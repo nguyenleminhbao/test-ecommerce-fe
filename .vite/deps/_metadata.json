@@ -1,0 +1,37 @@
+{
+  "hash": "3bf20f80",
+  "configHash": "7a2b357d",
+  "lockfileHash": "e06f14bf",
+  "browserHash": "b243a419",
+  "optimized": {
+    "vue": {
+      "src": "../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
+      "file": "vue.js",
+      "fileHash": "0f80dca6",
+      "needsInterop": false
+    },
+    "vue-clerk/plugin": {
+      "src": "../../node_modules/vue-clerk/dist/plugin.mjs",
+      "file": "vue-clerk_plugin.js",
+      "fileHash": "af877c72",
+      "needsInterop": false
+    },
+    "ant-design-vue": {
+      "src": "../../node_modules/ant-design-vue/es/index.js",
+      "file": "ant-design-vue.js",
+      "fileHash": "bfeff90e",
+      "needsInterop": false
+    },
+    "vue-router": {
+      "src": "../../node_modules/vue-router/dist/vue-router.mjs",
+      "file": "vue-router.js",
+      "fileHash": "60e91fbd",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-JM65UCRE": {
+      "file": "chunk-JM65UCRE.js"
+    }
+  }
+}

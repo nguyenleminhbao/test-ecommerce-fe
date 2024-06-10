@@ -1,0 +1,7 @@
+<template>
+  <CustomerDetail />
+</template>
+
+<script setup lang="ts">
+import CustomerDetail from '@/components/Admin/Customer/CustomerDetail/index.vue'
+</script>

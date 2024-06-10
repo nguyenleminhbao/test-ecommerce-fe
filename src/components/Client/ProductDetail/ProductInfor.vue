@@ -1,0 +1,144 @@
+<template>
+  <div class="grid grid-cols-2 gap-16">
+    <ProductImage :images="product.images" :primary-image="variant.variant_image" />
+    <Form class="flex flex-col relative">
+      <div class="flex items-center gap-2">
+        <Rate
+          v-model:value="mediumStarState"
+          :disabled="true"
+          :allow-half="true"
+          class="text-[16px] text-black"
+        />
+        <span>{{ `1 Reviews` }}</span>
+      </div>
+      <span class="text-headline-4 mt-4">{{ product.title }}</span>
+      <div class="flex items-center mt-4">
+        <span class="text-headline-6">₫{{ formatNumberWithCommas(variant.price) }}</span>
+        <span class="line-through text-neutral-4 ml-3 text-headline-7"
+          >₫{{ formatNumberWithCommas(variant.price) }}</span
+        >
+      </div>
+      <div class="w-full h-6 border-b-[1px]"></div>
+      <div class="flex flex-col">
+        <RadioOption
+          v-for="option in product.options"
+          :option="option"
+          :key="option.id"
+          @options="listenOptions"
+        />
+      </div>
+      <div class="flex flex-col mt-6">
+        <span class="text-body-1-semibold text-neutral-4">Quantity</span>
+        <div class="flex mt-3 items-center">
+          <button
+            class="border-[1px] w-[50px] h-10 object-center rounded-l-lg hover:bg-sky-200"
+            @click="qty = Math.max(0, --qty)"
+          >
+            <MinusOutlined />
+          </button>
+          <span class="w-[50px] h-10 border-y-[1px] object-center">{{ qty }}</span>
+          <button
+            class="border-[1px] w-[50px] h-10 object-center rounded-r-lg hover:bg-sky-200"
+            @click="qty++"
+          >
+            <PlusOutlined />
+          </button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-3 absolute bottom-6 w-full">
+        <Button class="h-9 bg-black/10 object-center text-[16px]">
+          <template #icon>
+            <ShareAltOutlined />
+          </template>
+          Share
+        </Button>
+        <Button class="h-9 bg-primary text-white text-[16px] object-center" @click="addToCartFunc">
+          <template #icon> <ShoppingCartOutlined /> </template>
+          Add to cart</Button
+        >
+      </div>
+    </Form>
+  </div>
+</template>
+
+<script setup lang="ts">
+import {
+  PlusOutlined,
+  MinusOutlined,
+  ShareAltOutlined,
+  ShoppingCartOutlined
+} from '@ant-design/icons-vue'
+import { Form, Button, message, Rate } from 'ant-design-vue'
+import { ProductImage, RadioOption } from './_components'
+import { computed, ref } from 'vue'
+import type { IProduct, IVariant } from '@/interfaces/product.interface'
+import { useRoute, useRouter } from 'vue-router'
+import { formatNumberWithCommas, dynamicQuery, findVariant } from '@/utils'
+import { useCart } from '@/stores/use-cart'
+import { addToCart } from '@/services/cart/post'
+
+const { product } = defineProps<{
+  product: IProduct
+}>()
+const route = useRoute()
+const router = useRouter()
+const qty = ref<number>(1)
+const mediumStarState = ref<number>(1)
+const variant = ref<IVariant>(
+  product.variants.find((variant) => variant.position == (route.query['position'] ?? 2)) as IVariant
+)
+
+const variantOptions = ref<{ key: string; value: string; position: number }[]>(
+  product.options.map((option) => {
+    return {
+      key: option.name,
+      value: option.values[0],
+      position: 1
+    }
+  })
+)
+
+// dynamic query product
+router.push({
+  path: route.path,
+  query: { ...route.query, ...dynamicQuery(variantOptions) }
+})
+
+const listenOptions = (e: { key: string; value: string; position: number }) => {
+  variantOptions.value = variantOptions.value.map((ele) => {
+    if (ele.key == e.key) {
+      ele = e
+    }
+    return ele
+  })
+
+  variant.value = findVariant(
+    product.options,
+    product.variants,
+    variantOptions.value.map((ele) => ele.position)
+  )
+
+  router.push({
+    path: route.path,
+    query: { ...route.query, ...dynamicQuery(variantOptions), position: variant.value.position }
+  })
+}
+
+const { addToCart: _addToCart } = useCart()
+
+const addToCartFunc = async () => {
+  const cartItem = {
+    variantId: variant.value.id,
+    image: variant.value.variant_image,
+    price: parseFloat(variant.value.price),
+    title: product.title + ' /' + variant.value.title,
+    quantity: qty.value,
+    shopId: product.shopId,
+    shopName: product.shopName
+  }
+  _addToCart(cartItem)
+  message.success('Add to cart successfully')
+  await addToCart(cartItem)
+}
+</script>
