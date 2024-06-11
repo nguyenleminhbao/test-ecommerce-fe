@@ -50,10 +50,20 @@ onMounted(() => {
       },
       onReturnToHomeScreenClicked: () => {
         const parentNode = document.querySelector('.BYpXSnOHfrC2td4QRijO')?.parentElement
-        console.log(parentNode)
         parentNode?.remove()
         router.replace('/product')
-      }
+      },
+      onLeaveRoom: () => {
+       // Add your custom logic
+       const parentNode = document.querySelector('.BYpXSnOHfrC2td4QRijO')?.parentElement
+        parentNode?.remove()
+        router.replace('/product')
+     },
+      turnOnCameraWhenJoining: false,
+      showMyCameraToggleButton: false,
+      showAudioVideoSettingsButton: false,
+      showScreenSharingButton: false,
+      showPreJoinView: false
     })
   }
 })

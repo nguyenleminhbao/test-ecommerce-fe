@@ -118,6 +118,7 @@ const handleLivestream = () => {
   // Generate Kit Token
   const appID = parseFloat(import.meta.env.VITE_ZEGO_APPID)
   const serverSecret = import.meta.env.VITE_ZEGO_SERVER_SECRET
+
   const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(
     appID,
     serverSecret,
@@ -125,6 +126,7 @@ const handleLivestream = () => {
     userId,
     authStore.user ? `${authStore.user?.firstName} ${authStore.user?.lastName}` : 'user'
   )
+
   // start the call
   const zp = ZegoUIKitPrebuilt.create(kitToken)
   zp.joinRoom({
