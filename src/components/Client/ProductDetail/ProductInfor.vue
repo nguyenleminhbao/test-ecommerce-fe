@@ -4,12 +4,12 @@
     <Form class="flex flex-col relative">
       <div class="flex items-center gap-2">
         <Rate
-          v-model:value="mediumStarState"
+          v-model:value="resultReviewState.medium_star"
           :disabled="true"
           :allow-half="true"
           class="text-[16px] text-black"
         />
-        <span>{{ `1 Reviews` }}</span>
+        <span>{{ `${resultReviewState.review_len} Reviews` }}</span>
       </div>
       <span class="text-headline-4 mt-4">{{ product.title }}</span>
       <div class="flex items-center mt-4">
@@ -84,10 +84,21 @@ const { product } = defineProps<{
 const route = useRoute()
 const router = useRouter()
 const qty = ref<number>(1)
-const mediumStarState = ref<number>(1)
 const variant = ref<IVariant>(
   product.variants.find((variant) => variant.position == (route.query['position'] ?? 2)) as IVariant
 )
+
+const resultReviewState = ref<{
+  review_len: number
+  medium_star: number
+}>({
+  review_len: isNaN(parseFloat(route.query.len as string))
+    ? 0
+    : parseFloat(route.query.len as string),
+  medium_star: isNaN(parseFloat(route.query.medium as string))
+    ? 0
+    : parseFloat(route.query.medium as string)
+})
 
 const variantOptions = ref<{ key: string; value: string; position: number }[]>(
   product.options.map((option) => {

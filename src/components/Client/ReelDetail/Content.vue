@@ -1,34 +1,35 @@
 <template>
-  <div class="CommentContainer">
+  <div class="CommentContainer !px-6">
     <div class="CommentListContainer">
-      <Profie />
+      <Profie
+        :shopId="reel.shop.id"
+        :shopAvatar="reel.shop.shopAvatar"
+        :shopName="reel.shop.shopName"
+        :createdAt="reel.createdAt"
+        :description="reel.description"
+      />
       <div class="mt-6">
         <CommentItem
-          avatarUrl="https://p16-capcut-sign-va.ibyteimg.com/tos-alisg-v-643f9f/oQAv6ZrtFEBIrYkkPABLOiH6RASUGiEZAQQAG~tplv-nhvfeczskr-1:250:0.webp?lk3s=44acef4b&x-expires=1738432706&x-signature=ZwVytvj8%2FvJaeubATGkmOI2yBZg%3D"
-          userName="cmt-1"
-          desc="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nostrum numquam repellendus quae. Itaque hic, aperiam atque nobis aliquam cumque magnam officia provident facere reiciendis maxime minus soluta, tenetur perferendis culpa?"
-        />
-        <CommentItem
-          avatarUrl="https://p16-capcut-sign-va.ibyteimg.com/tos-alisg-v-643f9f/oQAv6ZrtFEBIrYkkPABLOiH6RASUGiEZAQQAG~tplv-nhvfeczskr-1:250:0.webp?lk3s=44acef4b&x-expires=1738432706&x-signature=ZwVytvj8%2FvJaeubATGkmOI2yBZg%3D"
-          userName="cmt-2"
-          desc="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nostrum numquam repellendus quae. Itaque hic, aperiam atque nobis aliquam cumque magnam officia provident facere reiciendis maxime minus soluta, tenetur perferendis culpa?"
-        />
-        <CommentItem
-          avatarUrl="https://p16-capcut-sign-va.ibyteimg.com/tos-alisg-v-643f9f/oQAv6ZrtFEBIrYkkPABLOiH6RASUGiEZAQQAG~tplv-nhvfeczskr-1:250:0.webp?lk3s=44acef4b&x-expires=1738432706&x-signature=ZwVytvj8%2FvJaeubATGkmOI2yBZg%3D"
-          userName="cmt-2"
-          desc="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nostrum numquam repellendus quae. Itaque hic, aperiam atque nobis aliquam cumque magnam officia provident facere reiciendis maxime minus soluta, tenetur perferendis culpa?"
-        />
-        <CommentItem
-          avatarUrl="https://p16-capcut-sign-va.ibyteimg.com/tos-alisg-v-643f9f/oQAv6ZrtFEBIrYkkPABLOiH6RASUGiEZAQQAG~tplv-nhvfeczskr-1:250:0.webp?lk3s=44acef4b&x-expires=1738432706&x-signature=ZwVytvj8%2FvJaeubATGkmOI2yBZg%3D"
-          userName="cmt-2"
-          desc="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nostrum numquam repellendus quae. Itaque hic, aperiam atque nobis aliquam cumque magnam officia provident facere reiciendis maxime minus soluta, tenetur perferendis culpa?"
-        />
-        <CommentItem
-          avatarUrl="https://p16-capcut-sign-va.ibyteimg.com/tos-alisg-v-643f9f/oQAv6ZrtFEBIrYkkPABLOiH6RASUGiEZAQQAG~tplv-nhvfeczskr-1:250:0.webp?lk3s=44acef4b&x-expires=1738432706&x-signature=ZwVytvj8%2FvJaeubATGkmOI2yBZg%3D"
-          userName="cmt-2"
-          desc="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nostrum numquam repellendus quae. Itaque hic, aperiam atque nobis aliquam cumque magnam officia provident facere reiciendis maxime minus soluta, tenetur perferendis culpa?"
+          v-for="(comment, index) in comments"
+          :key="index"
+          :avatarUrl="comment.user.avatar"
+          :userName="comment.user.name"
+          :desc="comment.content"
         />
       </div>
+    </div>
+    <div class="w-full rounded-lg border-gray-600 border-[1px] sticky bottom-4">
+      <input
+        class="w-full rounded-lg border-gray-600 h-[50px] pl-3"
+        placeholder="Enter comment here"
+        v-model="content"
+        ref="element"
+      />
+      <Button
+        class="absolute right-3 translate-y-[28%] bg-primary text-white rounded-2xl w-[120px]"
+        @click="sendComment"
+        >Send</Button
+      >
     </div>
   </div>
 </template>
@@ -36,6 +37,42 @@
 <script setup lang="ts">
 import Profie from './_components/Profie.vue'
 import CommentItem from './_components/CommentItem.vue'
+import type { IReel } from '@/interfaces/news.interface'
+import { ref } from 'vue'
+import { Button } from 'ant-design-vue'
+import type { IComment } from '@/interfaces/comment.interface'
+import { TYPE_COMMENT } from '@/constants/enum/comment.enum'
+import { createComment } from '@/services/comment/post'
+import { getCommentByEtag } from '@/services/comment/get'
+import { useEventListener } from '@vueuse/core'
+
+const { reel } = defineProps<{
+  reel: IReel
+}>()
+const comments = ref<IComment[]>(reel.comments)
+const content = ref<string>('')
+
+const element = ref<HTMLDivElement>()
+
+const sendComment = async () => {
+  if (!content.value) return
+  const dataComment = {
+    content: content.value,
+    typeComment: TYPE_COMMENT.REEL,
+    etag: reel.id
+  }
+  content.value = ''
+  await createComment(dataComment)
+  const data = await getCommentByEtag(reel.id)
+  comments.value = data.message
+}
+
+useEventListener(element, 'keypress', (e) => {
+  if (e.key === 'Enter') {
+    e.preventDefault()
+    sendComment()
+  }
+})
 </script>
 
 <style scoped>
@@ -61,6 +98,5 @@ import CommentItem from './_components/CommentItem.vue'
   -webkit-box-flex: 1;
   flex-grow: 1;
   position: relative;
-  padding: 0px 32px 24px;
 }
 </style>

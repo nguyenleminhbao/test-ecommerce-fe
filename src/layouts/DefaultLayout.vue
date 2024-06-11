@@ -82,11 +82,17 @@ watch(userId, async () => {
       setListLivestream(listStream.message)
     }
 
-    isLoading.value = true
-    const isAdmin = await checkAdmin()
-    setAdmin(isAdmin.message)
-    if (isAdmin.message) router.push('/admin')
-    isLoading.value = false
+    if (sessionStorage.getItem('isAdmin') == '1') {
+      router.push('/admin')
+    } else if (sessionStorage.getItem('isAdmin') == '0') {
+    } else {
+      isLoading.value = true
+      const isAdmin = await checkAdmin()
+      sessionStorage.setItem('isAdmin', isAdmin.message ? '1' : '0')
+      setAdmin(isAdmin.message)
+      if (isAdmin.message) router.push('/admin')
+      isLoading.value = false
+    }
   }
 })
 

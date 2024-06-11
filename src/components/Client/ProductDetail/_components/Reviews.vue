@@ -87,7 +87,7 @@ import Comment from './Comment.vue'
 import { onMounted, ref } from 'vue'
 import { uploadImageUrl } from '@/constants/upload-url'
 import { TYPE_COMMENT } from '@/constants/enum/comment.enum'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { createComment } from '@/services/comment/post'
 import { useAuthSystem } from '@/stores/use-auth'
 import { getCommentByEtag } from '@/services/comment/get'
@@ -99,6 +99,7 @@ const { productId } = defineProps<{
 }>()
 
 const route = useRoute()
+const router = useRouter()
 const authStore = useAuthSystem()
 
 // Rate
@@ -134,6 +135,8 @@ const handleOk = async () => {
     const optionVariant = route.query
     delete optionVariant?.title
     delete optionVariant?.position
+    delete optionVariant?.len
+    delete optionVariant?.medium
 
     const optionProduct = Object.keys(optionVariant).map((key) => optionVariant[key]) as string[]
 
@@ -171,5 +174,15 @@ onMounted(async () => {
   const data = await getCommentByEtag(productId)
   comments.value = data.message
   resultReviewState.value = resultReview(data.message)
+
+  // dynamic query product
+  router.push({
+    path: route.path,
+    query: {
+      ...route.query,
+      len: resultReviewState.value.review_len,
+      medium: resultReviewState.value.medium_star
+    }
+  })
 })
 </script>

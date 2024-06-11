@@ -1,6 +1,7 @@
 <template>
-  <div class="w-[1120px] mx-auto mb-10">
-    <div v-if="authStore.isShopOwner" class="w-full h-full">
+  <div class="w-[1120px] mx-auto mb-10" :class="isLoading && 'object-center min-h-[500px]'">
+    <Spin v-if="isLoading" size="large" />
+    <div v-if="!isLoading && authStore.isShopOwner" class="w-full h-full">
       <ShopAvatar
         v-if="shopOwner"
         :shop-avatar="shopOwner?.shopAvatar"
@@ -9,9 +10,9 @@
         :user-id="shopOwner.userId"
       />
       <Banner v-if="shopOwner" :shop-id="shopOwner.shopId" :shop-banners="shopOwner.shopBanners" />
-      <ReelShop />
+      <ReelShop v-if="shopOwner" :shop-id="shopOwner?.shopId" />
     </div>
-    <div v-if="!authStore.isShopOwner"><FormShop /></div>
+    <div v-else><FormShop /></div>
   </div>
 </template>
 
@@ -23,6 +24,7 @@ import { onMounted, ref } from 'vue'
 import { getShopAdmin } from '@/services/shop/get'
 import { useAuthSystem } from '@/stores/use-auth'
 import ReelShop from './ReelShop.vue'
+import { Spin } from 'ant-design-vue'
 
 const shopOwner = ref<{
   shopId: string
@@ -34,10 +36,13 @@ const shopOwner = ref<{
 }>()
 const authStore = useAuthSystem()
 const { setShopOwner } = useAuthSystem()
+const isLoading = ref<boolean>(false)
 
 onMounted(async () => {
+  isLoading.value = true
   const data = await getShopAdmin()
   shopOwner.value = data.message
   setShopOwner(data.message.isShopOwner)
+  isLoading.value = false
 })
 </script>

@@ -13,7 +13,7 @@ export const resultReview = (reviews: IComment[]) => {
     review_stars.map((e, id) => e * (5 - id)).reduce((a, b) => a + b) / review_len
   ).toFixed(1)
   return {
-    review_len,
+    review_len: review_len ?? 0,
     medium_star: review_len == 0 ? 5 : parseFloat(medium_star)
   }
 }

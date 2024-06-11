@@ -3,24 +3,13 @@
     <span class="text-headline-3 mt-5 text-center">Reel</span>
     <div class="w-full grid grid-cols-4 mt-10 gap-4">
       <ReelItem
-        video-url="https://res.cloudinary.com/dtglrewvk/video/upload/v1717057176/ecommerce/orc6wbc57rb3gd4z0kla.mp4"
-        title="Tự tin trên phố"
-        view="123K"
-      />
-      <ReelItem
-        video-url="http://res.cloudinary.com/dtglrewvk/video/upload/v1717062003/ecommerce/ld0ufsryb4qt6matgurw.mp4"
-        title="Thưởng thức nhạc tuổi thơ Doraemon"
-        view="123K"
-      />
-      <ReelItem
-        video-url="http://res.cloudinary.com/dtglrewvk/video/upload/v1717062059/ecommerce/a5b8xcbcjzmv6rxuzdho.mp4"
-        title="Biểu diễn văn nghệ"
-        view="13K"
-      />
-      <ReelItem
-        video-url="http://res.cloudinary.com/dtglrewvk/video/upload/v1717062104/ecommerce/auzofqdcepvspoc0d4ms.mp4"
-        title="Chill cùng Trung Quân"
-        view="436M"
+        v-for="(reel, index) in reels"
+        :key="index"
+        :reelId="reel.id"
+        :video-url="reel.video"
+        :title="reel.title"
+        :view="reel.view"
+        :is-edit="true"
       />
     </div>
   </section>
@@ -28,4 +17,18 @@
 
 <script setup lang="ts">
 import ReelItem from '@/components/UI/ReelItem.vue'
+import type { IReel } from '@/interfaces/news.interface'
+import { getReelByShop } from '@/services/news/get'
+import { onMounted, ref } from 'vue'
+
+const { shopId } = defineProps<{
+  shopId: string
+}>()
+
+const reels = ref<IReel[]>([])
+
+onMounted(async () => {
+  const data = await getReelByShop(shopId)
+  reels.value = data.message
+})
 </script>

@@ -1,13 +1,25 @@
 <template>
-  <div class="BrowserModeContainer">
-    <Video class="VideoContainer" />
-    <Content class="ContentContainer" />
+  <div class="BrowserModeContainer" v-if="reel">
+    <Video class="VideoContainer" :videoUrl="reel.video" />
+    <Content class="ContentContainer" :reel="reel" />
   </div>
 </template>
 
 <script setup lang="ts">
 import Video from './Video.vue'
 import Content from './Content.vue'
+import { useRoute } from 'vue-router'
+import type { IReel } from '@/interfaces/news.interface'
+import { onMounted, ref } from 'vue'
+import { getReelById } from '@/services/news/get'
+
+const route = useRoute()
+const reel = ref<IReel>()
+
+onMounted(async () => {
+  const data = await getReelById(route.params.reelId as string)
+  reel.value = data.message
+})
 </script>
 
 <style scoped>

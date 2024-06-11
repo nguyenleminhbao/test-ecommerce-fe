@@ -1,5 +1,6 @@
 import type { IResponse } from '@/interfaces/response.interface'
 import axiosInstance from '../axios-instance'
+import type { IShop } from '@/interfaces/shop.interface'
 
 export const getAllShopName = async () => {
   try {
@@ -19,13 +20,7 @@ export const getAllShopName = async () => {
 
 export const getOneShop = async (shopId: string) => {
   try {
-    const { data } = await axiosInstance.get<
-      IResponse<{
-        shopId: string
-        shopName: string
-        shopAvatar: string
-      }>
-    >(`/shop/get-shop/${shopId}`)
+    const { data } = await axiosInstance.get<IResponse<IShop>>(`/shop/get-shop/${shopId}`)
     return data
   } catch (err) {
     throw err

@@ -1,23 +1,23 @@
 <template>
   <div class="ProfileWrapper">
-    <div class="DescriptionContentWrapper">
+    <div class="DescriptionContentWrapper shadow-md !px-6">
       <div class="InfoContainer">
-        <a class="mr-3" href="/userId">
+        <RouterLink class="mr-3" :to="`/shop/${shopId}`">
           <img
             class="w-10 aspect-square object-cover rounded-full"
-            src="https://cafefcdn.com/thumb_w/640/203337114487263232/2022/3/3/photo1646280815645-1646280816151764748403.jpg"
+            :src="shopAvatar"
             alt="user.name"
           />
-        </a>
+        </RouterLink>
         <a class="StyledLink" href="/userId">
-          <span class="text-body-2-bold">User</span>
+          <span class="text-body-2-bold">{{ shopName }}</span>
           <br />
-          <span class="text-caption-1">05-06-2024</span>
+          <span class="text-caption-1">{{ formatDateText(createdAt) }}</span>
         </a>
       </div>
 
       <div class="DescriptionContent">
-        <span class="text-body-2">mô tả</span>
+        <span class="text-body-2">{{ description ?? 'Description' }}</span>
       </div>
     </div>
 
@@ -28,7 +28,7 @@
             <!-- Heart ---------------------------------------------------------------------------->
             <button type="button" class="ButtonActionItem">
               <span class="SpanIconWrapper">
-                <HeartFilled class="text-[16px]" />
+                <HeartFilled class="text-[16px] text-red-600" />
               </span>
               <strong>20K</strong>
             </button>
@@ -60,7 +60,7 @@
                   width="16"
                   height="16"
                   fill="currentColor"
-                  class="bi bi-share-fill"
+                  class="bi bi-share-fill text-blue-600"
                   viewBox="0 0 16 16"
                 >
                   <path
@@ -78,20 +78,22 @@
 </template>
 
 <script setup lang="ts">
+import { formatDateText } from '@/utils'
 import { HeartFilled } from '@ant-design/icons-vue'
+
+const { shopId, shopName, shopAvatar, createdAt, description } = defineProps<{
+  shopId: string
+  shopName: string
+  shopAvatar: string
+  createdAt: string
+  description: string
+}>()
 </script>
 
 <style scoped>
-.ProfileWrapper {
-  margin-left: -32px;
-  margin-right: -32px;
-}
-
 .DescriptionContentWrapper {
   background: rgba(22, 24, 35, 0.03);
   border-radius: 12px;
-  margin-left: 20px;
-  margin-right: 20px;
   padding: 16px;
 }
 
@@ -122,7 +124,6 @@ import { HeartFilled } from '@ant-design/icons-vue'
 }
 
 .MainContent {
-  padding: 0px 32px;
   overflow: visible;
   display: flex;
   flex-direction: column;

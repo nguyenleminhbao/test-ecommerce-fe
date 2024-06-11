@@ -3,7 +3,9 @@
     <Breadcrumb class="my-4">
       <BreadcrumbItem class="[&_.ant-breadcrumb-link]:text-gray-600">Home</BreadcrumbItem>
       <BreadcrumbItem><a href="text-gray-600">Shop</a></BreadcrumbItem>
-      <BreadcrumbItem><a href="text-gray-600">Living room</a></BreadcrumbItem>
+      <BreadcrumbItem
+        ><a href="text-gray-600">{{ product?.shopName }}</a></BreadcrumbItem
+      >
       <BreadcrumbItem class="[&_.ant-breadcrumb-link]:font-semibold">Product</BreadcrumbItem>
     </Breadcrumb>
     <ProductInfor v-if="product" :product="product" />

@@ -6,24 +6,12 @@
     </div>
     <div class="flex overflow-x-auto items-start gap-[24px] scrollbar-hide relative">
       <ReelItem
-        video-url="https://res.cloudinary.com/dtglrewvk/video/upload/v1717057176/ecommerce/orc6wbc57rb3gd4z0kla.mp4"
-        title="Tự tin trên phố"
-        view="123K"
-      />
-      <ReelItem
-        video-url="http://res.cloudinary.com/dtglrewvk/video/upload/v1717062003/ecommerce/ld0ufsryb4qt6matgurw.mp4"
-        title="Thưởng thức nhạc tuổi thơ Doraemon"
-        view="123K"
-      />
-      <ReelItem
-        video-url="http://res.cloudinary.com/dtglrewvk/video/upload/v1717062059/ecommerce/a5b8xcbcjzmv6rxuzdho.mp4"
-        title="Biểu diễn văn nghệ"
-        view="13K"
-      />
-      <ReelItem
-        video-url="http://res.cloudinary.com/dtglrewvk/video/upload/v1717062104/ecommerce/auzofqdcepvspoc0d4ms.mp4"
-        title="Chill cùng Trung Quân"
-        view="436M"
+        v-for="(reel, index) in reels"
+        :key="index"
+        :reelId="reel.id"
+        :video-url="reel.video"
+        :title="reel.title"
+        :view="reel.view"
       />
       <RightCircleFilled
         class="bg-green z-10 sticky right-2 top-[calc(50%_-_50px)] text-4xl opacity-30"
@@ -35,5 +23,15 @@
 <script setup lang="ts">
 import ButtonArrow from '@/components/UI/elements/ButtonArrow.vue'
 import ReelItem from '@/components/UI/ReelItem.vue'
+import type { IReel } from '@/interfaces/news.interface'
+import { getAllReel } from '@/services/news/get'
 import { RightCircleFilled } from '@ant-design/icons-vue'
+import { onMounted, ref } from 'vue'
+
+const reels = ref<IReel[]>([])
+
+onMounted(async () => {
+  const data = await getAllReel()
+  reels.value = data.message
+})
 </script>

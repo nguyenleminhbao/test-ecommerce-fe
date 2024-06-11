@@ -1,25 +1,8 @@
 <template>
   <div class="w-full mt-8">
     <Carousel autoplay>
-      <div class="w-full !h-[500px]">
-        <img
-          src="https://down-bs-vn.img.susercontent.com/cn-11134210-7r98o-lvk44ckoslca3a.webp"
-          class="w-full h-full object-cover"
-        />
-      </div>
-
-      <div class="w-full h-[500px]">
-        <img
-          src="https://down-bs-vn.img.susercontent.com/cn-11134210-7r98o-lvmv2prvfnll7f.webp"
-          class="w-full h-full object-cover"
-        />
-      </div>
-
-      <div class="w-full h-[500px]">
-        <img
-          src="https://down-bs-vn.img.susercontent.com/cn-11134210-7qukw-lkiy9phq6yeu77.webp"
-          class="w-full h-full object-cover"
-        />
+      <div class="w-full !h-[500px]" v-for="(banner, index) in shopBanners" :key="index">
+        <img :src="banner" class="w-full h-full object-cover" />
       </div>
     </Carousel>
   </div>
@@ -27,6 +10,12 @@
 
 <script setup lang="ts">
 import { Carousel } from 'ant-design-vue'
+
+const { shopBanners } = defineProps<{
+  shopBanners: string[]
+}>()
+
+console.log(shopBanners)
 </script>
 
 <style scoped lang="css">
