@@ -2,7 +2,11 @@
   <div class="my-20 flex flex-col gap-12">
     <div class="flex justify-between items-end">
       <h1 class="text-headline-6">You might also like</h1>
+<<<<<<< HEAD
+      <ButtonArrow text="More Articles" link="/news" />
+=======
       <ButtonArrow text="More Articles" link="/" />
+>>>>>>> 06155174916644e25aae6aa8fb924d08de8ad4cc
     </div>
 
     <div class="grid grid-cols-3 gap-x-[25px] gap-y-10">

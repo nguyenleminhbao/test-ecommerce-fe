@@ -77,7 +77,7 @@ const removeItem = async (variantId: number) => {
 }
 
 const decreaseQty = async () => {
-  qty.value = Math.max(0, --qty.value)
+  qty.value = Math.max(1, --qty.value)
   decreaseQuantityCartItem(cartItem.variantId)
   await updateQuantity({
     quantity: qty.value,

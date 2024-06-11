@@ -5,6 +5,7 @@ type CreateReelType = {
   video: string
   title: string
   shopId: string
+  description: string
 }
 
 export const createReel = async (_data: CreateReelType) => {

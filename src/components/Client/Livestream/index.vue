@@ -54,16 +54,15 @@ onMounted(() => {
         router.replace('/product')
       },
       onLeaveRoom: () => {
-       // Add your custom logic
-       const parentNode = document.querySelector('.BYpXSnOHfrC2td4QRijO')?.parentElement
+        // Add your custom logic
+        const parentNode = document.querySelector('.BYpXSnOHfrC2td4QRijO')?.parentElement
         parentNode?.remove()
         router.replace('/product')
         zp.destroy()
-        
-     },
+      },
       turnOnCameraWhenJoining: false,
-      showMyCameraToggleButton: false,
-      showAudioVideoSettingsButton: false,
+      showMyCameraToggleButton: true,
+      showAudioVideoSettingsButton: true,
       showScreenSharingButton: false,
       showPreJoinView: false
     })

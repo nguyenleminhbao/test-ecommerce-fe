@@ -6,6 +6,7 @@
       :reelId="reel.id"
       :video-url="reel.video"
       :title="reel.title"
+      :description="reel.description"
       :view="reel.view"
     />
   </div>

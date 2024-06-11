@@ -2,6 +2,7 @@
   <div class="max-w-[1120px] mx-auto mb-10" v-if="shop">
     <ShopInfo :shop-id="shop.shopId" :shop-name="shop.shopName" :shop-avatar="shop.shopAvatar" />
     <HeroBanner :shop-banners="shop.shopBanners" />
+    <ReelCarousel :shop-id="shop.shopId" />
     <ShopProduct />
   </div>
 </template>
@@ -10,6 +11,7 @@
 import ShopInfo from './ShopInfo.vue'
 import HeroBanner from './HeroBanner.vue'
 import ShopProduct from './ShopProduct.vue'
+import ReelCarousel from './ReelCarousel.vue'
 import type { IShop } from '@/interfaces/shop.interface'
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'

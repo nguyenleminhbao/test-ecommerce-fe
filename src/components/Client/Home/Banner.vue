@@ -14,7 +14,7 @@
           >It’s more affordable than ever to give every room in your home a stylish makeover</span
         >
       </div>
-      <ButtonArrow text="Shop Now" link="/" />
+      <ButtonArrow text="Shop Now" link="/product" />
     </div>
   </div>
 </template>

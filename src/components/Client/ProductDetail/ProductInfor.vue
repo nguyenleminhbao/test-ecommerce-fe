@@ -1,60 +1,84 @@
 <template>
-  <div class="grid grid-cols-2 gap-16">
-    <ProductImage :images="product.images" :primary-image="variant.variant_image" />
-    <Form class="flex flex-col relative">
-      <div class="flex items-center gap-2">
-        <Rate
-          v-model:value="resultReviewState.medium_star"
-          :disabled="true"
-          :allow-half="true"
-          class="text-[16px] text-black"
-        />
-        <span>{{ `${resultReviewState.review_len} Reviews` }}</span>
-      </div>
-      <span class="text-headline-4 mt-4">{{ product.title }}</span>
-      <div class="flex items-center mt-4">
-        <span class="text-headline-6">₫{{ formatNumberWithCommas(variant.price) }}</span>
-        <span class="line-through text-neutral-4 ml-3 text-headline-7"
-          >₫{{ formatNumberWithCommas(variant.price) }}</span
+  <div class="grid grid-cols-[4fr_6fr] gap-16">
+    <div class="flex flex-col gap-6">
+      <ProductImage :images="product.images" :primary-image="variant.variant_image" />
+
+      <!-- <div class="grid grid-cols-2 gap-3 w-full">
+        <Button
+          class="h-9 border-neutral-7 object-center text-[16px]"
+          :disabled="!isSupported"
+          @click="prodShare"
+          :icon="h(ShareAltOutlined)"
         >
-      </div>
-      <div class="w-full h-6 border-b-[1px]"></div>
-      <div class="flex flex-col">
-        <RadioOption
-          v-for="option in product.options"
-          :option="option"
-          :key="option.id"
-          @options="listenOptions"
-        />
-      </div>
-      <div class="flex flex-col mt-6">
-        <span class="text-body-1-semibold text-neutral-4">Quantity</span>
-        <div class="flex mt-3 items-center">
-          <button
-            class="border-[1px] w-[50px] h-10 object-center rounded-l-lg hover:bg-sky-200"
-            @click="qty = Math.max(0, --qty)"
+          {{ isSupported ? 'Share' : 'Web share is not supported in your browser' }}
+        </Button>
+        <div class="flex gap-2 items-center text-2xl">
+          <FacebookOutlined />
+          <TwitterOutlined />
+        </div>
+      </div> -->
+    </div>
+
+    <Form class="flex flex-col relative justify-between">
+      <div>
+        <div class="flex items-center gap-2">
+          <Rate
+            v-model:value="resultReviewState.medium_star"
+            :disabled="true"
+            :allow-half="true"
+            class="text-[16px] text-black"
+          />
+          <span>{{ `${resultReviewState.review_len} Reviews` }}</span>
+        </div>
+        <span class="text-headline-4 mt-4">{{ product.title }}</span>
+        <div class="flex items-center mt-4">
+          <span class="text-headline-6">₫{{ formatNumberWithCommas(variant.price) }}</span>
+          <span class="line-through text-neutral-4 ml-3 text-headline-7"
+            >₫{{ formatNumberWithCommas(variant.price) }}</span
           >
-            <MinusOutlined />
-          </button>
-          <span class="w-[50px] h-10 border-y-[1px] object-center">{{ qty }}</span>
-          <button
-            class="border-[1px] w-[50px] h-10 object-center rounded-r-lg hover:bg-sky-200"
-            @click="qty++"
-          >
-            <PlusOutlined />
-          </button>
+        </div>
+        <div class="w-full h-6 border-b-[1px]"></div>
+        <div class="flex flex-col">
+          <RadioOption
+            v-for="option in product.options"
+            :option="option"
+            :key="option.id"
+            @options="listenOptions"
+          />
+        </div>
+        <div class="flex flex-col mt-6">
+          <span class="text-body-1-semibold text-neutral-4">Quantity</span>
+          <div class="flex mt-3 items-center">
+            <button
+              class="border-[1px] w-[50px] h-10 object-center rounded-l-lg hover:bg-sky-200"
+              @click="qty = Math.max(1, --qty)"
+            >
+              <MinusOutlined />
+            </button>
+            <span class="w-[50px] h-10 border-y-[1px] object-center">{{ qty }}</span>
+            <button
+              class="border-[1px] w-[50px] h-10 object-center rounded-r-lg hover:bg-sky-200"
+              @click="qty++"
+            >
+              <PlusOutlined />
+            </button>
+          </div>
         </div>
       </div>
 
-      <div class="grid grid-cols-2 gap-3 absolute bottom-6 w-full">
-        <Button class="h-9 bg-black/10 object-center text-[16px]">
+      <div class="mt-6 grid grid-cols-2 gap-3 w-full">
+        <Button class="h-9 border-neutral-7 object-center text-[16px]" @click="wish = !wish">
           <template #icon>
-            <ShareAltOutlined />
+            <HeartOutlined v-if="!wish" />
+            <HeartFilled v-else />
           </template>
-          Share
+          Wishlist
         </Button>
-        <Button class="h-9 bg-primary text-white text-[16px] object-center" @click="addToCartFunc">
-          <template #icon> <ShoppingCartOutlined /> </template>
+        <Button
+          class="h-9 bg-primary text-white text-[16px] object-center"
+          @click="addToCartFunc"
+          :icon="h(ShoppingCartOutlined)"
+        >
           Add to cart</Button
         >
       </div>
@@ -66,21 +90,36 @@
 import {
   PlusOutlined,
   MinusOutlined,
+  HeartOutlined,
+  HeartFilled,
   ShareAltOutlined,
-  ShoppingCartOutlined
+  ShoppingCartOutlined, FacebookOutlined, TwitterOutlined
 } from '@ant-design/icons-vue'
 import { Form, Button, message, Rate } from 'ant-design-vue'
 import { ProductImage, RadioOption } from './_components'
-import { computed, ref } from 'vue'
+import { computed, ref, h } from 'vue'
 import type { IProduct, IVariant } from '@/interfaces/product.interface'
 import { useRoute, useRouter } from 'vue-router'
 import { formatNumberWithCommas, dynamicQuery, findVariant } from '@/utils'
 import { useCart } from '@/stores/use-cart'
 import { addToCart } from '@/services/cart/post'
+import { isClient } from '@vueuse/shared'
+import { useShare } from '@vueuse/core'
+
+const options = ref({
+  title: 'VueUse',
+  text: 'Collection of essential Vue Composition Utilities!',
+  url: isClient ? location.href : ''
+})
+const { share, isSupported } = useShare(options)
+function prodShare() {
+  return share().catch((err) => err)
+}
 
 const { product } = defineProps<{
   product: IProduct
 }>()
+const wish = ref<boolean>(false)
 const route = useRoute()
 const router = useRouter()
 const qty = ref<number>(1)

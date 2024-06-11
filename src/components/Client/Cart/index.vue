@@ -8,18 +8,9 @@
         :current="current"
         class="[&_.ant-steps-icon]:!text-white [&_.ant-steps-finish-icon]:!-translate-y-[2px] [&_.ant-steps-finish-icon]:text-[16px] [&_.ant-steps-item-title]:text-body-2-semibold mt-10"
         :items="[
-          {
-            title: 'Shopping cart',
-            description
-          },
-          {
-            title: 'Checkout details',
-            description
-          },
-          {
-            title: 'Order complete',
-            description
-          }
+          { title: 'Shopping cart' },
+          { title: 'Checkout details' },
+          { title: 'Order complete' }
         ]"
       ></Steps>
     </div>
@@ -73,7 +64,7 @@ export type FormOrderType = {
 }
 
 const current = ref<number>(0) // set step current
-const description = 'This is a description.'
+// const description = 'This is a description.'
 const cartStore = useCart()
 const paymentStore = usePayment()
 const { setPaymentSession } = usePayment()

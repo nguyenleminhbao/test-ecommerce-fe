@@ -3,26 +3,31 @@
     <div
       class="flex flex-col bg-neutral-2 p-[16px] pb-0 justify-between rounded-t-lg ease-linear max-h-[350px]"
     >
-      <RouterLink :to="`/product/${product?.id}?title=${product.title}`">
-        <div class="flex justify-between">
-          <div class="grid gap-[8px]">
-            <BadgeMedium
-              title="New"
-              textColor="text-black"
-              bgColor="bg-white"
-              :type="TYPE_BADGE.NEW"
-            />
-            <BadgeMedium
-              :title="'10'"
-              textColor="text-neutral-1"
-              bgColor="bg-secondary-green"
-              :type="TYPE_BADGE.DISCOUNT"
-            />
-          </div>
-
-          <HeartIcon />
+      <div class="flex justify-between">
+        <div class="grid gap-[8px]">
+          <BadgeMedium
+            title="New"
+            textColor="text-black"
+            bgColor="bg-white"
+            :type="TYPE_BADGE.NEW"
+          />
+          <BadgeMedium
+            :title="'10'"
+            textColor="text-neutral-1"
+            bgColor="bg-secondary-green"
+            :type="TYPE_BADGE.DISCOUNT"
+          />
         </div>
 
+        <Button shape="circle" @click="wish = !wish">
+          <template #icon>
+            <HeartOutlined v-if="!wish" />
+            <HeartFilled v-else />
+          </template>
+        </Button>
+      </div>
+
+      <RouterLink :to="`/product/${product?.id}?title=${product.title}`">
         <img
           class="max-w-full w-full h-[240px] group-hover:max-h-[200px] rounded-md object-cover my-3 shadow-md"
           :src="product.variants[0].variant_image"
@@ -37,7 +42,8 @@
       </button>
     </div>
 
-    <div
+    <RouterLink
+      :to="`/product/${product?.id}?title=${product.title}`"
       class="grid gap-1 group-hover:border-[1px] group-hover:border-t-0 group-hover:border-neutral-3 group-hover:shadow-xl p-4 pt-0 rounded-b-lg"
     >
       <div class="text-neutral-5 text-[16px] mt-1">
@@ -54,26 +60,26 @@
         <span class="text-caption-1-semibold"
           >₫{{ formatNumberWithCommas(product.variants[0].price) }}</span
         >
-        <span class="text-caption-1 text-neutral-4"
-          >₫{{ formatNumberWithCommas(product.variants[0].price) }}</span
+        <del class="text-caption-1 text-neutral-4"
+          >₫{{ formatNumberWithCommas(product.variants[0].price) }}</del
         >
       </div>
-    </div>
+    </RouterLink>
     <DrawerCart ref="drawerCart" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { StarFilled } from '@ant-design/icons-vue'
+import { Button } from 'ant-design-vue'
+import { StarFilled, HeartOutlined, HeartFilled } from '@ant-design/icons-vue'
 import BadgeMedium from '@/components/UI/elements/BadgeMedium.vue'
-import HeartIcon from '@/components/UI/elements/HeartIcon.vue'
 import { TYPE_BADGE } from '@/constants/enum/badge.enum'
 import type { IProduct } from '@/interfaces/product.interface'
 import { formatNumberWithCommas } from '@/utils'
 import { RouterLink } from 'vue-router'
 import { useCart } from '@/stores/use-cart'
 import { addToCart } from '@/services/cart/post'
-import { ref } from 'vue'
+import { ref, h } from 'vue'
 import DrawerCart from '@/components/UI/DrawerCart.vue'
 
 const { product } = defineProps<{
@@ -82,6 +88,7 @@ const { product } = defineProps<{
 
 const { addToCart: _addToCart } = useCart()
 const drawerCart = ref()
+const wish = ref<boolean>(false)
 
 const addToCartFunc = async () => {
   const cartItem = {
@@ -100,3 +107,11 @@ const addToCartFunc = async () => {
   await addToCart(cartItem)
 }
 </script>
+
+<style scoped>
+:where(.css-dev-only-do-not-override-16pw25h).ant-btn.ant-btn-circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+</style>

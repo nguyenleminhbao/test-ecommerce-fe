@@ -1,34 +1,33 @@
 <template>
-  <div v-if="!orders" class="w-full h-[400px] object-center">
-    <Spin size="large"></Spin>
-  </div>
-
-  <div v-if="orders" class="w-full border-[1px] border-black rounded-lg">
-    <Table :columns="columns" :data-source="orders">
-      <template #bodyCell="{ column, record }">
-        <template v-if="column.dataIndex === 'id'">
-          <a>{{ `#${record.id.slice(0, 8)}` }}</a>
-        </template>
-        <template v-if="column.dataIndex === 'createdAt'">
-          <a>{{ formatDateText(record.createdAt) }}</a>
-        </template>
-        <template v-if="column.dataIndex === 'status'">
-          <Tag v-if="record.status == STATUS_ORDER.FULFILLED" color="success">{{
-            record.status
-          }}</Tag>
-          <Tag v-if="record.status == STATUS_ORDER.UNFULFILLED" color="processing">{{
-            record.status
-          }}</Tag>
-        </template>
-
-        <template v-if="column.dataIndex === 'amount'">
-          <span class="text-body-2-semibold"
-            >{{ `${formatNumberWithCommas(record.amount)} đ` }}
-          </span>
-        </template>
+  <Table
+    :loading="!orders"
+    :columns="columns"
+    :data-source="orders"
+    class="w-full border-[1px] border-black rounded-lg"
+  >
+    <template #bodyCell="{ column, record }">
+      <template v-if="column.dataIndex === 'id'">
+        <a>{{ `#${record.id.slice(0, 8)}` }}</a>
       </template>
-    </Table>
-  </div>
+      <template v-if="column.dataIndex === 'createdAt'">
+        <a>{{ formatDateText(record.createdAt) }}</a>
+      </template>
+      <template v-if="column.dataIndex === 'status'">
+        <Tag v-if="record.status == STATUS_ORDER.FULFILLED" color="success">{{
+          record.status
+        }}</Tag>
+        <Tag v-if="record.status == STATUS_ORDER.UNFULFILLED" color="processing">{{
+          record.status
+        }}</Tag>
+      </template>
+
+      <template v-if="column.dataIndex === 'amount'">
+        <span class="text-body-2-semibold"
+          >{{ `${formatNumberWithCommas(record.amount)} đ` }}
+        </span>
+      </template>
+    </template>
+  </Table>
 </template>
 
 <script setup lang="ts">

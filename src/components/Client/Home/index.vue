@@ -24,7 +24,7 @@ import ReelCarousel from './ReelCarousel.vue'
 import LivestreanCarousel from './LivestreamCarousel.vue'
 
 import { getAllProducts } from '@/services/products/get'
-import { onMounted, ref, watchEffect } from 'vue'
+import { onMounted, ref } from 'vue'
 import type { IProduct } from '@/interfaces/product.interface'
 import { useLivestream } from '@/stores/use-livestream'
 

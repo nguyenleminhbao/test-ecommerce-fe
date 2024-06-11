@@ -1,16 +1,24 @@
 <template>
   <div class="w-[834px] grid gap-[40px] h-fit">
     <div class="flex justify-between items-center">
-      <h1 class="text-body-1-semibold">Living Room</h1>
+      <h1 class="text-body-1-semibold">All Product</h1>
       <div class="flex gap-[32px]">
         <Dropdown />
-        <ToolbarSelector />
+        <!-- <ToolbarSelector /> -->
       </div>
     </div>
 
     <div class="flex flex-col gap-[80px]">
-      <div class="grid grid-cols-3 gap-[24px]">
-        <ProdCard v-for="product in displayedProducts" :key="product.id" :product="product" />
+      <div class="grid grid-cols-3 gap-6">
+        <ProdCard
+          v-for="product in products.slice((currentPage - 1) * 12, currentPage * 12)"
+          :key="product.id"
+          :product="product"
+        />
+      </div>
+
+      <div class="mx-auto">
+        <Pagination v-model:current="currentPage" :total="products.length" show-less-items />
       </div>
     </div>
   </div>
@@ -20,13 +28,12 @@
 import { Dropdown, ToolbarSelector } from './_components'
 import ProdCard from '@/components/UI/ProdCard.vue'
 import type { IProduct } from '@/interfaces/product.interface'
-import { ref, computed } from 'vue'
-import { Pagination, Spin } from 'ant-design-vue'
-import { usePagination } from 'vue-request'
+import { ref, computed, onMounted } from 'vue'
+import { Pagination } from 'ant-design-vue'
 
-const { products } = defineProps<{
+const currentPage = ref<number>(1)
+
+defineProps<{
   products: IProduct[]
 }>()
-
-const displayedProducts = computed(() => products.slice(0, 12))
 </script>

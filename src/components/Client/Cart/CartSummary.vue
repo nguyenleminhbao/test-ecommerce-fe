@@ -11,7 +11,7 @@
           <Radio :value="1" class="w-full">
             <div class="nameRadio">
               <span class="block text-black">Free shipping</span>
-              <span class="block text-black">$0.00</span>
+              <span class="block text-black">0 đ</span>
             </div>
           </Radio>
         </li>
@@ -21,7 +21,7 @@
           <Radio :value="2">
             <div class="nameRadio">
               <span class="block text-black">Express shipping</span>
-              <span class="block text-black">$0.00</span>
+              <span class="block text-black">0 đ</span>
             </div>
           </Radio>
         </li>
@@ -31,7 +31,7 @@
           <Radio :value="3">
             <div class="nameRadio">
               <span class="block text-black">Pick Up</span>
-              <span class="block text-black">$0.00</span>
+              <span class="block text-black">0 đ</span>
             </div></Radio
           >
         </li>
@@ -82,7 +82,7 @@ const checkout = () => {
   min-width: 220px;
 }
 
-.shippingItem .ant-radio-wrapper-checked {
+/* .shippingItem .ant-radio-wrapper-checked {
   background-color: rgb(163, 189, 245);
-}
+} */
 </style>

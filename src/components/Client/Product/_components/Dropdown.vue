@@ -7,10 +7,10 @@
     <template #overlay>
       <Menu>
         <MenuItem>
-          <a href="javascript:;">A-Z</a>
+          <a href="javascript:;">Thấp đến Cao</a>
         </MenuItem>
         <MenuItem>
-          <a href="javascript:;">Z-A</a>
+          <a href="javascript:;">Cao đến Thấp</a>
         </MenuItem>
       </Menu>
     </template>
@@ -21,3 +21,10 @@
 import { DownOutlined } from '@ant-design/icons-vue'
 import { Dropdown, Menu, MenuItem } from 'ant-design-vue'
 </script>
+
+<style scoped>
+.demo-dropdown-wrap :deep(.ant-dropdown-button) {
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+</style>

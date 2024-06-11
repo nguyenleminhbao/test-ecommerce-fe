@@ -19,16 +19,16 @@
           <li
             class="shippingItem p-2 rounded-md border-[1px] border-neutral-600 flex justify-between items-center w-full"
           >
-            <Radio :value="PAYMENT_TYPE.ZALOPAY">
-              <span class="text-md font-medium">Pay by ZaloPay</span></Radio
-            >
+            <Radio :value="PAYMENT_TYPE.ZALOPAY" class="w-full">
+              <span class="text-md font-medium">Pay by ZaloPay</span>
+            </Radio>
           </li>
           <li
             class="shippingItem p-2 rounded-md border-[1px] border-neutral-600 flex justify-between items-center w-full"
           >
-            <Radio :value="PAYMENT_TYPE.CREDIT"
-              ><span class="text-md font-medium"> Pay by Card Credit </span></Radio
-            >
+            <Radio :value="PAYMENT_TYPE.CREDIT" class="w-full">
+              <span class="text-md font-medium"> Pay by Card Credit </span>
+            </Radio>
           </li>
         </RadioGroup>
       </FormItem>
@@ -83,7 +83,6 @@ const selectBank = (index: number) => {
 
 <style scoped>
 .shippingItem .ant-radio-wrapper-checked {
-  background-color: rgb(163, 189, 245);
   width: 100%;
 }
 </style>

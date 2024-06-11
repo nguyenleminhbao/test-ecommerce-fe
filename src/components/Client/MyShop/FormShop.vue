@@ -8,6 +8,7 @@
       name="registration"
       autocomplete="off"
       class="my-20 grid grid-cols-2 gap-16"
+      :validate-messages="validateMessages"
     >
       <div class="flex flex-col gap-6">
         <!-- Shop Information -------------------------------------------------------->
@@ -37,6 +38,10 @@
             <div class="w-full">
               <FormItem label="Name Shop" name="name">
                 <Input v-model:value="formState.name" />
+              </FormItem>
+
+              <FormItem label="Email" name="email">
+                <Input v-model:value="formState.email" />
               </FormItem>
 
               <FormItem label="Description" name="desc">
@@ -139,6 +144,7 @@ import type { Rule } from 'ant-design-vue/es/form'
 interface FormState {
   logo: string
   name: string
+  email: string
   desc: string
 
   user: string
@@ -156,6 +162,7 @@ interface FormState {
 const formState = reactive<FormState>({
   logo: '',
   name: '',
+  email: '',
   desc: '',
 
   user: '',
@@ -171,19 +178,26 @@ const formState = reactive<FormState>({
 })
 
 const rules: Record<string, Rule[]> = {
-  logo: [{ required: true, message: 'Please Upload' }],
-  name: [{ required: true, message: 'Please input', trigger: 'change' }],
+  logo: [{ required: true }],
+  name: [{ required: true, trigger: 'change' }],
+  email: [{ required: true, trigger: 'change', type: 'email' }],
 
-  user: [{ required: true, message: 'Please input', trigger: 'change' }],
-  phone: [{ required: true, message: 'Please input', trigger: 'change' }],
-  add: [{ required: true, message: 'Please input', trigger: 'change' }],
+  user: [{ required: true, trigger: 'change' }],
+  phone: [{ required: true, trigger: 'change' }],
+  add: [{ required: true, trigger: 'change' }],
   default: [{ required: true, message: 'Please check', trigger: 'change' }],
 
-  nameBank: [{ required: true, message: 'Please input', trigger: 'change' }],
-  pan: [{ required: true, message: 'Please input', trigger: 'change' }],
-  bank: [{ required: true, message: 'Please input', trigger: 'change' }],
-  region: [{ required: true, message: 'Please input', trigger: 'change' }],
-  branch: [{ required: true, message: 'Please input', trigger: 'change' }]
+  nameBank: [{ required: true, trigger: 'change' }],
+  pan: [{ required: true, trigger: 'change' }],
+  bank: [{ required: true, trigger: 'change' }],
+  region: [{ required: true, trigger: 'change' }],
+  branch: [{ required: true, trigger: 'change' }]
+}
+const validateMessages = {
+  required: 'Please input ${label}!',
+  types: {
+    email: '${label} is not a valid email!'
+  }
 }
 
 function getBase64(img: Blob, callback: (base64Url: string) => void) {

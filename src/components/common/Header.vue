@@ -9,7 +9,9 @@
         <RouterLink class="hover:text-neutral-7 font-semibold" to="/">Home</RouterLink>
         <RouterLink class="hover:text-neutral-7 font-semibold" to="/product">Product</RouterLink>
         <RouterLink class="hover:text-neutral-7 font-semibold" to="/news">News</RouterLink>
-        <RouterLink class="hover:text-neutral-7 font-semibold" to="/my-account">My account</RouterLink>
+        <RouterLink class="hover:text-neutral-7 font-semibold" to="/my-account"
+          >My account</RouterLink
+        >
       </div>
 
       <div class="flex gap-4 items-center text-[24px]">

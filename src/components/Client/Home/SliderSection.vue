@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-[1120px] mx-auto grid gap-[32px] pb-[40px] overflow-x-hidden">
-    <Carousel arrows>
+    <Carousel arrows autoplay>
       <template #prevArrow>
         <div class="custom-slick-arrow" style="left: 10px; z-index: 1">
           <left-circle-outlined />
@@ -11,19 +11,8 @@
           <right-circle-outlined />
         </div>
       </template>
-      <div>
-        <img
-          class="w-full h-[500px] object-cover"
-          src="https://cdn.venngage.com/template/thumbnail/full/a13c371d-71c4-436d-8193-2f9e18db2772.webp"
-          alt="temp"
-        />
-      </div>
-      <div>
-        <img
-          class="object-contain aspect-[1120/536] w-full max-w-[1120px] max-h-[536px]"
-          src="https://cdn.venngage.com/template/thumbnail/full/a13c371d-71c4-436d-8193-2f9e18db2772.webp"
-          alt="temp"
-        />
+      <div v-for="(banner, index) in banners" :key="index">
+        <img class="w-full h-[500px] object-cover" :src="banner" alt="temp" />
       </div>
     </Carousel>
 
@@ -48,6 +37,15 @@
 <script setup lang="ts">
 import { Carousel } from 'ant-design-vue'
 import { LeftCircleOutlined, RightCircleOutlined } from '@ant-design/icons-vue'
+import { onMounted, ref } from 'vue'
+import { randomBanner } from '@/services/shop/get'
+
+const banners = ref<string[]>()
+
+onMounted(async () => {
+  const data = await randomBanner()
+  banners.value = data.message
+})
 </script>
 
 <style scoped lang="css">
