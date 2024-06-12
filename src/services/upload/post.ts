@@ -14,6 +14,14 @@ type UpdateShopAvatarType = {
   newImageUrl: string
 }
 
+type UpdateReelType = {
+  reelId: string
+  idVideoOld: string
+  newVideoUrl: string
+  title: string
+  description: string
+}
+
 export const updateBanner = async (_data: UpdateBannerType) => {
   try {
     const { data } = await axiosInstance.post<IResponse<string>>('/upload/update-banner', _data)
@@ -29,6 +37,15 @@ export const updateShopAvatar = async (_data: UpdateShopAvatarType) => {
       '/upload/update-shop-avatar',
       _data
     )
+    return data
+  } catch (err) {
+    throw err
+  }
+}
+
+export const updateReel = async (_data: UpdateReelType) => {
+  try {
+    const { data } = await axiosInstance.post<IResponse<string>>('/upload/update-reel', _data)
     return data
   } catch (err) {
     throw err

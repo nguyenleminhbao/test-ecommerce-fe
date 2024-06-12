@@ -6,7 +6,7 @@
         <span class="text-headline-7">{{ shop?.shopName }}</span>
         <span class="text-neutral-5 text-[12px]">Online 1 hour ago</span>
         <div class="grid grid-cols-2 mt-3 gap-2">
-          <Button class="h-7 bg-black/10 object-center">
+          <Button class="h-7 bg-slate-200 border-neutral-7 object-center">
             <template #icon>
               <WechatOutlined />
             </template>

@@ -80,7 +80,6 @@ const { shopName, shopAvatar, shopId, userId } = defineProps<{
 const fileList = ref([])
 const loading = ref<boolean>(false)
 const imageUrl = ref<string>('')
-const imageKey = ref<string>('')
 
 const handleChange = async (info: UploadChangeParam) => {
   if (info.file.status === 'uploading') {
@@ -88,7 +87,6 @@ const handleChange = async (info: UploadChangeParam) => {
     return
   }
   if (info.file.status === 'done') {
-    imageKey.value = info.file.response.public_id
     getBase64(info.file.originFileObj as FileType, (base64Url: string) => {
       imageUrl.value = base64Url
       loading.value = false

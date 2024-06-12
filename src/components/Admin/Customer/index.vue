@@ -30,7 +30,6 @@
 import { getAllCustomer } from '@/services/customer/get'
 import { Image, Table } from 'ant-design-vue'
 import { onMounted, ref } from 'vue'
-import { useElementSize } from '@vueuse/core'
 import type { TableColumnsType } from 'ant-design-vue'
 
 const columns: TableColumnsType = [

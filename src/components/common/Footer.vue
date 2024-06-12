@@ -11,8 +11,8 @@
         <div class="flex gap-[40px]">
           <RouterLink class="text-caption-1 text-neutral-1" to="/">Home</RouterLink>
           <RouterLink class="text-caption-1 text-neutral-1" to="/product">Product</RouterLink>
-          <RouterLink class="text-caption-1 text-neutral-1" to="/">New</RouterLink>
-          <RouterLink class="text-caption-1 text-neutral-1" to="/">About us</RouterLink>
+          <RouterLink class="text-caption-1 text-neutral-1" to="/news">News</RouterLink>
+          <RouterLink class="text-caption-1 text-neutral-1" to="/my-account">My account</RouterLink>
         </div>
       </div>
 

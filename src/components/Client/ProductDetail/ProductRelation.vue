@@ -2,7 +2,7 @@
   <div class="grid gap-[48px] my-[48px] max-w-[1120px] mx-auto">
     <div class="flex items-end justify-between text-neutral-7 max-w-[1120px]">
       <h1 class="text-headline-4">You might also like</h1>
-      <CButtonArrow text="More Products" link="/" />
+      <ButtonArrow text="More Products" link="/product" />
     </div>
     <div class="flex overflow-x-auto items-center gap-[24px] scrollbar-hide relative">
       <CardItem v-for="product in products" :key="product.id" :product="product"></CardItem>
@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import CButtonArrow from '@/components/UI/elements/ButtonArrow.vue'
+import ButtonArrow from '@/components/UI/elements/ButtonArrow.vue'
 import CardItem from '@/components/UI/ProdCard.vue'
 import { RightCircleFilled } from '@ant-design/icons-vue'
 import { getAllProducts } from '@/services/products/get'

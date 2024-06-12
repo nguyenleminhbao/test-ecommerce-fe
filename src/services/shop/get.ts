@@ -65,3 +65,12 @@ export const getAllShop = async () => {
     throw err
   }
 }
+
+export const randomBanner = async () => {
+  try {
+    const { data } = await axiosInstance.get<IResponse<string[]>>('/shop/random-banner')
+    return data
+  } catch (err) {
+    throw err
+  }
+}
