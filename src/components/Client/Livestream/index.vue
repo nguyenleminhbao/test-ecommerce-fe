@@ -58,6 +58,8 @@ onMounted(() => {
        const parentNode = document.querySelector('.BYpXSnOHfrC2td4QRijO')?.parentElement
         parentNode?.remove()
         router.replace('/product')
+        zp.destroy()
+        
      },
       turnOnCameraWhenJoining: false,
       showMyCameraToggleButton: false,
