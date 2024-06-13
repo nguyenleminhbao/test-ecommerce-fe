@@ -59,7 +59,8 @@ onMounted(() => {
         parentNode?.remove()
         router.replace('/product')
         zp.destroy()
-      },
+        
+     },
       turnOnCameraWhenJoining: false,
       showMyCameraToggleButton: true,
       showAudioVideoSettingsButton: true,
