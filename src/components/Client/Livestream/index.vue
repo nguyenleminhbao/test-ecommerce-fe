@@ -50,7 +50,6 @@ onMounted(() => {
       },
       onReturnToHomeScreenClicked: () => {
         const parentNode = document.querySelector('.BYpXSnOHfrC2td4QRijO')?.parentElement
-        console.log(parentNode)
         parentNode?.remove()
         router.replace('/product')
       },
@@ -60,7 +59,8 @@ onMounted(() => {
         parentNode?.remove()
         router.replace('/product')
         zp.destroy()
-      },
+        
+     },
       turnOnCameraWhenJoining: false,
       showMyCameraToggleButton: true,
       showAudioVideoSettingsButton: true,
