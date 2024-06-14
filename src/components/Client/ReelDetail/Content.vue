@@ -18,7 +18,7 @@
         />
       </div>
     </div>
-    <div class="w-full rounded-lg border-gray-600 border-[1px] sticky bottom-4">
+    <div v-if="isSignedIn" class="w-full rounded-lg border-gray-600 border-[1px] sticky bottom-4">
       <input
         class="w-full rounded-lg border-gray-600 h-[50px] pl-3"
         placeholder="Enter comment here"
@@ -45,6 +45,7 @@ import { TYPE_COMMENT } from '@/constants/enum/comment.enum'
 import { createComment } from '@/services/comment/post'
 import { getCommentByEtag } from '@/services/comment/get'
 import { useEventListener } from '@vueuse/core'
+import { useAuth } from 'vue-clerk'
 
 const { reel } = defineProps<{
   reel: IReel
@@ -52,6 +53,7 @@ const { reel } = defineProps<{
 const comments = ref<IComment[]>(reel.comments)
 const content = ref<string>('')
 
+const { isSignedIn } = useAuth()
 const element = ref<HTMLDivElement>()
 
 const sendComment = async () => {

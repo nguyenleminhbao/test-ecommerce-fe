@@ -28,10 +28,11 @@ import { usePayment } from '@/stores/use-payment'
 import { checkAdmin, getMe } from '@/services/auth/get'
 import { useRouter } from 'vue-router'
 import { useAuthSystem } from '@/stores/use-auth'
-import { Skeleton } from 'ant-design-vue'
+import { Skeleton, message } from 'ant-design-vue'
 import { useLivestream } from '@/stores/use-livestream'
 import { getAllStream } from '@/services/livestream/get'
 
+window.scrollTo(0, 0)
 const { userId } = useAuth()
 const isLoading = ref<boolean>(false)
 
@@ -48,16 +49,15 @@ const { setListLivestream } = useLivestream()
 
 watch(userId, async () => {
   const accessToken = localStorage && localStorage.getItem('accessToken')
-  console.log(userId.value, 'alo')
   if (!userId.value) {
     localStorage && localStorage.removeItem('accessToken')
     localStorage && localStorage.removeItem('refreshToken')
   } else if (userId.value && !accessToken) {
     isLoading.value = true
-    console.log(userId.value, 'alo1')
     const loginData = await login(userId.value)
     localStorage.setItem('accessToken', loginData?.message.accessToken)
     localStorage.setItem('refreshToken', loginData?.message.refreshToken)
+    message.success('Login successfully')
 
     const isAdmin = await checkAdmin()
     setAdmin(isAdmin.message)

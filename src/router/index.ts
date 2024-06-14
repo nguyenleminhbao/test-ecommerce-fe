@@ -1,36 +1,36 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import {
-  CartView,
-  HomeView,
-  LivestreamView,
-  MyAccountView,
-  MyShopView,
-  ProductDetailView,
-  ProductView,
-  NewsView,
-  BlogDetailView,
-  ReelDetailView,
-  ShopDetailView
-} from '@/views/Client'
+// import {
+//   CartView,
+//   HomeView,
+//   LivestreamView,
+//   MyAccountView,
+//   MyShopView,
+//   ProductDetailView,
+//   ProductView,
+//   NewsView,
+//   BlogDetailView,
+//   ReelDetailView,
+//   ShopDetailView
+// } from '@/views/Client'
 
-import {
-  DashboardAdmin,
-  ProductAdmin,
-  ProductDetailAdmin,
-  OrderAdmin,
-  OrderDetailAdmin,
-  CustomerAdmin,
-  CustomerDetailAdmin,
-  ShopAdmin,
-  ShopDetailAdmin,
-  ReelAdmin,
-  ReelDetailAdmin,
-  FeedAdmin,
-  FeedDetailAdmin,
-  SettingAdmin
-} from '@/views/Admin'
-import ForbiddenView from '@/views/ForbiddenView.vue'
-import NotFoundView from '@/views/NotFoundView.vue'
+// import {
+//   DashboardAdmin,
+//   ProductAdmin,
+//   ProductDetailAdmin,
+//   OrderAdmin,
+//   OrderDetailAdmin,
+//   CustomerAdmin,
+//   CustomerDetailAdmin,
+//   ShopAdmin,
+//   ShopDetailAdmin,
+//   ReelAdmin,
+//   ReelDetailAdmin,
+//   FeedAdmin,
+//   FeedDetailAdmin,
+//   SettingAdmin
+// } from '@/views/Admin'
+// import ForbiddenView from '@/views/ForbiddenView.vue'
+// import NotFoundView from '@/views/NotFoundView.vue'
 
 export enum LAYOUT_ENUM {
   DEFAULT_LAYOUT = 'default-layout',
@@ -45,7 +45,7 @@ const routes = [
     meta: {
       layout: LAYOUT_ENUM.DEFAULT_LAYOUT
     },
-    component: HomeView
+    component: () => import('@/views/Client/HomeView.vue')
   },
   {
     path: '/product',
@@ -53,15 +53,16 @@ const routes = [
     meta: {
       layout: LAYOUT_ENUM.DEFAULT_LAYOUT
     },
-    component: ProductView
+    component: () => import('@/views/Client/ProductView.vue')
   },
   {
     path: '/product/:productId',
     name: 'product detail',
     meta: {
-      layout: LAYOUT_ENUM.DEFAULT_LAYOUT
+      layout: LAYOUT_ENUM.DEFAULT_LAYOUT,
+      reload: true
     },
-    component: ProductDetailView
+    component: () => import('@/views/Client/ProductDetailView.vue')
   },
   {
     path: '/news',
@@ -69,7 +70,7 @@ const routes = [
     meta: {
       layout: LAYOUT_ENUM.DEFAULT_LAYOUT
     },
-    component: NewsView
+    component: () => import('@/views/Client/NewsView.vue')
   },
   {
     path: '/blog/:blogId',
@@ -77,7 +78,7 @@ const routes = [
     meta: {
       layout: LAYOUT_ENUM.DEFAULT_LAYOUT
     },
-    component: BlogDetailView
+    component: () => import('@/views/Client/BlogDetailView.vue')
   },
   {
     path: '/reel/:reelId',
@@ -85,7 +86,7 @@ const routes = [
     meta: {
       layout: LAYOUT_ENUM.AUTH_LAYOUT
     },
-    component: ReelDetailView
+    component: () => import('@/views/Client/ReelDetailView.vue')
   },
   {
     path: '/cart',
@@ -93,7 +94,7 @@ const routes = [
     meta: {
       layout: LAYOUT_ENUM.DEFAULT_LAYOUT
     },
-    component: CartView
+    component: () => import('@/views/Client/CartView.vue')
   },
   {
     path: '/my-shop',
@@ -101,7 +102,7 @@ const routes = [
     meta: {
       layout: LAYOUT_ENUM.DEFAULT_LAYOUT
     },
-    component: MyShopView
+    component: () => import('@/views/Client/MyShopView.vue')
   },
   {
     path: '/livestream',
@@ -109,7 +110,7 @@ const routes = [
     meta: {
       layout: LAYOUT_ENUM.DEFAULT_LAYOUT
     },
-    component: LivestreamView
+    component: () => import('@/views/Client/LivestreamView.vue')
   },
   {
     path: '/my-account',
@@ -117,7 +118,7 @@ const routes = [
     meta: {
       layout: LAYOUT_ENUM.DEFAULT_LAYOUT
     },
-    component: MyAccountView
+    component: () => import('@/views/Client/MyAccountView.vue')
   },
   {
     path: '/shop/:shopId',
@@ -126,7 +127,7 @@ const routes = [
       layout: LAYOUT_ENUM.DEFAULT_LAYOUT
     },
 
-    component: ShopDetailView
+    component: () => import('@/views/Client/ShopDetailView.vue')
   },
   {
     path: '/forbidden',
@@ -134,7 +135,7 @@ const routes = [
     meta: {
       layout: LAYOUT_ENUM.AUTH_LAYOUT
     },
-    component: ForbiddenView
+    component: () => import('@/views/ForbiddenView.vue')
   },
   {
     path: '/admin',
@@ -145,79 +146,84 @@ const routes = [
       {
         path: '',
         name: 'dashboard admin',
-        component: DashboardAdmin
+        component: () => import('@/views/Admin/DashboardAdmin.vue')
       },
       {
         path: '/admin/product',
         name: 'product admin',
-        component: ProductAdmin
+        component: () => import('@/views/Admin/ProductAdmin.vue')
       },
       {
         path: '/admin/product/:productId',
         name: 'product detail admin',
-        component: ProductDetailAdmin
+        component: () => import('@/views/Admin/ProductDetailAdmin.vue')
       },
       {
         path: '/admin/order',
         name: 'order admin',
-        component: OrderAdmin
+        component: () => import('@/views/Admin/OrderAdmin.vue')
       },
       {
         path: '/admin/order/:orderId',
         name: 'order detail admin',
-        component: OrderDetailAdmin
+        component: () => import('@/views/Admin/OrderDetailAdmin.vue')
       },
       {
         path: '/admin/customer',
         name: 'customer admin',
-        component: CustomerAdmin
+        component: () => import('@/views/Admin/CustomerAdmin.vue')
       },
       {
         path: '/admin/customer/:customerId',
         name: 'customer detail admin',
-        component: CustomerDetailAdmin
+        component: () => import('@/views/Admin/CustomerDetailAdmin.vue')
       },
       {
         path: '/admin/shop',
         name: 'shop admin',
-        component: ShopAdmin
+        component: () => import('@/views/Admin/ShopAdmin.vue')
       },
       {
         path: '/admin/shop/:shopId',
         name: 'shop detail admin',
-        component: ShopDetailAdmin
+        component: () => import('@/views/Admin/ShopDetailAdmin.vue')
       },
       {
         path: '/admin/reel',
         name: 'reel admin',
-        component: ReelAdmin
+        component: () => import('@/views/Admin/ReelAdmin.vue')
       },
       {
         path: '/admin/reel/:reelId',
         name: 'reel detail admin',
-        component: ReelDetailAdmin
+        component: () => import('@/views/Admin/ReelDetailAdmin.vue')
       },
       {
         path: '/admin/feed',
         name: 'feed admin',
-        component: FeedAdmin
+        component: () => import('@/views/Admin/FeedAdmin.vue')
       },
       {
         path: '/admin/feed/:feedId',
         name: 'feed detail admin',
-        component: FeedDetailAdmin
+        component: () => import('@/views/Admin/FeedDetailAdmin.vue')
       },
       {
         path: '/admin/setting',
         name: 'setting admin',
-        component: SettingAdmin
+        component: () => import('@/views/Admin/SettingAdmin.vue')
       }
     ]
   },
   {
+    path: '/unauthorized',
+    name: 'Unauthorized',
+    component: () => import('@/views/UnAuthorizedView.vue')
+  },
+  {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
-    component: NotFoundView
+    component: () => import('@/views/NotFoundView.vue')
   }
 ]
 

@@ -1,26 +1,22 @@
 <template>
-  <div class="max-w-[1120px] mx-auto">
+  <div v-if="isSignedIn" class="max-w-[1120px] mx-auto">
     <h1 class="my-20 text-headline-3 text-center">My Account</h1>
 
     <section class="w-full flex mb-10">
-      <div class="!bg-neutral-2 rounded-md shadow-md max-h-[350px]">
+      <div class="!bg-neutral-3 rounded-md shadow-md max-h-[350px]">
         <div class="flex flex-col items-center gap-4 border-[1px] border-b-black p-4 rounded-t-md">
           <ClerkLoading>
             <LoadingOutlined className="h-10 w-10 text-muted-foreground animate-spin" />
           </ClerkLoading>
           <ClerkLoaded>
-            <Image
-              :src="user?.imageUrl"
-              class="!w-[50px] !h-[50px] rounded-full"
-              v-if="isSignedIn"
-            />
+            <Image :src="user?.imageUrl" class="!w-[50px] !h-[50px] rounded-full" />
             <span class="text-body-2-semibold"> {{ user?.fullName }}</span>
           </ClerkLoaded>
         </div>
 
         <Menu
           v-model:selectedKeys="current"
-          class="bg-neutral-2 [&_.ant-menu-title-content]:text-body-2"
+          class="bg-neutral-3 [&_.ant-menu-title-content]:text-body-2"
           style="width: 256px"
           mode="vertical"
           :items="items"
@@ -38,8 +34,8 @@
 </template>
 
 <script setup lang="ts">
-import { Image, Menu } from 'ant-design-vue'
-import { h, ref, watchEffect } from 'vue'
+import { Image, Menu, message } from 'ant-design-vue'
+import { h, ref } from 'vue'
 import {
   CalendarOutlined,
   AppstoreOutlined,
@@ -48,7 +44,7 @@ import {
   LoginOutlined,
   LoadingOutlined
 } from '@ant-design/icons-vue'
-import { useAuth, useUser, ClerkLoaded, ClerkLoading } from 'vue-clerk'
+import { useAuth, useUser, ClerkLoaded, ClerkLoading, useClerk } from 'vue-clerk'
 import type { MenuProps } from 'ant-design-vue'
 import AccountDetail from './AccountDetail.vue'
 import AddressDetail from './AddressDetail.vue'
@@ -58,6 +54,7 @@ import { useRoute, useRouter } from 'vue-router'
 
 const { isSignedIn } = useAuth()
 const { user } = useUser()
+const { signOut } = useClerk()
 const route = useRoute()
 const router = useRouter()
 const keyPage = ref<number>(
@@ -106,12 +103,18 @@ const items = ref([
     title: 'Logout'
   }
 ])
-const handleClick: MenuProps['onClick'] = (menuInfo) => {
+
+const handleClick: MenuProps['onClick'] = async (menuInfo) => {
   keyPage.value = menuInfo.key as number
 
-  router.push({
-    path: route.path,
-    query: { ...route.query, keyPage: keyPage.value }
-  })
+  if (keyPage.value == 4) {
+    await signOut()
+    message.success('Logout successfully')
+    router.push('/')
+  } else
+    router.push({
+      path: route.path,
+      query: { ...route.query, keyPage: keyPage.value }
+    })
 }
 </script>

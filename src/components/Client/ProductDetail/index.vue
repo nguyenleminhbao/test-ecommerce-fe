@@ -1,27 +1,31 @@
 <template>
-  <div class="max-w-[1120px] mx-auto">
+  <div v-if="product" class="max-w-[1120px] mx-auto">
     <Breadcrumb class="my-4">
       <BreadcrumbItem class="[&_.ant-breadcrumb-link]:text-gray-600">Home</BreadcrumbItem>
-      <BreadcrumbItem><a href="text-gray-600">Shop</a></BreadcrumbItem>
+      <BreadcrumbItem><span>Shop</span></BreadcrumbItem>
       <BreadcrumbItem
-        ><a href="text-gray-600">{{ product?.shopName }}</a></BreadcrumbItem
+        ><RouterLink :to="`/shop/${product?.shopId}`">{{
+          product?.shopName
+        }}</RouterLink></BreadcrumbItem
       >
       <BreadcrumbItem class="[&_.ant-breadcrumb-link]:font-semibold">Product</BreadcrumbItem>
     </Breadcrumb>
-    <ProductInfor v-if="product" :product="product" />
-    <ShopInfor v-if="product" :shop-id="product?.shopId" />
+    <ProductInfor :product="product" />
+    <ShopInfor :shop-id="product?.shopId" />
     <TabProduct
-      v-if="product"
       :description="product.body_html"
       :product-id="product.id"
       :option-product="product.product_type"
     />
     <ProductRelation />
   </div>
+  <div v-else class="w-full min-h-[500px] object-center">
+    <Spin class="[&_.ant-spin-dot-item]:bg-black [&_.ant-spin-dot-item]:text-xl" size="large" />
+  </div>
 </template>
 
 <script setup lang="ts">
-import { Breadcrumb, BreadcrumbItem } from 'ant-design-vue'
+import { Breadcrumb, BreadcrumbItem, Spin } from 'ant-design-vue'
 import ProductInfor from './ProductInfor.vue'
 import ShopInfor from './ShopInfor.vue'
 import TabProduct from './TabProduct.vue'

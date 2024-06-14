@@ -66,6 +66,7 @@ export type FormOrderType = {
 const current = ref<number>(0) // set step current
 // const description = 'This is a description.'
 const cartStore = useCart()
+const { setSelectedCartItemEmpty } = useCart()
 const paymentStore = usePayment()
 const { setPaymentSession } = usePayment()
 const modalPayment = ref()
@@ -115,6 +116,8 @@ const stepOrder = async () => {
       if (data.type == 'Success') {
         message.success('Create order successfully')
         completeOrder.value = data.message // get newOrder after create
+
+        setSelectedCartItemEmpty()
         setTimeout(() => {
           // next step
           current.value = 2
@@ -161,6 +164,7 @@ const stepOrder = async () => {
           completeOrder.value = newOrder
           message.success('Payment successfully')
           setPaymentSession(null)
+          setSelectedCartItemEmpty()
           setTimeout(() => {
             // next step
             current.value = 2

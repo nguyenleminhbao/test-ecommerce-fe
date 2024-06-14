@@ -8,7 +8,7 @@
           class="rounded-full aspect-square object-cover group-hover:blur-sm duration-200"
         />
         <div v-if="loading" class="w-full aspect-square object-center bg-gray-300 rounded-full">
-          <Spin size="large" />
+          <Spin size="large" class="[&_.ant-spin-dot-item]:bg-black" />
         </div>
         <div
           class="absolute top-[calc(50%_-_30px)] left-[calc(50%_-_30px)] cursor-pointer items-center gap-1 bg-slate-400 rounded-full aspect-square w-[60px] justify-center hidden group-hover:flex"

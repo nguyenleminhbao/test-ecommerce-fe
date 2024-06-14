@@ -2,21 +2,6 @@
   <div class="grid grid-cols-[4fr_6fr] gap-16">
     <div class="flex flex-col gap-6">
       <ProductImage :images="product.images" :primary-image="variant.variant_image" />
-
-      <!-- <div class="grid grid-cols-2 gap-3 w-full">
-        <Button
-          class="h-9 border-neutral-7 object-center text-[16px]"
-          :disabled="!isSupported"
-          @click="prodShare"
-          :icon="h(ShareAltOutlined)"
-        >
-          {{ isSupported ? 'Share' : 'Web share is not supported in your browser' }}
-        </Button>
-        <div class="flex gap-2 items-center text-2xl">
-          <FacebookOutlined />
-          <TwitterOutlined />
-        </div>
-      </div> -->
     </div>
 
     <Form class="flex flex-col relative justify-between">
@@ -67,15 +52,25 @@
       </div>
 
       <div class="mt-6 grid grid-cols-2 gap-3 w-full">
-        <Button class="h-9 border-neutral-7 object-center text-[16px]" @click="wish = !wish">
+        <!-- <Button class="h-11 border-neutral-7 object-center text-[18px]" @click="wish = !wish">
           <template #icon>
             <HeartOutlined v-if="!wish" />
             <HeartFilled v-else />
           </template>
           Wishlist
-        </Button>
+        </Button> -->
+
         <Button
-          class="h-9 bg-primary text-white text-[16px] object-center"
+          class="h-11 border-neutral-7 object-center text-[18px]"
+          :disabled="!isSupported"
+          @click="prodShare"
+          :icon="h(ShareAltOutlined)"
+        >
+          {{ isSupported ? 'Share' : 'Web share is not supported in your browser' }}
+        </Button>
+
+        <Button
+          class="h-11 bg-primary text-white text-[18px] object-center"
           @click="addToCartFunc"
           :icon="h(ShoppingCartOutlined)"
         >
@@ -93,7 +88,9 @@ import {
   HeartOutlined,
   HeartFilled,
   ShareAltOutlined,
-  ShoppingCartOutlined, FacebookOutlined, TwitterOutlined
+  ShoppingCartOutlined,
+  FacebookOutlined,
+  TwitterOutlined
 } from '@ant-design/icons-vue'
 import { Form, Button, message, Rate } from 'ant-design-vue'
 import { ProductImage, RadioOption } from './_components'

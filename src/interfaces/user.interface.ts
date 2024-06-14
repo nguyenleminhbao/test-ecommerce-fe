@@ -4,9 +4,11 @@ export interface IUser {
   firstName: string
   lastName: string
   phoneNumber: string
-  addresses: {
-    streetAddress: string
-    city: string
-  }[]
+  addresses: IAddress[]
   avatar: string
+}
+
+export interface IAddress {
+  streetAddress: string
+  city: string
 }

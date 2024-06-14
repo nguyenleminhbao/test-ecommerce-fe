@@ -27,7 +27,7 @@
         </Button>
       </div>
 
-      <RouterLink :to="`/product/${product?.id}?title=${product.title}`">
+      <RouterLink :to="`/product/${product?.id}?title=${product.title}`" @click="reloadPage">
         <img
           class="max-w-full w-full h-[240px] group-hover:max-h-[200px] rounded-md object-cover my-3 shadow-md"
           :src="product.variants[0].variant_image"
@@ -76,35 +76,50 @@ import BadgeMedium from '@/components/UI/elements/BadgeMedium.vue'
 import { TYPE_BADGE } from '@/constants/enum/badge.enum'
 import type { IProduct } from '@/interfaces/product.interface'
 import { formatNumberWithCommas } from '@/utils'
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRouter } from 'vue-router'
 import { useCart } from '@/stores/use-cart'
 import { addToCart } from '@/services/cart/post'
 import { ref, h } from 'vue'
 import DrawerCart from '@/components/UI/DrawerCart.vue'
+import { useAuth, useClerk } from 'vue-clerk'
 
 const { product } = defineProps<{
   product: IProduct
 }>()
+
+const { isSignedIn } = useAuth()
+const { openSignIn } = useClerk()
+const router = useRouter()
 
 const { addToCart: _addToCart } = useCart()
 const drawerCart = ref()
 const wish = ref<boolean>(false)
 
 const addToCartFunc = async () => {
-  const cartItem = {
-    variantId: product.variants[0].id,
-    image: product.variants[0].variant_image,
-    price: parseFloat(product.variants[0].price),
-    title: product.title,
-    quantity: 1,
-    shopId: product.shopId,
-    shopName: product.shopName
-  }
+  if (isSignedIn.value) {
+    const cartItem = {
+      variantId: product.variants[0].id,
+      image: product.variants[0].variant_image,
+      price: parseFloat(product.variants[0].price),
+      title: product.title,
+      quantity: 1,
+      shopId: product.shopId,
+      shopName: product.shopName
+    }
 
-  _addToCart(cartItem)
-  // message.success('Add to cart successfully')
-  drawerCart?.value?.showCart()
-  await addToCart(cartItem)
+    _addToCart(cartItem)
+    // message.success('Add to cart successfully')
+    drawerCart?.value?.showCart()
+    await addToCart(cartItem)
+  } else {
+    openSignIn()
+  }
+}
+
+const reloadPage = () => {
+  setTimeout(() => {
+    window.location.reload()
+  }, 100)
 }
 </script>
 

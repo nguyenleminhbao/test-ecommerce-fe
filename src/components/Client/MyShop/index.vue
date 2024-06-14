@@ -1,6 +1,5 @@
 <template>
-  <div class="w-[1120px] mx-auto mb-10" :class="isLoading && 'object-center min-h-[500px]'">
-    <Spin v-if="isLoading" size="large" />
+  <div class="w-[1120px] mx-auto mb-10" v-if="!isLoading">
     <div v-if="!isLoading && authStore.isShopOwner && shopOwner" class="w-full h-full">
       <ShopAvatar
         :shop-avatar="shopOwner?.shopAvatar"
@@ -13,6 +12,9 @@
       <ShopProduct :shop-id="shopOwner.shopId" />
     </div>
     <div v-else><FormShop /></div>
+  </div>
+  <div v-else class="w-full min-h-[500px] object-center">
+    <Spin class="[&_.ant-spin-dot-item]:bg-black [&_.ant-spin-dot-item]:text-xl" size="large" />
   </div>
 </template>
 

@@ -66,6 +66,7 @@ import { Form, FormItem, Input, InputPassword, Button } from 'ant-design-vue'
 import { reactive, ref } from 'vue'
 import type { Rule } from 'ant-design-vue/es/form'
 import type { FormInstance } from 'ant-design-vue'
+import { useAuthSystem } from '@/stores/use-auth'
 interface FormState {
   firstName: string
   lastName: string
@@ -75,11 +76,13 @@ interface FormState {
   pass: string
   checkPass: string
 }
+
+const authStore = useAuthSystem()
 const formRef = ref<FormInstance>()
 const formState = ref<FormState>({
-  firstName: '',
-  lastName: '',
-  displayName: '',
+  firstName: authStore.user?.firstName ?? '',
+  lastName: authStore.user?.lastName ?? '',
+  displayName: authStore.user?.name ?? '',
   email: '',
   oldPass: '',
   pass: '',

@@ -58,8 +58,12 @@
           placeholder="please select your zone"
           class="mt-2"
         >
-          <SelectOption value="default">Zone one</SelectOption>
-          <SelectOption value="option">Zone two</SelectOption>
+          <SelectOption
+            v-for="(address, index) in listAddress"
+            :key="index"
+            :value="`${address.streetAddress} ${address.city}`"
+            >{{ `${address.streetAddress} ${address.city}` }}</SelectOption
+          >
         </Select>
       </FormItem>
     </div>
@@ -72,19 +76,27 @@
     class="[&_.ant-modal-title]:text-headline-6"
   >
     <Form class="w-full grid grid-cols-2 gap-3" :model="formAddress">
-      <FormItem class="col-span-2" name="street">
+      <FormItem
+        class="col-span-2"
+        name="streetAddress"
+        :rules="[{ required: true, message: 'Please input your street!' }]"
+      >
         <span class="text-body-2-semibold text-neutral-4"
           >Street Address <span class="text-red-600 text-lg">*</span></span
         >
         <Input
-          v-model:value="formAddress.street"
+          v-model:value="formAddress.streetAddress"
           required
           class="mt-2"
           placeholder="12 Le Duan, Quan 1, tp Ho Chi Minh"
         />
       </FormItem>
 
-      <FormItem class="col-span-2" name="city">
+      <FormItem
+        class="col-span-2"
+        name="city"
+        :rules="[{ required: true, message: 'Please input your city!' }]"
+      >
         <span class="text-body-2-semibold text-neutral-4"
           >City <span class="text-red-600 text-lg">*</span></span
         >
@@ -100,29 +112,50 @@
 </template>
 
 <script setup lang="ts">
-import { Form, FormItem, Input, Select, SelectOption, Modal } from 'ant-design-vue'
+import { Form, FormItem, Input, Select, SelectOption, Modal, message } from 'ant-design-vue'
 import { PlusCircleOutlined } from '@ant-design/icons-vue'
-import { ref, watchEffect } from 'vue'
+import { onMounted, ref, watchEffect } from 'vue'
 import type { FormOrderType } from '../index.vue'
+import type { IAddress } from '@/interfaces/user.interface'
+import { getAllAddress } from '@/services/detail-user/get'
+import { createAddress } from '@/services/detail-user/post'
 
 const { form } = defineProps<{
   form: FormOrderType
 }>()
+
+const listAddress = ref<IAddress[]>([])
 
 const open = ref<boolean>(false)
 const showModal = () => {
   open.value = true
 }
 
-const handleOk = (e: MouseEvent) => {
-  open.value = false
+const handleOk = async (e: MouseEvent) => {
+  if (!formAddress.value.streetAddress || !formAddress.value.city) {
+    message.error('Please fill in all information')
+  } else {
+    await createAddress({
+      streetAddress: formAddress.value.streetAddress,
+      city: formAddress.value.city
+    })
+    const data = await getAllAddress()
+    listAddress.value = data.message
+    message.success('Create new address successfully')
+    open.value = false
+  }
 }
 
 const formAddress = ref<{
-  street: string
+  streetAddress: string
   city: string
 }>({
-  street: '',
+  streetAddress: '',
   city: ''
+})
+
+onMounted(async () => {
+  const data = await getAllAddress()
+  listAddress.value = data.message
 })
 </script>

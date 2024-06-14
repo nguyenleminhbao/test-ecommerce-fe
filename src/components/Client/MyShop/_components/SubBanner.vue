@@ -7,7 +7,7 @@
       :key="imageKey"
     />
     <div v-if="loading" class="w-full h-full object-center bg-gray-300">
-      <Spin size="large" />
+      <Spin size="large" class="[&_.ant-spin-dot-item]:bg-black" />
     </div>
 
     <div

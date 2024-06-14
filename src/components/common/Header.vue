@@ -6,22 +6,43 @@
       /></RouterLink>
 
       <div class="flex items-center gap-10 text-neutral-4">
-        <RouterLink class="hover:text-neutral-7 font-semibold" to="/">Home</RouterLink>
-        <RouterLink class="hover:text-neutral-7 font-semibold" to="/product">Product</RouterLink>
-        <RouterLink class="hover:text-neutral-7 font-semibold" to="/news">News</RouterLink>
-        <RouterLink class="hover:text-neutral-7 font-semibold" to="/my-account"
-          >My account</RouterLink
+        <Tooltip placement="bottom">
+          <template #title>Home</template>
+          <RouterLink class="hover:text-neutral-7 font-semibold" to="/">Home</RouterLink>
+        </Tooltip>
+        <Tooltip placement="bottom">
+          <template #title>Product</template>
+          <RouterLink class="hover:text-neutral-7 font-semibold" to="/product"
+            >Product</RouterLink
+          ></Tooltip
+        >
+        <Tooltip placement="bottom">
+          <template #title>News</template>
+          <RouterLink class="hover:text-neutral-7 font-semibold" to="/news">News</RouterLink>
+        </Tooltip>
+
+        <Tooltip placement="bottom">
+          <template #title>My account</template>
+          <RouterLink to="@" @click="onCheckLogin" class="hover:text-neutral-7 font-semibold"
+            >My account</RouterLink
+          ></Tooltip
         >
       </div>
 
       <div class="flex gap-4 items-center text-[24px]">
         <div class="flex items-center gap-3">
-          <RouterLink to="/my-shop" class="object-center cursor-pointer">
-            <ShopOutlined />
-          </RouterLink>
-          <span @click="showCart" class="object-center cursor-pointer">
-            <ShoppingOutlined />
-          </span>
+          <Tooltip placement="bottom">
+            <template #title>My shop</template>
+            <RouterLink to="/my-shop" class="object-center cursor-pointer">
+              <ShopOutlined /> </RouterLink
+          ></Tooltip>
+
+          <Tooltip placement="bottom">
+            <template #title>Cart</template
+            ><span @click="showCart" class="object-center cursor-pointer">
+              <ShoppingOutlined /> </span
+          ></Tooltip>
+
           <span class="object-center cursor-pointer"> <BellOutlined /> </span>
         </div>
 
@@ -50,7 +71,7 @@
 </template>
 
 <script setup lang="ts">
-import { Button } from 'ant-design-vue'
+import { Button, Tooltip } from 'ant-design-vue'
 import {
   ShopOutlined,
   ShoppingOutlined,
@@ -64,14 +85,45 @@ import {
   ClerkLoaded,
   SignedOut,
   SignedIn,
-  SignUpButton
+  SignUpButton,
+  useClerk,
+  useAuth
 } from 'vue-clerk'
 import DrawerCart from '@/components/UI/DrawerCart.vue'
 import { ref } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 
+const router = useRouter()
+const { isSignedIn } = useAuth()
+const { openSignIn } = useClerk()
 const drawerCart = ref()
+const route = useRoute()
 
 const showCart = () => {
   drawerCart?.value?.showCart()
 }
+
+const checkNavNum = (path: string) => {
+  if (path.includes('product')) return 1
+  else if (path.includes('news')) return 2
+  else if (path.includes('my-account')) return 3
+  else return 0
+}
+const navNum = ref<number>(checkNavNum(route.path))
+
+const onCheckLogin = (e: Event) => {
+  e.stopPropagation()
+  if (!isSignedIn.value) {
+    openSignIn()
+  } else {
+    router.push('/my-account')
+  }
+}
 </script>
+
+<style scoped>
+.router-link-active {
+  color: black;
+  font-weight: 700;
+}
+</style>

@@ -1,6 +1,6 @@
 <template>
   <section
-    class="col-span-4 p-6 pt-3 border-[1px] rounded-md border-neutral-600 max-h-[400px] sticky top-[100px] shadow-lg"
+    class="col-span-4 p-6 pt-3 border-[1px] rounded-md border-neutral-600 max-h-[380px] sticky top-[100px] shadow-lg"
   >
     <span class="text-headline-6">Order summary</span>
     <div class="flex flex-col mt-6">
@@ -33,17 +33,16 @@
           `${formatNumberWithCommas(cartStore.subTotal)} đ`
         }}</span>
       </div>
-
-      <Button
-        type="text"
-        html-type="submit"
-        class="bg-neutral-7 text-white h-[44px] text-lg mt-6"
-        @click="order"
-      >
-        <Spin v-if="isLoading" />
-        <span v-else>Order</span>
-      </Button>
     </div>
+    <Button
+      type="text"
+      html-type="submit"
+      class="bg-neutral-7 absolute bottom-5 w-[calc(100%_-_48px)] text-white h-[44px] text-lg mt-6"
+      @click="order"
+    >
+      <Spin v-if="isLoading" class="[&_.ant-spin-dot-item]:bg-black" />
+      <span v-else>Order</span>
+    </Button>
   </section>
 </template>
 

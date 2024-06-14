@@ -1,8 +1,8 @@
 <template>
-  <div class="flex min-h-[532px] mt-12">
+  <div class="grid grid-cols-2 min-h-[532px] mt-12">
     <img
       data-aos="zoom-in"
-      class="max-w-[50%] object-cover aspect-[720/532]"
+      class="!w-full !h-full object-cover"
       src="https://hips.hearstapps.com/hmg-prod/images/cute-room-ideas-1677096334.png"
       alt="aesthetic room"
     />

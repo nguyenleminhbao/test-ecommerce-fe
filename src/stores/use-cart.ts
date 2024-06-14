@@ -114,6 +114,10 @@ export const useCart = defineStore('cart', {
         subToTotal += cartItem ? cartItem?.quantity * cartItem?.price : 0
       })
       this.subTotal = subToTotal
+    },
+    setSelectedCartItemEmpty() {
+      this.selectedCartItem = []
+      this.subTotal = 0
     }
   }
 })

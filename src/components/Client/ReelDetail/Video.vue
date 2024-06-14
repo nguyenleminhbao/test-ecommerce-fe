@@ -24,7 +24,7 @@
               class="h-full w-full"
             />
 
-            <Spin :spinning="waiting" class="StyledPlayIcon" size="large" />
+            <Spin :spinning="waiting" class="StyledPlayIcon [&_.ant-spin-dot-item]:bg-black" size="large" />
           </div>
         </div>
       </div>

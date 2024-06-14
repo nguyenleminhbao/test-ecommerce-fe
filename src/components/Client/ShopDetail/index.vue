@@ -5,6 +5,9 @@
     <ReelCarousel :shop-id="shop.shopId" />
     <ShopProduct />
   </div>
+  <div v-else class="w-full min-h-[500px] object-center">
+    <Spin class="[&_.ant-spin-dot-item]:bg-black [&_.ant-spin-dot-item]:text-xl" size="large" />
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -16,6 +19,7 @@ import type { IShop } from '@/interfaces/shop.interface'
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { getOneShop } from '@/services/shop/get'
+import { Spin } from 'ant-design-vue'
 
 const route = useRoute()
 const shop = ref<IShop>()

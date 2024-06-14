@@ -29,6 +29,7 @@ import { useAuth } from 'vue-clerk'
 import { useRoute, useRouter } from 'vue-router'
 import { Skeleton } from 'ant-design-vue'
 
+window.scrollTo(0, 0)
 const { userId } = useAuth()
 const authStore = useAuthSystem()
 const { setAdmin } = useAuthSystem()
