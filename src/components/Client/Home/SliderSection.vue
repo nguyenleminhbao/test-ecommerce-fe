@@ -41,7 +41,7 @@ import { randomBanner } from '@/services/shop/get'
 import useSWRV from 'swrv'
 import { configBannerSWRV } from '@/config/swrv'
 
-const { data:banners  } = useSWRV('products', randomBanner,configBannerSWRV)
+const { data:banners  } = useSWRV('banners', randomBanner,configBannerSWRV)
 </script>
 
 <style scoped lang="css">
