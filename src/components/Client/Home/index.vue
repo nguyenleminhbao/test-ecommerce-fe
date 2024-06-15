@@ -4,7 +4,7 @@
   <LivestreanCarousel
     v-if="livestreamStore.listLivestream && livestreamStore.listLivestream.length"
   />
-  <ProductCarousel :products="products" />
+  <ProductCarousel v-if="products" :products="products.message"  />
   <Values />
   <ReelCarousel />
   <Banner />
@@ -22,17 +22,14 @@ import BlogSection from './BlogSection.vue'
 import Newsletter from './Newsletter.vue'
 import ReelCarousel from './ReelCarousel.vue'
 import LivestreanCarousel from './LivestreamCarousel.vue'
-
 import { getAllProducts } from '@/services/products/get'
-import { onMounted, ref } from 'vue'
-import type { IProduct } from '@/interfaces/product.interface'
 import { useLivestream } from '@/stores/use-livestream'
+import useSWRV from 'swrv'
+import { configSWRV } from '@/config/swrv'
 
-const products = ref<IProduct[]>([])
+
+const { data:products  } = useSWRV('products', getAllProducts,configSWRV)
 const livestreamStore = useLivestream()
 
-onMounted(async () => {
-  const data = await getAllProducts()
-  products.value = data?.message
-})
+
 </script>

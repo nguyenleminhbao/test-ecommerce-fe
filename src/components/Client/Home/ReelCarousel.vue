@@ -6,7 +6,8 @@
     </div>
     <div class="flex overflow-x-auto items-start gap-[24px] scrollbar-hide relative">
       <ReelItem
-        v-for="(reel, index) in reels"
+        v-if="reels"
+        v-for="(reel, index) in reels.message"
         :key="index"
         :reelId="reel.id"
         :video-url="reel.video"
@@ -24,15 +25,13 @@
 <script setup lang="ts">
 import ButtonArrow from '@/components/UI/elements/ButtonArrow.vue'
 import ReelItem from '@/components/UI/ReelItem.vue'
-import type { IReel } from '@/interfaces/news.interface'
+import { configSWRV } from '@/config/swrv'
 import { getAllReel } from '@/services/news/get'
 import { RightCircleFilled } from '@ant-design/icons-vue'
-import { onMounted, ref } from 'vue'
+import useSWRV from 'swrv'
 
-const reels = ref<IReel[]>([])
 
-onMounted(async () => {
-  const data = await getAllReel()
-  reels.value = data.message
-})
+const { data:reels  } = useSWRV('reels', getAllReel,configSWRV)
+
+
 </script>

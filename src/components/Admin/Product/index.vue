@@ -1,10 +1,11 @@
 <template>
-  <div class="flex flex-col gap-[24px]">
+  <div class="flex flex-col gap-[24px]" v-if="products">
     <h1 class="ml-[24px] text-headline-5">Product Lists</h1>
     <div class="bg-white p-[24px] rounded-lg">
       <Table
+      
         :columns="columns"
-        :data-source="products"
+        :data-source="products.message"
         :scroll="{
           x: 1000,
           y: 350,
@@ -21,7 +22,7 @@
       >
         <template #bodyCell="{ index, column, record }" class="cursor-pointer">
           <template v-if="column.dataIndex == 'id'">
-            <span>{{ products.findIndex((ele: any) => ele == record) + 1 }}</span></template
+            <span>{{ products.message.findIndex((ele: any) => ele == record) + 1 }}</span></template
           >
           <template v-if="column.dataIndex == 'title'">
             <span class="text-lg font-semibold two-lines-truncate">{{ record.title }}</span>
@@ -50,10 +51,12 @@
 import { getAllProducts } from '@/services/products/get'
 import { formatNumberWithCommas } from '@/utils'
 import { Table, Image, type TableColumnsType } from 'ant-design-vue'
-import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
-const products = ref()
+import useSWRV from 'swrv'
+import { configSWRV } from '@/config/swrv'
+
+const { data:products  } = useSWRV('products', getAllProducts,configSWRV)
 const router = useRouter()
 
 const columns: TableColumnsType = [
@@ -87,8 +90,5 @@ const columns: TableColumnsType = [
   }
 ]
 
-onMounted(async () => {
-  const data = await getAllProducts()
-  products.value = data.message
-})
+
 </script>

@@ -4,6 +4,7 @@ import type { IResponse } from '@/interfaces/response.interface'
 
 export const getAllProducts = async () => {
   try {
+    console.log('fetching')
     const { data } = await axiosInstance.get<IResponse<IProduct[]>>('/products')
     return data
   } catch (err) {

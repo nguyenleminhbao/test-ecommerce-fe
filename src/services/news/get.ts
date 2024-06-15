@@ -4,6 +4,7 @@ import type { IReel } from '@/interfaces/news.interface'
 
 export const getAllReel = async () => {
   try {
+    console.log('fetching reel')
     const { data } = await axiosInstance.get<IResponse<IReel[]>>('/news/reel')
 
     return data
