@@ -11,7 +11,7 @@
           <right-circle-outlined />
         </div>
       </template>
-      <div v-for="(banner, index) in banners" :key="index">
+      <div v-if="banners" v-for="(banner, index) in banners.message" :key="index">
         <img class="w-full h-[500px] object-cover" :src="banner" alt="temp" />
       </div>
     </Carousel>
@@ -37,15 +37,11 @@
 <script setup lang="ts">
 import { Carousel } from 'ant-design-vue'
 import { LeftCircleOutlined, RightCircleOutlined } from '@ant-design/icons-vue'
-import { onMounted, ref } from 'vue'
 import { randomBanner } from '@/services/shop/get'
+import useSWRV from 'swrv'
+import { configBannerSWRV } from '@/config/swrv'
 
-const banners = ref<string[]>()
-
-onMounted(async () => {
-  const data = await randomBanner()
-  banners.value = data.message
-})
+const { data:banners  } = useSWRV('products', randomBanner,configBannerSWRV)
 </script>
 
 <style scoped lang="css">
