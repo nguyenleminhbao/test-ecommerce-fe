@@ -9,8 +9,8 @@
     :closable="false"
     class="[&_.ant-modal-content]:!p-0 [&_.ant-modal-content]:!rounded-2xl"
   >
-    <div class="min-h-[450px] grid grid-cols-2">
-      <section class="object-center flex flex-col">
+    <div class="min-h-[450px] grid grid-cols-10 gap-10 object-center">
+      <section class="flex flex-col col-span-4 h-[300px]">
         <div
           class="qr-code-container w-[230px] aspect-square border-[3px] border-black object-center"
         >
@@ -24,24 +24,35 @@
           />
           <div class="scanline"></div>
         </div>
-        <div class="mt-4 flex flex-col gap-3 object-center">
+        <div class="mt-4 flex gap-3 object-center w-[230px]">
+          <span class="font-semibold text-[15px] inline-block"
+            >The time to scan the QR code for payment is still</span
+          >
           <StatisticCountdown
             :value="deadline"
+            format="mm:ss"
             @finish="onFinish"
-            class="[&_.ant-statistic-content-value]:text-body-1-semibold [&_.ant-statistic-content-value]:!text-[25px] [&_.ant-statistic-content-value]:!text-red-600"
+            class="[&_.ant-statistic-content-value]:text-body-1-semibold [&_.ant-statistic-content-value]:!text-[20px] [&_.ant-statistic-content-value]:!text-blue-600 [&_.ant-statistic-content-value]:italic"
           />
-          <!-- <div class="flex items-start max-w-[300px]">
-            <ExclamationCircleOutlined class="text-red-600 mr-3 text-xl" />
-            <span class="text-hairline-1">
-              Payment time is only 15 minutes, if you do not pay, your order will be canceled</span
-            >
-          </div> -->
         </div>
       </section>
-      <section class="relative">
-        <img class="w-full h-full object-cover !rounded-r-2xl" src="@/assets/images/payment.png " />
-        <div class="absolute top-0 left-0 w-full h-full flex flex-col p-4">
-          <span class="text-headline-4 text-white">E-payment</span>
+      <section class="col-span-6 h-[300px]">
+        <h1 class="flex text-headline-6 !text-black">
+          <span class="mr-2">Pay with</span>
+          <img src="@/assets/images/zalopay.png" class="w-[72px] h-8 translate-y-[2px]" />
+          <span>using QR code</span>
+        </h1>
+        <div class="flex flex-col mt-10 ml-5 text-[17px]">
+          <span class="font-semibold text-black">Payment Guide</span>
+          <ul class="flex flex-col mt-2">
+            <li>Step 1: Open <span class="font-semibold">ZaloPay</span> application</li>
+            <li>
+              Step 2: Select "<span class="font-semibold">Payment</span>" and scan the qr code
+            </li>
+            <li>
+              Step 3: Click <span class="font-semibold">Confirm</span> payment to complete the order
+            </li>
+          </ul>
         </div>
       </section>
     </div>
@@ -50,7 +61,7 @@
 
 <script setup lang="ts">
 import type { IZaloResopnse } from '@/interfaces/zalo.interface'
-import { Modal, Button, QRCode, StatisticCountdown } from 'ant-design-vue'
+import { Modal, QRCode, StatisticCountdown } from 'ant-design-vue'
 import type { Socket } from 'socket.io-client'
 import { ref } from 'vue'
 

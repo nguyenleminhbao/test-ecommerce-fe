@@ -1,14 +1,8 @@
 <template>
-  <section class="w-full flex flex-col">
-    <div class="w-full mt-5 grid grid-cols-4 gap-6">
-      <CardItem
-        v-for="product in products.slice((currentPage - 1) * 12, currentPage * 12)"
-        :key="product.id"
-        :product="product"
-      />
-    </div>
-    <div class="flex justify-center my-20">
-      <Pagination v-model:current="currentPage" :total="products.length" show-less-items />
+  <section class="mt-10 w-full">
+    <span class="text-center text-headline-3 block !w-full"> Newest Product </span>
+    <div class="w-full mt-10 grid grid-cols-4 gap-6">
+      <CardItem v-for="product in products.slice(0, 4)" :key="product.id" :product="product" />
     </div>
   </section>
 </template>
@@ -19,11 +13,9 @@ import { getShopProducts } from '@/services/products/get'
 import { onMounted, ref } from 'vue'
 import CardItem from '@/components/UI/ProdCard.vue'
 import { useRoute } from 'vue-router'
-import { Pagination } from 'ant-design-vue'
 
 const route = useRoute()
 const products = ref<IProduct[]>([])
-const currentPage = ref<number>(1)
 
 onMounted(async () => {
   const data = await getShopProducts(route.params['shopId'] as string)

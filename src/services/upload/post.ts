@@ -22,6 +22,14 @@ type UpdateReelType = {
   description: string
 }
 
+type UpdateFeedType = {
+  feedId: string
+  idImageOld: string
+  newImageUrl: string
+  title: string
+  content: string
+}
+
 export const updateBanner = async (_data: UpdateBannerType) => {
   try {
     const { data } = await axiosInstance.post<IResponse<string>>('/upload/update-banner', _data)
@@ -46,6 +54,15 @@ export const updateShopAvatar = async (_data: UpdateShopAvatarType) => {
 export const updateReel = async (_data: UpdateReelType) => {
   try {
     const { data } = await axiosInstance.post<IResponse<string>>('/upload/update-reel', _data)
+    return data
+  } catch (err) {
+    throw err
+  }
+}
+
+export const updateFeed = async (_data: UpdateFeedType) => {
+  try {
+    const { data } = await axiosInstance.post<IResponse<string>>('/upload/update-feed', _data)
     return data
   } catch (err) {
     throw err

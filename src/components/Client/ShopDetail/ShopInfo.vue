@@ -6,16 +6,18 @@
         <span class="text-headline-7">{{ shopName }}</span>
         <span class="text-neutral-5 text-[12px]">Online 1 hour ago</span>
         <div class="grid grid-cols-2 mt-3 gap-2">
-          <Button class="h-7 bg-black/10 object-center">
-            <template #icon>
-              <WechatOutlined />
-            </template>
-            Chat
-          </Button>
-          <Button class="h-7 bg-primary text-white object-center">
-            <template #icon><PlusCircleOutlined /> </template>
-            Follow</Button
+          <Button class="h-7 bg-slate-200 border-black object-center" :icon="h(WechatOutlined)"
+            >Chat</Button
           >
+
+          <Button class="h-7 bg-primary text-white object-center" @click="follow = !follow">
+            <template #icon>
+              <PlusCircleOutlined v-if="!follow" /> <CheckCircleOutlined v-else
+            /></template>
+            <span v-if="!follow">Follow</span>
+            <span v-else>Following</span>
+          </Button>
+          
         </div>
       </div>
     </div>
@@ -44,8 +46,10 @@
 
 <script setup lang="ts">
 import { Image, Button } from 'ant-design-vue'
-import { WechatOutlined, PlusCircleOutlined } from '@ant-design/icons-vue'
+import { WechatOutlined, PlusCircleOutlined, CheckCircleOutlined } from '@ant-design/icons-vue'
+import { ref, h } from 'vue'
 
+const follow = ref<boolean>(false)
 const { shopId, shopName, shopAvatar } = defineProps<{
   shopId: string
   shopName: string

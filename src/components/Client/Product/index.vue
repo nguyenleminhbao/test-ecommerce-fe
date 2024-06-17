@@ -1,6 +1,6 @@
 <template>
   <Header />
-  <div class="pt-[60px] pb-[100px] max-w-[1120px] mx-auto flex gap-[24px]">
+  <div class="mt-[60px] mb-[100px] max-w-[1120px] mx-auto flex gap-[24px]">
     <Sidebar />
     <Grids v-if="products" :products="products.message" />
   </div>

@@ -1,28 +1,34 @@
 <template>
-  <div class="grid grid-cols-3 gap-x-[25px] gap-y-10">
-    <BlogCard
-      imgUrl="https://cf.bstatic.com/xdata/images/hotel/max1024x768/372191700.jpg?k=f500ad107b90760656244fbfb37fec3418553646e1d8769046cd775208961fa0&o=&hp=1"
-      title="7 ways to decor your home like a professional"
-      date="October 16, 2023"
+  <div class="grid grid-cols-3 gap-x-[25px] gap-y-10 mt-5">
+    <BlogItem
+      v-if="feeds"
+      v-for="(feed, index) in feeds.message.slice((currentPage - 1) * 12, currentPage * 12)"
+      :key="index"
+      :feedId="feed.id"
+      :imageUrl="feed.thumbnail"
+      :title="feed.title"
+      :date="feed.createdAt"
+      :content="feed.content"
     />
-    <BlogCard
-      imgUrl="https://cf.bstatic.com/xdata/images/hotel/max1024x768/372191700.jpg?k=f500ad107b90760656244fbfb37fec3418553646e1d8769046cd775208961fa0&o=&hp=1"
-      title="7 ways to decor your home like a professional"
-      date="October 16, 2023"
-    />
-    <BlogCard
-      imgUrl="https://cf.bstatic.com/xdata/images/hotel/max1024x768/372191700.jpg?k=f500ad107b90760656244fbfb37fec3418553646e1d8769046cd775208961fa0&o=&hp=1"
-      title="7 ways to decor your home like a professional"
-      date="October 16, 2023"
-    />
-    <BlogCard
-      imgUrl="https://cf.bstatic.com/xdata/images/hotel/max1024x768/372191700.jpg?k=f500ad107b90760656244fbfb37fec3418553646e1d8769046cd775208961fa0&o=&hp=1"
-      title="7 ways to decor your home like a professional"
-      date="October 16, 2023"
+  </div>
+  <div class="flex justify-center my-20">
+    <Pagination
+      v-if="feeds"
+      v-model:current="currentPage"
+      :total="feeds.message.length"
+      show-less-items
     />
   </div>
 </template>
 
 <script setup lang="ts">
-import BlogCard from '@/components/UI/BlogCard.vue'
+import BlogItem from '@/components/UI/BlogItem.vue'
+import { ref } from 'vue'
+import { Pagination } from 'ant-design-vue'
+import { getAllFeed } from '@/services/news/get'
+import useSWRV from 'swrv'
+import { configSWRV } from '@/config/swrv'
+
+const currentPage = ref<number>(1)
+const { data: feeds } = useSWRV('feeds', getAllFeed, configSWRV)
 </script>

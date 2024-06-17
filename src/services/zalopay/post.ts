@@ -10,11 +10,24 @@ type CreateOrderZalo = {
   paymentMethod: string
   shopCart: IShopCart[]
   amount: number
+  bankCode?: string
 }
 
-export const createOrderZaloPay = async (_data: CreateOrderZalo) => {
+export const createOrderZaloPayQR = async (_data: CreateOrderZalo) => {
   try {
-    const { data } = await axiosInstance.post<IResponse<IZaloResopnse>>('/zalopay/create', _data)
+    const { data } = await axiosInstance.post<IResponse<IZaloResopnse>>('/zalopay/create-qr', _data)
+    return data
+  } catch (err) {
+    throw err
+  }
+}
+
+export const createOrderZaloPayATM = async (_data: CreateOrderZalo) => {
+  try {
+    const { data } = await axiosInstance.post<IResponse<IZaloResopnse>>(
+      '/zalopay/create-atm',
+      _data
+    )
     return data
   } catch (err) {
     throw err

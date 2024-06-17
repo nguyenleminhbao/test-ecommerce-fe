@@ -24,10 +24,10 @@
     </div>
     <div class="flex justify-between items-center my-10">
       <span class="text-headline-6">{{ `${resultReviewState.review_len} Reviews` }}</span>
-      <Select v-model:value="value" style="width: 25%">
+      <!-- <Select v-model:value="value" style="width: 25%">
         <SelectOption value="New">Newest</SelectOption>
         <SelectOption value="Old">Older</SelectOption>
-      </Select>
+      </Select> -->
     </div>
     <ul class="">
       <Comment v-for="(comment, index) in comments" :key="index" :comment="comment" />

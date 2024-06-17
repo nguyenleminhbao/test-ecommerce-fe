@@ -15,10 +15,8 @@
 </template>
 
 <script setup lang="ts">
-import { Checkbox } from 'ant-design-vue'
 import { CartItemCheckout } from '.'
 import type { ICartItem } from '@/interfaces/cart.interface'
-import { ref, watch } from 'vue'
 
 const { shopName, cartItems } = defineProps<{
   shopName: string

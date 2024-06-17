@@ -5,25 +5,32 @@
       <ButtonArrow text="More Articles" link="/news" />
     </div>
 
-    <div class="flex gap-[25px]">
-      <Article
-        title="7 ways to decor your home"
-        imageUrl="https://images.livspace-cdn.com/w:600/plain/https://d3gq2merok8n5r.cloudfront.net/abhinav/designs-sg-1633500163-pPxOT/batch-2-1637561408-DOCIx/living-room-1637561433-l9au2/001-2-1639548184-sU5ER.jpg"
+    <div class="w-full flex overflow-x-auto items-start gap-6 scrollbar-hide relative" v-if="feeds">
+      <BlogItem
+        v-for="(feed, index) in feeds.message"
+        :key="index"
+        :feedId="feed.id"
+        :imageUrl="feed.thumbnail"
+        :title="feed.title"
+        :date="feed.createdAt"
+        :content="feed.content"
       />
-      <Article
-        title="Kitchen organization"
-        imageUrl="https://images.livspace-cdn.com/w:600/plain/https://d3gq2merok8n5r.cloudfront.net/abhinav/designs-sg-1633500163-pPxOT/batch-2-1637561408-DOCIx/living-room-1637561433-l9au2/001-2-1639548184-sU5ER.jpg"
-      />
-      <Article
-        title="Decor your bedroom"
-        imageUrl="https://images.livspace-cdn.com/w:600/plain/https://d3gq2merok8n5r.cloudfront.net/abhinav/designs-sg-1633500163-pPxOT/batch-2-1637561408-DOCIx/living-room-1637561433-l9au2/001-2-1639548184-sU5ER.jpg"
+
+      <RightCircleFilled
+        v-if="feeds && feeds.message.length > 3"
+        class="bg-green z-10 sticky right-2 top-[calc(50%_-_50px)] text-4xl"
       />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { RouterLink } from 'vue-router'
+import { RightCircleFilled } from '@ant-design/icons-vue'
 import { ButtonArrow } from '@/components/UI/elements'
-import { Article } from './_components'
+import BlogItem from '@/components/UI/BlogItem.vue'
+import { getAllFeed } from '@/services/news/get'
+import useSWRV from 'swrv'
+import { configSWRV } from '@/config/swrv'
+
+const { data: feeds } = useSWRV('feeds', getAllFeed, configSWRV)
 </script>

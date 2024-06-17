@@ -33,7 +33,7 @@
         </RadioGroup>
       </FormItem>
       <FormItem name="bank" class="hidden">
-        <Input v-model:value="form.bank" />
+        <Input v-model:value="form.bankCode" />
       </FormItem>
       <div
         v-if="form.payMethod == PAYMENT_TYPE.CREDIT"
@@ -77,7 +77,7 @@ const bankNum = ref<number>(-1)
 const selectBank = (index: number) => {
   bankNum.value = index
   const bank = banks.find((bank, id) => id == index)
-  form.bank = bank?.label
+  form.bankCode = bank?.bankCode
 }
 </script>
 

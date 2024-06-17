@@ -9,5 +9,5 @@ export const configBannerSWRV = {
   ttl: 60 * 1000, // 60 seconds in milliseconds
   revalidateOnFocus: true,
   revalidateDebounce: 500,
-  dedupingInterval: 12 * 3600 * 1000
+  dedupingInterval: 120 * 1000
 }

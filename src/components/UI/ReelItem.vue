@@ -1,11 +1,7 @@
 <template>
-  <RouterLink
-    class="w-full relative group min-w-[262px] max-w-[270px]"
-    :to="`/reel/${reelId}`"
-    @click="onClick"
-  >
+  <RouterLink class="relative group max-w-[262px]" :to="`/reel/${reelId}`" @click="onClick">
     <div
-      class="w-full h-[420px] bg-gray-800 rounded-2xl relative group cursor-pointer"
+      class="w-full h-[420px] aspect-[9/16] bg-gray-800 rounded-2xl relative group cursor-pointer"
       @mouseover="(playing = true), (muted = true)"
       @mouseleave="(playing = false), (currentTime = 0)"
     >
@@ -17,13 +13,13 @@
       ></video>
       <Button
         v-if="isEdit"
-        class="absolute bg-black !font-semibold w-[70px] h-[35px] bottom-0 right-0 hidden group-hover:block"
+        class="absolute bg-black bottom-2 right-2 shadow-lg hidden group-hover:block"
         type="primary"
         @click="showDrawer"
         >Edit</Button
       >
     </div>
-    <h1 class="pt-3 text-headline-7 text-neutral-7">{{ title }}</h1>
+    <h1 class="pt-3 text-headline-7 text-neutral-7 line-clamp-2">{{ title }}</h1>
     <span class="text-neutral-4 text-[14px] leading-[24px]">{{ numOfView }} views</span>
   </RouterLink>
 
@@ -39,40 +35,52 @@
     placement="right"
   >
     <div class="flex flex-col gap-4">
-      <video
-        :src="videoState.video"
-        class="w-full h-full rounded-lg object-cover min-h-[440px] max-h-[450px]"
-        controls
-      ></video>
-      <div class="flex justify-end">
-        <Upload
-          v-model:file-list="fileList"
-          name="file"
-          class="avatar-uploader [&_.ant-upload-list]:!hidden"
-          :action="uploadVideoUrl"
-          :multiple="false"
-          @change="handleChange"
-        >
-          <div class="flex items-center gap-1">
-            <loading-outlined v-if="loading"></loading-outlined>
-            <EditOutlined v-else class="text-lg" />
-            <span class="text-body-1-bold !text-[18px]">Edit</span>
-          </div>
-        </Upload>
-      </div>
-
       <div class="flex flex-col items-start gap-2">
         <span class="text-xl font-semibold text-black min-w-[100px]">Title</span>
         <Input v-model:value="videoState.title" />
       </div>
       <div class="flex flex-col items-start gap-2">
         <span class="text-xl font-semibold text-black min-w-[100px]">Description</span>
-        <Textarea v-model:value="videoState.description" />
+        <Textarea v-model:value="videoState.description" :rows="4" />
       </div>
+
+      <div class="flex justify-between">
+        <span class="text-xl font-semibold text-black min-w-[100px]">Edit Video</span>
+        <Upload
+          v-model:file-list="fileList"
+          name="file"
+          :show-upload-list="false"
+          :action="uploadVideoUrl"
+          @change="handleChange"
+          :max-count="1"
+          :before-upload="beforeUpload"
+        >
+          <Button v-if="loading" type="primary" loading class="flex items-center bg-neutral-7"
+            >Loading</Button
+          >
+          <Button
+            v-else
+            type="primary"
+            class="flex items-center bg-neutral-7"
+            :icon="h(EditOutlined)"
+          >
+            Edit
+          </Button>
+        </Upload>
+      </div>
+      <video
+        :src="videoState.video"
+        class="w-full h-full rounded-lg object-cover min-h-[440px] max-h-[450px]"
+        controls
+      ></video>
     </div>
     <template #footer>
       <div class="flex items-end w-full justify-end gap-2">
-        <Button type="primary" class="bg-red-600 w-[70px]" @click="onDelete">Delete</Button>
+        <Popconfirm title="Are you sure？" ok-text="Yes" cancel-text="No" @confirm="onDelete">
+          <template #icon><question-circle-outlined style="color: red" /></template>
+          <Button type="primary" danger class="w-[70px]">Delete</Button>
+        </Popconfirm>
+
         <Button type="primary" class="bg-black w-[70px]" @click="onUpdateReel">Edit</Button>
       </div>
     </template>
@@ -80,22 +88,27 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, h } from 'vue'
 import { useMediaControls } from '@vueuse/core'
 import { increateViewReel } from '@/services/news/post'
 import {
   Drawer,
   Button,
+  Popconfirm,
   Input,
   Textarea,
   Upload,
   type UploadChangeParam,
+  type UploadProps,
   message
 } from 'ant-design-vue'
 import { uploadVideoUrl } from '@/constants/upload-url'
-import { LoadingOutlined, EditOutlined } from '@ant-design/icons-vue'
+import { EditOutlined, QuestionCircleOutlined } from '@ant-design/icons-vue'
 import { getPublicIdFromUrl } from '@/utils'
 import { updateReel } from '@/services/upload/post'
+import type { IResponse } from '@/interfaces/response.interface'
+import type { IReel } from '@/interfaces/news.interface'
+import type { fetcherFn } from 'swrv/dist/types'
 
 const {
   reelId,
@@ -103,7 +116,8 @@ const {
   title,
   description,
   view,
-  isEdit = false
+  isEdit = false,
+  runMutation
 } = defineProps<{
   reelId: string
   videoUrl: string
@@ -111,6 +125,7 @@ const {
   description: string
   view: number
   isEdit?: boolean
+  runMutation?: (data?: fetcherFn<IResponse<IReel[]>>) => Promise<void>
 }>()
 
 const videoState = ref<{
@@ -161,6 +176,14 @@ const handleChange = async (info: UploadChangeParam) => {
   }
 }
 
+const beforeUpload: UploadProps['beforeUpload'] = (file) => {
+  const isMP4 = file.type === 'video/mp4'
+  if (!isMP4) {
+    message.error(`${file.name} is not a mp4 file`)
+  }
+  return isMP4 || Upload.LIST_IGNORE
+}
+
 const onUpdateReel = async () => {
   await updateReel({
     idVideoOld: getPublicIdFromUrl(videoUrl),
@@ -170,6 +193,7 @@ const onUpdateReel = async () => {
     newVideoUrl: videoState.value.video
   })
   message.success('Update reel successfully')
+  if (runMutation) runMutation()
   open.value = false
 }
 

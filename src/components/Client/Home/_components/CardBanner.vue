@@ -2,7 +2,7 @@
   <div class="bg-neutral-2 p-[48px] w-full shadow-md">
     <div class="grid gap-[12px] text-neutral-7 content-end">
       <p class="text-headline-5">{{ title }}</p>
-      <ButtonArrow text="Shop Now" link="/" />
+      <ButtonArrow text="Shop Now" link="/product" />
     </div>
 
     <img :src="imageUrl" class="object-contain aspect-[3/4] w-full" />

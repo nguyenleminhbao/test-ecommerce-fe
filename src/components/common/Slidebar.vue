@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="m-[8px] h-11 flex justify-start items-center">
+    <div class="m-[8px] h-11 flex justify-center items-center">
       <RouterLink to="/admin" class="px-6 text-headline-5">Admin</RouterLink>
     </div>
     <Menu
@@ -78,6 +78,12 @@ const items: ItemType[] = reactive([
     icon: () => h(FileTextOutlined),
     label: 'Feed',
     title: 'Feed'
+  },
+  {
+    key: '/admin/banner',
+    icon: () => h(FileTextOutlined),
+    label: 'Banner',
+    title: 'Banner'
   },
 
   { type: 'divider' },

@@ -6,9 +6,10 @@
       <Table
         :columns="columns"
         :data-source="shops"
+        :loading="!shops"
         :scroll="{
           x: 1000,
-          y: 350,
+          y: 410,
           scrollToFirstRowOnChange: true
         }"
         class="[&_.ant-table-body]:!scrollbar-hide"
@@ -18,10 +19,13 @@
             <span>{{ index + 1 }}</span></template
           >
           <template v-if="column.dataIndex == 'name'">
-            <span class="text-headline-7">{{ record.shopName }}</span>
-          </template>
-          <template v-if="column.dataIndex == 'avatar'">
-            <Image :src="record.shopAvatar" class="object-cover !w-10 rounded-full aspect-square" />
+            <div class="flex items-center gap-3">
+              <Image
+                :src="record.shopAvatar"
+                class="object-cover !w-10 rounded-full aspect-square"
+              />
+              <span class="text-body-2-semibold">{{ record.shopName }}</span>
+            </div>
           </template>
           <template v-if="column.dataIndex == 'user'">
             <div class="flex items-center gap-3">
@@ -55,21 +59,21 @@ const columns: TableColumnsType = [
     width: 80
   },
   {
-    title: 'Name',
+    title: 'Name Shop',
     dataIndex: 'name',
     key: 'name',
     fixed: 'left'
   },
   {
-    title: 'Avatar',
-    dataIndex: 'avatar',
-    key: 'avatar'
-  },
-  {
     title: 'User',
     dataIndex: 'user',
     key: 'user'
-  }
+  },
+  {
+    title: 'Product',
+    dataIndex: 'numProd',
+    key: 'numProd'
+  },
 ]
 
 onMounted(async () => {

@@ -3,12 +3,11 @@
     <h1 class="ml-[24px] text-headline-5">Product Lists</h1>
     <div class="bg-white p-[24px] rounded-lg">
       <Table
-      
         :columns="columns"
         :data-source="products.message"
         :scroll="{
           x: 1000,
-          y: 350,
+          y: 410,
           scrollToFirstRowOnChange: true
         }"
         :custom-row="
@@ -24,22 +23,20 @@
           <template v-if="column.dataIndex == 'id'">
             <span>{{ products.message.findIndex((ele: any) => ele == record) + 1 }}</span></template
           >
-          <template v-if="column.dataIndex == 'title'">
-            <span class="text-lg font-semibold two-lines-truncate">{{ record.title }}</span>
-          </template>
-          <template v-if="column.dataIndex == 'image'">
-            <Image
-              :src="record.variants[0].variant_image"
-              class="object-cover !w-16 aspect-square"
-            />
+          <template v-if="column.dataIndex == 'product'">
+            <div class="flex gap-3 items-center">
+              <Image
+                :src="record.variants[0].variant_image"
+                class="object-cover !w-16 !h-16 aspect-square rounded-lg"
+              />
+              <span class="text-body-2-semibold two-lines-truncate">{{ record.title }}</span>
+            </div>
           </template>
           <template v-if="column.dataIndex == 'shopName'">
-            <span class="text-lg font-semibold">{{ record.shopName }}</span>
+            <span>{{ record.shopName }}</span>
           </template>
           <template v-if="column.dataIndex == 'price'">
-            <span class="text-xl">{{
-              `${formatNumberWithCommas(record.variants[0].price)} đ`
-            }}</span>
+            <span>{{ `${formatNumberWithCommas(record.variants[0].price)} đ` }}</span>
           </template>
         </template>
       </Table>
@@ -56,7 +53,7 @@ import { useRouter } from 'vue-router'
 import useSWRV from 'swrv'
 import { configSWRV } from '@/config/swrv'
 
-const { data:products  } = useSWRV('products', getAllProducts,configSWRV)
+const { data: products } = useSWRV('products', getAllProducts, configSWRV)
 const router = useRouter()
 
 const columns: TableColumnsType = [
@@ -68,27 +65,22 @@ const columns: TableColumnsType = [
     width: 80
   },
   {
-    title: 'Title',
-    dataIndex: 'title',
-    key: 'title',
+    title: 'Product',
+    dataIndex: 'product',
+    key: 'product',
     fixed: 'left'
-  },
-  {
-    title: 'Image',
-    dataIndex: 'image',
-    key: 'image'
   },
   {
     title: 'Shop',
     dataIndex: 'shopName',
-    key: 'shopName'
+    key: 'shopName',
+    width: 200
   },
   {
     title: 'Price',
     dataIndex: 'price',
-    key: 'price'
+    key: 'price',
+    width: 100
   }
 ]
-
-
 </script>

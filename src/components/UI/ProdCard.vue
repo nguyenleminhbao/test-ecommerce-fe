@@ -19,7 +19,7 @@
           />
         </div>
 
-        <Button shape="circle" @click="wish = !wish">
+        <Button shape="circle" @click="addToWishFunc">
           <template #icon>
             <HeartOutlined v-if="!wish" />
             <HeartFilled v-else />
@@ -53,6 +53,12 @@
         <StarFilled />
         <StarFilled />
       </div>
+      <!-- <Rate
+        :value="averageRating"
+        disabled
+        allow-half
+        class="text-[16px] text-black"
+      /> -->
       <span class="text-body-2-semibold text-neutral-7 two-lines-truncate h-[42px]">{{
         product.title
       }}</span>
@@ -70,16 +76,16 @@
 </template>
 
 <script setup lang="ts">
-import { Button } from 'ant-design-vue'
+import { Button, Rate } from 'ant-design-vue'
 import { StarFilled, HeartOutlined, HeartFilled } from '@ant-design/icons-vue'
 import BadgeMedium from '@/components/UI/elements/BadgeMedium.vue'
 import { TYPE_BADGE } from '@/constants/enum/badge.enum'
 import type { IProduct } from '@/interfaces/product.interface'
 import { formatNumberWithCommas } from '@/utils'
-import { RouterLink, useRouter } from 'vue-router'
+import { RouterLink, useRouter, useRoute } from 'vue-router'
 import { useCart } from '@/stores/use-cart'
 import { addToCart } from '@/services/cart/post'
-import { ref, h } from 'vue'
+import { ref, h, computed } from 'vue'
 import DrawerCart from '@/components/UI/DrawerCart.vue'
 import { useAuth, useClerk } from 'vue-clerk'
 
@@ -94,6 +100,7 @@ const router = useRouter()
 const { addToCart: _addToCart } = useCart()
 const drawerCart = ref()
 const wish = ref<boolean>(false)
+const route = useRoute()
 
 const addToCartFunc = async () => {
   if (isSignedIn.value) {
@@ -116,11 +123,47 @@ const addToCartFunc = async () => {
   }
 }
 
+const addToWishFunc = async () => {
+  if (isSignedIn.value) {
+    // const wishItem = {
+    //   variantId: product.variants[0].id,
+    //   image: product.variants[0].variant_image,
+    //   price: parseFloat(product.variants[0].price),
+    //   title: product.title,
+    //   quantity: 1,
+    //   shopId: product.shopId,
+    //   shopName: product.shopName
+    // }
+
+    if (wish.value) {
+      // _addToWish(wishItem)
+      // message.success('Add to wish successfully')
+      // await addToWish(wishItem)
+      wish.value = false
+    } else {
+      // _removeToWish(wishItem)
+      // message.error('Remove to wish successfully')
+      // await removeToWish(wishItem)
+      wish.value = true
+    }
+  } else {
+    openSignIn()
+  }
+}
+
 const reloadPage = () => {
   setTimeout(() => {
     window.location.reload()
   }, 100)
 }
+
+// const averageRating = computed(() => {
+//   if (!product.reviews || product.value.reviews.length === 0) {
+//     return 0
+//   }
+//   const sum = product.value.reviews.reduce((acc, review) => acc + review.rating, 0)
+//   return sum / product.value.reviews.length
+// })
 </script>
 
 <style scoped>

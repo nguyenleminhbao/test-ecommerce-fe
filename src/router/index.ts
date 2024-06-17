@@ -209,6 +209,11 @@ const routes = [
         component: () => import('@/views/Admin/FeedDetailAdmin.vue')
       },
       {
+        path: '/admin/banner',
+        name: 'banner admin',
+        component: () => import('@/views/Admin/BannerAdminView.vue')
+      },
+      {
         path: '/admin/setting',
         name: 'setting admin',
         component: () => import('@/views/Admin/SettingAdmin.vue')

@@ -1,53 +1,71 @@
 export const banks: {
   label: string
   image: string
+  bankCode?: string | undefined
 }[] = [
   {
     label: 'Vietcombank',
-    image: 'vcb.png'
+    image: 'vcb.png',
+    bankCode: 'VCB'
   },
   {
     label: 'ACB',
-    image: 'acb.jpg'
+    image: 'acb.jpg',
+    bankCode: 'ACB'
+  },
+  {
+    label: 'SBI',
+    image: 'sbi.png',
+    bankCode: 'SBIS'
   },
   {
     label: 'Agribank',
-    image: 'agri.png'
+    image: 'agri.png',
+    bankCode: undefined
   },
   {
     label: 'BIDV',
-    image: 'bidv.jpg'
+    image: 'bidv.jpg',
+    bankCode: 'BIDV'
   },
   {
     label: 'MBBank',
-    image: 'mb.png'
+    image: 'mb.png',
+    bankCode: 'MB'
   },
   {
     label: 'OCB',
-    image: 'ocb.jpg'
+    image: 'ocb.jpg',
+    bankCode: 'OCB'
   },
   {
     label: 'Seabank',
-    image: 'seabank.jpg'
+    image: 'seabank.jpg',
+    bankCode: 'SEAB'
   },
   {
     label: 'Techcombank',
-    image: 'tcb.jpg'
+    image: 'tcb.jpg',
+    bankCode: 'TCB'
   },
   {
     label: 'TPBank',
-    image: 'tpbank.jpg'
+    image: 'tpbank.jpg',
+    bankCode: 'TPB'
   },
   {
     label: 'VIB',
-    image: 'vib.png'
+    image: 'vib.png',
+    bankCode: 'VIB'
   },
   {
     label: 'VPBank',
-    image: 'vpbank.png'
+    image: 'vpbank.png',
+    bankCode: 'VPB'
   },
   {
     label: 'Vietinbank',
-    image: 'vtb.png'
+    image: 'vtb.png',
+    bankCode: 'VTB'
   }
 ]

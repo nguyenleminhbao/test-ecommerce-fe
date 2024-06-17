@@ -55,9 +55,7 @@
           </SignedIn>
           <SignedOut>
             <SignUpButton mode="modal" v-slot="{ handler }">
-              <Button @click="handler" class="border-none shadow-none font-semibold"
-                >Sign up</Button
-              >
+              <Button @click="handler" class="border-black font-semibold">Sign up</Button>
             </SignUpButton>
             <SignInButton mode="modal" v-slot="{ handler }">
               <Button @click="handler" class="bg-primary text-white !font-semibold">Login</Button>

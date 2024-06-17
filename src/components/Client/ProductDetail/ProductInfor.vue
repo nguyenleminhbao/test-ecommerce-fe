@@ -6,15 +6,29 @@
 
     <Form class="flex flex-col relative justify-between">
       <div>
-        <div class="flex items-center gap-2">
-          <Rate
-            v-model:value="resultReviewState.medium_star"
-            :disabled="true"
-            :allow-half="true"
-            class="text-[16px] text-black"
-          />
-          <span>{{ `${resultReviewState.review_len} Reviews` }}</span>
+        <div class="flex justify-between">
+          <div class="flex items-center gap-2">
+            <Rate
+              v-model:value="resultReviewState.medium_star"
+              :disabled="true"
+              :allow-half="true"
+              class="text-[16px] text-black"
+            />
+            <span>{{ `${resultReviewState.review_len} Reviews` }}</span>
+          </div>
+
+          <Button
+            shape="circle"
+            class="border-neutral-7 object-center text-[18px]"
+            @click="addToWishFunc"
+          >
+            <template #icon>
+              <HeartOutlined v-if="!wish" />
+              <HeartFilled v-else />
+            </template>
+          </Button>
         </div>
+
         <span class="text-headline-4 mt-4">{{ product.title }}</span>
         <div class="flex items-center mt-4">
           <span class="text-headline-6">₫{{ formatNumberWithCommas(variant.price) }}</span>
@@ -52,14 +66,6 @@
       </div>
 
       <div class="mt-6 grid grid-cols-2 gap-3 w-full">
-        <!-- <Button class="h-11 border-neutral-7 object-center text-[18px]" @click="wish = !wish">
-          <template #icon>
-            <HeartOutlined v-if="!wish" />
-            <HeartFilled v-else />
-          </template>
-          Wishlist
-        </Button> -->
-
         <Button
           class="h-11 border-neutral-7 object-center text-[18px]"
           :disabled="!isSupported"
@@ -88,13 +94,11 @@ import {
   HeartOutlined,
   HeartFilled,
   ShareAltOutlined,
-  ShoppingCartOutlined,
-  FacebookOutlined,
-  TwitterOutlined
+  ShoppingCartOutlined
 } from '@ant-design/icons-vue'
 import { Form, Button, message, Rate } from 'ant-design-vue'
 import { ProductImage, RadioOption } from './_components'
-import { computed, ref, h } from 'vue'
+import { ref, h } from 'vue'
 import type { IProduct, IVariant } from '@/interfaces/product.interface'
 import { useRoute, useRouter } from 'vue-router'
 import { formatNumberWithCommas, dynamicQuery, findVariant } from '@/utils'
@@ -102,6 +106,7 @@ import { useCart } from '@/stores/use-cart'
 import { addToCart } from '@/services/cart/post'
 import { isClient } from '@vueuse/shared'
 import { useShare } from '@vueuse/core'
+import { useAuth, useClerk } from 'vue-clerk'
 
 const options = ref({
   title: 'VueUse',
@@ -116,6 +121,8 @@ function prodShare() {
 const { product } = defineProps<{
   product: IProduct
 }>()
+const { isSignedIn } = useAuth()
+const { openSignIn } = useClerk()
 const wish = ref<boolean>(false)
 const route = useRoute()
 const router = useRouter()
@@ -175,17 +182,49 @@ const listenOptions = (e: { key: string; value: string; position: number }) => {
 const { addToCart: _addToCart } = useCart()
 
 const addToCartFunc = async () => {
-  const cartItem = {
-    variantId: variant.value.id,
-    image: variant.value.variant_image,
-    price: parseFloat(variant.value.price),
-    title: product.title + ' /' + variant.value.title,
-    quantity: qty.value,
-    shopId: product.shopId,
-    shopName: product.shopName
+  if (isSignedIn.value) {
+    const cartItem = {
+      variantId: variant.value.id,
+      image: variant.value.variant_image,
+      price: parseFloat(variant.value.price),
+      title: product.title + ' /' + variant.value.title,
+      quantity: qty.value,
+      shopId: product.shopId,
+      shopName: product.shopName
+    }
+    _addToCart(cartItem)
+    message.success('Add to cart successfully')
+    await addToCart(cartItem)
+  } else {
+    openSignIn()
   }
-  _addToCart(cartItem)
-  message.success('Add to cart successfully')
-  await addToCart(cartItem)
+}
+
+const addToWishFunc = async () => {
+  if (isSignedIn.value) {
+    // const wishItem = {
+    //   variantId: product.variants[0].id,
+    //   image: product.variants[0].variant_image,
+    //   price: parseFloat(product.variants[0].price),
+    //   title: product.title,
+    //   quantity: 1,
+    //   shopId: product.shopId,
+    //   shopName: product.shopName
+    // }
+
+    if (wish.value) {
+      // _addToWish(wishItem)
+      // message.success('Add to wish successfully')
+      // await addToWish(wishItem)
+      wish.value = false
+    } else {
+      // _removeToWish(wishItem)
+      // message.error('Remove to wish successfully')
+      // await removeToWish(wishItem)
+      wish.value = true
+    }
+  } else {
+    openSignIn()
+  }
 }
 </script>

@@ -2,9 +2,10 @@
   <Table
     :columns="columns"
     :data-source="orders"
+    :loading="!orders"
     :scroll="{
       x: 1000,
-      y: 350,
+      y: 410,
       scrollToFirstRowOnChange: true
     }"
     :custom-row="
@@ -18,21 +19,23 @@
   >
     <template #bodyCell="{ index, record, column, text }">
       <template v-if="column.dataIndex == 'id'">
-        <span>{{ orders.findIndex((ele: any) => ele == record) + 1 }}</span></template
-      >
+        <span>{{ orders.findIndex((ele: any) => ele == record) + 1 }}</span>
+      </template>
+
       <template v-if="column.dataIndex == 'user'">
         <div class="flex items-center gap-3">
-          <Image :src="record.avatarUser" class="object-cover !w-10 rounded-full aspect-square" />
+          <img :src="record.avatarUser" class="object-cover !w-10 rounded-full aspect-square" />
           <span>{{ `${record.firstName} ${record.lastName}` }}</span>
         </div>
       </template>
 
       <template v-if="column.dataIndex == 'product'">
         <div class="flex gap-2">
-          <Image
+          <img
             :src="image"
             v-for="(image, index) in groupImageOrder(record.cartItems)"
-            class="!w-12 aspect-square"
+            class="!w-12 aspect-square rounded-lg"
+            alt="prod"
           />
         </div>
       </template>
@@ -96,12 +99,12 @@ const columns: TableColumnsType = [
     title: 'Status',
     dataIndex: 'status',
     key: 'status',
-    ellipsis: true
+    ellipsis: true,
+    width: '12%'
   },
   {
     title: 'Amount',
     dataIndex: 'amount',
-
     width: '10%'
   },
 

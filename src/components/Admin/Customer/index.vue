@@ -1,8 +1,9 @@
 <template>
-  <div class="flex flex-col gap-6 ]">
+  <div class="flex flex-col gap-6">
     <h1 class="ml-[24px] text-headline-5">Customer Lists</h1>
-    <div class="bg-white p-[24px] rounded-lg shadow-xl">
+    <div class="bg-white p-[24px] rounded-lg">
       <Table
+        :loading="!customers"
         :columns="columns"
         :data-source="customers"
         :scroll="{
@@ -17,8 +18,11 @@
           <template v-if="column.dataIndex == 'id'">
             <span>{{ index + 1 }}</span></template
           >
-          <template v-if="column.dataIndex == 'avatar'">
-            <Image :src="record.avatar" class="object-cover !w-10 rounded-full aspect-square" />
+          <template v-if="column.dataIndex == 'name'">
+            <div class="flex items-center gap-3">
+              <Image :src="record.avatar" class="object-cover !w-10 rounded-full aspect-square" />
+              <span class="text-body-2-semibold">{{ record.name }}</span>
+            </div>
           </template>
         </template>
       </Table>
@@ -45,11 +49,6 @@ const columns: TableColumnsType = [
     dataIndex: 'name',
     key: 'name',
     fixed: 'left'
-  },
-  {
-    title: 'Avatar',
-    dataIndex: 'avatar',
-    key: 'avatar'
   },
   {
     title: 'Email',

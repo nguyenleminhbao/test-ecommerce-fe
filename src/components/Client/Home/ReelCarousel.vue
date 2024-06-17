@@ -16,6 +16,7 @@
         :view="reel.view"
       />
       <RightCircleFilled
+        v-if="reels && reels.message.length > 4"
         class="bg-green z-10 sticky right-2 top-[calc(50%_-_50px)] text-4xl opacity-30"
       />
     </div>
@@ -30,8 +31,5 @@ import { getAllReel } from '@/services/news/get'
 import { RightCircleFilled } from '@ant-design/icons-vue'
 import useSWRV from 'swrv'
 
-
-const { data:reels  } = useSWRV('reels', getAllReel,configSWRV)
-
-
+const { data: reels } = useSWRV('reels', getAllReel, configSWRV)
 </script>

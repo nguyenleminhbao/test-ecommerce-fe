@@ -48,7 +48,7 @@ import { ref } from 'vue'
 import { useCart } from '@/stores/use-cart'
 import { PAYMENT_TYPE } from '@/constants/enum/payment.enum'
 import { getVariantIdSelectedInShop } from '@/utils'
-import { createOrderZaloPay } from '@/services/zalopay/post'
+import { createOrderZaloPayQR, createOrderZaloPayATM } from '@/services/zalopay/post'
 import { io } from 'socket.io-client'
 import { usePayment } from '@/stores/use-payment'
 import type { IOrder } from '@/interfaces/order.interface'
@@ -60,7 +60,7 @@ export type FormOrderType = {
   phoneNumber: string
   shippingAddress: string
   payMethod: PAYMENT_TYPE
-  bank?: string
+  bankCode?: string
 }
 
 const current = ref<number>(0) // set step current
@@ -105,7 +105,8 @@ const stepOrder = async () => {
       address: form.value.shippingAddress,
       paymentMethod: form.value.payMethod,
       amount: cartStore.subTotal,
-      shopCart: getVariantIdSelectedInShop(cartStore.shopCart, cartStore.selectedCartItem)
+      shopCart: getVariantIdSelectedInShop(cartStore.shopCart, cartStore.selectedCartItem),
+      bankCode: form.value.bankCode ?? ''
     }
 
     isLoading.value = true
@@ -125,22 +126,39 @@ const stepOrder = async () => {
       } else {
         message.error('Payment failed')
       }
-    }
-    // PAYEMENT ZALOPAY
-    else if (form.value.payMethod == PAYMENT_TYPE.ZALOPAY) {
-      if (paymentStore.paymentSession) {
-        modalPayment?.value?.showModal()
-        modalPayment?.value?.assignZaloResponse(paymentStore.paymentSession) // cache payment session form pinia
-      } else {
-        const data = await createOrderZaloPay(createData) // create order by pay zalopay
+    } else {
+      // PAYEMENT ZALOPAY
+      if (form.value.payMethod == PAYMENT_TYPE.ZALOPAY) {
+        if (paymentStore.paymentSession) {
+          modalPayment?.value?.showModal()
+          modalPayment?.value?.assignZaloResponse(paymentStore.paymentSession) // cache payment session form pinia
+        } else {
+          const data = await createOrderZaloPayQR(createData) // create order by pay zalopay
 
-        modalPayment?.value?.showModal()
-        modalPayment?.value?.assignZaloResponse(data.message)
-        setPaymentSession(data.message)
+          modalPayment?.value?.showModal()
+          modalPayment?.value?.assignZaloResponse(data.message)
+          setPaymentSession(data.message)
 
-        if (data && data.type == 'Error') {
-          message.error('Payment failed. Please you check again!')
-          isLoading.value = false
+          if (data && data.type == 'Error') {
+            message.error('Payment failed. Please you check again!')
+            isLoading.value = false
+          }
+        }
+      }
+
+      // PAYMENT CREDIT
+      else if (form.value.payMethod == PAYMENT_TYPE.CREDIT) {
+        if (!form.value.bankCode) {
+          message.error('Please select bank to pay!')
+        } else {
+          const data = await createOrderZaloPayATM(createData) // create order by pay zalopay ATM
+
+          if (data && data.type == 'Error') {
+            message.error('Payment failed. Please you check again!')
+            isLoading.value = false
+          } else {
+            window.location.href = data.message.orderUrl
+          }
         }
       }
 

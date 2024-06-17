@@ -18,3 +18,19 @@ export interface IReel {
   }
   comments: IComment[]
 }
+
+export interface IFeed {
+  id: string
+  title: string
+  thumbnail: string
+  content: string
+  shopId: string
+  createdAt: string
+  updatedAt: string
+  status: STATUS
+  shop: {
+    id: string
+    shopName: string
+    shopAvatar: string
+  }
+}

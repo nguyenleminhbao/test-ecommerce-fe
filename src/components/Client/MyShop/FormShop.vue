@@ -58,7 +58,7 @@
         <!-- Shop Address -------------------------------------------------------->
         <div class="formItem">
           <h1 class="text-headline-7 mb-6">Shop Address</h1>
-          <div class="flex justify-between">
+          <div class="flex justify-between gap-6">
             <FormItem label="Name" name="user">
               <Input v-model:value="formState.user" />
             </FormItem>

@@ -2,13 +2,11 @@
   <div class="w-[834px] grid gap-[40px] h-fit">
     <div class="flex justify-between items-center">
       <h1 class="text-body-1-semibold">All Product</h1>
-      <div class="flex gap-[32px]">
-        <Dropdown />
-        <!-- <ToolbarSelector /> -->
-      </div>
+      <Dropdown />
     </div>
 
     <div class="flex flex-col gap-[80px]">
+      <Spin :spinning="!products" size="large" tip="Loading..."/>
       <div class="grid grid-cols-3 gap-6">
         <ProdCard
           v-for="product in products.slice((currentPage - 1) * 12, currentPage * 12)"
@@ -25,11 +23,11 @@
 </template>
 
 <script setup lang="ts">
-import { Dropdown, ToolbarSelector } from './_components'
+import { Dropdown } from './_components'
 import ProdCard from '@/components/UI/ProdCard.vue'
 import type { IProduct } from '@/interfaces/product.interface'
 import { ref, computed, onMounted } from 'vue'
-import { Pagination } from 'ant-design-vue'
+import { Pagination, Spin } from 'ant-design-vue'
 
 const currentPage = ref<number>(1)
 

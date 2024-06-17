@@ -2,34 +2,35 @@
   <div class="my-20 flex flex-col gap-12">
     <div class="flex justify-between items-end">
       <h1 class="text-headline-6">You might also like</h1>
-<<<<<<< HEAD
       <ButtonArrow text="More Articles" link="/news" />
-=======
-      <ButtonArrow text="More Articles" link="/" />
->>>>>>> 06155174916644e25aae6aa8fb924d08de8ad4cc
     </div>
 
-    <div class="grid grid-cols-3 gap-x-[25px] gap-y-10">
-      <BlogCard
-        imgUrl="https://cf.bstatic.com/xdata/images/hotel/max1024x768/372191700.jpg?k=f500ad107b90760656244fbfb37fec3418553646e1d8769046cd775208961fa0&o=&hp=1"
-        title="7 ways to decor your home like a professional"
-        date="October 16, 2023"
+    <div class="w-full flex overflow-x-auto items-start gap-6 scrollbar-hide relative" v-if="feeds">
+      <BlogItem
+        v-for="(feed, index) in feeds.message"
+        :key="index"
+        :feedId="feed.id"
+        :imageUrl="feed.thumbnail"
+        :title="feed.title"
+        :date="feed.createdAt"
+        :content="feed.content"
       />
-      <BlogCard
-        imgUrl="https://cf.bstatic.com/xdata/images/hotel/max1024x768/372191700.jpg?k=f500ad107b90760656244fbfb37fec3418553646e1d8769046cd775208961fa0&o=&hp=1"
-        title="7 ways to decor your home like a professional"
-        date="October 16, 2023"
-      />
-      <BlogCard
-        imgUrl="https://cf.bstatic.com/xdata/images/hotel/max1024x768/372191700.jpg?k=f500ad107b90760656244fbfb37fec3418553646e1d8769046cd775208961fa0&o=&hp=1"
-        title="7 ways to decor your home like a professional"
-        date="October 16, 2023"
+
+      <RightCircleFilled
+        v-if="feeds && feeds.message.length > 3"
+        class="bg-green z-10 sticky right-2 top-[calc(50%_-_50px)] text-4xl"
       />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import ButtonArrow from '@/components/UI/elements/ButtonArrow.vue'
-import BlogCard from '@/components/UI/BlogCard.vue'
+import { RightCircleFilled } from '@ant-design/icons-vue'
+import { ButtonArrow } from '@/components/UI/elements'
+import BlogItem from '@/components/UI/BlogItem.vue'
+import useSWRV from 'swrv'
+import { configSWRV } from '@/config/swrv'
+import { getAllFeed } from '@/services/news/get'
+
+const { data: feeds } = useSWRV('feeds', getAllFeed, configSWRV)
 </script>

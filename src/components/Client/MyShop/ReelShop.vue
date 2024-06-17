@@ -1,15 +1,19 @@
 <template>
-  <section class="mt-8 w-full flex flex-col">
-    <div class="flex items-center justify-center mt-5 gap-2">
-      <span class="text-headline-3 text-center">Reel </span>
-      <button class="w-10 h-10 object-center translate-y-1" @click="showDrawer">
-        <PlusCircleOutlined class="w-10 h-10 text-[35px]" />
-      </button>
+  <section class="w-full flex flex-col">
+    <div class="flex justify-between items-center">
+      <h1 class="text-body-1-semibold text-headline-5">Reel</h1>
+      <Button
+        class="bg-neutral-7 flex items-center"
+        type="primary"
+        :icon="h(PlusCircleOutlined)"
+        @click="showDrawer"
+        >New Reel
+      </Button>
     </div>
 
-    <div class="w-full mt-10 flex overflow-x-auto items-start gap-6 scrollbar-hide relative">
+    <div class="grid grid-cols-4 gap-x-[25px] gap-y-10 mt-5" v-if="reels">
       <ReelItem
-        v-for="(reel, index) in reels"
+        v-for="(reel, index) in reels.message.slice((currentPage - 1) * 12, currentPage * 12)"
         :key="index"
         :reelId="reel.id"
         :video-url="reel.video"
@@ -17,11 +21,20 @@
         :description="reel.description"
         :view="reel.view"
         :is-edit="true"
+        :runMutation="runMutation"
         @delete-reel="onDelete"
       />
-      <RightCircleFilled class="bg-green z-10 sticky right-2 top-[calc(50%_-_50px)] text-4xl" />
+    </div>
+    <div class="flex justify-center my-20">
+      <Pagination
+        v-if="reels"
+        v-model:current="currentPage"
+        :total="reels.message.length"
+        show-less-items
+      />
     </div>
   </section>
+
   <Drawer
     v-model:open="open"
     class="custom-class [&_.ant-drawer-title]:text-headline-6 [&_.ant-drawer-body]:!scrollbar-hide"
@@ -34,39 +47,44 @@
     placement="right"
   >
     <div class="flex flex-col gap-4">
-      <div class="flex justify-end mb-10">
-        <UploadDragger
-          v-model:fileList="fileList"
-          name="file"
-          @change="handleChange"
-          :action="uploadVideoUrl"
-          class="w-full"
-        >
-          <p class="ant-upload-drag-icon">
-            <inbox-outlined></inbox-outlined>
-          </p>
-          <p class="ant-upload-text">Click or drag file to this area to upload</p>
-          <p class="ant-upload-hint w-full">Only upload file video mp4</p>
-        </UploadDragger>
-      </div>
-
       <div class="flex flex-col items-start gap-2">
         <span class="text-xl font-semibold text-black min-w-[100px]">Title</span>
         <Input v-model:value="videoState.title" />
       </div>
       <div class="flex flex-col items-start gap-2">
         <span class="text-xl font-semibold text-black min-w-[100px]">Description</span>
-        <Textarea v-model:value="videoState.description" />
+        <Textarea v-model:value="videoState.description" :rows="4" />
       </div>
-      <video
-        :src="videoState.video"
-        class="w-full h-full mt-2 rounded-lg object-cover max-h-[450px]"
-        controls
-      ></video>
+
+      <div class="flex flex-col items-start gap-2">
+        <span class="text-xl font-semibold text-black min-w-[100px]">Upload Video</span>
+        <UploadDragger
+          v-model:fileList="fileList"
+          list-type="picture"
+          name="file"
+          @change="handleChange"
+          :max-count="1"
+          :action="uploadVideoUrl"
+          :before-upload="beforeUpload"
+          class="w-full"
+        >
+          <p class="ant-upload-drag-icon">
+            <LoadingOutlined v-if="loading" /><inbox-outlined v-else />
+          </p>
+          <p class="ant-upload-text">Click or drag file to this area to upload</p>
+          <p class="ant-upload-hint w-full">Only upload file video mp4</p>
+        </UploadDragger>
+        <video
+          v-if="videoState.video"
+          :src="videoState.video"
+          class="w-full h-full mt-2 rounded-lg object-cover max-h-[450px]"
+          controls
+        ></video>
+      </div>
     </div>
     <template #footer>
       <div class="flex items-end w-full justify-end gap-2">
-        <Button type="primary" class="bg-gray-400 w-[70px]" @click="open = false">Cancel</Button>
+        <Button class="border-black w-[70px]" @click="open = false">Cancel</Button>
         <Button type="primary" class="bg-black w-[70px]" @click="onAdd">Add</Button>
       </div>
     </template>
@@ -75,17 +93,19 @@
 
 <script setup lang="ts">
 import ReelItem from '@/components/UI/ReelItem.vue'
-import type { IReel } from '@/interfaces/news.interface'
 import { getReelByShop } from '@/services/news/get'
-import { onMounted, ref } from 'vue'
-import { PlusCircleOutlined, InboxOutlined, RightCircleFilled } from '@ant-design/icons-vue'
+import { ref, h } from 'vue'
+import { PlusCircleOutlined, InboxOutlined, LoadingOutlined } from '@ant-design/icons-vue'
 import {
   Drawer,
   Input,
   Textarea,
   Button,
+  Pagination,
   UploadDragger,
   type UploadChangeParam,
+  type UploadProps,
+  Upload,
   message
 } from 'ant-design-vue'
 import { uploadVideoUrl } from '@/constants/upload-url'
@@ -93,14 +113,21 @@ import { deleteFile } from '@/services/upload/delete'
 import { getPublicIdFromUrl } from '@/utils'
 import { createReel } from '@/services/news/post'
 import { deleteReel } from '@/services/news/delete'
+import useSWRV from 'swrv'
+import { configSWRV } from '@/config/swrv'
 
 const { shopId } = defineProps<{
   shopId: string
 }>()
 
-const reels = ref<IReel[]>([])
+const { data: reels, mutate: runMutation } = useSWRV(
+  `/news/reel/shop/${shopId}`,
+  getReelByShop,
+  configSWRV
+)
 const fileList = ref([])
 const loading = ref<boolean>(false)
+const currentPage = ref<number>(1)
 const videoState = ref<{
   video: string
   title: string
@@ -131,8 +158,16 @@ const handleChange = async (info: UploadChangeParam) => {
   }
   if (info.file.status === 'error') {
     loading.value = false
-    message.error('upload error')
+    message.error('Upload error')
   }
+}
+
+const beforeUpload: UploadProps['beforeUpload'] = (file) => {
+  const isMP4 = file.type === 'video/mp4'
+  if (!isMP4) {
+    message.error(`${file.name} is not a mp4 file`)
+  }
+  return isMP4 || Upload.LIST_IGNORE
 }
 
 const onAdd = async () => {
@@ -146,21 +181,20 @@ const onAdd = async () => {
     description: videoState.value.description,
     shopId
   })
-  const data = await getReelByShop(shopId)
-  reels.value = data.message
+  runMutation()
   message.success('Create reel successfully')
+  videoState.value = {
+    video: '',
+    title: '',
+    description: ''
+  }
+  fileList.value = []
   open.value = false
 }
 
 const onDelete = async (reelId: string) => {
   await deleteReel(reelId)
   message.success('Delete reel successfully')
-  const data = await getReelByShop(shopId)
-  reels.value = data.message
+  runMutation()
 }
-
-onMounted(async () => {
-  const data = await getReelByShop(shopId)
-  reels.value = data.message
-})
 </script>

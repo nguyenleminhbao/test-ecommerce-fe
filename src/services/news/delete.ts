@@ -9,3 +9,12 @@ export const deleteReel = async (reelId: string) => {
     throw err
   }
 }
+
+export const deleteFeed = async (feedId: string) => {
+  try {
+    const { data } = await axiosInstance.delete<IResponse<string>>(`/news/feed/${feedId}`)
+    return data
+  } catch (err) {
+    throw err
+  }
+}
