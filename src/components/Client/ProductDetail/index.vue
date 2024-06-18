@@ -1,8 +1,11 @@
 <template>
   <div v-if="product" class="max-w-[1120px] mx-auto">
     <Breadcrumb class="my-4">
-      <BreadcrumbItem class="[&_.ant-breadcrumb-link]:text-gray-600">Home</BreadcrumbItem>
-      <BreadcrumbItem><span>Shop</span></BreadcrumbItem>
+      <BreadcrumbItem class="[&_.ant-breadcrumb-link]:text-gray-600">
+        <a href="/">Home</a>
+      </BreadcrumbItem>
+
+      <!-- <BreadcrumbItem><span>Shop</span></BreadcrumbItem> -->
       <BreadcrumbItem
         ><RouterLink :to="`/shop/${product?.shopId}`">{{
           product?.shopName

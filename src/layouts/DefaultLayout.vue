@@ -1,7 +1,8 @@
 <template>
-  <div>
+  <div class="overflow-x-hidden">
     <Header />
-    <div>
+    <HeaderMobile />
+    <div class="px-4 md:px-6 lg:px-0 scrollbar-hide">
       <Skeleton
         class="max-w-[1120px] mx-auto"
         :paragraph="{
@@ -17,6 +18,7 @@
 </template>
 <script setup lang="ts">
 import Header from '@/components/common/Header.vue'
+import HeaderMobile from '@/components/common/HeaderMobile.vue'
 import Footer from '@/components/common/Footer.vue'
 
 import { login } from '@/services/auth/post'
@@ -77,11 +79,6 @@ watch(userId, async () => {
       setAuth(me.message)
     }
 
-    if (!livestreamStore.listLivestream) {
-      const listStream = await getAllStream()
-      setListLivestream(listStream.message)
-    }
-
     if (sessionStorage.getItem('isAdmin') == '1') {
       router.push('/admin')
     } else if (sessionStorage.getItem('isAdmin') == '0') {
@@ -93,6 +90,10 @@ watch(userId, async () => {
       if (isAdmin.message) router.push('/admin')
       isLoading.value = false
     }
+  }
+  if (!livestreamStore.listLivestream) {
+    const listStream = await getAllStream()
+    setListLivestream(listStream.message)
   }
 })
 

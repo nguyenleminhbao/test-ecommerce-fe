@@ -15,33 +15,32 @@
         <img class="w-full h-[500px] object-cover" :src="banner" alt="temp" />
       </div>
     </Carousel>
-
-    <div class="flex gap-[24px] items-center max-w-[1120px]">
-      <div class="max-w-[643px]">
-        <h1
-          data-aos="zoom-in"
-          class="text-neutral-7 text-[72px] font-medium leading-[76px] tracking-[-2px]"
-        >
-          Simply Unique/<br />Simply Better.
-        </h1>
-      </div>
-
-      <p class="max-w-[424px] text-neutral-4" data-aos="zoom-in-left">
-        <span data-aos="zoom-in-left" class="text-neutral-5 text-body-2-semibold">Shop</span> is a
-        gift & decorations store based in HCMC, Vietnam. Est since 2019.
-      </p>
+  </div>
+  <div class="flex flex-col lg:flex-row gap-[24px] items-center max-w-[1120px] mx-auto">
+    <div class="max-w-[643px]">
+      <h1
+        data-aos="zoom-in"
+        class="text-neutral-7 text-[40px] leading-[50px] md:text-[72px] font-medium md:leading-[76px] tracking-[-2px]"
+      >
+        Simply Unique/<br />Simply Better.
+      </h1>
     </div>
+
+    <p class="max-w-[250px] md:max-w-[424px] text-neutral-4" data-aos="zoom-in-left">
+      <span data-aos="zoom-in-left" class="text-neutral-5 text-body-2-semibold">Shop</span> is a
+      gift & decorations store based in HCMC, Vietnam. Est since 2019.
+    </p>
   </div>
 </template>
 
 <script setup lang="ts">
 import { Carousel } from 'ant-design-vue'
 import { LeftCircleOutlined, RightCircleOutlined } from '@ant-design/icons-vue'
-import { randomBanner } from '@/services/shop/get'
+import { getBannerPromotion } from '@/services/shop/get'
 import useSWRV from 'swrv'
 import { configBannerSWRV } from '@/config/swrv'
 
-const { data: banners } = useSWRV('banners', randomBanner, configBannerSWRV)
+const { data: banners } = useSWRV('banners', getBannerPromotion, configBannerSWRV)
 </script>
 
 <style scoped lang="css">

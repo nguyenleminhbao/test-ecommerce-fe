@@ -6,7 +6,7 @@
     :footer-style="{ textAlign: 'right' }"
     @close="closeCart"
     class="[&_.ant-drawer-title]:text-headline-6 [&_.ant-drawer-body]:px-0"
-    width="450"
+    :width="width > 500 ? 450 : 360"
   >
     <ul class="flex flex-col h-full">
       <CartItem
@@ -38,6 +38,9 @@ import { Drawer, Button } from 'ant-design-vue'
 import { CartItem } from '@/components/UI/elements'
 import { useCart } from '@/stores/use-cart'
 import { useRouter } from 'vue-router'
+import { useWindowSize } from '@vueuse/core'
+
+const { width } = useWindowSize()
 const router = useRouter()
 
 const cartStore = useCart()

@@ -74,3 +74,28 @@ export const randomBanner = async () => {
     throw err
   }
 }
+
+export const getBanners = async () => {
+  try {
+    const { data } = await axiosInstance.get<
+      IResponse<
+        {
+          shopName: string
+          banner: string
+        }[]
+      >
+    >('/shop/get-banners')
+    return data
+  } catch (err) {
+    throw err
+  }
+}
+
+export const getBannerPromotion = async () => {
+  try {
+    const { data } = await axiosInstance.get<IResponse<string[]>>('/shop/get-banner-promotion')
+    return data
+  } catch (err) {
+    throw err
+  }
+}

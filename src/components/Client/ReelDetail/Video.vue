@@ -80,14 +80,14 @@
     </div>
 
     <!-- Up Button ---------------------------------------------------------------------------->
-    <button role="button" class="StyledVideoSwitch top-[calc(50%_-_48px)]">
+    <!-- <button role="button" class="StyledVideoSwitch top-[calc(50%_-_48px)]">
       <UpOutlined class="text-[26px] text-white" />
-    </button>
+    </button> -->
 
     <!-- Down Button ---------------------------------------------------------------------------->
-    <button role="button" class="StyledVideoSwitch top-[calc(50%_+_8px)]">
+    <!-- <button role="button" class="StyledVideoSwitch top-[calc(50%_+_8px)]">
       <DownOutlined class="text-[26px] text-white" />
-    </button>
+    </button> -->
   </div>
 </template>
 

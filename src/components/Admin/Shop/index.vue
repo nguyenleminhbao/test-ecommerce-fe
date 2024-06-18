@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col gap-[24px]">
-    <h1 class="ml-[24px] text-headline-5">Shop Lists</h1>
+    <h1 class="text-headline-5">Shop Lists</h1>
 
     <div class="bg-white p-[24px] rounded-lg">
       <Table
@@ -73,7 +73,7 @@ const columns: TableColumnsType = [
     title: 'Product',
     dataIndex: 'numProd',
     key: 'numProd'
-  },
+  }
 ]
 
 onMounted(async () => {

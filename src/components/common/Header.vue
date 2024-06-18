@@ -1,9 +1,11 @@
 <template>
-  <div class="w-full shadow-[-1px_1px_1px_#c7c7c7] sticky top-0 left-0 z-[1000] bg-white">
+  <div
+    class="hidden md:block px-6 w-full shadow-[-1px_1px_1px_#c7c7c7] sticky top-0 left-0 z-[1000] bg-white"
+  >
     <div class="h-[60px] max-w-[1120px] mx-auto flex justify-between items-center">
-      <RouterLink to="/"
-        ><img src="@/assets/images/LOGO.jpg" class="w-[40px] aspect-square rounded-full"
-      /></RouterLink>
+      <RouterLink to="/" class="flex items-center gap-2 text-neutral-7 text-body-1-bold">
+        <img src="@/assets/images/logo.svg" class="w-[40px] aspect-square" /> Shopo
+      </RouterLink>
 
       <div class="flex items-center gap-10 text-neutral-4">
         <Tooltip placement="bottom">

@@ -4,7 +4,7 @@
   <LivestreanCarousel
     v-if="livestreamStore.listLivestream && livestreamStore.listLivestream.length"
   />
-  <ProductCarousel v-if="products" :products="products.message"  />
+  <ProductCarousel v-if="products" :products="products.message" />
   <Values />
   <ReelCarousel />
   <Banner />
@@ -27,9 +27,6 @@ import { useLivestream } from '@/stores/use-livestream'
 import useSWRV from 'swrv'
 import { configSWRV } from '@/config/swrv'
 
-
-const { data:products  } = useSWRV('products', getAllProducts,configSWRV)
+const { data: products } = useSWRV('products', () => getAllProducts(1), configSWRV)
 const livestreamStore = useLivestream()
-
-
 </script>

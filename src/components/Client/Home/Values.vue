@@ -1,5 +1,7 @@
 <template>
-  <div class="flex gap-[24px] py-[48px] mx-auto max-w-[1120px] justify-center">
+  <div
+    class="grid grid-cols-2 md:grid-cols-4 gap-[24px] py-[48px] mx-auto max-w-[1120px] justify-center"
+  >
     <Card
       data-aos="fade-left"
       data-aos-offset="500"

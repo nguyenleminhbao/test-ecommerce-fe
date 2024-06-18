@@ -1,7 +1,7 @@
 <template>
-  <div class="grid gap-[40px] py-[80px] mx-auto max-w-[1121px]">
+  <div class="grid gap-[40px] py-10 md:py-[80px] mx-auto max-w-[1121px]">
     <div class="flex items-end justify-between content-center text-neutral-7 max-w-[1120px]">
-      <h1 class="text-headline-4">Articles</h1>
+      <h1 data-aos="zoom-in" class="text-headline-6 md:text-headline-4">Articles</h1>
       <ButtonArrow text="More Articles" link="/news" />
     </div>
 

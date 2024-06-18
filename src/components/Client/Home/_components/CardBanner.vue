@@ -5,7 +5,10 @@
       <ButtonArrow text="Shop Now" link="/product" />
     </div>
 
-    <img :src="imageUrl" class="object-contain aspect-[3/4] w-full" />
+    <img
+      :src="imageUrl"
+      class="object-contain aspect-square w-[250px] md:w-[500px] lg:aspect-[3/4] lg:w-full"
+    />
   </div>
 </template>
 

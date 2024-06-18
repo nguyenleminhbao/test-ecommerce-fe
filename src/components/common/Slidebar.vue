@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="m-[8px] h-11 flex justify-center items-center">
-      <RouterLink to="/admin" class="px-6 text-headline-5">Admin</RouterLink>
+    <div class="m-[8px] h-11 flex px-6 items-center">
+      <RouterLink to="/admin" class="text-headline-5">Admin</RouterLink>
     </div>
     <Menu
       v-model:openKeys="state.openKeys"
@@ -9,13 +9,14 @@
       mode="inline"
       :inline-collapsed="state.collapsed"
       :items="items"
+      class="[&_.ant-menu-title-content]:font-semibold"
       @click="handleMenuItemClick"
     ></Menu>
   </div>
 </template>
 <script lang="ts" setup>
 import { Menu, type ItemType } from 'ant-design-vue'
-import { reactive, watch, VueElement, h } from 'vue'
+import { reactive, watch, h } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 const route = useRoute()
 const router = useRouter()
@@ -107,10 +108,7 @@ watch(
     state.selectedKeys = [val]
   }
 )
-const toggleCollapsed = () => {
-  state.collapsed = !state.collapsed
-  state.openKeys = state.collapsed ? [] : state.preOpenKeys
-}
+
 const handleMenuItemClick = (e: any) => {
   const { key } = e
   router.push(key)

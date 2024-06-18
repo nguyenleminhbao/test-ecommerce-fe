@@ -53,17 +53,12 @@
         <StarFilled />
         <StarFilled />
       </div>
-      <!-- <Rate
-        :value="averageRating"
-        disabled
-        allow-half
-        class="text-[16px] text-black"
-      /> -->
+
       <span class="text-body-2-semibold text-neutral-7 two-lines-truncate h-[42px]">{{
         product.title
       }}</span>
       <div class="flex gap-[12px]">
-        <span class="text-caption-1-semibold"
+        <span class="text-caption-1-semibold text-neutral-7"
           >₫{{ formatNumberWithCommas(product.variants[0].price) }}</span
         >
         <del class="text-caption-1 text-neutral-4"
@@ -85,7 +80,7 @@ import { formatNumberWithCommas } from '@/utils'
 import { RouterLink, useRouter, useRoute } from 'vue-router'
 import { useCart } from '@/stores/use-cart'
 import { addToCart } from '@/services/cart/post'
-import { ref, h, computed } from 'vue'
+import { ref, h, computed, onMounted } from 'vue'
 import DrawerCart from '@/components/UI/DrawerCart.vue'
 import { useAuth, useClerk } from 'vue-clerk'
 
@@ -154,16 +149,8 @@ const addToWishFunc = async () => {
 const reloadPage = () => {
   setTimeout(() => {
     window.location.reload()
-  }, 100)
+  }, 300)
 }
-
-// const averageRating = computed(() => {
-//   if (!product.reviews || product.value.reviews.length === 0) {
-//     return 0
-//   }
-//   const sum = product.value.reviews.reduce((acc, review) => acc + review.rating, 0)
-//   return sum / product.value.reviews.length
-// })
 </script>
 
 <style scoped>

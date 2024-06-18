@@ -2,7 +2,7 @@
   <div class="grid gap-[48px] pt-[48px] max-w-[1120px] mx-auto">
     <div class="flex items-end justify-between text-neutral-7 max-w-[1120px]">
       <h1 data-aos="zoom-in" class="text-headline-4">Reel</h1>
-      <ButtonArrow text="More Reels" link="/news" />
+      <ButtonArrow text="More Reels" link="/news?tab=Reel" />
     </div>
     <div class="flex overflow-x-auto items-start gap-[24px] scrollbar-hide relative">
       <ReelItem

@@ -10,14 +10,13 @@
             >Chat</Button
           >
 
-          <Button class="h-7 bg-primary text-white object-center" @click="follow = !follow">
+          <Button class="h-7 bg-primary text-white object-center" @click="followFunc">
             <template #icon>
               <PlusCircleOutlined v-if="!follow" /> <CheckCircleOutlined v-else
             /></template>
             <span v-if="!follow">Follow</span>
             <span v-else>Following</span>
           </Button>
-          
         </div>
       </div>
     </div>
@@ -29,7 +28,7 @@
         </li>
         <li class="flex justify-between items-center max-w-[230px]">
           <span class="text-hairline-1">Product</span>
-          <span>1,2k</span>
+          <span>{{ products.length }}</span>
         </li>
         <li class="flex justify-between items-center max-w-[230px]">
           <span class="text-hairline-1">Participation</span>
@@ -47,7 +46,12 @@
 <script setup lang="ts">
 import { Image, Button } from 'ant-design-vue'
 import { WechatOutlined, PlusCircleOutlined, CheckCircleOutlined } from '@ant-design/icons-vue'
-import { ref, h } from 'vue'
+import { ref, h, onMounted } from 'vue'
+import type { IProduct } from '@/interfaces/product.interface'
+import { getShopProducts } from '@/services/products/get'
+import { useAuth, useClerk } from 'vue-clerk'
+
+const products = ref<IProduct[]>([])
 
 const follow = ref<boolean>(false)
 const { shopId, shopName, shopAvatar } = defineProps<{
@@ -55,4 +59,24 @@ const { shopId, shopName, shopAvatar } = defineProps<{
   shopName: string
   shopAvatar: string
 }>()
+
+onMounted(async () => {
+  const data = await getShopProducts(shopId)
+  products.value = data?.message
+})
+
+const { isSignedIn } = useAuth()
+const { openSignIn } = useClerk()
+
+const followFunc = async () => {
+  if (isSignedIn.value) {
+    if (follow.value) {
+      follow.value = false
+    } else {
+      follow.value = true
+    }
+  } else {
+    openSignIn()
+  }
+}
 </script>

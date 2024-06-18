@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col gap-6">
-    <h1 class="ml-[24px] text-headline-5">Customer Lists</h1>
+    <h1 class="text-headline-5">Customer Lists</h1>
     <div class="bg-white p-[24px] rounded-lg">
       <Table
         :loading="!customers"

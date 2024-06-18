@@ -4,7 +4,7 @@
   >
     <div class="grid gap-[24px] place-content-center text-center">
       <Breadcrumb separator=">" class="flex gap-[16px] text-button-xs justify-self-center">
-        <BreadcrumbItem href="/">Home</BreadcrumbItem>
+        <BreadcrumbItem><a href="/">Home</a></BreadcrumbItem>
         <BreadcrumbItem>News</BreadcrumbItem>
       </Breadcrumb>
 

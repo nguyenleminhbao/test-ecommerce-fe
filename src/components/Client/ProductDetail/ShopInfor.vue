@@ -29,7 +29,7 @@
         </li>
         <li class="flex justify-between items-center max-w-[230px]">
           <span class="text-hairline-1">Product</span>
-          <span>1,2k</span>
+          <span>{{ products.length }}</span>
         </li>
         <li class="flex justify-between items-center max-w-[230px]">
           <span class="text-hairline-1">Participation</span>
@@ -43,6 +43,7 @@
     </div>
   </section>
 </template>
+
 <script setup lang="ts">
 const { shopId } = defineProps<{
   shopId: string
@@ -52,6 +53,8 @@ import { Image, Button } from 'ant-design-vue'
 import { WechatOutlined, ShopOutlined } from '@ant-design/icons-vue'
 import { onMounted, ref } from 'vue'
 import { getOneShop } from '@/services/shop/get'
+import type { IProduct } from '@/interfaces/product.interface'
+import { getShopProducts } from '@/services/products/get'
 
 const shop = ref<{
   shopId: string
@@ -62,5 +65,11 @@ const shop = ref<{
 onMounted(async () => {
   const data = await getOneShop(shopId)
   shop.value = data.message
+
+  const dataProd = await getShopProducts(shopId)
+  products.value = dataProd?.message 
 })
+
+const products = ref<IProduct[]>([])
+
 </script>

@@ -9,7 +9,7 @@
             alt="user.name"
           />
         </RouterLink>
-        <a class="StyledLink" href="/userId">
+        <a class="StyledLink" :href="`/shop/${shopId}`">
           <span class="text-body-2-bold">{{ shopName }}</span>
           <br />
           <span class="text-caption-1">{{ formatDateText(createdAt) }}</span>

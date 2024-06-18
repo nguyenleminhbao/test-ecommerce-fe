@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col gap-[24px]">
-    <h1 class="ml-[24px] text-headline-5">Order Lists</h1>
+    <h1 class="text-headline-5">Order Lists</h1>
     <Spin :spinning="!summary || !orders" />
     <Statistic
       v-if="summary && orders"
