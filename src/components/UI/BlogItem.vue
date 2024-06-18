@@ -1,8 +1,8 @@
 <template>
-  <RouterLink :to="`/blog/${feedId}`" class="group relative shadow-md">
-    <div class="flex flex-col gap-6 w-[357px]">
-      <div class="w-[357px] h-[325px]">
-        <img class="w-[357px] h-[325px] object-cover rounded-md" :src="imageUrl" alt="theme blog" />
+  <RouterLink :to="`/blog/${feedId}`" class="group relative shadow-md max-w-[262px] rounded-md" :class="class">
+    <div class="flex flex-col gap-6 w-full rounded-md">
+      <div class="w-full h-[325px]">
+        <img class="w-full h-[325px] object-cover rounded-t-md" :src="imageUrl" alt="theme blog" />
         <Button
           v-if="isEdit"
           class="absolute bg-black bottom-2 right-2 hidden shadow-lg z-30 group-hover:block"
@@ -11,7 +11,7 @@
           >Edit</Button
         >
       </div>
-      <div class="flex flex-col gap-2 p-4 bg-gray-200">
+      <div class="flex flex-col gap-2 p-4 bg-gray-200 rounded-b-md">
         <h3 class="pt-3 text-headline-7 text-neutral-7">{{ title }}</h3>
         <p class="text-neutral-4 text-[14px] leading-[24px]">{{ formatDateText(date) }}</p>
       </div>
@@ -121,6 +121,7 @@ const {
   date: string
   content: string
   isEdit?: boolean
+  class?: string
   runMutation?: (data?: fetcherFn<IResponse<IFeed[]>>) => Promise<void>
 }>()
 

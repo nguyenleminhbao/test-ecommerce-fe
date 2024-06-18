@@ -3,7 +3,7 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 max-w-[1120px] mx-auto mt-12">
       <CardBanner
         data-aos="fade-right"
-        class="lg:max-w-[548px] h-[400px] md:h-[662px]"
+        class="lg:max-w-[548px] h-[350px] md:h-[662px]"
         title="Headphone"
         imageUrl="https://sony.scene7.com/is/image/sonyglobalsolutions/wh-ch520_Primary_image?$categorypdpnav$&fmt=png-alpha"
       ></CardBanner>

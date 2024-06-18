@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-3 gap-x-[25px] gap-y-10 mt-5">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-[25px] gap-y-10 mt-5">
     <BlogItem
       v-if="feeds"
       v-for="(feed, index) in feeds.message.slice((currentPage - 1) * 12, currentPage * 12)"
@@ -9,6 +9,7 @@
       :title="feed.title"
       :date="feed.createdAt"
       :content="feed.content"
+      class=" !max-w-full"
     />
   </div>
   <div class="flex justify-center my-20">

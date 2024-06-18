@@ -1,5 +1,5 @@
 <template>
-  <RouterLink class="relative group max-w-[262px]" :to="`/reel/${reelId}`" @click="onClick">
+  <RouterLink class="relative group max-w-[262px]" :class="class" :to="`/reel/${reelId}`" @click="onClick">
     <div
       class="w-full h-[420px] aspect-[9/16] bg-gray-800 rounded-2xl relative group cursor-pointer"
       @mouseover="(playing = true), (muted = true)"
@@ -125,6 +125,7 @@ const {
   description: string
   view: number
   isEdit?: boolean
+  class?: string
   runMutation?: (data?: fetcherFn<IResponse<IReel[]>>) => Promise<void>
 }>()
 
