@@ -2,7 +2,12 @@
   <div class="flex flex-col gap-[19px]">
     <!-- <h1 class="text-body-1-semibold">Your Wishlist</h1> -->
 
-    <Table :loading="loading" :columns="columns" :data-source="products" :scroll="{ y: 500 }">
+    <Table
+      :loading="loading"
+      :columns="columns"
+      :data-source="products"
+      :scroll="{ x: 500, y: 500 }"
+    >
       <template #bodyCell="{ column, text, record }">
         <template v-if="column.dataIndex === 'product'">
           <div class="flex gap-4 items-center">
@@ -20,8 +25,13 @@
         </template>
 
         <template v-if="column.dataIndex === 'action'">
-          <Button class="border-neutral-7 object-center w-full mb-2" :icon="h(HeartFilled)">Wish</Button>
-          <Button class="bg-primary text-white object-center w-full" :icon="h(ShoppingCartOutlined)">
+          <Button class="border-neutral-7 object-center w-full mb-2" :icon="h(HeartFilled)"
+            >Wish</Button
+          >
+          <Button
+            class="bg-primary text-white object-center w-full"
+            :icon="h(ShoppingCartOutlined)"
+          >
             Add to cart
           </Button>
         </template>
@@ -43,7 +53,7 @@ const loading = ref(false)
 const columns = [
   { title: 'Product', dataIndex: 'product', width: '50%' },
   { title: 'Price', dataIndex: 'price' },
-  { title: 'Action', dataIndex: 'action' }
+  { title: 'Action', dataIndex: 'action', width: '30%' }
 ]
 
 // type APIParams = {

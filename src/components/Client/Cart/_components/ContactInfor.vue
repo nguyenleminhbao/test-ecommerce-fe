@@ -7,6 +7,7 @@
       <FormItem
         name="firstName"
         :rules="[{ required: true, message: 'Please input your first name!' }]"
+        class="col-span-2 md:col-span-1"
       >
         <span class="text-body-2-semibold text-neutral-4"
           >First Name <span class="text-red-600 text-lg">*</span></span
@@ -16,6 +17,7 @@
       <FormItem
         name="lastName"
         :rules="[{ required: true, message: 'Please input your last name!' }]"
+        class="col-span-2 md:col-span-1"
       >
         <span class="text-body-2-semibold text-neutral-4"
           >Last Name <span class="text-red-600 text-lg">*</span></span

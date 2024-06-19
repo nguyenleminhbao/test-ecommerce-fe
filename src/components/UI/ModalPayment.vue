@@ -9,8 +9,10 @@
     :closable="false"
     class="[&_.ant-modal-content]:!p-0 [&_.ant-modal-content]:!rounded-2xl"
   >
-    <div class="min-h-[450px] grid grid-cols-10 gap-10 object-center">
-      <section class="flex flex-col col-span-4 h-[300px]">
+    <div
+      class="min-h-[450px] flex flex-col md:grid md:grid-cols-10 gap-5 md:gap-10 object-center p-6"
+    >
+      <section class="flex flex-col md:col-span-4 h-[300px]">
         <div
           class="qr-code-container w-[230px] aspect-square border-[3px] border-black object-center"
         >
@@ -36,13 +38,16 @@
           />
         </div>
       </section>
-      <section class="col-span-6 h-[300px]">
-        <h1 class="flex text-headline-6 !text-black">
+      <section class="md:col-span-6 md:h-[300px]">
+        <h1 class="flex text-headline-7 font-bold md:text-headline-6 !text-black">
           <span class="mr-2">Pay with</span>
-          <img src="@/assets/images/zalopay.png" class="w-[72px] h-8 translate-y-[2px]" />
+          <img
+            src="@/assets/images/zalopay.png"
+            class="w-[50px] md:w-[72px] h-6 md:h-8 md:translate-y-[2px]"
+          />
           <span>using QR code</span>
         </h1>
-        <div class="flex flex-col mt-10 ml-5 text-[17px]">
+        <div class="flex flex-col mt-5 md:mt-10 ml-5 text-[17px]">
           <span class="font-semibold text-black">Payment Guide</span>
           <ul class="flex flex-col mt-2">
             <li>Step 1: Open <span class="font-semibold">ZaloPay</span> application</li>
@@ -65,7 +70,7 @@ import { Modal, QRCode, StatisticCountdown } from 'ant-design-vue'
 import type { Socket } from 'socket.io-client'
 import { ref } from 'vue'
 
-const open = ref<boolean>(false)
+const open = ref<boolean>(true)
 const zaloResponse = ref<IZaloResopnse>()
 const deadline = Date.now() + 15 * 60 * 1000
 

@@ -1,8 +1,12 @@
 <template>
-  <RouterLink :to="`/blog/${feedId}`" class="group relative shadow-md max-w-[262px] rounded-md" :class="class">
+  <RouterLink
+    :to="`/blog/${feedId}`"
+    class="group relative shadow-md max-w-[262px] rounded-md"
+    :class="class"
+  >
     <div class="flex flex-col gap-6 w-full rounded-md">
       <div class="w-full h-[325px]">
-        <img class="w-full h-[325px] object-cover rounded-t-md" :src="imageUrl" alt="theme blog" />
+        <img class="w-full h-[325px] object-contain rounded-t-md" :src="imageUrl" alt="theme blog" />
         <Button
           v-if="isEdit"
           class="absolute bg-black bottom-2 right-2 hidden shadow-lg z-30 group-hover:block"

@@ -109,12 +109,12 @@ import {
   message
 } from 'ant-design-vue'
 import { uploadVideoUrl } from '@/constants/upload-url'
-import { deleteFile } from '@/services/upload/delete'
 import { getPublicIdFromUrl } from '@/utils'
 import { createReel } from '@/services/news/post'
 import { deleteReel } from '@/services/news/delete'
 import useSWRV from 'swrv'
 import { configSWRV } from '@/config/swrv'
+import { deleteFileV2 } from '@/services/upload/post'
 
 const { shopId } = defineProps<{
   shopId: string
@@ -147,7 +147,7 @@ const handleChange = async (info: UploadChangeParam) => {
   if (info.file.status === 'uploading') {
     loading.value = true
     if (videoState.value.video) {
-      await deleteFile(getPublicIdFromUrl(videoState.value.video))
+      await deleteFileV2(getPublicIdFromUrl(videoState.value.video))
     }
     return
   }

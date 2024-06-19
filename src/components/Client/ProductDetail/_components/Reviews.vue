@@ -1,6 +1,6 @@
 <template>
   <section>
-    <span class="text-headline-6">Customer Reviews</span>
+    <span class="text-headline-7 lg:text-headline-6">Customer Reviews</span>
     <div class="flex gap-2 items-center my-4">
       <Rate
         v-model:value="resultReviewState.medium_star"

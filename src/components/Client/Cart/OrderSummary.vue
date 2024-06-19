@@ -1,6 +1,6 @@
 <template>
   <section
-    class="col-span-4 p-6 pt-3 border-[1px] rounded-md border-neutral-600 max-h-[380px] sticky top-[100px] shadow-lg"
+    class="md:col-span-4 p-6 pt-3 border-[1px] rounded-md border-neutral-600 min-h-[380px] md:max-h-[380px] sticky top-[100px] shadow-lg"
   >
     <span class="text-headline-6">Order summary</span>
     <div class="flex flex-col mt-6">
@@ -15,7 +15,9 @@
         </li>
         <li class="flex items-start justify-between">
           <span class="text-body-2-semibold">Address</span>
-          <span class="max-w-[200px] two-lines-truncate">{{ form.shippingAddress }}</span>
+          <span class="max-w-[180px] md:max-w-[200px] two-lines-truncate">{{
+            form.shippingAddress
+          }}</span>
         </li>
       </ul>
       <span class="h-[1px] w-full bg-slate-300 my-2"></span>

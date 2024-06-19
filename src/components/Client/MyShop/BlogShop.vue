@@ -105,9 +105,8 @@
 
 <script setup lang="ts">
 import BlogItem from '@/components/UI/BlogItem.vue'
-import type { IFeed } from '@/interfaces/news.interface'
 import { getFeedByShop } from '@/services/news/get'
-import { onMounted, ref, h } from 'vue'
+import { ref, h } from 'vue'
 import { PlusCircleOutlined, UploadOutlined } from '@ant-design/icons-vue'
 import {
   Drawer,
@@ -123,12 +122,12 @@ import {
   Image
 } from 'ant-design-vue'
 import { uploadImageUrl } from '@/constants/upload-url'
-import { deleteFile } from '@/services/upload/delete'
 import { getPublicIdFromUrl } from '@/utils'
 import { createFeed } from '@/services/news/post'
 import { deleteFeed } from '@/services/news/delete'
 import useSWRV from 'swrv'
 import { configSWRV } from '@/config/swrv'
+import { deleteFileV2 } from '@/services/upload/post'
 
 const { shopId } = defineProps<{
   shopId: string
@@ -161,7 +160,7 @@ const handleChange = async (info: UploadChangeParam) => {
   if (info.file.status === 'uploading') {
     loading.value = true
     if (feedState.value.thumbnail) {
-      await deleteFile(getPublicIdFromUrl(feedState.value.thumbnail))
+      await deleteFileV2(getPublicIdFromUrl(feedState.value.thumbnail))
     }
     return
   }

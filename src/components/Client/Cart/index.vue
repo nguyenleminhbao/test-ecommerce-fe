@@ -1,12 +1,18 @@
 <template>
   <Form class="max-w-[1120px] mx-auto" :model="form" @finish="onFinish">
-    <div class="w-full max-w-[840px] mx-auto mt-[80px] flex flex-col">
+    <button @click="router.back()" class="flex items-center md:hidden gap-2 pt-3">
+      <ArrowLeftOutlined />Back
+    </button>
+    <div
+      class="w-full max-w-[840px] mx-auto mt-[40px] md:mt-[80px] flex flex-col items-center justify-center"
+    >
       <span class="text-headline-3 text-center" v-if="current == 0">Cart</span>
       <span class="text-headline-3 text-center" v-if="current == 1">Check Out</span>
       <span class="text-headline-3 text-center" v-if="current == 2">Complete!</span>
       <Steps
         :current="current"
-        class="[&_.ant-steps-icon]:!text-white [&_.ant-steps-finish-icon]:!-translate-y-[2px] [&_.ant-steps-finish-icon]:text-[16px] [&_.ant-steps-item-title]:text-body-2-semibold mt-10"
+        :direction="width < 450 ? 'vertical' : 'horizontal'"
+        class="[&_.ant-steps-icon]:!text-white [&_.ant-steps-finish-icon]:!-translate-y-[2px] [&_.ant-steps-finish-icon]:text-[16px] [&_.ant-steps-item-title]:text-body-2-semibold mt-10 ml-[130px] md:ml-0"
         :items="[
           { title: 'Shopping cart' },
           { title: 'Checkout details' },
@@ -15,20 +21,22 @@
       ></Steps>
     </div>
     <div v-if="current == 0" class="w-full h-full">
-      <section class="w-full grid grid-cols-10 mt-[80px] gap-6 mb-10">
+      <section
+        class="w-full grid-cols-1 grid lg:grid-cols-10 mt-10 md:mt-[80px] gap-6 mb-14 md:mb-10"
+      >
         <ShowCart />
         <CartSummary @checkout="stepCheckout" />
       </section>
     </div>
 
     <div v-if="current == 1" class="w-full h-full">
-      <section class="w-full grid grid-cols-10 mt-[80px] gap-6 mb-10">
+      <section class="w-full grid grid-cols-1 md:grid-cols-10 mt-10 md:mt-[80px] gap-6 mb-10">
         <ShowInforOrder :form="form" />
         <OrderSummary @order="stepOrder" :form="form" :isLoading="isLoading" />
       </section>
     </div>
     <div v-if="current == 2" class="w-full h-full">
-      <section class="max-w-[738px] mx-auto mt-[80px] mb-10">
+      <section class="max-w-[738px] mx-auto mt-10 md:mt-[80px] mb-10">
         <OrderComplete v-if="completeOrder" :order="completeOrder" />
       </section>
     </div>
@@ -44,6 +52,7 @@ import OrderSummary from './OrderSummary.vue'
 import OrderComplete from './OrderComplete.vue'
 import ModalPayment from '@/components/UI/ModalPayment.vue'
 import { Steps, message, Form } from 'ant-design-vue'
+import { ArrowLeftOutlined } from '@ant-design/icons-vue'
 import { ref } from 'vue'
 import { useCart } from '@/stores/use-cart'
 import { PAYMENT_TYPE } from '@/constants/enum/payment.enum'
@@ -53,6 +62,8 @@ import { io } from 'socket.io-client'
 import { usePayment } from '@/stores/use-payment'
 import type { IOrder } from '@/interfaces/order.interface'
 import { createOrder } from '@/services/order/post'
+import { useRouter } from 'vue-router'
+import { useWindowSize } from '@vueuse/core'
 
 export type FormOrderType = {
   firstName: string
@@ -63,6 +74,7 @@ export type FormOrderType = {
   bankCode?: string
 }
 
+const router = useRouter()
 const current = ref<number>(0) // set step current
 // const description = 'This is a description.'
 const cartStore = useCart()
@@ -72,6 +84,7 @@ const { setPaymentSession } = usePayment()
 const modalPayment = ref()
 const isLoading = ref<boolean>(false)
 const completeOrder = ref<IOrder>()
+const { width } = useWindowSize()
 
 const form = ref<FormOrderType>({
   firstName: paymentStore.user?.firstName ?? '',
@@ -98,7 +111,7 @@ const stepOrder = async () => {
     form.value.payMethod
   ) {
     // create data order to post server
-    const createData = {
+    let createData = {
       firstName: form.value.firstName,
       lastName: form.value.lastName,
       phoneNumber: form.value.phoneNumber,
@@ -129,20 +142,33 @@ const stepOrder = async () => {
     } else {
       // PAYEMENT ZALOPAY
       if (form.value.payMethod == PAYMENT_TYPE.ZALOPAY) {
+        // setup data for payment QR or payment Zalopay app mobile
+        createData = {
+          ...createData,
+          //bankCode: width.value < 450 ? '' : 'zalopayapp'
+          bankCode: 'zalopayapp'
+        }
         if (paymentStore.paymentSession) {
           modalPayment?.value?.showModal()
           modalPayment?.value?.assignZaloResponse(paymentStore.paymentSession) // cache payment session form pinia
         } else {
           const data = await createOrderZaloPayQR(createData) // create order by pay zalopay
 
-          modalPayment?.value?.showModal()
-          modalPayment?.value?.assignZaloResponse(data.message)
-          setPaymentSession(data.message)
-
           if (data && data.type == 'Error') {
             message.error('Payment failed. Please you check again!')
             isLoading.value = false
           }
+
+          modalPayment?.value?.showModal()
+          modalPayment?.value?.assignZaloResponse(data.message)
+          setPaymentSession(data.message)
+          // if (width.value > 450) {
+          //   modalPayment?.value?.showModal()
+          //   modalPayment?.value?.assignZaloResponse(data.message)
+          //   setPaymentSession(data.message)
+          // } else {
+          //   window.location.href = data.message.orderUrl
+          // }
         }
       }
 

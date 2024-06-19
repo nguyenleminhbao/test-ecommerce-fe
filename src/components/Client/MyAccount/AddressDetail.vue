@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col gap-[19px]">
     <h1 class="text-body-1-semibold">Address</h1>
-    <div class="grid grid-cols-2 gap-[23px]">
+    <div class="grid grid-cols-2 max-lg:grid-cols-1 gap-[23px]">
       <AddressCard
         type="Home"
         name="Sofia Havertz"

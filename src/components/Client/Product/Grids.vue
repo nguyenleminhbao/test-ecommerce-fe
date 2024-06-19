@@ -1,13 +1,20 @@
 <template>
-  <div class="w-[834px] grid gap-[40px] h-fit">
+  <div class="w-full flex flex-col gap-10 max-sm:gap-8 h-fit">
     <div class="flex justify-between items-center">
-      <h1 class="text-body-1-semibold">All Product</h1>
+      <h1 class="text-body-1-semibold">All Products</h1>
       <Dropdown />
     </div>
 
-    <div class="flex flex-col gap-[80px]">
-      <Spin :spinning="!products" size="large" tip="Loading..." />
-      <div v-if="products" class="grid grid-cols-3 gap-6">
+    <div class="flex flex-col gap-20 max-sm:gap-8">
+      <Spin
+        class="[&_.ant-spin-dot-item]:bg-black [&_.ant-spin-dot-item]:text-xl"
+        :spinning="!products"
+        size="large"
+      />
+      <div
+        v-if="products"
+        class="grid grid-cols-4 gap-6 max-[1120px]:grid-cols-3 max-[800px]:grid-cols-2 max-sm:grid-cols-1"
+      >
         <ProdCard v-for="product in products.message" :key="product.id" :product="product" />
       </div>
 

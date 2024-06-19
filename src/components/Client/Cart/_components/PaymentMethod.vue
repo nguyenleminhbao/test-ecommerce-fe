@@ -41,7 +41,7 @@
       ></div>
       <div
         v-if="form.payMethod == PAYMENT_TYPE.CREDIT"
-        class="w-full grid grid-cols-5 gap-4 duration-5ss00 ease-linear"
+        class="w-full grid grid-cols-3 md:grid-cols-5 gap-4 duration-5ss00 ease-linear"
       >
         <div
           class="rounded-md flex flex-col items-center shadow-lg cursor-pointer py-2 max-h-[88px]"

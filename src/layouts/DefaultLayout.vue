@@ -22,7 +22,7 @@ import HeaderMobile from '@/components/common/HeaderMobile.vue'
 import Footer from '@/components/common/Footer.vue'
 
 import { login } from '@/services/auth/post'
-import { onMounted, ref, watch } from 'vue'
+import { onMounted, ref, watch, watchEffect } from 'vue'
 import { useAuth } from 'vue-clerk'
 import { getCart } from '@/services/cart/get'
 import { useCart } from '@/stores/use-cart'

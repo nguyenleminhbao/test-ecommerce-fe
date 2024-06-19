@@ -1,5 +1,5 @@
 <template>
-  <div class="col-span-6 flex flex-col gap-6">
+  <div class="md:col-span-6 flex flex-col gap-6">
     <ContactInfor :form="form" />
     <PaymentMethod :form="form" />
   </div>

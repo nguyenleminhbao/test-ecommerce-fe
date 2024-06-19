@@ -8,12 +8,15 @@
         <span class="text-hairline-1 font-normal two-lines-truncate max-w-[230px]">{{
           cartItem.title
         }}</span>
-        <span class="text-hairline-1 font-medium">{{
+        <span class="hidden md:block text-hairline-1 font-medium">{{
           `đ ${formatNumberWithCommas(cartItem.price)}`
         }}</span>
       </div>
-      <div class="flex justify-between translate-y-1">
+      <div class="flex justify-between items-center translate-y-1">
         <span class="text-neutral-4 font-medium text-[17px]"> {{ `x${cartItem.quantity}` }}</span>
+        <span class="md:hidden text-hairline-1 font-medium">{{
+          `đ ${formatNumberWithCommas(cartItem.price)}`
+        }}</span>
         <Button
           class="border-none shadow-none text-xl hover:bg-red-500 opacity-30 hover:opacity-100"
           type="text"

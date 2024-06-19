@@ -1,5 +1,5 @@
 <template>
-  <section class="w-full grid grid-cols-3 mt-8">
+  <section class="w-full grid grid-cols-1 lg:grid-cols-3 mt-8">
     <div class="flex p-6 col-span-1 bg-slate-200 rounded-md">
       <Image class="!w-[80px] aspect-square rounded-full" :src="shopAvatar" />
       <div class="flex flex-col ml-5 flex-1">
