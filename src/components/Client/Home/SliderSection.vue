@@ -1,5 +1,8 @@
 <template>
-  <div class="max-w-[1120px] mx-auto grid gap-[32px] pb-[40px] overflow-x-hidden">
+  <div
+    class="max-w-[1120px] mx-auto grid gap-[32px] pb-[40px] overflow-x-hidden"
+    style="display: inherit"
+  >
     <Carousel arrows autoplay>
       <template #prevArrow>
         <div class="custom-slick-arrow" style="left: 10px; z-index: 1">

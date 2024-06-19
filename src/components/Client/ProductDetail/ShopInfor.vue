@@ -1,23 +1,22 @@
 <template>
-  <section class="w-full mt-6 grid grid-cols-3 bg-slate-200 shadow-md">
-    <div class="flex p-6 col-span-1 border-r-[1px] border-gray-400">
-      <Image class="!w-[80px] aspect-square rounded-full" :src="shop?.shopAvatar" />
+  <section class="w-full mt-6 grid grid-cols-1 lg:grid-cols-3 bg-slate-200 shadow-md">
+    <div class="flex p-6 col-span-1 border-b-[1px] lg:border-r-[1px] border-gray-400">
+      <Image class="!w-[60px] lg:!w-[80px] aspect-square rounded-full" :src="shop?.shopAvatar" />
       <div class="flex flex-col ml-5 flex-1">
         <span class="text-headline-7">{{ shop?.shopName }}</span>
         <span class="text-neutral-5 text-[12px]">Online 1 hour ago</span>
         <div class="grid grid-cols-2 mt-3 gap-2">
-          <Button class="h-7 bg-slate-200 border-neutral-7 object-center">
-            <template #icon>
-              <WechatOutlined />
-            </template>
+          <Button
+            class="h-7 bg-slate-200 border-neutral-7 object-center"
+            :icon="h(MessageOutlined)"
+          >
             Chat
           </Button>
           <RouterLink :to="`/shop/${shopId}`">
-            <Button class="h-7 bg-primary text-white object-center">
-              <template #icon><ShopOutlined /> </template>
+            <Button class="h-7 w-full bg-primary text-white object-center" :icon="h(ShopOutlined)">
               Shop</Button
-            ></RouterLink
-          >
+            >
+          </RouterLink>
         </div>
       </div>
     </div>
@@ -50,8 +49,8 @@ const { shopId } = defineProps<{
 }>()
 
 import { Image, Button } from 'ant-design-vue'
-import { WechatOutlined, ShopOutlined } from '@ant-design/icons-vue'
-import { onMounted, ref } from 'vue'
+import { MessageOutlined, ShopOutlined } from '@ant-design/icons-vue'
+import { onMounted, ref, h } from 'vue'
 import { getOneShop } from '@/services/shop/get'
 import type { IProduct } from '@/interfaces/product.interface'
 import { getShopProducts } from '@/services/products/get'
@@ -67,9 +66,8 @@ onMounted(async () => {
   shop.value = data.message
 
   const dataProd = await getShopProducts(shopId)
-  products.value = dataProd?.message 
+  products.value = dataProd?.message
 })
 
 const products = ref<IProduct[]>([])
-
 </script>

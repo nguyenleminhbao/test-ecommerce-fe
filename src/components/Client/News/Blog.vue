@@ -9,7 +9,7 @@
       :title="feed.title"
       :date="feed.createdAt"
       :content="feed.content"
-      class=" !max-w-full"
+      class="!max-w-full"
     />
   </div>
   <div class="flex justify-center my-20">

@@ -2,8 +2,8 @@
   <div v-if="isSignedIn" class="max-w-[1120px] mx-auto">
     <h1 class="my-20 text-headline-3 text-center">My Account</h1>
 
-    <section class="w-full flex mb-10">
-      <div class="!bg-neutral-3 rounded-md shadow-md max-h-[390px]">
+    <section class="w-full flex max-sm:flex-col mb-10">
+      <div class="!bg-neutral-3 rounded-md shadow-md max-h-[390px] w-[256px] max-sm:w-full">
         <div class="flex flex-col items-center gap-4 border-[1px] border-b-black p-4 rounded-t-md">
           <ClerkLoading>
             <LoadingOutlined className="h-10 w-10 text-muted-foreground animate-spin" />
@@ -17,13 +17,12 @@
         <Menu
           v-model:selectedKeys="current"
           class="bg-neutral-3 [&_.ant-menu-title-content]:text-body-2"
-          style="width: 256px"
           mode="vertical"
           :items="items"
           @click="handleClick"
         />
       </div>
-      <div class="flex-1 pl-[72px] h-full">
+      <div class="flex-1 md:pl-[64px] max-sm:pt-8 h-full">
         <AccountDetail v-if="keyPage == 0" />
         <AddressDetail v-if="keyPage == 1" />
         <OrderDetail v-if="keyPage == 2" />

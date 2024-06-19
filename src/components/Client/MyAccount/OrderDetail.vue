@@ -4,6 +4,7 @@
     :columns="columns"
     :data-source="orders"
     class="w-full border-[1px] border-black rounded-lg"
+    :scroll="{ x: 400 }"
   >
     <template #bodyCell="{ column, record }">
       <template v-if="column.dataIndex === 'id'">
@@ -42,7 +43,8 @@ const columns = [
   {
     title: 'Order Id',
     dataIndex: 'id',
-    key: 'id'
+    key: 'id',
+    ellipsis: true
   },
   {
     title: 'Date',
@@ -58,8 +60,7 @@ const columns = [
   {
     title: 'Price',
     dataIndex: 'amount',
-    key: 'amount',
-    ellipsis: true
+    key: 'amount'
   }
 ]
 

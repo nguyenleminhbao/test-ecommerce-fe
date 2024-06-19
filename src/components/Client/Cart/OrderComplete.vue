@@ -47,12 +47,14 @@
         </div>
       </template>
       <template #extra class="gap-4">
-        <Button key="buy" class="w-[150px] h-10">Buy Again</Button>
-        <RouterLink to="/my-account?keyPage=2">
-          <Button key="console" class="!bg-neutral-7 w-[150px] h-10 font-semibold" type="primary"
-            >Go to My order</Button
-          ></RouterLink
-        >
+        <div class="flex flex-col md:flex-row gap-3 items-center justify-center">
+          <Button key="buy" class="w-[150px] h-10">Buy Again</Button>
+          <RouterLink to="/my-account?keyPage=2">
+            <Button key="console" class="!bg-neutral-7 w-[150px] h-10 font-semibold" type="primary"
+              >Go to My order</Button
+            ></RouterLink
+          >
+        </div>
       </template>
     </Result>
   </section>

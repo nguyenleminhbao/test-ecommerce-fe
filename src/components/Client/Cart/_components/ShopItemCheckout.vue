@@ -4,7 +4,7 @@
       <span class="text-body-1-semibold ml-6">{{ shopName }}</span>
     </div>
     <div class="h-[1px] w-full bg-gray-400 my-4"></div>
-    <ul class="flex flex-col w-full gap-3">
+    <ul class="flex flex-col w-full gap-5 md:gap-3">
       <CartItemCheckout
         v-for="cartItem in cartItems"
         :cart-item="cartItem"

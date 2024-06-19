@@ -1,6 +1,6 @@
 <template>
   <section class="w-full flex flex-col">
-    <div class="w-full mt-5 grid grid-cols-4 gap-6">
+    <div class="w-full mt-5 grid grid-cols-4 gap-6 max-[1120px]:grid-cols-3 max-[800px]:grid-cols-2 max-sm:grid-cols-1">
       <CardItem
         v-for="product in products.slice((currentPage - 1) * 12, currentPage * 12)"
         :key="product.id"

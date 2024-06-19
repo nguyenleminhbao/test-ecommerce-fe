@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-[4fr_6fr] gap-16">
+  <div class="grid grid-cols-1 lg:grid-cols-[4fr_6fr] gap-7 lg:gap-16">
     <div class="flex flex-col gap-6">
       <ProductImage :images="product.images" :primary-image="variant.variant_image" />
     </div>
@@ -29,10 +29,12 @@
           </Button>
         </div>
 
-        <span class="text-headline-4 mt-4">{{ product.title }}</span>
+        <span class="text-headline-6 lg:text-headline-4 mt-4">{{ product.title }}</span>
         <div class="flex items-center mt-4">
-          <span class="text-headline-6">₫{{ formatNumberWithCommas(variant.price) }}</span>
-          <span class="line-through text-neutral-4 ml-3 text-headline-7"
+          <span class="text-headline-7 lg:text-headline-6"
+            >₫{{ formatNumberWithCommas(variant.price) }}</span
+          >
+          <span class="line-through text-neutral-4 ml-3 lg:text-headline-7 text-[16px] font-medium"
             >₫{{ formatNumberWithCommas(variant.price) }}</span
           >
         </div>

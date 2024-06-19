@@ -1,6 +1,8 @@
 <template>
-  <section class="col-span-7 flex flex-col gap-4">
-    <div class="w-full flex justify-between items-center bg-slate-300 shadow-md p-3 rounded-lg">
+  <section class="md:col-span-7 flex flex-col gap-4">
+    <div
+      class="hidden md:flex w-full justify-between items-center bg-slate-300 shadow-md p-3 rounded-lg"
+    >
       <div class="w-[350px]">
         <span class="text-body-2-semibold ml-6">Product</span>
       </div>

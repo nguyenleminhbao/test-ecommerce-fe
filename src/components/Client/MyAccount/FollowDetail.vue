@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col gap-[19px]">
-    <Table :loading="loading" :columns="columns" :data-source="products" :scroll="{ y: 500 }">
+    <Table :loading="loading" :columns="columns" :data-source="products" :scroll="{ x: 500, y: 500 }">
       <template #bodyCell="{ column, text, record }">
         <template v-if="column.dataIndex === 'shop'">
           <div class="flex gap-[10px] items-center">
@@ -43,7 +43,7 @@ const loading = ref(false)
 const columns = [
   { title: 'Shop', dataIndex: 'shop', width: '50%' },
   { title: 'Product', dataIndex: 'product' },
-  { title: 'Following', dataIndex: 'following' }
+  { title: 'Following', dataIndex: 'following', width: '30%' }
 ]
 
 interface DataItem {
