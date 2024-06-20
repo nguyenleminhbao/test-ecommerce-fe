@@ -119,7 +119,9 @@
           </div>
 
           <div class="flex flex-col gap-[2px]">
-            <ShareAltOutlined class="text-[36px] text-neutral-3 cursor-pointer" />
+            <s-microsoft-teams :share-options="shareOptions" :use-native-behavior="false">
+              <ShareAltOutlined class="text-[36px] text-neutral-3 cursor-pointer" />
+            </s-microsoft-teams>
             <span class="text-body-2-bold text-neutral-3 uppercase">1.3M</span>
           </div>
         </div>
@@ -190,6 +192,7 @@ import {
 import { computed, onMounted, ref } from 'vue'
 import { useMediaControls, useEventListener } from '@vueuse/core'
 import { useAuth } from 'vue-clerk'
+import { SMicrosoftTeams } from 'vue-socials'
 
 const { reel } = defineProps<{
   reel: IReel
@@ -247,6 +250,16 @@ useEventListener(element, 'keypress', (e) => {
     sendComment()
   }
 })
+
+import { useRoute, useRouter } from 'vue-router'
+const route = useRoute()
+const shareOptions = {
+  url: import.meta.env.VITE_FRONTEND_URL + route.fullPath,
+  preview: true,
+  text: reel.description,
+  title: reel.title,
+  instruction: 'Instruction'
+}
 </script>
 
 <style scoped>

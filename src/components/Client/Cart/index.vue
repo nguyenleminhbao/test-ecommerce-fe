@@ -145,7 +145,8 @@ const stepOrder = async () => {
         // setup data for payment QR or payment Zalopay app mobile
         createData = {
           ...createData,
-          bankCode: width.value < 450 ? '' : 'zalopayapp'
+          //bankCode: width.value < 450 ? '' : 'zalopayapp'
+          bankCode: 'zalopayapp'
         }
         if (paymentStore.paymentSession) {
           modalPayment?.value?.showModal()
@@ -158,13 +159,16 @@ const stepOrder = async () => {
             isLoading.value = false
           }
 
-          if (width.value > 450) {
-            modalPayment?.value?.showModal()
-            modalPayment?.value?.assignZaloResponse(data.message)
-            setPaymentSession(data.message)
-          } else {
-            window.location.href = data.message.orderUrl
-          }
+          modalPayment?.value?.showModal()
+          modalPayment?.value?.assignZaloResponse(data.message)
+          setPaymentSession(data.message)
+          // if (width.value > 450) {
+          //   modalPayment?.value?.showModal()
+          //   modalPayment?.value?.assignZaloResponse(data.message)
+          //   setPaymentSession(data.message)
+          // } else {
+          //   window.location.href = data.message.orderUrl
+          // }
         }
       }
 

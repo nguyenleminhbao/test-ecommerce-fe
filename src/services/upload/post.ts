@@ -68,3 +68,15 @@ export const updateFeed = async (_data: UpdateFeedType) => {
     throw err
   }
 }
+
+export const deleteFileV2 = async (publicId: string) => {
+  try {
+    console.log('id', publicId)
+    const { data } = await axiosInstance.post<IResponse<string>>('/upload/delete-file-v2', {
+      publicId
+    })
+    return data
+  } catch (err) {
+    throw err
+  }
+}

@@ -1,10 +1,27 @@
 <template>
   <div v-if="isSignedIn" class="max-w-[1120px] mx-auto">
-    <h1 class="my-20 text-headline-3 text-center">My Account</h1>
+    <h1 class="hidden md:block my-20 text-headline-3 text-center">My Account</h1>
+    <button @click="router.back()" class="flex items-center md:hidden gap-2 pt-3">
+      <ArrowLeftOutlined />Back
+    </button>
+    <div class="md:hidden flex justify-center flex-col items-center gap-3 mb-5">
+      <span class="font-bold text-xl">My Account</span>
+      <div class="flex flex-col items-center gap-3">
+        <ClerkLoading>
+          <LoadingOutlined className="h-10 w-10 text-muted-foreground animate-spin" />
+        </ClerkLoading>
+        <ClerkLoaded>
+          <Image :src="user?.imageUrl" class="!w-[80px] !h-[80px] rounded-full" />
+          <span class="text-body-2-semibold"> {{ user?.fullName }}</span>
+        </ClerkLoaded>
+      </div>
+    </div>
 
     <section class="w-full flex max-sm:flex-col mb-10">
       <div class="!bg-neutral-3 rounded-md shadow-md max-h-[390px] w-[256px] max-sm:w-full">
-        <div class="flex flex-col items-center gap-4 border-[1px] border-b-black p-4 rounded-t-md">
+        <div
+          class="hidden md:flex flex-col items-center gap-4 border-[1px] border-b-black p-4 rounded-t-md"
+        >
           <ClerkLoading>
             <LoadingOutlined className="h-10 w-10 text-muted-foreground animate-spin" />
           </ClerkLoading>
@@ -43,7 +60,8 @@ import {
   UserOutlined,
   PlusCircleOutlined,
   LoginOutlined,
-  LoadingOutlined
+  LoadingOutlined,
+  ArrowLeftOutlined
 } from '@ant-design/icons-vue'
 import { useAuth, useUser, ClerkLoaded, ClerkLoading, useClerk } from 'vue-clerk'
 import type { MenuProps } from 'ant-design-vue'

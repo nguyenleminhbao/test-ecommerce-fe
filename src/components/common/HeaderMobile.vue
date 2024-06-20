@@ -15,11 +15,7 @@
 
       <div class="flex gap-4 items-center text-[24px]">
         <div class="flex items-center gap-3">
-          <Tooltip placement="bottom">
-            <template #title>Cart</template
-            ><span @click="showCart" class="object-center cursor-pointer">
-              <ShoppingOutlined /> </span
-          ></Tooltip>
+          <span @click="showCart" class="object-center cursor-pointer"> <ShoppingOutlined /> </span>
           <span class="object-center cursor-pointer"> <BellOutlined /> </span>
         </div>
       </div>

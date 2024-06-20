@@ -19,7 +19,11 @@
               @click="removeItem(cartItem.variantId)"
               ><CloseOutlined
             /></Button>
-            <Checkbox v-model:checked="isChecked" class="mr-3" @change="selectCartItem" />
+            <Checkbox
+              v-model:checked="isChecked"
+              class="mr-3 [&_.ant-checkbox-inner]:w-5 [&_.ant-checkbox-inner]:h-5"
+              @change="selectCartItem"
+            />
           </div>
           <Button
             class="btnDelete border-none shadow-none text-xl hover:bg-red-500 opacity-30 hover:opacity-100 max-w-[20px]"
