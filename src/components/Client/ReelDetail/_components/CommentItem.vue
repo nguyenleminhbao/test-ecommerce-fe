@@ -8,8 +8,8 @@
       </a>
 
       <div class="flex-auto">
-        <a class="text-body-2-semibold" href="/user">{{ userName }}</a>
-        <p class="CommentText">{{ desc }}</p>
+        <a class="text-body-2-semibold text-neutral-7" href="/user">{{ userName }}</a>
+        <p class="CommentText text-neutral-7">{{ desc }}</p>
         <!-- <p class="text-body-2 text-neutral-4">
             <span class="SpanCreatedTime">{{ createAt }}</span>
             <span role="button" class="SpanReplyButton">Reply</span>

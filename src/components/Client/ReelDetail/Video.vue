@@ -33,7 +33,7 @@
         </div>
       </div>
 
-      <div class="VideoControlContainer">
+      <div class="VideoControlContainer max-sm:!w-full">
         <div class="SeekBarContainer">
           <VideoSlider v-model="currentTime" :max="duration" :secondary="endBuffer" class="mt-2">
             <template #default="{ position, pendingValue }">
@@ -49,7 +49,7 @@
           <!-- <div :class="`SeekBarCircle left-[calc(${currentTime}%)]`"></div>
           <div :class="`SeekBar -translate-y-2/4 scale-x-[${currentTime}/100]`"></div> -->
         </div>
-        <div class="SeekBarTimeContainer">
+        <div class="SeekBarTimeContainer max-sm:hidden">
           {{ formatDuration(currentTime) }}/{{ formatDuration(duration) }}
         </div>
       </div>
@@ -95,17 +95,70 @@
 
     <!-- Button Reaction ---------------------------------------------------------------------------->
     <div>
-      <div class="sm:hidden absolute z-10 top-1/2 right-5">
-        <RouterLink :to="`/shop/${shopId}`">
-          <img
-            class="w-10 h-10 rounded-full ring-2 ring-white"
-            :src="avatarUrl"
-            alt="Bordered avatar"
-          />
-          <PlusCircleFilled class="absolute text-secondary-red left-[calc(1/2+)] bottom-0" />
-        </RouterLink>
+      <div class="sm:hidden absolute z-10 bottom-20 right-5">
+        <div class="flex flex-col gap-6">
+          <RouterLink class="relative" :to="`/shop/${reel.shop.id}`">
+            <img
+              class="w-10 h-10 aspect-square rounded-full ring-2 ring-white"
+              :src="reel.shop.shopAvatar"
+              alt="Bordered avatar"
+            />
+            <PlusCircleFilled
+              class="absolute text-secondary-red left-[calc(50%_-_15px_/_2)] -bottom-[7.5px]"
+            />
+          </RouterLink>
+
+          <div class="flex flex-col gap-[2px]">
+            <HeartFilled class="text-[36px] text-neutral-3 cursor-pointer" />
+            <span class="text-body-2-bold text-neutral-3 uppercase">1.3M</span>
+          </div>
+
+          <div class="flex flex-col gap-[2px]">
+            <MessageFilled @click="showDrawer" class="text-[36px] text-neutral-3 cursor-pointer" />
+            <span class="text-body-2-bold text-neutral-3 uppercase">1.3M</span>
+          </div>
+
+          <div class="flex flex-col gap-[2px]">
+            <ShareAltOutlined class="text-[36px] text-neutral-3 cursor-pointer" />
+            <span class="text-body-2-bold text-neutral-3 uppercase">1.3M</span>
+          </div>
+        </div>
       </div>
     </div>
+
+    <Drawer
+      v-model:open="open"
+      class="custom-class"
+      root-class-name="root-class-name"
+      :root-style="{ color: 'blue' }"
+      style="color: red"
+      title="Comment"
+      placement="bottom"
+      height="70%"
+      @after-open-change="afterOpenChange"
+    >
+      <div v-if="isSignedIn" class="w-full rounded-lg border-gray-600 border-[1px] sticky bottom-0 mb-6">
+        <input
+          class="w-full rounded-lg border-gray-600 h-[50px] pl-3"
+          placeholder="Enter comment here"
+          v-model="content"
+          ref="element"
+        />
+        <Button
+          class="absolute right-3 translate-y-[28%] bg-primary text-white rounded-2xl w-[120px]"
+          @click="sendComment"
+          >Send</Button
+        >
+      </div>
+
+      <CommentItem
+        v-for="(comment, index) in comments"
+        :key="index"
+        :avatarUrl="comment.user.avatar"
+        :userName="comment.user.name"
+        :desc="comment.content"
+      />
+    </Drawer>
   </div>
 </template>
 
@@ -113,23 +166,36 @@
 import VolumeSlider from './_components/VolumeSlider.vue'
 import VideoSlider from './_components/VideoSlider.vue'
 import BlurBg from './_components/BlurBg.vue'
+import CommentItem from './_components/CommentItem.vue'
+import type { IReel } from '@/interfaces/news.interface'
+import type { IComment } from '@/interfaces/comment.interface'
+import { TYPE_COMMENT } from '@/constants/enum/comment.enum'
+import { createComment } from '@/services/comment/post'
+import { getCommentByEtag } from '@/services/comment/get'
 
-import { Spin } from 'ant-design-vue'
+import { Spin, Drawer, Button } from 'ant-design-vue'
 import {
   CaretRightFilled,
   CloseOutlined,
   UpOutlined,
   DownOutlined,
-  PlusCircleFilled
+  PlusCircleFilled,
+  HeartFilled,
+  MessageFilled,
+  ShareAltOutlined
 } from '@ant-design/icons-vue'
 import { computed, onMounted, ref } from 'vue'
-import { useMediaControls } from '@vueuse/core'
+import { useMediaControls, useEventListener } from '@vueuse/core'
+import { useAuth } from 'vue-clerk'
 
-const { videoUrl, shopId, avatarUrl } = defineProps<{
-  shopId: string
-  videoUrl: string
-  avatarUrl: string
+const { reel } = defineProps<{
+  reel: IReel
 }>()
+const comments = ref<IComment[]>(reel.comments)
+const content = ref<string>('')
+
+const { isSignedIn } = useAuth()
+const element = ref<HTMLDivElement>()
 
 const showVideoControl = ref()
 const showVolumeControl = ref()
@@ -141,13 +207,43 @@ const endBuffer = computed(() =>
 const { playing, waiting, currentTime, duration, volume, muted, buffered } = useMediaControls(
   video,
   {
-    src: videoUrl
+    src: reel.video
   }
 )
 
 function formatDuration(seconds: number) {
   return new Date(1000 * seconds).toISOString().slice(14, 19)
 }
+
+const open = ref<boolean>(false)
+
+const afterOpenChange = (bool: boolean) => {
+  console.log('open', bool)
+}
+
+const showDrawer = () => {
+  open.value = true
+}
+
+const sendComment = async () => {
+  if (!content.value) return
+  const dataComment = {
+    content: content.value,
+    typeComment: TYPE_COMMENT.REEL,
+    etag: reel.id
+  }
+  content.value = ''
+  await createComment(dataComment)
+  const data = await getCommentByEtag(reel.id)
+  comments.value = data.message
+}
+
+useEventListener(element, 'keypress', (e) => {
+  if (e.key === 'Enter') {
+    e.preventDefault()
+    sendComment()
+  }
+})
 </script>
 
 <style scoped>
