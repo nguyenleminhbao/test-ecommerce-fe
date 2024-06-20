@@ -53,7 +53,12 @@
             </button>
 
             <!-- Share ---------------------------------------------------------------------------->
-            <button type="button" class="ButtonActionItem ml-5">
+            <button
+              type="button"
+              class="ButtonActionItem ml-5"
+              :disabled="!isSupported"
+              @click="startShare"
+            >
               <span class="SpanIconWrapper">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -80,7 +85,11 @@
 <script setup lang="ts">
 import { formatDateText } from '@/utils'
 import { HeartFilled } from '@ant-design/icons-vue'
+import { ref } from 'vue'
+import { isClient } from '@vueuse/shared'
+import { useShare } from '@vueuse/core'
 
+const { share, isSupported } = useShare()
 const { shopId, shopName, shopAvatar, createdAt, description } = defineProps<{
   shopId: string
   shopName: string
@@ -88,6 +97,14 @@ const { shopId, shopName, shopAvatar, createdAt, description } = defineProps<{
   createdAt: string
   description: string
 }>()
+
+function startShare() {
+  return share({
+    title: 'Shopo Reel',
+    text: 'Have fun',
+    url: isClient ? location.href : ''
+  }).catch((err) => err)
+}
 </script>
 
 <style scoped>

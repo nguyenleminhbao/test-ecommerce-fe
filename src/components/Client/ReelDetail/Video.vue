@@ -137,7 +137,10 @@
       height="70%"
       @after-open-change="afterOpenChange"
     >
-      <div v-if="isSignedIn" class="w-full rounded-lg border-gray-600 border-[1px] sticky bottom-0 mb-6">
+      <div
+        v-if="isSignedIn"
+        class="w-full rounded-lg border-gray-600 border-[1px] sticky bottom-0 mb-6"
+      >
         <input
           class="w-full rounded-lg border-gray-600 h-[50px] pl-3"
           placeholder="Enter comment here"

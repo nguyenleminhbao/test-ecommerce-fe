@@ -111,8 +111,8 @@ import { useShare } from '@vueuse/core'
 import { useAuth, useClerk } from 'vue-clerk'
 
 const options = ref({
-  title: 'VueUse',
-  text: 'Collection of essential Vue Composition Utilities!',
+  title: 'Shopo Product',
+  text: 'Buy now!',
   url: isClient ? location.href : ''
 })
 const { share, isSupported } = useShare(options)
