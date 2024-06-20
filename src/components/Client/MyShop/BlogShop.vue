@@ -11,7 +11,7 @@
       </Button>
     </div>
 
-    <div class="grid grid-cols-3 gap-x-[25px] gap-y-10 mt-5" v-if="feeds">
+    <div class="grid grid-cols-4 gap-x-[25px] gap-y-10 mt-5" v-if="feeds">
       <BlogItem
         v-for="(feed, index) in feeds.message.slice((currentPage - 1) * 12, currentPage * 12)"
         :key="index"
