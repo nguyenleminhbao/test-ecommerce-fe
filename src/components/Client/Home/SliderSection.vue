@@ -15,7 +15,7 @@
         </div>
       </template>
       <div v-if="banners" v-for="(banner, index) in banners.message" :key="index">
-        <img class="w-full h-[500px] object-cover" :src="banner" alt="temp" />
+        <img class="w-full aspect-[1120/536] object-cover" :src="banner" alt="temp" />
       </div>
     </Carousel>
   </div>

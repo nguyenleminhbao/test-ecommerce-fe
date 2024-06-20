@@ -1,6 +1,6 @@
 <template>
   <div class="w-full mt-8">
-    <Carousel arrows autoplay>
+    <Carousel arrows autoplay style="display: inherit">
       <template #prevArrow>
         <div class="custom-slick-arrow" style="left: 10px; z-index: 1">
           <left-circle-outlined />
@@ -12,8 +12,8 @@
         </div>
       </template>
 
-      <div class="w-full !h-[500px]" v-for="(banner, index) in shopBanners" :key="index">
-        <img :src="banner" class="w-full h-full object-cover" alt="banner" />
+      <div v-for="(banner, index) in shopBanners" :key="index">
+        <img :src="banner" class="w-full h-full object-cover aspect-[1120/536]" alt="banner" />
       </div>
     </Carousel>
   </div>

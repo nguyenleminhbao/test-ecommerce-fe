@@ -2,11 +2,13 @@ export const banks: {
   label: string
   image: string
   bankCode?: string | undefined
+  url?: string
 }[] = [
   {
     label: 'Vietcombank',
     image: 'vcb.png',
-    bankCode: 'VCB'
+    bankCode: 'VCB',
+    url: ''
   },
   {
     label: 'ACB',

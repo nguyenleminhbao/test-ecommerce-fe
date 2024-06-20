@@ -24,7 +24,11 @@
               class="h-full w-full"
             />
 
-            <Spin :spinning="waiting" class="StyledPlayIcon [&_.ant-spin-dot-item]:bg-black" size="large" />
+            <Spin
+              :spinning="waiting"
+              class="StyledPlayIcon [&_.ant-spin-dot-item]:bg-black"
+              size="large"
+            />
           </div>
         </div>
       </div>
@@ -61,7 +65,7 @@
 
     <!-- Volum Button ---------------------------------------------------------------------------->
     <div
-      class="VoiceControlContainer"
+      class="VoiceControlContainer max-sm:hidden"
       @mouseover="showVolumeControl = true"
       @mouseout="showVolumeControl = false"
     >
@@ -88,6 +92,20 @@
     <!-- <button role="button" class="StyledVideoSwitch top-[calc(50%_+_8px)]">
       <DownOutlined class="text-[26px] text-white" />
     </button> -->
+
+    <!-- Button Reaction ---------------------------------------------------------------------------->
+    <div>
+      <div class="sm:hidden absolute z-10 top-1/2 right-5">
+        <RouterLink :to="`/shop/${shopId}`">
+          <img
+            class="w-10 h-10 rounded-full ring-2 ring-white"
+            :src="avatarUrl"
+            alt="Bordered avatar"
+          />
+          <PlusCircleFilled class="absolute text-secondary-red left-[calc(1/2+)] bottom-0" />
+        </RouterLink>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -97,12 +115,20 @@ import VideoSlider from './_components/VideoSlider.vue'
 import BlurBg from './_components/BlurBg.vue'
 
 import { Spin } from 'ant-design-vue'
-import { CaretRightFilled, CloseOutlined, UpOutlined, DownOutlined } from '@ant-design/icons-vue'
+import {
+  CaretRightFilled,
+  CloseOutlined,
+  UpOutlined,
+  DownOutlined,
+  PlusCircleFilled
+} from '@ant-design/icons-vue'
 import { computed, onMounted, ref } from 'vue'
 import { useMediaControls } from '@vueuse/core'
 
-const { videoUrl } = defineProps<{
+const { videoUrl, shopId, avatarUrl } = defineProps<{
+  shopId: string
   videoUrl: string
+  avatarUrl: string
 }>()
 
 const showVideoControl = ref()
