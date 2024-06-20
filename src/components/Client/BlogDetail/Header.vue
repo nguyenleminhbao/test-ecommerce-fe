@@ -1,8 +1,8 @@
 <template>
   <div class="flex flex-col gap-14">
     <Breadcrumb separator=">" class="text-button-xs">
-      <BreadcrumbItem href="/">Home</BreadcrumbItem>
-      <BreadcrumbItem href="/news">News</BreadcrumbItem>
+      <BreadcrumbItem><a href="/">Home</a></BreadcrumbItem>
+      <BreadcrumbItem><a href="/news">News</a></BreadcrumbItem>
       <BreadcrumbItem>Blog</BreadcrumbItem>
       <BreadcrumbItem>{{ feed.title }}</BreadcrumbItem>
     </Breadcrumb>

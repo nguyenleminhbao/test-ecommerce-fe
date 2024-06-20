@@ -1,6 +1,6 @@
 <template>
   <section class="w-full flex flex-col" v-if="feeds">
-    <div class="grid grid-cols-3 gap-x-[25px] gap-y-10 mt-5">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-[25px] gap-y-10 mt-5">
       <BlogItem
         v-for="(feed, index) in feeds.message.slice((currentPage - 1) * 12, currentPage * 12)"
         :key="index"
@@ -9,6 +9,7 @@
         :imageUrl="feed.thumbnail"
         :date="feed.createdAt"
         :content="feed.content"
+        class="!max-w-full"
       />
     </div>
     <div class="flex justify-center my-20">
