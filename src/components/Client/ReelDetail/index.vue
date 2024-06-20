@@ -1,6 +1,6 @@
 <template>
   <div class="BrowserModeContainer" v-if="reel">
-    <Video class="VideoContainer" :videoUrl="reel.video" />
+    <Video class="VideoContainer" :videoUrl="reel.video" :shopId="reel.shop.id" :avatarUrl="reel.shop.shopAvatar" />
     <Content class="ContentContainer" :reel="reel" />
   </div>
 </template>

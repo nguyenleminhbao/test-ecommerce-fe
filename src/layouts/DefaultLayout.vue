@@ -2,7 +2,7 @@
   <div class="overflow-x-hidden">
     <Header />
     <HeaderMobile />
-    <div class="px-4 md:px-6 lg:px-0 scrollbar-hide">
+    <div class="px-4 md:px-6 lg:px-0 scrollbar-hide mt-[60px] md:mt-0">
       <Skeleton
         class="max-w-[1120px] mx-auto"
         :paragraph="{

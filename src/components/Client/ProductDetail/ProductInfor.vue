@@ -68,14 +68,13 @@
       </div>
 
       <div class="mt-6 grid grid-cols-2 gap-3 w-full">
-        <Button
-          class="h-11 border-neutral-7 object-center text-[18px]"
-          :disabled="!isSupported"
-          @click="prodShare"
-          :icon="h(ShareAltOutlined)"
+        <s-microsoft-teams
+          class="h-11 border-neutral-7 object-center text-[18px] border-[1px] rounded-md"
+          :share-options="shareOptions"
+          :use-native-behavior="false"
         >
-          {{ isSupported ? 'Share' : 'Web share is not supported in your browser' }}
-        </Button>
+          <ShareAltOutlined class="mr-2" /> Share
+        </s-microsoft-teams>
 
         <Button
           class="h-11 bg-primary text-white text-[18px] object-center"
@@ -106,19 +105,8 @@ import { useRoute, useRouter } from 'vue-router'
 import { formatNumberWithCommas, dynamicQuery, findVariant } from '@/utils'
 import { useCart } from '@/stores/use-cart'
 import { addToCart } from '@/services/cart/post'
-import { isClient } from '@vueuse/shared'
-import { useShare } from '@vueuse/core'
+import { SMicrosoftTeams } from 'vue-socials'
 import { useAuth, useClerk } from 'vue-clerk'
-
-const options = ref({
-  title: 'VueUse',
-  text: 'Collection of essential Vue Composition Utilities!',
-  url: isClient ? location.href : ''
-})
-const { share, isSupported } = useShare(options)
-function prodShare() {
-  return share().catch((err) => err)
-}
 
 const { product } = defineProps<{
   product: IProduct
@@ -132,6 +120,14 @@ const qty = ref<number>(1)
 const variant = ref<IVariant>(
   product.variants.find((variant) => variant.position == (route.query['position'] ?? 2)) as IVariant
 )
+
+const shareOptions = {
+  url: import.meta.env.VITE_FRONTEND_URL + route.fullPath,
+  preview: true,
+  text: product.body_html,
+  title: product.title,
+  instruction: 'Instruction'
+}
 
 const resultReviewState = ref<{
   review_len: number

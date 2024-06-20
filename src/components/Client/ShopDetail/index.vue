@@ -7,6 +7,7 @@
     <Tabs
       v-model:activeKey="activeKey"
       class="mt-20 [&_.ant-tabs-tab-btn]:flex [&_.ant-tabs-tab-btn]:items-center"
+      @change="onChange"
     >
       <TabPane key="1">
         <template #tab>
@@ -48,14 +49,31 @@ import ShopReel from './ShopReel.vue'
 
 import type { IShop } from '@/interfaces/shop.interface'
 import { onMounted, ref } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { getOneShop } from '@/services/shop/get'
 import { Tabs, TabPane } from 'ant-design-vue'
 import { AppstoreOutlined, FileOutlined, MobileOutlined } from '@ant-design/icons-vue'
 
 const route = useRoute()
+const router = useRouter()
 const shop = ref<IShop>()
-const activeKey = ref('1')
+
+const findTab = (tab: string) => {
+  if (tab == 'Product') return '1'
+  else if (tab == 'Blog') return '2'
+  else if (tab == 'Reel') return '3'
+  else return '1'
+}
+
+const activeKey = ref(findTab(route.query.tab as string) ?? '1')
+
+const onChange = () => {
+  // // dynamic query product
+  router.push({
+    path: route.path,
+    query: { tab: activeKey.value == '1' ? 'Product' : activeKey.value == '2' ? 'Blog' : 'Reel' }
+  })
+}
 
 onMounted(async () => {
   const data = await getOneShop(route.params.shopId as string)

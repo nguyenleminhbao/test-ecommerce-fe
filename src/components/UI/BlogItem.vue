@@ -1,12 +1,16 @@
 <template>
   <RouterLink
     :to="`/blog/${feedId}`"
-    class="group relative shadow-md max-w-[262px] rounded-md"
+    class="group relative shadow-md min-w-[262px] rounded-md"
     :class="class"
   >
-    <div class="flex flex-col gap-6 w-full rounded-md">
-      <div class="w-full h-[325px]">
-        <img class="w-full h-[325px] object-contain rounded-t-md" :src="imageUrl" alt="theme blog" />
+    <div class="flex flex-col w-full rounded-md">
+      <div class="w-full rounded">
+        <img
+          class="w-full aspect-[357/325] object-cover rounded-t"
+          :src="imageUrl"
+          alt="theme blog"
+        />
         <Button
           v-if="isEdit"
           class="absolute bg-black bottom-2 right-2 hidden shadow-lg z-30 group-hover:block"
@@ -16,7 +20,7 @@
         >
       </div>
       <div class="flex flex-col gap-2 p-4 bg-gray-200 rounded-b-md">
-        <h3 class="pt-3 text-headline-7 text-neutral-7">{{ title }}</h3>
+        <h3 class="text-headline-7 text-neutral-7">{{ title }}</h3>
         <p class="text-neutral-4 text-[14px] leading-[24px]">{{ formatDateText(date) }}</p>
       </div>
     </div>

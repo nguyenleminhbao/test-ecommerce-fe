@@ -1,9 +1,9 @@
 <template>
-  <div class="grid gap-[48px] pt-[48px] max-w-[1120px] mx-auto">
+  <div class="grid gap-[48px] pt-[48px] max-w-[1120px] mx-auto" v-if="reels">
     <span class="text-headline-3 text-center">Reel </span>
     <div class="flex w-full overflow-x-auto items-start gap-[24px] scrollbar-hide relative">
       <ReelItem
-        v-for="(reel, index) in reels"
+        v-for="(reel, index) in reels.message"
         :key="index"
         :reelId="reel.id"
         :video-url="reel.video"
@@ -20,18 +20,13 @@
 
 <script setup lang="ts">
 import ReelItem from '@/components/UI/ReelItem.vue'
-import type { IReel } from '@/interfaces/news.interface'
+import { configSWRV } from '@/config/swrv'
 import { getReelByShop } from '@/services/news/get'
 import { RightCircleFilled } from '@ant-design/icons-vue'
-import { onMounted, ref } from 'vue'
+import useSWRV from 'swrv'
 
 const { shopId } = defineProps<{
   shopId: string
 }>()
-const reels = ref<IReel[]>([])
-
-onMounted(async () => {
-  const data = await getReelByShop(shopId)
-  reels.value = data.message
-})
+const { data: reels } = useSWRV(`/news/reel/shop/${shopId}`, getReelByShop, configSWRV)
 </script>

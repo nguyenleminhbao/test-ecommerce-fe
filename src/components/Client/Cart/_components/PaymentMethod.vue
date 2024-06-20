@@ -50,11 +50,11 @@
           @click="selectBank(index)"
         >
           <img
-            :src="'../src/assets/images/' + bank.image"
+            :src="width < 450 ? bank.url : '../src/assets/images/' + bank.image"
             class="w-[50px] aspect-square object-contain"
           />
 
-          <span class="font-semibold">{{ bank.label }}</span>
+          <span class="font-semibold text-[12px] md:text-[15px]">{{ bank.label }}</span>
         </div>
       </div>
     </div>
@@ -67,11 +67,13 @@ import { computed, ref, watch, watchEffect } from 'vue'
 import { banks } from '@/constants/bank'
 import type { FormOrderType } from '../index.vue'
 import { PAYMENT_TYPE } from '@/constants/enum/payment.enum'
+import { useWindowSize } from '@vueuse/core'
 
 const { form } = defineProps<{
   form: FormOrderType
 }>()
 
+const { width } = useWindowSize()
 const bankNum = ref<number>(-1)
 
 const selectBank = (index: number) => {

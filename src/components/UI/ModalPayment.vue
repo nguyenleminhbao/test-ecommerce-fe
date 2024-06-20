@@ -70,7 +70,7 @@ import { Modal, QRCode, StatisticCountdown } from 'ant-design-vue'
 import type { Socket } from 'socket.io-client'
 import { ref } from 'vue'
 
-const open = ref<boolean>(true)
+const open = ref<boolean>(false)
 const zaloResponse = ref<IZaloResopnse>()
 const deadline = Date.now() + 15 * 60 * 1000
 
