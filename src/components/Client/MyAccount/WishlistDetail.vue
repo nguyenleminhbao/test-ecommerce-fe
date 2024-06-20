@@ -7,6 +7,7 @@
       :columns="columns"
       :data-source="products"
       :scroll="{ x: 500, y: 500 }"
+      class="w-full border-[1px] border-black rounded-lg [&_.ant-table-body]:!scrollbar-hide [&_.ant-table-row]:cursor-pointer"
     >
       <template #bodyCell="{ column, text, record }">
         <template v-if="column.dataIndex === 'product'">
@@ -41,73 +42,24 @@
 </template>
 
 <script lang="ts" setup>
-import ButtonSquare from '@/components/UI/elements/ButtonSquare.vue'
-import { CloseOutlined, ShoppingCartOutlined, HeartFilled } from '@ant-design/icons-vue'
-import { Table, Popconfirm, Button } from 'ant-design-vue'
-import { ref, computed, h } from 'vue'
-import type { TableProps } from 'ant-design-vue'
-import { usePagination } from 'vue-request'
-import axios from 'axios'
+import { ShoppingCartOutlined, HeartFilled } from '@ant-design/icons-vue'
+import { Table, Button } from 'ant-design-vue'
+import { ref, h } from 'vue'
+import type { TableColumnsType } from 'ant-design-vue'
+import { useWindowSize } from '@vueuse/core'
 
 const loading = ref(false)
-const columns = [
-  { title: 'Product', dataIndex: 'product', width: '50%' },
+const { width: _width } = useWindowSize()
+const columns: TableColumnsType = [
+  {
+    title: 'Product',
+    dataIndex: 'product',
+    width: _width.value < 450 ? '35%' : '50%',
+    fixed: 'left'
+  },
   { title: 'Price', dataIndex: 'price' },
   { title: 'Action', dataIndex: 'action', width: '30%' }
 ]
-
-// type APIParams = {
-//   results: number
-//   page?: number
-//   sortField?: string
-//   sortOrder?: number
-//   [key: string]: any
-// }
-// type APIResult = {
-//   results: {
-//     product: string
-//     price: string
-//     action: string
-//   }[]
-// }
-
-// const queryData = (params: APIParams) => {
-//   return axios.get<APIResult>('https://randomuser.me/api?noinfo', { params })
-// }
-
-// const {
-//   data: products,
-//   run,
-//   loading,
-//   current,
-//   pageSize
-// } = usePagination(queryData, {
-//   formatResult: (res) => res.data.results,
-//   pagination: {
-//     currentKey: 'page',
-//     pageSizeKey: 'results'
-//   }
-// })
-
-// const pagination = computed(() => ({
-//   total: 20,
-//   current: current.value,
-//   pageSize: pageSize.value
-// }))
-
-// const handleTableChange: TableProps['onChange'] = (
-//   pag: { pageSize: number; current: number },
-//   filters: any,
-//   sorter: any
-// ) => {
-//   run({
-//     results: pag.pageSize,
-//     page: pag?.current,
-//     sortField: sorter.field,
-//     sortOrder: sorter.order,
-//     ...filters
-//   })
-// }
 
 interface DataItem {
   key: number

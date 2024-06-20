@@ -2,19 +2,23 @@
   <div class="flex flex-col gap-14">
     <Breadcrumb separator=">" class="text-button-xs">
       <BreadcrumbItem href="/">Home</BreadcrumbItem>
-      <BreadcrumbItem href="/">News</BreadcrumbItem>
-      <BreadcrumbItem href="/">Blog</BreadcrumbItem>
-      <BreadcrumbItem>How to make a busy bathroom a place to relax</BreadcrumbItem>
+      <BreadcrumbItem href="/news">News</BreadcrumbItem>
+      <BreadcrumbItem>Blog</BreadcrumbItem>
+      <BreadcrumbItem>{{ feed.title }}</BreadcrumbItem>
     </Breadcrumb>
 
     <div class="flex flex-col gap-6">
       <h3 class="text-hairline-2 uppercase">Article</h3>
       <h1 class="text-headline-3 text-neutral-7 max-w-[834px]">
-        How to make a busy bathroom a place to relax
+        {{ feed.title }}
       </h1>
-      <div class="flex gap-12">
-        <Meta icon="UserOutlined" text="Henrik Annemark" />
-        <Meta icon="CalendarOutlined" text="October 16, 2023" />
+      <div class="flex flex-col md:flex-row md:gap-12">
+        <div class="flex items-center gap-2">
+          <img :src="feed.shop.shopAvatar" class="!w-12 !h-12 rounded-full" />
+          <Meta icon="UserOutlined" :text="feed.shop.shopName" />
+        </div>
+
+        <Meta icon="CalendarOutlined" :text="formatDateText(feed.createdAt)" />
       </div>
     </div>
   </div>
@@ -22,6 +26,11 @@
 
 <script setup lang="ts">
 import Meta from './_components/Meta.vue'
-import { Breadcrumb, BreadcrumbItem } from 'ant-design-vue'
-import { UserOutlined, CalendarOutlined } from '@ant-design/icons-vue'
+import { Breadcrumb, BreadcrumbItem, Spin } from 'ant-design-vue'
+import { formatDateText } from '@/utils'
+import type { IFeed } from '@/interfaces/news.interface'
+
+const { feed } = defineProps<{
+  feed: IFeed
+}>()
 </script>

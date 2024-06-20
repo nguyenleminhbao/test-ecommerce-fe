@@ -1,6 +1,12 @@
 <template>
   <div class="flex flex-col gap-[19px]">
-    <Table :loading="loading" :columns="columns" :data-source="products" :scroll="{ x: 500, y: 500 }">
+    <Table
+      :loading="loading"
+      :columns="columns"
+      :data-source="products"
+      :scroll="{ x: 500, y: 500 }"
+      class="w-full border-[1px] border-black rounded-lg [&_.ant-table-body]:!scrollbar-hide [&_.ant-table-row]:cursor-pointer"
+    >
       <template #bodyCell="{ column, text, record }">
         <template v-if="column.dataIndex === 'shop'">
           <div class="flex gap-[10px] items-center">
@@ -20,7 +26,9 @@
         </template>
 
         <template v-if="column.dataIndex === 'following'">
-          <Button class="border-neutral-7 object-center w-full mb-2" :icon="h(ShopOutlined)">View Shop</Button>
+          <Button class="border-neutral-7 object-center w-full mb-2" :icon="h(ShopOutlined)"
+            >View Shop</Button
+          >
           <Button class="bg-primary text-white object-center w-full" :icon="h(CheckCircleOutlined)">
             Following
           </Button>
@@ -31,17 +39,15 @@
 </template>
 
 <script lang="ts" setup>
-import ButtonSquare from '@/components/UI/elements/ButtonSquare.vue'
 import { CheckCircleOutlined, ShopOutlined } from '@ant-design/icons-vue'
-import { Table, Button } from 'ant-design-vue'
-import { ref, computed, h } from 'vue'
-import type { TableProps } from 'ant-design-vue'
-import { usePagination } from 'vue-request'
-import axios from 'axios'
+import { Table, Button, type TableColumnsType } from 'ant-design-vue'
+import { ref, h } from 'vue'
+import { useWindowSize } from '@vueuse/core'
 
 const loading = ref(false)
-const columns = [
-  { title: 'Shop', dataIndex: 'shop', width: '50%' },
+const { width: _width } = useWindowSize()
+const columns: TableColumnsType = [
+  { title: 'Shop', dataIndex: 'shop', width: _width.value < 450 ? '35%' : '50%', fixed: 'left' },
   { title: 'Product', dataIndex: 'product' },
   { title: 'Following', dataIndex: 'following', width: '30%' }
 ]

@@ -1,7 +1,7 @@
 <template>
   <RouterLink
     :to="`/blog/${feedId}`"
-    class="group relative shadow-md min-w-[262px] rounded-md"
+    class="group relative shadow-md min-w-[262px] max-w-[262px] rounded-md"
     :class="class"
   >
     <div class="flex flex-col w-full rounded-md">
