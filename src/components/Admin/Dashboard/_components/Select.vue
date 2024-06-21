@@ -10,7 +10,8 @@
 </template>
 
 <script setup lang="ts">
-import { Select, SelectOption } from 'ant-design-vue'
 import { ref } from 'vue'
+import { Select, SelectOption } from 'ant-design-vue'
+
 const value = ref<string>('Day')
 </script>

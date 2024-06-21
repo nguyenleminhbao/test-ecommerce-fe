@@ -81,8 +81,8 @@ import { RouterLink, useRouter, useRoute } from 'vue-router'
 import { useCart } from '@/stores/use-cart'
 import { addToCart } from '@/services/cart/post'
 import { ref } from 'vue'
-import DrawerCart from '@/components/UI/DrawerCart.vue'
 import { useAuth, useClerk } from 'vue-clerk'
+import { DrawerCart } from './drawer'
 
 const { product } = defineProps<{
   product: IProduct

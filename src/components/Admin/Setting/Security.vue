@@ -9,7 +9,7 @@
     <h1 class="text-headline-6">Change Password</h1>
     <Form
       :model="formState"
-      name="basic"      
+      name="basic"
       layout="vertical"
       :label-col="{ span: 3 }"
       :wrapper-col="{ span: 8 }"
@@ -37,8 +37,9 @@
 </template>
 
 <script lang="ts" setup>
-import { Switch, Form, FormItem, InputPassword } from 'ant-design-vue'
 import { ref, reactive } from 'vue'
+import { Switch, Form, FormItem, InputPassword } from 'ant-design-vue'
+
 const checked = ref<boolean>(true)
 
 interface FormState {

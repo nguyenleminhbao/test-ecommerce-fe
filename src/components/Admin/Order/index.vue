@@ -16,11 +16,11 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted, ref } from 'vue'
 import { Spin } from 'ant-design-vue'
-import type { IOrder } from '@/interfaces/order.interface'
 import Statistic from './Statistic.vue'
 import Table from './Table.vue'
-import { onMounted, ref } from 'vue'
+import type { IOrder } from '@/interfaces/order.interface'
 import { getAllOrderSystem } from '@/services/order/get'
 import { calcOrder } from '@/utils/calc-order'
 

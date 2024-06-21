@@ -28,18 +28,16 @@
         <FormItem :name="['user', 'phone']" label="Phone Number" :rules="[{ required: true }]">
           <Input v-model:value="formState.user.phone" />
         </FormItem>
-        <!-- <FormItem :wrapper-col="{ ...layout.wrapperCol, offset: 8 }">
-          <Button type="primary" html-type="submit">Submit</Button>
-        </FormItem> -->
       </Form>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { reactive } from 'vue'
 import { Avatar, Form, FormItem, Input, InputNumber, Textarea, Button } from 'ant-design-vue'
 import { UserOutlined } from '@ant-design/icons-vue'
-import { reactive } from 'vue'
+
 const layout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 16 }

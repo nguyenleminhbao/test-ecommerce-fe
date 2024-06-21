@@ -43,9 +43,8 @@
 </template>
 
 <script setup lang="ts">
-import { Image, Table } from 'ant-design-vue'
 import { onMounted, ref } from 'vue'
-import type { TableColumnsType } from 'ant-design-vue'
+import { Image, Table, type TableColumnsType } from 'ant-design-vue'
 import { getAllShop } from '@/services/shop/get'
 
 const shops = ref()

@@ -26,9 +26,9 @@
   </div>
 </template>
 <script setup lang="ts">
-import type { ICartItem } from '@/interfaces/cart.interface'
-import { formatNumberWithCommas } from '@/utils'
 import { Table, Image, type TableColumnsType } from 'ant-design-vue'
+import { formatNumberWithCommas } from '@/utils'
+import type { ICartItem } from '@/interfaces/cart.interface'
 
 const columns: TableColumnsType = [
   {

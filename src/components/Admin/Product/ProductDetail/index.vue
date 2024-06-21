@@ -56,13 +56,13 @@
 </template>
 
 <script setup lang="ts">
+import { useRoute } from 'vue-router'
 import Table from './Table.vue'
 import InfoProd from './InfoProd.vue'
 import CheckList from './CheckList.vue'
 import BarChart from './BarChart.vue'
 import Pagination from './Pagination.vue'
 import CardProduct from './CardProduct.vue'
-import { useRoute } from 'vue-router'
 import { useProductDetail } from '@/composables/useProduct'
 
 const route = useRoute()

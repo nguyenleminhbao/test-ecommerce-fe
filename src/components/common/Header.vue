@@ -89,7 +89,7 @@ import {
   useClerk,
   useAuth
 } from 'vue-clerk'
-import DrawerCart from '@/components/UI/DrawerCart.vue'
+import DrawerCart from '@/components/UI/drawer/DrawerCart.vue'
 import { ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 

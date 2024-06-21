@@ -45,10 +45,10 @@
 </template>
 
 <script setup lang="ts">
-import { useProduct } from '@/composables/useProduct'
-import { formatNumberWithCommas } from '@/utils'
-import { Table, Image, type TableColumnsType } from 'ant-design-vue'
 import { useRouter } from 'vue-router'
+import { Table, Image, type TableColumnsType } from 'ant-design-vue'
+import { formatNumberWithCommas } from '@/utils'
+import { useProduct } from '@/composables/useProduct'
 
 const router = useRouter()
 const { data: products } = useProduct()
