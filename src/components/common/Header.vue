@@ -4,7 +4,7 @@
   >
     <div class="h-[60px] max-w-[1120px] mx-auto flex justify-between items-center">
       <RouterLink to="/" class="flex items-center gap-2 text-neutral-7 text-body-1-bold">
-        <img src="@/assets/images/logo.svg" class="w-[40px] aspect-square" /> Shopo
+        <img v-once src="@/assets/images/logo.svg" class="w-[40px] aspect-square" /> Shopo
       </RouterLink>
 
       <div class="flex items-center gap-10 text-neutral-4">

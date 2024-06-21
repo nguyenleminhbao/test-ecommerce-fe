@@ -14,10 +14,7 @@
         :title="reel.title"
         :view="reel.view"
       />
-      <RightCircleFilled
-        v-if="reels.length > 4"
-        class="bg-green z-10 sticky right-2 top-[calc(50%_-_50px)] text-4xl opacity-30"
-      />
+      <RightIcon v-if="reels.length > 4" />
     </div>
   </div>
 </template>
@@ -26,7 +23,7 @@
 import ButtonArrow from '@/components/UI/elements/ButtonArrow.vue'
 import ReelItem from '@/components/UI/ReelItem.vue'
 import { useReel } from '@/composables/useReel'
-import { RightCircleFilled } from '@ant-design/icons-vue'
+import { RightIcon } from '@/components/UI/elements/index'
 
 const { data: reels } = useReel()
 </script>

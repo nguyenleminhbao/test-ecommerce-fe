@@ -26,6 +26,5 @@ import { useLivestream } from '@/stores/use-livestream'
 import { useProduct } from '@/composables/useProduct'
 
 const { data: products, isLoading } = useProduct({ page: 1 })
-
 const livestreamStore = useLivestream()
 </script>

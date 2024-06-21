@@ -13,20 +13,23 @@
         {{ feed.title }}
       </h1>
       <div class="flex flex-col md:flex-row md:gap-12">
-        <div class="flex items-center gap-2">
-          <img :src="feed.shop.shopAvatar" class="!w-12 !h-12 rounded-full" />
-          <Meta icon="UserOutlined" :text="feed.shop.shopName" />
-        </div>
+        <RouterLink :to="`/shop/${feed.shop.id}`" class="flex items-center gap-2 text-body-2 text-neutral-4">
+          <img :src="feed.shop.shopAvatar" class="!w-10 rounded-full aspect-square ring-2 ring-neutral-4" />
+          <span>{{ feed.shop.shopName }}</span>
+        </RouterLink>
 
-        <Meta icon="CalendarOutlined" :text="formatDateText(feed.createdAt)" />
+        <div class="flex gap-1 items-center text-body-2 text-neutral-4">
+          <CalendarOutlined class="text-2xl flex justify-center items-center" />
+          <span>{{ formatDateText(feed.createdAt) }}</span>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import Meta from './_components/Meta.vue'
-import { Breadcrumb, BreadcrumbItem, Spin } from 'ant-design-vue'
+import { Breadcrumb, BreadcrumbItem } from 'ant-design-vue'
+import { CalendarOutlined } from '@ant-design/icons-vue'
 import { formatDateText } from '@/utils'
 import type { IFeed } from '@/interfaces/news.interface'
 

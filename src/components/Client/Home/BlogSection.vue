@@ -16,16 +16,13 @@
         :content="feed.content"
       />
 
-      <RightCircleFilled
-        v-if="feeds.length > 3"
-        class="bg-green z-10 sticky right-2 top-[calc(50%_-_50px)] text-4xl"
-      />
+      <RightIcon v-if="feeds.length > 4" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { RightCircleFilled } from '@ant-design/icons-vue'
+import { RightIcon } from '@/components/UI/elements/index'
 import { ButtonArrow } from '@/components/UI/elements'
 import BlogItem from '@/components/UI/BlogItem.vue'
 import { useFeed } from '@/composables/useFeed'

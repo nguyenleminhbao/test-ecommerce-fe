@@ -6,9 +6,8 @@
     </div>
     <div class="flex overflow-x-auto items-center gap-[24px] scrollbar-hide relative">
       <ProdCard v-for="product in products" :key="product.id" :product="product" />
-      <RightCircleFilled
-        class="bg-green z-10 sticky right-2 top-[calc(50%_-_50px)] text-4xl opacity-30"
-      />
+
+      <RightIcon v-if="products.length > 4" />
     </div>
   </div>
 </template>
@@ -16,7 +15,7 @@
 <script setup lang="ts">
 import ButtonArrow from '@/components/UI/elements/ButtonArrow.vue'
 import ProdCard from '@/components/UI/ProdCard.vue'
-import { RightCircleFilled } from '@ant-design/icons-vue'
+import { RightIcon } from '@/components/UI/elements/index'
 import type { IProduct } from '@/interfaces/product.interface'
 
 const { products } = defineProps<{

@@ -63,7 +63,6 @@ const { data: banners } = useSWRV('banners', getBannerPromotion, configBannerSWR
   height: 40px;
   font-size: 25px;
   color: #fff;
-  background-color: rgba(35, 35, 35, 0.11);
   transition: ease all 0.3s;
   opacity: 0.3;
   z-index: 1;
