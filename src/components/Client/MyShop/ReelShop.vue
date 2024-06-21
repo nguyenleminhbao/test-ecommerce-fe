@@ -11,9 +11,9 @@
       </Button>
     </div>
 
-    <div class="grid grid-cols-4 gap-x-[25px] gap-y-10 mt-5" v-if="reels">
+    <div class="grid grid-cols-4 gap-x-[25px] gap-y-10 mt-5">
       <ReelItem
-        v-for="(reel, index) in reels.message.slice((currentPage - 1) * 12, currentPage * 12)"
+        v-for="(reel, index) in reels.slice((currentPage - 1) * 12, currentPage * 12)"
         :key="index"
         :reelId="reel.id"
         :video-url="reel.video"
@@ -26,12 +26,7 @@
       />
     </div>
     <div class="flex justify-center my-20">
-      <Pagination
-        v-if="reels"
-        v-model:current="currentPage"
-        :total="reels.message.length"
-        show-less-items
-      />
+      <Pagination v-model:current="currentPage" :total="reels.length" show-less-items />
     </div>
   </section>
 
@@ -93,7 +88,6 @@
 
 <script setup lang="ts">
 import ReelItem from '@/components/UI/ReelItem.vue'
-import { getReelByShop } from '@/services/news/get'
 import { ref, h } from 'vue'
 import { PlusCircleOutlined, InboxOutlined, LoadingOutlined } from '@ant-design/icons-vue'
 import {
@@ -112,19 +106,15 @@ import { uploadVideoUrl } from '@/constants/upload-url'
 import { getPublicIdFromUrl } from '@/utils'
 import { createReel } from '@/services/news/post'
 import { deleteReel } from '@/services/news/delete'
-import useSWRV from 'swrv'
-import { configSWRV } from '@/config/swrv'
 import { deleteFileV2 } from '@/services/upload/post'
+import { useShopReel } from '@/composables/useReel'
 
 const { shopId } = defineProps<{
   shopId: string
 }>()
 
-const { data: reels, mutate: runMutation } = useSWRV(
-  `/news/reel/shop/${shopId}`,
-  getReelByShop,
-  configSWRV
-)
+const { data: reels, mutate: runMutation } = useShopReel({ shopId })
+
 const fileList = ref([])
 const loading = ref<boolean>(false)
 const currentPage = ref<number>(1)
@@ -181,7 +171,7 @@ const onAdd = async () => {
     description: videoState.value.description,
     shopId
   })
-  runMutation()
+  if (runMutation) await runMutation()
   message.success('Create reel successfully')
   videoState.value = {
     video: '',
@@ -195,6 +185,6 @@ const onAdd = async () => {
 const onDelete = async (reelId: string) => {
   await deleteReel(reelId)
   message.success('Delete reel successfully')
-  runMutation()
+  if (runMutation) await runMutation()
 }
 </script>

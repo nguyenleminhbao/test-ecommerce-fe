@@ -71,7 +71,7 @@
 </template>
 
 <script setup lang="ts">
-import { Button, Rate } from 'ant-design-vue'
+import { Button } from 'ant-design-vue'
 import { StarFilled, HeartOutlined, HeartFilled } from '@ant-design/icons-vue'
 import BadgeMedium from '@/components/UI/elements/BadgeMedium.vue'
 import { TYPE_BADGE } from '@/constants/enum/badge.enum'
@@ -80,7 +80,7 @@ import { formatNumberWithCommas } from '@/utils'
 import { RouterLink, useRouter, useRoute } from 'vue-router'
 import { useCart } from '@/stores/use-cart'
 import { addToCart } from '@/services/cart/post'
-import { ref, h, computed, onMounted } from 'vue'
+import { ref } from 'vue'
 import DrawerCart from '@/components/UI/DrawerCart.vue'
 import { useAuth, useClerk } from 'vue-clerk'
 
@@ -149,6 +149,7 @@ const addToWishFunc = async () => {
 const reloadPage = () => {
   setTimeout(() => {
     window.location.reload()
+    router.push
   }, 300)
 }
 </script>

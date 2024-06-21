@@ -4,7 +4,7 @@
     <div class="bg-white p-[24px] rounded-lg">
       <Table
         :columns="columns"
-        :data-source="products.message"
+        :data-source="products"
         :scroll="{
           x: 1000,
           y: 410,
@@ -21,7 +21,7 @@
       >
         <template #bodyCell="{ index, column, record }" class="cursor-pointer">
           <template v-if="column.dataIndex == 'id'">
-            <span>{{ products.message.findIndex((ele: any) => ele == record) + 1 }}</span></template
+            <span>{{ products.findIndex((ele: any) => ele == record) + 1 }}</span></template
           >
           <template v-if="column.dataIndex == 'product'">
             <div class="flex gap-3 items-center">
@@ -45,16 +45,13 @@
 </template>
 
 <script setup lang="ts">
-import { getAllProducts } from '@/services/products/get'
+import { useProduct } from '@/composables/useProduct'
 import { formatNumberWithCommas } from '@/utils'
 import { Table, Image, type TableColumnsType } from 'ant-design-vue'
 import { useRouter } from 'vue-router'
 
-import useSWRV from 'swrv'
-import { configSWRV } from '@/config/swrv'
-
-const { data: products } = useSWRV('products', getAllProducts, configSWRV)
 const router = useRouter()
+const { data: products } = useProduct()
 
 const columns: TableColumnsType = [
   {

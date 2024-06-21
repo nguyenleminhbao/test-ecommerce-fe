@@ -20,20 +20,14 @@
 </template>
 
 <script setup lang="ts">
-import type { IProduct } from '@/interfaces/product.interface'
-import { getShopProducts } from '@/services/products/get'
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
 import CardItem from '@/components/UI/ProdCard.vue'
 import { Pagination } from 'ant-design-vue'
+import { useShopProduct } from '@/composables/useProduct'
 
 const { shopId } = defineProps<{
   shopId: string
 }>()
-const products = ref<IProduct[]>([])
+const { data: products } = useShopProduct({ shopId })
 const currentPage = ref<number>(1)
-
-onMounted(async () => {
-  const data = await getShopProducts(shopId)
-  products.value = data?.message
-})
 </script>

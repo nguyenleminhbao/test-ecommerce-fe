@@ -19,8 +19,8 @@
           >Edit</Button
         >
       </div>
-      <div class="flex flex-col gap-2 p-4 rounded-b-md">
-        <h3 class="text-headline-7 text-neutral-7 line-clamp-2">{{ title }}</h3>
+      <div class="flex flex-col gap-2 p-4 bg-gray-200 rounded-b-md">
+        <h3 class="text-headline-7 text-neutral-7 h-[42px] two-lines-truncate">{{ title }}</h3>
         <p class="text-neutral-4 text-[14px] leading-[24px]">{{ formatDateText(date) }}</p>
       </div>
     </div>
@@ -32,7 +32,7 @@
     :closable="false"
     root-class-name="root-class-name"
     :root-style="{ color: 'blue' }"
-    :width="500"
+    width="50%"
     style="color: red"
     title="Edit Blog"
     placement="right"
@@ -76,6 +76,7 @@
       <div class="flex flex-col items-start gap-2">
         <span class="text-xl font-semibold text-black min-w-[100px]">Content</span>
         <editor
+          style="width: 100%; height: 600px"
           v-model="imageState.content"
           api-key="qagffr3pkuv17a8on1afax661irst1hbr4e6tbv888sz91jc"
           :init="{

@@ -63,15 +63,8 @@ import BarChart from './BarChart.vue'
 import Pagination from './Pagination.vue'
 import CardProduct from './CardProduct.vue'
 import { useRoute } from 'vue-router'
-import type { IProduct } from '@/interfaces/product.interface'
-import { onMounted, ref } from 'vue'
-import { getOneProduct } from '@/services/products/get'
+import { useProductDetail } from '@/composables/useProduct'
 
 const route = useRoute()
-const product = ref<IProduct>()
-
-onMounted(async () => {
-  const data = await getOneProduct(route.params['productId'] as string)
-  product.value = data.message
-})
+const { data: product } = useProductDetail({ productId: route.params['productId'] as string })
 </script>
