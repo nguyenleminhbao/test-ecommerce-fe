@@ -22,8 +22,7 @@
 </template>
 
 <script setup lang="ts">
-import { RightIcon } from '@/components/UI/elements/index'
-import { ButtonArrow } from '@/components/UI/elements'
+import { ButtonArrow, RightIcon } from '@/components/UI/elements'
 import BlogItem from '@/components/UI/BlogItem.vue'
 import { useFeed } from '@/composables/useFeed'
 

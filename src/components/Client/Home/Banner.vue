@@ -24,5 +24,5 @@
 </template>
 
 <script setup lang="ts">
-import ButtonArrow from '@/components/UI/elements/ButtonArrow.vue'
+import { ButtonArrow } from '@/components/UI/elements'
 </script>

@@ -13,9 +13,8 @@
 </template>
 
 <script setup lang="ts">
-import ButtonArrow from '@/components/UI/elements/ButtonArrow.vue'
 import ProdCard from '@/components/UI/ProdCard.vue'
-import { RightIcon } from '@/components/UI/elements/index'
+import { RightIcon, ButtonArrow } from '@/components/UI/elements'
 import type { IProduct } from '@/interfaces/product.interface'
 
 const { products } = defineProps<{

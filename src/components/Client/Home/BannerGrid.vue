@@ -26,5 +26,5 @@
 </template>
 
 <script setup lang="ts">
-import { CardBanner } from './_components'
+import CardBanner from './_components/CardBanner.vue'
 </script>

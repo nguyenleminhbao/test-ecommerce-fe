@@ -20,10 +20,9 @@
 </template>
 
 <script setup lang="ts">
-import ButtonArrow from '@/components/UI/elements/ButtonArrow.vue'
 import ReelItem from '@/components/UI/ReelItem.vue'
 import { useReel } from '@/composables/useReel'
-import { RightIcon } from '@/components/UI/elements/index'
+import { RightIcon, ButtonArrow } from '@/components/UI/elements'
 
 const { data: reels } = useReel()
 </script>
