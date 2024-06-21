@@ -1,7 +1,7 @@
 <template>
   <RouterLink
     :to="`/blog/${feedId}`"
-    class="group relative shadow-md min-w-[262px] rounded-md"
+    class="group relative shadow-md min-w-[262px] rounded-md bg-neutral-3"
     :class="class"
   >
     <div class="flex flex-col w-full rounded-md">
@@ -19,8 +19,8 @@
           >Edit</Button
         >
       </div>
-      <div class="flex flex-col gap-2 p-4 bg-gray-200 rounded-b-md">
-        <h3 class="text-headline-7 text-neutral-7">{{ title }}</h3>
+      <div class="flex flex-col gap-2 p-4 rounded-b-md">
+        <h3 class="text-headline-7 text-neutral-7 line-clamp-2">{{ title }}</h3>
         <p class="text-neutral-4 text-[14px] leading-[24px]">{{ formatDateText(date) }}</p>
       </div>
     </div>
@@ -75,7 +75,24 @@
 
       <div class="flex flex-col items-start gap-2">
         <span class="text-xl font-semibold text-black min-w-[100px]">Content</span>
-        <Textarea v-model:value="imageState.content" :rows="10" />
+        <editor
+          v-model="imageState.content"
+          api-key="qagffr3pkuv17a8on1afax661irst1hbr4e6tbv888sz91jc"
+          :init="{
+            menubar: false,
+            branding: false,
+            plugins: [
+              'advlist autolink autosave autoresize link image lists charmap hr anchor',
+              'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime nonbreaking',
+              'table template colorpicker paste textcolor importcss textpattern spellchecker'
+            ],
+            toolbar: [
+              'undo redo | bold italic underline strikethrough | alignleft aligncenter alignright  | blockquote | formatselect | spellchecker',
+              'cut copy paste removeformat | searchreplace | bullist numlist | outdent indent | hr | link unlink anchor image code | inserttime',
+              'h1 h2 h3 | table | subscript superscript | charmap | visualchars visualblocks nonbreaking | template | helloworld'
+            ]
+          }"
+        ></editor>
       </div>
     </div>
     <template #footer>
@@ -93,6 +110,7 @@
 
 <script setup lang="ts">
 import { ref, h } from 'vue'
+import Editor from '@tinymce/tinymce-vue'
 import {
   Drawer,
   Button,
