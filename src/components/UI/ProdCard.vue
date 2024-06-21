@@ -46,13 +46,7 @@
       :to="`/product/${product?.id}?title=${product.title}`"
       class="grid gap-1 group-hover:border-[1px] group-hover:border-t-0 group-hover:border-neutral-3 group-hover:shadow-xl p-4 pt-0 rounded-b-lg"
     >
-      <div class="text-neutral-5 text-[16px] mt-1">
-        <StarFilled />
-        <StarFilled />
-        <StarFilled />
-        <StarFilled />
-        <StarFilled />
-      </div>
+      <Rate :value="5" disabled allow-half class="text-neutral-5 text-[16px] mt-1" />
 
       <span class="text-body-2-semibold text-neutral-7 two-lines-truncate h-[42px]">{{
         product.title
@@ -71,8 +65,8 @@
 </template>
 
 <script setup lang="ts">
-import { Button } from 'ant-design-vue'
-import { StarFilled, HeartOutlined, HeartFilled } from '@ant-design/icons-vue'
+import { Button, Rate } from 'ant-design-vue'
+import { HeartOutlined, HeartFilled } from '@ant-design/icons-vue'
 import BadgeMedium from '@/components/UI/elements/BadgeMedium.vue'
 import { TYPE_BADGE } from '@/constants/enum/badge.enum'
 import type { IProduct } from '@/interfaces/product.interface'

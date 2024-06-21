@@ -2,7 +2,7 @@
   <div>
     <!-- Blur Poster Backgroud ---------------------------------------------------------------------------->
     <BlurBg
-      poster="https://p16-sign-va.tiktokcdn.com/obj/tos-maliva-p-0068/19edd65dcea345e7a4966c7fc0b91dfc_1690128608?x-expires=1717725600&amp;x-signature=kUM5UUNgwyajG23%2BtYJDMFKew0o%3D"
+      poster="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwd9tkmpnLIjOKzqY7zn9ZDcXzddP08XZddA&s"
     />
 
     <!-- Video ---------------------------------------------------------------------------->
@@ -189,7 +189,7 @@ import {
   MessageFilled,
   ShareAltOutlined
 } from '@ant-design/icons-vue'
-import { computed, onMounted, ref } from 'vue'
+import { computed, ref } from 'vue'
 import { useMediaControls, useEventListener } from '@vueuse/core'
 import { useAuth } from 'vue-clerk'
 import { SMicrosoftTeams } from 'vue-socials'

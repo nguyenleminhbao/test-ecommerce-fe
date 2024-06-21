@@ -2,7 +2,25 @@
   <div class="w-full flex flex-col gap-10 max-sm:gap-8 h-fit">
     <div class="flex justify-between items-center">
       <h1 class="text-body-1-semibold">All Products</h1>
-      <Dropdown />
+      <Dropdown placement="bottomRight">
+        <a
+          class="ant-dropdown-link flex gap-[4px] text-body-2-semibold items-center"
+          @click.prevent
+        >
+          Sort by
+          <DownOutlined />
+        </a>
+        <template #overlay>
+          <Menu>
+            <MenuItem>
+              <a href="javascript:;">Thấp đến Cao</a>
+            </MenuItem>
+            <MenuItem>
+              <a href="javascript:;">Cao đến Thấp</a>
+            </MenuItem>
+          </Menu>
+        </template>
+      </Dropdown>
     </div>
 
     <div class="flex flex-col gap-20 max-sm:gap-8">
@@ -31,10 +49,10 @@
 </template>
 
 <script setup lang="ts">
-import { Dropdown } from './_components'
 import ProdCard from '@/components/UI/ProdCard.vue'
 import { ref } from 'vue'
-import { Pagination, Spin } from 'ant-design-vue'
+import { Pagination, Spin, Dropdown, Menu, MenuItem } from 'ant-design-vue'
+import { DownOutlined } from '@ant-design/icons-vue'
 import { getAllProducts } from '@/services/products/get'
 import { useRoute, useRouter } from 'vue-router'
 import { useProduct } from '@/composables/useProduct'
@@ -58,3 +76,10 @@ const onChange = () => {
   runMutation(() => getAllProducts(currentPage.value))
 }
 </script>
+
+<style scoped>
+.demo-dropdown-wrap :deep(.ant-dropdown-button) {
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+</style>

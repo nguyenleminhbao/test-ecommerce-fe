@@ -46,11 +46,8 @@
 </template>
 
 <script lang="ts" setup>
-import { UserOutlined, DownOutlined } from '@ant-design/icons-vue'
+import { DownOutlined } from '@ant-design/icons-vue'
 import { Dropdown, Button, type MenuProps, Menu, MenuItem } from 'ant-design-vue'
-const handleButtonClick = (e: Event) => {
-  console.log('click left button', e)
-}
 const handleMenuClick: MenuProps['onClick'] = (e) => {
   console.log('click', e)
 }
