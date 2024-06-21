@@ -16,13 +16,9 @@
 </template>
 
 <script lang="ts" setup>
-import { List, ListItem, ListItemMeta, Switch } from 'ant-design-vue'
 import { reactive } from 'vue'
-interface DataItem {
-  title: string
-  description: string
-  checked: boolean
-}
+import { List, ListItem, ListItemMeta, Switch } from 'ant-design-vue'
+
 const data = reactive([
   {
     title: 'Personalized Offers',

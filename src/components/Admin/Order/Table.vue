@@ -60,11 +60,11 @@
 </template>
 
 <script setup lang="ts">
+import { useRouter } from 'vue-router'
+import { Table, Image, Tag, type TableColumnsType } from 'ant-design-vue'
 import type { ICartItem } from '@/interfaces/cart.interface'
 import type { IOrder } from '@/interfaces/order.interface'
-import { Table, Image, Tag, type TableColumnsType } from 'ant-design-vue'
 import { STATUS_ORDER } from '@/constants/enum/status-order.enum'
-import { useRouter } from 'vue-router'
 import { formatDateText, formatNumberWithCommas } from '@/utils'
 
 const { orders } = defineProps<{

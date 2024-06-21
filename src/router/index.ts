@@ -1,37 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-// import {
-//   CartView,
-//   HomeView,
-//   LivestreamView,
-//   MyAccountView,
-//   MyShopView,
-//   ProductDetailView,
-//   ProductView,
-//   NewsView,
-//   BlogDetailView,
-//   ReelDetailView,
-//   ShopDetailView
-// } from '@/views/Client'
-
-// import {
-//   DashboardAdmin,
-//   ProductAdmin,
-//   ProductDetailAdmin,
-//   OrderAdmin,
-//   OrderDetailAdmin,
-//   CustomerAdmin,
-//   CustomerDetailAdmin,
-//   ShopAdmin,
-//   ShopDetailAdmin,
-//   ReelAdmin,
-//   ReelDetailAdmin,
-//   FeedAdmin,
-//   FeedDetailAdmin,
-//   SettingAdmin
-// } from '@/views/Admin'
-// import ForbiddenView from '@/views/ForbiddenView.vue'
-// import NotFoundView from '@/views/NotFoundView.vue'
-
 export enum LAYOUT_ENUM {
   DEFAULT_LAYOUT = 'default-layout',
   AUTH_LAYOUT = 'auth-layout',

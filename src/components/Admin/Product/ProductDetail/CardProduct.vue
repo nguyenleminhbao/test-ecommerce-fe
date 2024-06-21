@@ -17,8 +17,9 @@
 </template>
 
 <script setup lang="ts">
-import { formatNumberWithCommas } from '@/utils'
 import { Card, CardMeta } from 'ant-design-vue'
+import { formatNumberWithCommas } from '@/utils'
+
 defineProps({
   title: {
     type: String

@@ -75,12 +75,12 @@
 </template>
 
 <script setup lang="ts">
-import type { IOrder } from '@/interfaces/order.interface'
-import Table from './Table.vue'
 import { onMounted, ref } from 'vue'
-import { getOneOrderSystem } from '@/services/order/get'
 import { useRoute } from 'vue-router'
+import Table from './Table.vue'
 import { formatDateText, formatDateDelivery, formatNumberWithCommas } from '@/utils'
+import { getOneOrderSystem } from '@/services/order/get'
+import type { IOrder } from '@/interfaces/order.interface'
 
 const order = ref<IOrder>()
 const route = useRoute()

@@ -17,7 +17,7 @@
       />
       <div v-if="!cartStore.cart?.cartItems.length" class="w-full h-full object-center">
         <img
-          src="../../assets/images/no-shopping-cart.png"
+          src="@/assets/images/no-shopping-cart.png"
           class="w-[150px] aspect-square object-center"
         />
       </div>

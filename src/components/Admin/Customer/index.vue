@@ -31,10 +31,9 @@
 </template>
 
 <script setup lang="ts">
-import { getAllCustomer } from '@/services/customer/get'
-import { Image, Table } from 'ant-design-vue'
 import { onMounted, ref } from 'vue'
-import type { TableColumnsType } from 'ant-design-vue'
+import { Image, Table, type TableColumnsType } from 'ant-design-vue'
+import { getAllCustomer } from '@/services/customer/get'
 
 const columns: TableColumnsType = [
   {

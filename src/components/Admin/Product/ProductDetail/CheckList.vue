@@ -19,8 +19,9 @@
 </template>
 
 <script lang="ts" setup>
-import { Checkbox, Divider, CheckboxGroup } from 'ant-design-vue'
 import { reactive, watch } from 'vue'
+import { Checkbox, Divider, CheckboxGroup } from 'ant-design-vue'
+
 const plainOptions = ['1.0⭐', '2.0⭐', '3.0⭐', '4.0⭐', '5.0⭐']
 const state = reactive({
   indeterminate: false,
