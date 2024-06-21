@@ -4,7 +4,7 @@
   <LivestreanCarousel
     v-if="livestreamStore.listLivestream && livestreamStore.listLivestream.length"
   />
-  <ProductCarousel v-if="products" :products="products.message" />
+  <ProductCarousel v-if="!isLoading" :products="products" />
   <Values />
   <ReelCarousel />
   <Banner />
@@ -22,11 +22,10 @@ import BlogSection from './BlogSection.vue'
 import Newsletter from './Newsletter.vue'
 import ReelCarousel from './ReelCarousel.vue'
 import LivestreanCarousel from './LivestreamCarousel.vue'
-import { getAllProducts } from '@/services/products/get'
 import { useLivestream } from '@/stores/use-livestream'
-import useSWRV from 'swrv'
-import { configSWRV } from '@/config/swrv'
+import { useProduct } from '@/composables/useProduct'
 
-const { data: products } = useSWRV('products', () => getAllProducts(1), configSWRV)
+const { data: products, isLoading } = useProduct({ page: 1 })
+
 const livestreamStore = useLivestream()
 </script>

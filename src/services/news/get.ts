@@ -12,18 +12,9 @@ export const getAllReel = async () => {
   }
 }
 
-// export const getReelByShop = async (shopId: string) => {
-//   try {
-//     const { data } = await axiosInstance.get<IResponse<IReel[]>>(`/news/reel/shop/${shopId}`)
-//     return data
-//   } catch (err) {
-//     throw err
-//   }
-// }
-
-export const getReelByShop = async (url: string) => {
+export const getReelByShop = async (shopId: string) => {
   try {
-    const { data } = await axiosInstance.get<IResponse<IReel[]>>(url)
+    const { data } = await axiosInstance.get<IResponse<IReel[]>>(`/news/reel/shop/${shopId}`)
     return data
   } catch (err) {
     throw err
@@ -49,18 +40,9 @@ export const getAllFeed = async () => {
   }
 }
 
-// export const getFeedByShop = async (shopId: string) => {
-//   try {
-//     const { data } = await axiosInstance.get<IResponse<IFeed[]>>(`/news/feed/shop/${shopId}`)
-//     return data
-//   } catch (err) {
-//     throw err
-//   }
-// }
-
-export const getFeedByShop = async (url: string) => {
+export const getFeedByShop = async (shopId: string) => {
   try {
-    const { data } = await axiosInstance.get<IResponse<IFeed[]>>(url)
+    const { data } = await axiosInstance.get<IResponse<IFeed[]>>(`/news/feed/shop/${shopId}`)
     return data
   } catch (err) {
     throw err

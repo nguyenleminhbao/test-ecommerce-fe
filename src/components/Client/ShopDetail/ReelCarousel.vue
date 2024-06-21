@@ -3,7 +3,7 @@
     <span class="text-headline-3 text-center">Reel </span>
     <div class="flex w-full overflow-x-auto items-start gap-[24px] scrollbar-hide relative">
       <ReelItem
-        v-for="(reel, index) in reels.message"
+        v-for="(reel, index) in reels"
         :key="index"
         :reelId="reel.id"
         :video-url="reel.video"
@@ -20,13 +20,12 @@
 
 <script setup lang="ts">
 import ReelItem from '@/components/UI/ReelItem.vue'
-import { configSWRV } from '@/config/swrv'
-import { getReelByShop } from '@/services/news/get'
+import { useShopReel } from '@/composables/useReel'
 import { RightCircleFilled } from '@ant-design/icons-vue'
-import useSWRV from 'swrv'
 
 const { shopId } = defineProps<{
   shopId: string
 }>()
-const { data: reels } = useSWRV(`/news/reel/shop/${shopId}`, getReelByShop, configSWRV)
+
+const { data: reels } = useShopReel({ shopId })
 </script>

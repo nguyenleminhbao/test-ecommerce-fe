@@ -46,25 +46,18 @@
 <script setup lang="ts">
 import { Image, Button } from 'ant-design-vue'
 import { WechatOutlined, PlusCircleOutlined, CheckCircleOutlined } from '@ant-design/icons-vue'
-import { ref, h, onMounted } from 'vue'
-import type { IProduct } from '@/interfaces/product.interface'
-import { getShopProducts } from '@/services/products/get'
+import { ref, h } from 'vue'
 import { useAuth, useClerk } from 'vue-clerk'
+import { useShopProduct } from '@/composables/useProduct'
 
-const products = ref<IProduct[]>([])
-
-const follow = ref<boolean>(false)
 const { shopId, shopName, shopAvatar } = defineProps<{
   shopId: string
   shopName: string
   shopAvatar: string
 }>()
 
-onMounted(async () => {
-  const data = await getShopProducts(shopId)
-  products.value = data?.message
-})
-
+const { data: products } = useShopProduct({ shopId })
+const follow = ref<boolean>(false)
 const { isSignedIn } = useAuth()
 const { openSignIn } = useClerk()
 

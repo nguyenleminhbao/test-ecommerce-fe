@@ -20,7 +20,7 @@
         >
       </div>
       <div class="flex flex-col gap-2 p-4 bg-gray-200 rounded-b-md">
-        <h3 class="text-headline-7 text-neutral-7">{{ title }}</h3>
+        <h3 class="text-headline-7 text-neutral-7 h-[42px] two-lines-truncate">{{ title }}</h3>
         <p class="text-neutral-4 text-[14px] leading-[24px]">{{ formatDateText(date) }}</p>
       </div>
     </div>

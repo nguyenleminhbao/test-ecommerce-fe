@@ -32,15 +32,8 @@ import ShopInfor from './ShopInfor.vue'
 import TabProduct from './TabProduct.vue'
 import ProductRelation from './ProductRelation.vue'
 import { useRoute } from 'vue-router'
-import { onMounted, ref } from 'vue'
-import type { IProduct } from '@/interfaces/product.interface'
-import { getOneProduct } from '@/services/products/get'
+import { useProductDetail } from '@/composables/useProduct'
 
 const route = useRoute()
-const product = ref<IProduct>()
-
-onMounted(async () => {
-  const data = await getOneProduct(route.params['productId'] as string)
-  product.value = data.message
-})
+const { data: product } = useProductDetail({ productId: route.params['productId'] as string })
 </script>

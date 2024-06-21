@@ -41,7 +41,7 @@ import { Carousel } from 'ant-design-vue'
 import { LeftCircleOutlined, RightCircleOutlined } from '@ant-design/icons-vue'
 import { getBannerPromotion } from '@/services/shop/get'
 import useSWRV from 'swrv'
-import { configBannerSWRV } from '@/config/swrv'
+import { configBannerSWRV } from '@/composables/swrv'
 
 const { data: banners } = useSWRV('banners', getBannerPromotion, configBannerSWRV)
 </script>

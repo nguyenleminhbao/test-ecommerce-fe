@@ -7,7 +7,7 @@
 
     <div class="w-full flex overflow-x-auto items-start gap-6 scrollbar-hide relative" v-if="feeds">
       <BlogItem
-        v-for="(feed, index) in feeds.message"
+        v-for="(feed, index) in feeds"
         :key="index"
         :feedId="feed.id"
         :imageUrl="feed.thumbnail"
@@ -17,7 +17,7 @@
       />
 
       <RightCircleFilled
-        v-if="feeds && feeds.message.length > 3"
+        v-if="feeds.length > 3"
         class="bg-green z-10 sticky right-2 top-[calc(50%_-_50px)] text-4xl"
       />
     </div>
@@ -28,9 +28,7 @@
 import { RightCircleFilled } from '@ant-design/icons-vue'
 import { ButtonArrow } from '@/components/UI/elements'
 import BlogItem from '@/components/UI/BlogItem.vue'
-import useSWRV from 'swrv'
-import { configSWRV } from '@/config/swrv'
-import { getAllFeed } from '@/services/news/get'
+import { useFeed } from '@/composables/useFeed'
 
-const { data: feeds } = useSWRV('feeds', getAllFeed, configSWRV)
+const { data: feeds } = useFeed()
 </script>

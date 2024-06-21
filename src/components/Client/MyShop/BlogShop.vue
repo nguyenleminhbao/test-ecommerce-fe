@@ -13,7 +13,7 @@
 
     <div class="grid grid-cols-4 gap-x-[25px] gap-y-10 mt-5" v-if="feeds">
       <BlogItem
-        v-for="(feed, index) in feeds.message.slice((currentPage - 1) * 12, currentPage * 12)"
+        v-for="(feed, index) in feeds.slice((currentPage - 1) * 12, currentPage * 12)"
         :key="index"
         :feedId="feed.id"
         :title="feed.title"
@@ -29,7 +29,7 @@
       <Pagination
         v-if="feeds"
         v-model:current="currentPage"
-        :total="feeds.message.length"
+        :total="feeds.length"
         show-less-items
       />
     </div>
@@ -105,7 +105,6 @@
 
 <script setup lang="ts">
 import BlogItem from '@/components/UI/BlogItem.vue'
-import { getFeedByShop } from '@/services/news/get'
 import { ref, h } from 'vue'
 import { PlusCircleOutlined, UploadOutlined } from '@ant-design/icons-vue'
 import {
@@ -125,19 +124,15 @@ import { uploadImageUrl } from '@/constants/upload-url'
 import { getPublicIdFromUrl } from '@/utils'
 import { createFeed } from '@/services/news/post'
 import { deleteFeed } from '@/services/news/delete'
-import useSWRV from 'swrv'
-import { configSWRV } from '@/config/swrv'
 import { deleteFileV2 } from '@/services/upload/post'
+import { useShopFeed } from '@/composables/useFeed'
 
 const { shopId } = defineProps<{
   shopId: string
 }>()
 
-const { data: feeds, mutate: runMutation } = useSWRV(
-  `/news/feed/shop/${shopId}`,
-  getFeedByShop,
-  configSWRV
-)
+const { data: feeds, mutate: runMutation } = useShopFeed({ shopId })
+
 const fileList = ref([])
 const loading = ref<boolean>(false)
 const currentPage = ref<number>(1)

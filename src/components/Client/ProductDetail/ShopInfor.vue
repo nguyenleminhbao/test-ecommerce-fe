@@ -44,16 +44,15 @@
 </template>
 
 <script setup lang="ts">
-const { shopId } = defineProps<{
-  shopId: string
-}>()
-
 import { Image, Button } from 'ant-design-vue'
 import { MessageOutlined, ShopOutlined } from '@ant-design/icons-vue'
 import { onMounted, ref, h } from 'vue'
 import { getOneShop } from '@/services/shop/get'
-import type { IProduct } from '@/interfaces/product.interface'
-import { getShopProducts } from '@/services/products/get'
+import { useShopProduct } from '@/composables/useProduct'
+
+const { shopId } = defineProps<{
+  shopId: string
+}>()
 
 const shop = ref<{
   shopId: string
@@ -61,13 +60,10 @@ const shop = ref<{
   shopAvatar: string
 }>()
 
+const { data: products } = useShopProduct({ shopId })
+
 onMounted(async () => {
   const data = await getOneShop(shopId)
   shop.value = data.message
-
-  const dataProd = await getShopProducts(shopId)
-  products.value = dataProd?.message
 })
-
-const products = ref<IProduct[]>([])
 </script>

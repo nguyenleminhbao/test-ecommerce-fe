@@ -8,17 +8,10 @@
 </template>
 
 <script setup lang="ts">
-import type { IProduct } from '@/interfaces/product.interface'
-import { getShopProducts } from '@/services/products/get'
-import { onMounted, ref } from 'vue'
 import CardItem from '@/components/UI/ProdCard.vue'
 import { useRoute } from 'vue-router'
+import { useShopProduct } from '@/composables/useProduct'
 
 const route = useRoute()
-const products = ref<IProduct[]>([])
-
-onMounted(async () => {
-  const data = await getShopProducts(route.params['shopId'] as string)
-  products.value = data?.message
-})
+const { data: products } = useShopProduct({ shopId: route.params['shopId'] as string })
 </script>
