@@ -1,7 +1,7 @@
 <template>
-  <div class="my-20 flex flex-col gap-12">
+  <div class="my-10 md:my-20 flex flex-col gap-12">
     <div class="flex justify-between items-end">
-      <h1 class="text-headline-6">You might also like</h1>
+      <h1 class="text-headline-6 md:text-headline-5 w-[200px] md:w-[300px]">You might also like</h1>
       <ButtonArrow text="More Articles" link="/news" />
     </div>
 

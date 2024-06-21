@@ -3,7 +3,7 @@
     :loading="!orders"
     :columns="columns"
     :data-source="orders"
-    class="w-full border-[1px] border-black rounded-lg"
+    class="w-full border-[1px] border-black rounded-lg [&_.ant-table-body]:!scrollbar-hide [&_.ant-table-row]:cursor-pointer"
     :scroll="{ x: 400 }"
   >
     <template #bodyCell="{ column, record }">
@@ -34,16 +34,17 @@
 <script setup lang="ts">
 import { getAllOrder } from '@/services/order/get'
 import { onMounted, ref } from 'vue'
-import { Table, Tag, Spin } from 'ant-design-vue'
+import { Table, Tag, Spin, type TableColumnsType } from 'ant-design-vue'
 import { formatDateText, formatNumberWithCommas } from '@/utils'
 import { STATUS_ORDER } from '@/constants/enum/status-order.enum'
 
 const orders = ref()
-const columns = [
+const columns: TableColumnsType = [
   {
     title: 'Order Id',
     dataIndex: 'id',
     key: 'id',
+    fixed: 'left',
     ellipsis: true
   },
   {
