@@ -6,7 +6,7 @@
       @change="onChange"
       class="[&_.ant-tabs-tab-btn]:flex [&_.ant-tabs-tab-btn]:items-center"
     >
-      <TabPane key="1" class="pt-[20px]">
+      <TabPane key="1">
         <template #tab>
           <FileOutlined />
           <span class="text-body-2 font-semibold">Blog</span>

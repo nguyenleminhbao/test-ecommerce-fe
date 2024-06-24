@@ -1,7 +1,17 @@
 <template>
   <div class="w-full flex flex-col gap-10 max-sm:gap-8 h-fit">
-    <div class="flex justify-between items-center">
-      <h1 class="text-body-1-semibold">All Products</h1>
+    <div class="flex flex-wrap justify-between items-center gap-6">
+      <!-- <h1 class="text-body-1-semibold">All Products</h1> -->
+      <InputSearch
+        v-model:value="value"
+        class="border-neutral-4 border-2 rounded-lg sm:w-80 [&_.ant-btn-default]:border-0 [&_.ant-btn-default]:flex [&_.ant-btn-default]:justify-center [&_.ant-btn-default]:items-center"
+        size="large"
+        placeholder="Search..."
+        :bordered="false"
+        :loading="loading"
+        @search="onSearch"
+      />
+
       <Dropdown placement="bottomRight">
         <a
           class="ant-dropdown-link flex gap-[4px] text-body-2-semibold items-center"
@@ -51,7 +61,7 @@
 <script setup lang="ts">
 import ProdCard from '@/components/UI/ProdCard.vue'
 import { ref } from 'vue'
-import { Pagination, Spin, Dropdown, Menu, MenuItem } from 'ant-design-vue'
+import { Pagination, Spin, Dropdown, Menu, MenuItem, InputSearch } from 'ant-design-vue'
 import { DownOutlined } from '@ant-design/icons-vue'
 import { getAllProducts } from '@/services/products/get'
 import { useRoute, useRouter } from 'vue-router'
@@ -74,6 +84,13 @@ const onChange = () => {
     query: { page: currentPage.value }
   })
   runMutation(() => getAllProducts(currentPage.value))
+}
+
+const loading = ref<boolean>(false)
+const value = ref<string>('')
+const onSearch = (searchValue: string) => {
+  console.log('use value', searchValue)
+  console.log('or use this.value', value.value)
 }
 </script>
 

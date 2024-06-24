@@ -9,7 +9,7 @@
         </button>
         <RouterLink to="/" class="flex items-center gap-2">
           <img src="@/assets/images/logo.svg" class="w-[28px] aspect-square" />
-          <span class="text-xl">Shopo</span>
+          <span class="text-body-1-bold">Shopo</span>
         </RouterLink>
       </div>
 
@@ -35,7 +35,7 @@
     <template #title>
       <RouterLink to="/" class="flex items-center gap-2">
         <img src="@/assets/images/logo.svg" class="w-[28px] aspect-square" />
-        <span class="text-xl">Shopo</span>
+        <span class="text-body-1-bold">Shopo</span>
       </RouterLink>
     </template>
     <template #extra>
