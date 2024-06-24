@@ -24,7 +24,7 @@
 
     <Modal v-model:visible="open" title="Address Infomation" @ok="handleOk">
       <template #footer>
-        <Button key="submit" type="primary" :loading="loading" @click="handleOk">Submit</Button>
+        <Button key="submit" type="primary" :loading="loading" @click="handleOk">Add</Button>
       </template>
       <Form
         :model="formState"

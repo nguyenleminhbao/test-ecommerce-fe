@@ -6,7 +6,7 @@
         <span class="text-headline-7">{{ shopName }}</span>
         <span class="text-neutral-5 text-[12px]">Online 1 hour ago</span>
         <div class="grid grid-cols-2 mt-3 gap-2">
-          <Button class="h-7 bg-slate-200 border-black object-center" :icon="h(WechatOutlined)"
+          <Button class="h-7 bg-slate-200 border-black object-center" :icon="h(MessageOutlined)"
             >Chat</Button
           >
 
@@ -45,7 +45,7 @@
 
 <script setup lang="ts">
 import { Image, Button } from 'ant-design-vue'
-import { WechatOutlined, PlusCircleOutlined, CheckCircleOutlined } from '@ant-design/icons-vue'
+import { MessageOutlined, PlusCircleOutlined, CheckCircleOutlined } from '@ant-design/icons-vue'
 import { ref, h } from 'vue'
 import { useAuth, useClerk } from 'vue-clerk'
 import { useShopProduct } from '@/composables/useProduct'

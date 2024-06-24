@@ -90,7 +90,7 @@
           v-model:value="formAddress.streetAddress"
           required
           class="mt-2"
-          placeholder="12 Le Duan, Quan 1, tp Ho Chi Minh"
+          placeholder="12 Le Duan, Quan 1"
         />
       </FormItem>
 

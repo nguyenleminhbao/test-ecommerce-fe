@@ -1,7 +1,7 @@
 <template>
   <Form class="max-w-[1120px] mx-auto" :model="form" @finish="onFinish">
     <button @click="router.back()" class="flex items-center md:hidden gap-2 pt-3">
-      <ArrowLeftOutlined />Back
+      <LeftOutlined />back
     </button>
     <div
       class="w-full max-w-[840px] mx-auto mt-[40px] md:mt-[80px] flex flex-col items-center justify-center"
@@ -52,7 +52,7 @@ import OrderSummary from './OrderSummary.vue'
 import OrderComplete from './OrderComplete.vue'
 import ModalPayment from '@/components/UI/ModalPayment.vue'
 import { Steps, message, Form } from 'ant-design-vue'
-import { ArrowLeftOutlined } from '@ant-design/icons-vue'
+import { LeftOutlined } from '@ant-design/icons-vue'
 import { ref } from 'vue'
 import { useCart } from '@/stores/use-cart'
 import { PAYMENT_TYPE } from '@/constants/enum/payment.enum'

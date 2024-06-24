@@ -3,7 +3,7 @@
     <Breadcrumb separator=">" class="text-button-xs max-sm:hidden mb-14">
       <BreadcrumbItem><a href="/">Home</a></BreadcrumbItem>
       <BreadcrumbItem><a href="/news">News</a></BreadcrumbItem>
-      <BreadcrumbItem>Blog</BreadcrumbItem>
+      <BreadcrumbItem><a href="/news?tab=Blog">Blog</a></BreadcrumbItem>
       <BreadcrumbItem class="line-clamp-1">{{ feed.title }}</BreadcrumbItem>
     </Breadcrumb>
 

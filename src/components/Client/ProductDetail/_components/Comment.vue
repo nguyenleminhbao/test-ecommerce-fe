@@ -26,7 +26,7 @@
       <div class="flex gap-4">
         <Button class="flex items-center border-none">
           <LikeFilled class="mr-1" />
-          Like?
+          Like
         </Button>
         <Button class="flex items-center border-none">
           <RollbackOutlined class="mr-1" />
