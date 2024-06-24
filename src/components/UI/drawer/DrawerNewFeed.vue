@@ -5,7 +5,7 @@
     :closable="false"
     root-class-name="root-class-name"
     :root-style="{ color: 'blue' }"
-    :width="500"
+    width="50%"
     style="color: red"
     title="New Blog"
     placement="right"
@@ -54,7 +54,25 @@
 
       <div class="flex flex-col items-start gap-2">
         <span class="text-xl font-semibold text-black min-w-[100px]">Content</span>
-        <Textarea v-model:value="feedState.content" :rows="10" />
+        <editor
+          v-model="feedState.content"
+          style="width: 100%; height: 600px"
+          api-key="qagffr3pkuv17a8on1afax661irst1hbr4e6tbv888sz91jc"
+          :init="{
+            menubar: false,
+            branding: false,
+            plugins: [
+              'advlist autolink autosave autoresize link image lists charmap hr anchor',
+              'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime nonbreaking',
+              'table template colorpicker paste textcolor importcss textpattern spellchecker'
+            ],
+            toolbar: [
+              'undo redo | bold italic underline strikethrough | alignleft aligncenter alignright  | blockquote | formatselect | spellchecker',
+              'cut copy paste removeformat | searchreplace | bullist numlist | outdent indent | hr | link unlink anchor image code | inserttime',
+              'h1 h2 h3 | table | subscript superscript | charmap | visualchars visualblocks nonbreaking | template | helloworld'
+            ]
+          }"
+        ></editor>
       </div>
     </div>
 
@@ -69,11 +87,11 @@
 
 <script setup lang="ts">
 import { ref, h } from 'vue'
+import Editor from '@tinymce/tinymce-vue'
 import { UploadOutlined } from '@ant-design/icons-vue'
 import {
   Drawer,
   Input,
-  Textarea,
   Button,
   Empty,
   type UploadChangeParam,
