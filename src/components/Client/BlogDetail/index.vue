@@ -1,6 +1,6 @@
 <template>
   <div v-if="feed" class="max-w-[1120px] mx-auto">
-    <div class="flex flex-col gap-10 pt-4">
+    <div class="flex flex-col gap-10 max-sm:gap-8 pt-4">
       <Header :feed="feed" />
       <Content :thumnail="feed.thumbnail" :content="feed.content" />
     </div>
