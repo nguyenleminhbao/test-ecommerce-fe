@@ -27,13 +27,10 @@
           :max-count="1"
           :before-upload="beforeUpload"
         >
-          <Button v-if="loading" type="primary" loading class="flex items-center bg-neutral-7"
-            >Loading</Button
-          >
           <Button
-            v-else
             type="primary"
             class="flex items-center bg-neutral-7"
+            :loading="loading"
             :icon="h(EditOutlined)"
           >
             Edit

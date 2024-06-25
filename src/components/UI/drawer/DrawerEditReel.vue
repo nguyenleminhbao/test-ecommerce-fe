@@ -31,12 +31,9 @@
           :max-count="1"
           :before-upload="beforeUpload"
         >
-          <Button v-if="loading" type="primary" loading class="flex items-center bg-neutral-7"
-            >Loading</Button
-          >
           <Button
-            v-else
             type="primary"
+            :loading="loadingVid"
             class="flex items-center bg-neutral-7"
             :icon="h(EditOutlined)"
           >
@@ -54,10 +51,16 @@
       <div class="flex items-end w-full justify-end gap-2">
         <Popconfirm title="Are you sure？" ok-text="Yes" cancel-text="No" @confirm="onDelete">
           <template #icon><question-circle-outlined style="color: red" /></template>
-          <Button type="primary" danger class="w-[70px]">Delete</Button>
+          <Button :loading="loadingDel" type="primary" danger class="w-[70px]">Delete</Button>
         </Popconfirm>
 
-        <Button type="primary" class="bg-black w-[70px]" @click="onUpdateReel">Edit</Button>
+        <Button
+          :loading="loadingEdit"
+          type="primary"
+          class="bg-black w-[70px]"
+          @click="onUpdateReel"
+          >Edit</Button
+        >
       </div>
     </template>
   </Drawer>
@@ -109,7 +112,9 @@ const videoState = ref<{
 const video = ref()
 const open = ref<boolean>(false)
 const fileList = ref([])
-const loading = ref<boolean>(false)
+const loadingVid = ref<boolean>(false)
+const loadingEdit = ref<boolean>(false)
+const loadingDel = ref<boolean>(false)
 const emit = defineEmits(['deleteReel'])
 
 const { volume, muted } = useMediaControls(video, {
@@ -124,16 +129,16 @@ const showDrawer = (e: Event) => {
 const handleChange = async (info: UploadChangeParam) => {
   console.log(info.file)
   if (info.file.status === 'uploading') {
-    loading.value = true
+    loadingVid.value = true
     return
   }
   if (info.file.status === 'done') {
     videoState.value.video = info.file.response.url
     message.success('Upload reel successfully')
-    loading.value = false
+    loadingVid.value = false
   }
   if (info.file.status === 'error') {
-    loading.value = false
+    loadingVid.value = false
     message.error('upload error')
   }
 }
@@ -147,6 +152,7 @@ const beforeUpload: UploadProps['beforeUpload'] = (file) => {
 }
 
 const onUpdateReel = async () => {
+  loadingEdit.value = true
   await updateReel({
     idVideoOld: getPublicIdFromUrl(videoUrl),
     reelId,
@@ -154,14 +160,17 @@ const onUpdateReel = async () => {
     description: videoState.value.description,
     newVideoUrl: videoState.value.video
   })
+  loadingEdit.value = false
   message.success('Update reel successfully')
   if (runMutation) await runMutation()
   open.value = false
 }
 
 const onDelete = () => {
+  loadingDel.value = true
   emit('deleteReel', reelId)
   open.value = false
+  loadingDel.value = false
 }
 
 // Change initial media properties

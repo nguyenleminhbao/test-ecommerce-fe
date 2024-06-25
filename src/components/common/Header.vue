@@ -45,7 +45,16 @@
               <ShoppingOutlined /> </span
           ></Tooltip>
 
-          <span class="object-center cursor-pointer"> <BellOutlined /> </span>
+          <Dropdown placement="bottom" arrow>
+            <span class="object-center cursor-pointer"> <BellOutlined /> </span>
+            <template #overlay>
+              <Empty>
+                <template #description>
+                  <span>No Notifications Yet</span>
+                </template>
+              </Empty>
+            </template>
+          </Dropdown>
         </div>
 
         <ClerkLoading>
@@ -71,7 +80,7 @@
 </template>
 
 <script setup lang="ts">
-import { Button, Tooltip } from 'ant-design-vue'
+import { Button, Tooltip, Dropdown, Empty } from 'ant-design-vue'
 import {
   ShopOutlined,
   ShoppingOutlined,
