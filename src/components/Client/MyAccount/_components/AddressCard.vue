@@ -21,14 +21,14 @@
   <Modal
     v-model:open="open"
     title="Edit address shipping"
-    @ok="handleOk"
+    @ok="handleEdit"
     class="[&_.ant-modal-title]:text-headline-6"
   >
     <template #footer>
       <Button key="back" type="primary" :loading="loadingDel" @click="handleDel" danger>
         Delete
       </Button>
-      <Button key="submit" type="primary" :loading="loadingEdit" @click="handleOk">Edit</Button>
+      <Button key="submit" type="primary" :loading="loadingEdit" @click="handleEdit">Edit</Button>
     </template>
 
     <Form class="w-full grid grid-cols-2 gap-3" :model="formAddress">
@@ -69,10 +69,9 @@
 
 <script setup lang="ts">
 import { Modal, Form, FormItem, Input, Button, message } from 'ant-design-vue'
-import { EditOutlined } from '@ant-design/icons-vue'
+import { ConsoleSqlOutlined, EditOutlined } from '@ant-design/icons-vue'
 import { onMounted, ref, watchEffect, h } from 'vue'
 import type { IAddress } from '@/interfaces/user.interface'
-import { createAddress } from '@/services/detail-user/post'
 
 const { id, street, city } = defineProps<{
   id: number
@@ -95,15 +94,15 @@ const formAddress = ref<{
   city: ''
 })
 
-const handleOk = async (e: MouseEvent) => {
+const handleEdit = async (e: MouseEvent) => {
   if (!formAddress.value.streetAddress || !formAddress.value.city) {
     message.error('Please fill in all information')
   } else {
     loadingEdit.value = true
-    await createAddress({
-      streetAddress: formAddress.value.streetAddress,
-      city: formAddress.value.city
-    })
+
+    // Edit
+    console.log('ok')
+
     loadingEdit.value = false
     message.success('Edit address successfully')
     open.value = false
@@ -113,10 +112,9 @@ const handleOk = async (e: MouseEvent) => {
 const handleDel = async (e: MouseEvent) => {
   loadingDel.value = true
 
-  await createAddress({
-    streetAddress: formAddress.value.streetAddress,
-    city: formAddress.value.city
-  })
+  // Delete
+  console.log('del')
+  
   loadingDel.value = false
   message.success('Delete address successfully')
 }
