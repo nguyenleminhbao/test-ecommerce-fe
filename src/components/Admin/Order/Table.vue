@@ -61,7 +61,7 @@
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
-import { Table, Image, Tag, type TableColumnsType } from 'ant-design-vue'
+import { Table, Tag, type TableColumnsType } from 'ant-design-vue'
 import type { ICartItem } from '@/interfaces/cart.interface'
 import type { IOrder } from '@/interfaces/order.interface'
 import { STATUS_ORDER } from '@/constants/enum/status-order.enum'

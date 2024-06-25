@@ -1,131 +1,123 @@
 <template>
   <div class="flex flex-col gap-2 p-4 border-neutral-4 border rounded-lg">
-    <button v-if="newAdd" @click="showModal" class="h-full flex justify-center items-center">
-      <PlusCircleOutlined />
-    </button>
-    <div v-else>
-      <div class="flex justify-between text-body-2-semibold">
-        <div class="flex gap-1 items-center">
-          <h1 class="text-body-2-semibold">{{ type }} Address</h1>
-          <CheckCircleOutlined v-if="default" class="text-secondary-red" />
-        </div>
-        <button @click="showModal" class="flex gap-1 items-center text-neutral-4">
-          <EditOutlined />
-          <span class="text-body-2-semibold">Edit</span>
-        </button>
-      </div>
-
-      <div class="flex flex-col gap-1 text-caption-1">
-        <span>{{ name }}</span>
-        <span>{{ phone }}</span>
-        <span>{{ address }}</span>
-      </div>
+    <div class="flex justify-between text-body-2-semibold">
+      <h1 class="text-body-2-semibold">Address #{{ id }}</h1>
+      <Button
+        type="text"
+        @click="showModal"
+        class="flex gap-1 items-center text-neutral-4 text-body-2-semibold"
+        :icon="h(EditOutlined)"
+      >
+        Edit
+      </Button>
     </div>
 
-    <Modal v-model:visible="open" title="Address Infomation" @ok="handleOk">
-      <template #footer>
-        <Button key="submit" type="primary" :loading="loading" @click="handleOk">Add</Button>
-      </template>
-      <Form
-        :model="formState"
-        name="basic"
-        :label-col="{ span: 5 }"
-        :wrapper-col="{ span: 20 }"
-        autocomplete="off"
-      >
-        <FormItem label="Name" name="name" :rules="[{ required: true, message: 'Please input!' }]">
-          <Input v-model:value="formState.name" />
-        </FormItem>
-
-        <FormItem
-          label="Phone"
-          name="phone"
-          :rules="[{ required: true, message: 'Please input!' }]"
-        >
-          <Input v-model:value="formState.phone" />
-        </FormItem>
-
-        <FormItem
-          label="Address"
-          name="address"
-          :rules="[{ required: true, message: 'Please input!' }]"
-        >
-          <Input v-model:value="formState.address" />
-        </FormItem>
-
-        <FormItem label="Type" name="type" :rules="[{ required: true, message: 'Please input!' }]">
-          <RadioGroup v-model:value="formState.type">
-            <Radio value="Home">Home</Radio>
-            <Radio value="Company">Company</Radio>
-          </RadioGroup>
-        </FormItem>
-
-        <FormItem name="remember" :wrapper-col="{ offset: 5, span: 20 }">
-          <Checkbox v-model:checked="formState.default">Set default</Checkbox>
-        </FormItem>
-      </Form>
-    </Modal>
+    <div class="flex flex-col gap-1 text-caption-1">
+      <span>{{ street }}</span>
+      <span>{{ city }}</span>
+    </div>
   </div>
+
+  <Modal
+    v-model:open="open"
+    title="Edit address shipping"
+    @ok="handleOk"
+    class="[&_.ant-modal-title]:text-headline-6"
+  >
+    <template #footer>
+      <Button key="back" type="primary" :loading="loadingDel" @click="handleDel" danger>
+        Delete
+      </Button>
+      <Button key="submit" type="primary" :loading="loadingEdit" @click="handleOk">Edit</Button>
+    </template>
+
+    <Form class="w-full grid grid-cols-2 gap-3" :model="formAddress">
+      <FormItem
+        class="col-span-2"
+        name="streetAddress"
+        :rules="[{ required: true, message: 'Please input your street!' }]"
+      >
+        <span class="text-body-2-semibold text-neutral-4"
+          >Street Address <span class="text-red-600 text-lg">*</span></span
+        >
+        <Input
+          v-model:value="formAddress.streetAddress"
+          required
+          class="mt-2"
+          placeholder="12 Le Duan, Quan 1"
+        />
+      </FormItem>
+
+      <FormItem
+        class="col-span-2"
+        name="city"
+        :rules="[{ required: true, message: 'Please input your city!' }]"
+      >
+        <span class="text-body-2-semibold text-neutral-4"
+          >City <span class="text-red-600 text-lg">*</span></span
+        >
+        <Input
+          v-model:value="formAddress.city"
+          required
+          class="mt-2"
+          placeholder="Tp Ho Chi Minh"
+        />
+      </FormItem>
+    </Form>
+  </Modal>
 </template>
 
 <script setup lang="ts">
-import { Modal, Form, FormItem, Input, Checkbox, RadioGroup, Radio, Button } from 'ant-design-vue'
-import { PlusCircleOutlined, EditOutlined, CheckCircleOutlined } from '@ant-design/icons-vue'
+import { Modal, Form, FormItem, Input, Button, message } from 'ant-design-vue'
+import { EditOutlined } from '@ant-design/icons-vue'
+import { onMounted, ref, watchEffect, h } from 'vue'
+import type { IAddress } from '@/interfaces/user.interface'
+import { createAddress } from '@/services/detail-user/post'
 
-const props = defineProps<{
-  newAdd: boolean
-  type?: string
-  name?: string
-  phone?: string
-  address?: string
-  default?: boolean
+const { id, street, city } = defineProps<{
+  id: number
+  street: string
+  city: string
 }>()
 
-import { ref, reactive } from 'vue'
+const loadingEdit = ref<boolean>()
+const loadingDel = ref<boolean>()
 const open = ref<boolean>(false)
-const loading = ref<boolean>(false)
-
 const showModal = () => {
   open.value = true
 }
 
-const handleOk = () => {
-  console.log('Success:', formState)
-
-  emit('update:type', formState.type)
-  emit('update:name', formState.name)
-  emit('update:phone', formState.phone)
-  emit('update:address', formState.address)
-  emit('update:default', formState.default)
-
-  loading.value = true
-  setTimeout(() => {
-    loading.value = false
-    open.value = false
-  }, 2000)
-}
-
-interface FormState {
-  name: string
-  phone: string
-  address: string
-  type: string
-  default: boolean
-}
-
-const formState = reactive<FormState>({
-  name: props.name ?? 'user',
-  phone: props.phone ?? '0123456789',
-  address: props.address ?? 'address default',
-  type: props.type ?? 'default',
-  default: props.default
+const formAddress = ref<{
+  streetAddress: string
+  city: string
+}>({
+  streetAddress: '',
+  city: ''
 })
 
-const emit = defineEmits<{
-  (e: 'update:type', value: string): void
-  (e: 'update:name', value: string): void
-  (e: 'update:phone', value: string): void
-  (e: 'update:address', value: string): void
-  (e: 'update:default', value: boolean): void
-}>()
+const handleOk = async (e: MouseEvent) => {
+  if (!formAddress.value.streetAddress || !formAddress.value.city) {
+    message.error('Please fill in all information')
+  } else {
+    loadingEdit.value = true
+    await createAddress({
+      streetAddress: formAddress.value.streetAddress,
+      city: formAddress.value.city
+    })
+    loadingEdit.value = false
+    message.success('Edit address successfully')
+    open.value = false
+  }
+}
+
+const handleDel = async (e: MouseEvent) => {
+  loadingDel.value = true
+
+  await createAddress({
+    streetAddress: formAddress.value.streetAddress,
+    city: formAddress.value.city
+  })
+  loadingDel.value = false
+  message.success('Delete address successfully')
+}
 </script>

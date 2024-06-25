@@ -63,8 +63,8 @@
           <SelectOption
             v-for="(address, index) in listAddress"
             :key="index"
-            :value="`${address.streetAddress} ${address.city}`"
-            >{{ `${address.streetAddress} ${address.city}` }}</SelectOption
+            :value="`${address.streetAddress}, ${address.city}`"
+            >{{ `${address.streetAddress}, ${address.city}` }}</SelectOption
           >
         </Select>
       </FormItem>
