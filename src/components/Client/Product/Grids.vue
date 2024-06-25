@@ -3,13 +3,13 @@
     <div class="flex flex-wrap justify-between items-center gap-6">
       <!-- <h1 class="text-body-1-semibold">All Products</h1> -->
       <InputSearch
-        v-model:value="value"
+        v-model:value="titleSearch"
         class="border-neutral-4 border-2 rounded-lg sm:w-80 [&_.ant-btn-default]:border-0 [&_.ant-btn-default]:flex [&_.ant-btn-default]:justify-center [&_.ant-btn-default]:items-center"
         size="large"
         placeholder="Search..."
         :bordered="false"
         :loading="loading"
-        @search="onSearch"
+        @change="onSearch"
       />
 
       <Dropdown placement="bottomRight">
@@ -66,6 +66,8 @@ import { DownOutlined } from '@ant-design/icons-vue'
 import { getAllProducts } from '@/services/products/get'
 import { useRoute, useRouter } from 'vue-router'
 import { useProduct } from '@/composables/useProduct'
+import { searchProduct } from '@/services/products/post'
+import { ElasticsearchIndex } from '@/constants/enum/search.enum'
 
 const route = useRoute()
 const router = useRouter()
@@ -87,10 +89,13 @@ const onChange = () => {
 }
 
 const loading = ref<boolean>(false)
-const value = ref<string>('')
-const onSearch = (searchValue: string) => {
-  console.log('use value', searchValue)
-  console.log('or use this.value', value.value)
+const titleSearch = ref<string>('')
+const onSearch = () => {
+  //console.log('use value', searchValue)
+  console.log('or use this.value', titleSearch.value)
+  if (titleSearch.value)
+    runMutation(() => searchProduct(ElasticsearchIndex.PRODUCT, titleSearch.value))
+  else runMutation(() => getAllProducts(currentPage.value))
 }
 </script>
 
