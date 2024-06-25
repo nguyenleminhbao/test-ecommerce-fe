@@ -1,7 +1,7 @@
 <template>
   <div v-if="authStore.isAdmin">
     <div class="flex">
-      <Slidebar class="fixed top-0 w-[200px]" />
+      <SlidebarAdmin class="fixed top-0 w-[200px]" />
       <div class="flex-1 overflow-auto ml-[200px] bg-neutral-2 min-h-screen">
         <HeaderAdmin class="fixed top-0" />
         <div class="p-[24px] mt-[60px]">
@@ -20,7 +20,7 @@
 </template>
 <script setup lang="ts">
 import HeaderAdmin from '@/components/common/HeaderAdmin.vue'
-import Slidebar from '@/components/common/Slidebar.vue'
+import SlidebarAdmin from '@/components/common/SlidebarAdmin.vue'
 import { checkAdmin } from '@/services/auth/get'
 import { login } from '@/services/auth/post'
 import { useAuthSystem } from '@/stores/use-auth'

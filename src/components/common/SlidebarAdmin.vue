@@ -9,7 +9,7 @@
       mode="inline"
       :inline-collapsed="state.collapsed"
       :items="items"
-      class="[&_.ant-menu-title-content]:font-semibold"
+      class="[&_.ant-menu-title-content]:font-semibold [&_.ant-menu-item-selected]:bg-neutral-7 [&_.ant-menu-item-selected]:text-white"
       @click="handleMenuItemClick"
     ></Menu>
   </div>
