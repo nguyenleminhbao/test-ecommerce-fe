@@ -51,7 +51,7 @@
 </template>
 
 <script setup lang="ts">
-import { Image, Menu, message } from 'ant-design-vue'
+import { Image, Menu, message, type MenuProps } from 'ant-design-vue'
 import { h, ref } from 'vue'
 import {
   CalendarOutlined,
@@ -64,7 +64,6 @@ import {
   ArrowLeftOutlined
 } from '@ant-design/icons-vue'
 import { useAuth, useUser, ClerkLoaded, ClerkLoading, useClerk } from 'vue-clerk'
-import type { MenuProps } from 'ant-design-vue'
 import AccountDetail from './AccountDetail.vue'
 import AddressDetail from './AddressDetail.vue'
 import OrderDetail from './OrderDetail.vue'
