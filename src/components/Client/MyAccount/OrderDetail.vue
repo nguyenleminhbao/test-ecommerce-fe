@@ -8,7 +8,7 @@
   >
     <template #bodyCell="{ column, record }">
       <template v-if="column.dataIndex === 'id'">
-        <a>{{ `#${record.id.slice(0, 8)}` }}</a>
+        {{ `#${record.id.slice(0, 8)}` }}
       </template>
       <template v-if="column.dataIndex === 'createdAt'">
         {{ formatDateText(record.createdAt) }}
@@ -23,8 +23,8 @@
       </template>
 
       <template v-if="column.dataIndex === 'amount'">
-        <span class="text-body-2-semibold"
-          >{{ `${formatNumberWithCommas(record.amount)} đ` }}
+        <span class="text-body-2-semibold">
+          {{ `${formatNumberWithCommas(record.amount)} đ` }}
         </span>
       </template>
     </template>
