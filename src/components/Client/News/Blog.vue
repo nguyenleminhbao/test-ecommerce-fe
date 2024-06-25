@@ -1,12 +1,12 @@
 <template>
   <InputSearch
-    v-model:value="value"
+    v-model:value="titleSearch"
     class="border-neutral-4 border-2 rounded-lg sm:w-80 [&_.ant-btn-default]:border-0 [&_.ant-btn-default]:flex [&_.ant-btn-default]:justify-center [&_.ant-btn-default]:items-center"
     size="large"
     placeholder="Search..."
     :bordered="false"
     :loading="loading"
-    @search="onSearch"
+    @change="onSearch"
   />
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-[25px] gap-y-10 mt-5">
     <BlogItem
@@ -30,14 +30,16 @@ import BlogItem from '@/components/UI/BlogItem.vue'
 import { ref } from 'vue'
 import { Pagination, InputSearch } from 'ant-design-vue'
 import { useFeed } from '@/composables/useFeed'
+import { searchFeed } from '@/services/news/post'
+import { ElasticsearchIndex } from '@/constants/enum/search.enum'
 
 const currentPage = ref<number>(1)
-const { data: feeds } = useFeed()
+const { data: feeds, mutate: runMutation } = useFeed()
 
 const loading = ref<boolean>(false)
-const value = ref<string>('')
-const onSearch = (searchValue: string) => {
-  console.log('use value', searchValue)
-  console.log('or use this.value', value.value)
+const titleSearch = ref<string>('')
+const onSearch = () => {
+  if (titleSearch.value) runMutation(() => searchFeed(ElasticsearchIndex.FEED, titleSearch.value))
+  else runMutation()
 }
 </script>
