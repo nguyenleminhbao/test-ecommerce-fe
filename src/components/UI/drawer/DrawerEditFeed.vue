@@ -30,7 +30,7 @@
           <Button
             type="primary"
             class="flex items-center bg-neutral-7"
-            :loading="loading"
+            :loading="loadingImg"
             :icon="h(EditOutlined)"
           >
             Edit
@@ -70,10 +70,10 @@
       <div class="flex items-end w-full justify-end gap-2">
         <Popconfirm title="Are you sure？" ok-text="Yes" cancel-text="No" @confirm="onDelete">
           <template #icon><question-circle-outlined style="color: red" /></template>
-          <Button type="primary" danger class="w-[70px]">Delete</Button>
+          <Button :loading="loadingDel" type="primary" danger class="w-[70px]">Delete</Button>
         </Popconfirm>
 
-        <Button type="primary" class="bg-black w-[70px]" @click="onUpdateFeed">Edit</Button>
+        <Button :loading="loadingEdit" type="primary" class="bg-black w-[70px]" @click="onUpdateFeed">Edit</Button>
       </div>
     </template>
   </Drawer>
@@ -111,7 +111,9 @@ const { feedId, imageUrl, title, content, runMutation } = defineProps<{
 
 const open = ref<boolean>(false)
 const fileList = ref([])
-const loading = ref<boolean>(false)
+const loadingImg = ref<boolean>(false)
+const loadingEdit = ref<boolean>(false)
+const loadingDel = ref<boolean>(false)
 const emit = defineEmits(['deleteBlog'])
 
 const imageState = ref<{
@@ -132,16 +134,16 @@ const showDrawer = (e: Event) => {
 const handleChange = async (info: UploadChangeParam) => {
   console.log(info.file)
   if (info.file.status === 'uploading') {
-    loading.value = true
+    loadingImg.value = true
     return
   }
   if (info.file.status === 'done') {
     imageState.value.image = info.file.response.url
     message.success('Upload reel successfully')
-    loading.value = false
+    loadingImg.value = false
   }
   if (info.file.status === 'error') {
-    loading.value = false
+    loadingImg.value = false
     message.error('upload error')
   }
 }
@@ -155,6 +157,7 @@ const beforeUpload: UploadProps['beforeUpload'] = (file) => {
 }
 
 const onUpdateFeed = async () => {
+  loadingEdit.value = true
   await updateFeed({
     idImageOld: getPublicIdFromUrl(imageUrl),
     feedId,
@@ -162,14 +165,17 @@ const onUpdateFeed = async () => {
     newImageUrl: imageState.value.image,
     content: imageState.value.content
   })
+  loadingEdit.value = false
   message.success('Update feed successfully')
   if (runMutation) await runMutation()
   open.value = false
 }
 
 const onDelete = () => {
+  loadingDel.value = true
   emit('deleteBlog', feedId)
   open.value = false
+  loadingDel.value = false
 }
 
 defineExpose({

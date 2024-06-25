@@ -49,7 +49,9 @@
     <template #footer>
       <div class="flex items-end w-full justify-end gap-2">
         <Button class="border-black w-[70px]" @click="open = false">Cancel</Button>
-        <Button type="primary" class="bg-black w-[70px]" @click="onAdd">Add</Button>
+        <Button :loading="loadingAdd" type="primary" class="bg-black w-[70px]" @click="onAdd"
+          >Add</Button
+        >
       </div>
     </template>
   </Drawer>
@@ -84,6 +86,7 @@ const { shopId, runMutation } = defineProps<{
 
 const fileList = ref([])
 const loading = ref<boolean>(false)
+const loadingAdd = ref<boolean>(false)
 const open = ref<boolean>(false)
 
 const videoState = ref<{
@@ -133,6 +136,7 @@ const onAdd = async () => {
     message.error('Please fill full the information!')
     return
   }
+  loadingAdd.value = true
   await createReel({
     video: videoState.value.video,
     title: videoState.value.title,
@@ -140,6 +144,7 @@ const onAdd = async () => {
     shopId
   })
   if (runMutation) await runMutation()
+  loadingAdd.value = false
   message.success('Create reel successfully')
   videoState.value = {
     video: '',

@@ -29,11 +29,8 @@
           :action="uploadImageUrl"
           :before-upload="beforeUpload"
         >
-          <Button v-if="loading" type="primary" loading class="flex items-center bg-neutral-7"
-            >Loading</Button
-          >
           <Button
-            v-else
+            :loading="loadingImg"
             type="primary"
             class="flex items-center bg-neutral-7"
             :icon="h(UploadOutlined)"
@@ -79,7 +76,7 @@
     <template #footer>
       <div class="flex items-end w-full justify-end gap-2">
         <Button class="border-black w-[70px]" @click="open = false">Cancel</Button>
-        <Button type="primary" class="bg-black w-[70px]" @click="onAdd">Add</Button>
+        <Button :loading="loadingAdd" type="primary" class="bg-black w-[70px]" @click="onAdd">Add</Button>
       </div>
     </template>
   </Drawer>
@@ -114,7 +111,8 @@ const { shopId, runMutation } = defineProps<{
 }>()
 
 const fileList = ref([])
-const loading = ref<boolean>(false)
+const loadingImg = ref<boolean>(false)
+const loadingAdd = ref<boolean>(false)
 const open = ref<boolean>(false)
 
 const feedState = ref<{
@@ -134,7 +132,7 @@ const showDrawer = (e: Event) => {
 
 const handleChange = async (info: UploadChangeParam) => {
   if (info.file.status === 'uploading') {
-    loading.value = true
+    loadingImg.value = true
     if (feedState.value.thumbnail) {
       await deleteFileV2(getPublicIdFromUrl(feedState.value.thumbnail))
     }
@@ -143,10 +141,10 @@ const handleChange = async (info: UploadChangeParam) => {
   if (info.file.status === 'done') {
     feedState.value.thumbnail = info.file.response.url
     message.success('Upload thumbnail successfully')
-    loading.value = false
+    loadingImg.value = false
   }
   if (info.file.status === 'error') {
-    loading.value = false
+    loadingImg.value = false
     message.error('Upload error')
   }
 }
@@ -164,6 +162,7 @@ const onAdd = async () => {
     message.error('Please fill full the information!')
     return
   }
+  loadingAdd.value = true
   await createFeed({
     title: feedState.value.title,
     thumbnail: feedState.value.thumbnail,
@@ -171,6 +170,7 @@ const onAdd = async () => {
     shopId
   })
   if (runMutation) await runMutation()
+  loadingAdd.value = false
   message.success('Create feed successfully')
   feedState.value = {
     title: '',
