@@ -14,5 +14,5 @@
 
 <script setup lang="ts">
 defineProps(['title', 'imageUrl'])
-import ButtonArrow from '@/components/UI/elements/ButtonArrow.vue'
+import { ButtonArrow } from '@/components/UI/elements'
 </script>

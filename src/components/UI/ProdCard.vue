@@ -67,7 +67,7 @@
 <script setup lang="ts">
 import { Button, Rate } from 'ant-design-vue'
 import { HeartOutlined, HeartFilled } from '@ant-design/icons-vue'
-import BadgeMedium from '@/components/UI/elements/BadgeMedium.vue'
+import { BadgeMedium } from '@/components/UI/elements'
 import { TYPE_BADGE } from '@/constants/enum/badge.enum'
 import type { IProduct } from '@/interfaces/product.interface'
 import { formatNumberWithCommas } from '@/utils'

@@ -22,11 +22,9 @@
 </template>
 
 <script setup lang="ts">
-import { RightCircleFilled } from '@ant-design/icons-vue'
-import { ButtonArrow } from '@/components/UI/elements'
+import { ButtonArrow, RightIcon } from '@/components/UI/elements'
 import BlogItem from '@/components/UI/BlogItem.vue'
 import { useFeed } from '@/composables/useFeed'
-import { RightIcon } from '@/components/UI/elements'
 
 const { data: feeds } = useFeed()
 </script>

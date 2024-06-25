@@ -3,9 +3,9 @@
     <component :is="icon" class="text-[48px] text-left" />
     <div class="grid gap-[8px]">
       <span class="text-headline-7 !text-[17px] md:!text-[20px] text-neutral-7">{{ title }}</span>
-      <span class="md:min-w-[198px]  text-neutral-4 text-[12px] md:text-[14px] leading-[24px]">{{
-        description
-      }}</span>
+      <span class="md:min-w-[198px] text-neutral-4 text-[12px] md:text-[14px] leading-[24px]">
+        {{ description }}
+      </span>
     </div>
   </div>
 </template>
