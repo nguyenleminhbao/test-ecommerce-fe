@@ -63,7 +63,6 @@ import ProdCard from '@/components/UI/ProdCard.vue'
 import { ref } from 'vue'
 import { Pagination, Spin, Dropdown, Menu, MenuItem, InputSearch } from 'ant-design-vue'
 import { DownOutlined } from '@ant-design/icons-vue'
-import { getAllProducts } from '@/services/products/get'
 import { useRoute, useRouter } from 'vue-router'
 import { useProduct } from '@/composables/useProduct'
 import { searchProduct } from '@/services/products/post'
@@ -85,17 +84,15 @@ const onChange = () => {
     path: route.path,
     query: { page: currentPage.value }
   })
-  runMutation(() => getAllProducts(currentPage.value))
+  runMutation()
 }
 
 const loading = ref<boolean>(false)
 const titleSearch = ref<string>('')
 const onSearch = () => {
-  //console.log('use value', searchValue)
-  console.log('or use this.value', titleSearch.value)
   if (titleSearch.value)
     runMutation(() => searchProduct(ElasticsearchIndex.PRODUCT, titleSearch.value))
-  else runMutation(() => getAllProducts(currentPage.value))
+  else runMutation()
 }
 </script>
 
