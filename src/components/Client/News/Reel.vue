@@ -8,18 +8,29 @@
     :loading="loading"
     @change="onSearch"
   />
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-[25px] gap-y-10 mt-5">
-    <ReelItem
-      v-for="(reel, index) in reels.slice((currentPage - 1) * 12, currentPage * 12)"
-      :key="index"
-      :reelId="reel.id"
-      :video-url="reel.video"
-      :title="reel.title"
-      :description="reel.description"
-      :view="reel.view"
-      class="!max-w-full"
-    />
+  <div class="w-full">
+    <div v-if="isLoading"  class="w-full min-h-[500px] object-center">
+      <Spin
+        class="[&_.ant-spin-dot-item]:bg-black [&_.ant-spin-dot-item]:text-xl"
+        :spinning="isLoading"
+        size="large"
+      />
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-[25px] gap-y-10 mt-5">
+      <ReelItem
+        v-if="!isLoading"
+        v-for="(reel, index) in reels.slice((currentPage - 1) * 12, currentPage * 12)"
+        :key="index"
+        :reelId="reel.id"
+        :video-url="reel.video"
+        :title="reel.title"
+        :description="reel.description"
+        :view="reel.view"
+        class="!max-w-full"
+      />
+      </div>
   </div>
+
   <div class="flex justify-center my-20">
     <Pagination v-if="reels" v-model:current="currentPage" :total="reels.length" show-less-items />
   </div>
@@ -27,14 +38,15 @@
 
 <script setup lang="ts">
 import ReelItem from '@/components/UI/ReelItem.vue'
-import { Pagination, InputSearch } from 'ant-design-vue'
+import { Pagination, InputSearch, Spin } from 'ant-design-vue'
 import { ref } from 'vue'
 import { useReel } from '@/composables/useReel'
 import { searchNews } from '@/services/news/post'
 import { ElasticsearchIndex } from '@/constants/enum/search.enum'
 import type { IReel } from '@/interfaces/news.interface'
+import { getAllReel } from '@/services/news/get'
 
-const { data: reels, mutate: runMutation } = useReel()
+const { data: reels, isLoading,mutate: runMutation } = useReel()
 const currentPage = ref<number>(1)
 
 const loading = ref<boolean>(false)
@@ -42,6 +54,6 @@ const titleSearch = ref<string>('')
 const onSearch = () => {
   if (titleSearch.value)
     runMutation(() => searchNews<IReel>(ElasticsearchIndex.REEL, titleSearch.value))
-  else runMutation()
+  else runMutation(()=>getAllReel())
 }
 </script>
