@@ -100,10 +100,10 @@ import {
 import { EditOutlined, QuestionCircleOutlined } from '@ant-design/icons-vue'
 import { uploadImageUrl } from '@/constants/upload-url'
 import { getPublicIdFromUrl } from '@/utils'
-import { updateFeed } from '@/services/upload/post'
 import type { IFeed } from '@/interfaces/news.interface'
 import type { IResponse } from '@/interfaces/response.interface'
 import type { fetcherFn } from 'swrv/dist/types'
+import { updateFeed } from '@/services/news/post'
 
 const { feedId, imageUrl, title, content, runMutation } = defineProps<{
   feedId: string

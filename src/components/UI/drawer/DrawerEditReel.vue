@@ -80,10 +80,10 @@ import {
 import { EditOutlined, QuestionCircleOutlined } from '@ant-design/icons-vue'
 import { uploadVideoUrl } from '@/constants/upload-url'
 import { getPublicIdFromUrl } from '@/utils'
-import { updateReel } from '@/services/upload/post'
 import type { IResponse } from '@/interfaces/response.interface'
 import type { IReel } from '@/interfaces/news.interface'
 import type { fetcherFn } from 'swrv/dist/types'
+import { updateReel } from '@/services/news/post'
 
 const { reelId, videoUrl, title, description, runMutation } = defineProps<{
   reelId: string

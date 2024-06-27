@@ -26,20 +26,22 @@
 </template>
 
 <script setup lang="ts">
-import BlogItem from '@/components/UI/BlogItem.vue'
 import { ref } from 'vue'
 import { Pagination, InputSearch } from 'ant-design-vue'
 import { useFeed } from '@/composables/useFeed'
-import { searchFeed } from '@/services/news/post'
+import { searchNews } from '@/services/news/post'
 import { ElasticsearchIndex } from '@/constants/enum/search.enum'
+import BlogItem from '@/components/UI/BlogItem.vue'
+import type { IFeed } from '@/interfaces/news.interface'
 
 const currentPage = ref<number>(1)
-const { data: feeds, mutate: runMutation } = useFeed()
-
 const loading = ref<boolean>(false)
 const titleSearch = ref<string>('')
+const { data: feeds, mutate: runMutation } = useFeed()
+
 const onSearch = () => {
-  if (titleSearch.value) runMutation(() => searchFeed(ElasticsearchIndex.FEED, titleSearch.value))
+  if (titleSearch.value)
+    runMutation(() => searchNews<IFeed>(ElasticsearchIndex.FEED, titleSearch.value))
   else runMutation()
 }
 </script>

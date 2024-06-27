@@ -30,8 +30,9 @@ import ReelItem from '@/components/UI/ReelItem.vue'
 import { Pagination, InputSearch } from 'ant-design-vue'
 import { ref } from 'vue'
 import { useReel } from '@/composables/useReel'
-import { searchReel } from '@/services/news/post'
+import { searchNews } from '@/services/news/post'
 import { ElasticsearchIndex } from '@/constants/enum/search.enum'
+import type { IReel } from '@/interfaces/news.interface'
 
 const { data: reels, mutate: runMutation } = useReel()
 const currentPage = ref<number>(1)
@@ -39,7 +40,8 @@ const currentPage = ref<number>(1)
 const loading = ref<boolean>(false)
 const titleSearch = ref<string>('')
 const onSearch = () => {
-  if (titleSearch.value) runMutation(() => searchReel(ElasticsearchIndex.REEL, titleSearch.value))
+  if (titleSearch.value)
+    runMutation(() => searchNews<IReel>(ElasticsearchIndex.REEL, titleSearch.value))
   else runMutation()
 }
 </script>
