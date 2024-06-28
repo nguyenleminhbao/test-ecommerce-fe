@@ -78,7 +78,6 @@ const checkout = () => {
 *.nameRadio {
   display: flex;
   justify-content: space-between;
-
   min-width: 220px;
 }
 

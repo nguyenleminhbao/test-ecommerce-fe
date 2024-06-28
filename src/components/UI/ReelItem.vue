@@ -39,7 +39,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
 import { useMediaControls } from '@vueuse/core'
 import { Button } from 'ant-design-vue'
 import { increateViewReel } from '@/services/news/post'
@@ -75,13 +75,7 @@ const onClick = async () => {
 const video = ref()
 const drawerEditReel = ref()
 
-const { playing, volume, muted, currentTime } = useMediaControls(video, {
+const { playing, muted, currentTime } = useMediaControls(video, {
   src: videoUrl
-})
-
-// Change initial media properties
-onMounted(() => {
-  muted.value = true
-  volume.value = 1
 })
 </script>

@@ -3,6 +3,7 @@
     :to="`/blog/${feedId}`"
     class="group relative shadow-md min-w-[262px] max-w-[262px] rounded-md bg-neutral-3"
     :class="class"
+    @click="reloadPage"
   >
     <div class="flex flex-col w-full rounded-md">
       <div class="w-full rounded">
@@ -43,6 +44,7 @@ import { DrawerEditFeed } from './drawer'
 import type { IFeed } from '@/interfaces/news.interface'
 import type { IResponse } from '@/interfaces/response.interface'
 import type { fetcherFn } from 'swrv/dist/types'
+import { useRouter } from 'vue-router'
 
 const {
   feedId,
@@ -64,4 +66,12 @@ const {
 }>()
 
 const drawerEditFeed = ref()
+const router = useRouter()
+const reloadPage = (e: Event) => {
+  e.stopPropagation()
+  setTimeout(() => {
+    window.location.reload()
+    router.push
+  }, 300)
+}
 </script>

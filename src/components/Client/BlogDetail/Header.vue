@@ -15,7 +15,7 @@
     </button>
 
     <div class="flex flex-col gap-6">
-      <h3 class="text-hairline-2 uppercase">Article</h3>
+      <h3 class="text-headline-7 uppercase">Article</h3>
       <h1 class="text-headline-3 max-sm:text-headline-6 text-neutral-7 max-w-[834px]">
         {{ feed.title }}
       </h1>

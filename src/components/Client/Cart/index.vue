@@ -20,9 +20,9 @@
         ]"
       ></Steps>
     </div>
-    <div v-if="current == 0" class="w-full h-full">
+    <div v-if="current == 0" class="w-full">
       <section
-        class="w-full grid-cols-1 grid lg:grid-cols-10 mt-10 md:mt-[80px] gap-6 mb-14 md:mb-10"
+        class="w-full grid grid-cols-1 lg:grid-cols-10 mt-10 md:mt-[80px] gap-6 mb-14 md:mb-10"
       >
         <ShowCart />
         <CartSummary @checkout="stepCheckout" />

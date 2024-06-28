@@ -71,7 +71,7 @@ import { BadgeMedium } from '@/components/UI/elements'
 import { TYPE_BADGE } from '@/constants/enum/badge.enum'
 import type { IProduct } from '@/interfaces/product.interface'
 import { formatNumberWithCommas } from '@/utils'
-import { RouterLink, useRouter, useRoute } from 'vue-router'
+import { RouterLink, useRouter } from 'vue-router'
 import { useCart } from '@/stores/use-cart'
 import { addToCart } from '@/services/cart/post'
 import { ref } from 'vue'
@@ -89,7 +89,6 @@ const router = useRouter()
 const { addToCart: _addToCart } = useCart()
 const drawerCart = ref()
 const wish = ref<boolean>(false)
-const route = useRoute()
 
 const addToCartFunc = async () => {
   if (isSignedIn.value) {
@@ -114,25 +113,9 @@ const addToCartFunc = async () => {
 
 const addToWishFunc = async () => {
   if (isSignedIn.value) {
-    // const wishItem = {
-    //   variantId: product.variants[0].id,
-    //   image: product.variants[0].variant_image,
-    //   price: parseFloat(product.variants[0].price),
-    //   title: product.title,
-    //   quantity: 1,
-    //   shopId: product.shopId,
-    //   shopName: product.shopName
-    // }
-
     if (wish.value) {
-      // _addToWish(wishItem)
-      // message.success('Add to wish successfully')
-      // await addToWish(wishItem)
       wish.value = false
     } else {
-      // _removeToWish(wishItem)
-      // message.error('Remove to wish successfully')
-      // await removeToWish(wishItem)
       wish.value = true
     }
   } else {

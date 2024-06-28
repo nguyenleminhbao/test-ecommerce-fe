@@ -54,15 +54,10 @@
         <editor
           v-model="feedState.content"
           style="width: 100%; height: 600px"
-          :api-key="import.meta.env.VITE_EDITOR_KEY"
+          :api-key="editorApiKey"
           :init="{
             menubar: false,
             branding: false,
-            plugins: [
-              'advlist autolink autosave autoresize link image lists charmap hr anchor',
-              'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime nonbreaking',
-              'table template colorpicker paste textcolor importcss textpattern spellchecker'
-            ],
             toolbar: [
               'undo redo | bold italic underline strikethrough | alignleft aligncenter alignright  | blockquote | formatselect | spellchecker',
               'cut copy paste removeformat | searchreplace | bullist numlist | outdent indent | hr | link unlink anchor image code | inserttime',
@@ -116,6 +111,7 @@ const fileList = ref([])
 const loadingImg = ref<boolean>(false)
 const loadingAdd = ref<boolean>(false)
 const open = ref<boolean>(false)
+const editorApiKey = import.meta.env.VITE_EDITOR_KEY
 
 const feedState = ref<{
   title: string

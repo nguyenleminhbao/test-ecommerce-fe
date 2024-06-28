@@ -1,6 +1,5 @@
 <template>
   <div class="flex gap-6 max-sm:flex-col">
-
     <!-- CATEGORIES --------------------------------------------------------------------------->
     <div class="w-[262px] max-sm:w-full flex flex-col gap-2">
       <h1 class="uppercase text-neutral-4 text-body-2-semibold">CATEGORIES</h1>

@@ -60,9 +60,7 @@ const { form, isLoading } = defineProps<{
   isLoading: boolean
 }>()
 
-const value = ref<number>(1)
 const cartStore = useCart()
-
 const emit = defineEmits(['order'])
 const order = () => {
   emit('order')

@@ -48,14 +48,11 @@
         <editor
           v-model="imageState.content"
           style="width: 100%; height: 600px"
-          :api-key="import.meta.env.VITE_EDITOR_KEY"
+          :api-key="editorApiKey"
           :init="{
             menubar: false,
             branding: false,
-            plugins: [
-              'advlist autolink autosave autoresize link image lists charmap hr anchor',
-              'table template colorpicker paste textcolor importcss textpattern spellchecker'
-            ],
+
             toolbar: [
               'undo redo | bold italic underline strikethrough | alignleft aligncenter alignright  | blockquote',
               'cut copy paste removeformat | outdent indent | hr',
@@ -120,6 +117,7 @@ const loadingImg = ref<boolean>(false)
 const loadingEdit = ref<boolean>(false)
 const loadingDel = ref<boolean>(false)
 const emit = defineEmits(['deleteBlog'])
+const editorApiKey = import.meta.env.VITE_EDITOR_KEY
 
 const imageState = ref<{
   image: string
@@ -133,6 +131,7 @@ const imageState = ref<{
 
 const showDrawer = (e: Event) => {
   e.preventDefault()
+  e.stopPropagation()
   open.value = true
 }
 
