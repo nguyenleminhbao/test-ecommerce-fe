@@ -22,7 +22,6 @@
         :view="reel.view"
         :is-edit="true"
         :runMutation="runMutation"
-        @delete-reel="onDelete"
       />
     </div>
     <div class="flex justify-center my-20">
@@ -35,8 +34,7 @@
 <script setup lang="ts">
 import { ref, h } from 'vue'
 import { PlusCircleOutlined } from '@ant-design/icons-vue'
-import { Button, Pagination, message } from 'ant-design-vue'
-import { deleteReel } from '@/services/news/delete'
+import { Button, Pagination } from 'ant-design-vue'
 import { useShopReel } from '@/composables/useReel'
 import { DrawerNewReel } from '@/components/UI/drawer'
 import ReelItem from '@/components/UI/ReelItem.vue'
@@ -48,10 +46,4 @@ const { shopId } = defineProps<{
 const drawerNewReel = ref()
 const { data: reels, mutate: runMutation } = useShopReel({ shopId })
 const currentPage = ref<number>(1)
-
-const onDelete = async (reelId: string) => {
-  await deleteReel(reelId)
-  if (runMutation) await runMutation()
-  message.success('Delete reel successfully')
-}
 </script>
