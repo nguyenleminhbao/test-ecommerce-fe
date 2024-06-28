@@ -45,9 +45,6 @@
               </div>
             </template>
           </VideoSlider>
-          <!-- <div tabindex="0" role="slider" class="SeekBarProgress"></div> -->
-          <!-- <div :class="`SeekBarCircle left-[calc(${currentTime}%)]`"></div>
-          <div :class="`SeekBar -translate-y-2/4 scale-x-[${currentTime}/100]`"></div> -->
         </div>
         <div class="SeekBarTimeContainer max-sm:hidden">
           {{ formatDuration(currentTime) }}/{{ formatDuration(duration) }}
@@ -82,16 +79,6 @@
         <img v-else src="@/assets/images/mute.png" class="!w-6 !h-6" />
       </button>
     </div>
-
-    <!-- Up Button ---------------------------------------------------------------------------->
-    <!-- <button role="button" class="StyledVideoSwitch top-[calc(50%_-_48px)]">
-      <UpOutlined class="text-[26px] text-white" />
-    </button> -->
-
-    <!-- Down Button ---------------------------------------------------------------------------->
-    <!-- <button role="button" class="StyledVideoSwitch top-[calc(50%_+_8px)]">
-      <DownOutlined class="text-[26px] text-white" />
-    </button> -->
 
     <!-- Button Reaction ---------------------------------------------------------------------------->
     <div>
@@ -182,8 +169,6 @@ import { Spin, Drawer, Button } from 'ant-design-vue'
 import {
   CaretRightFilled,
   CloseOutlined,
-  UpOutlined,
-  DownOutlined,
   PlusCircleFilled,
   HeartFilled,
   MessageFilled,
@@ -193,6 +178,7 @@ import { computed, ref } from 'vue'
 import { useMediaControls, useEventListener } from '@vueuse/core'
 import { useAuth } from 'vue-clerk'
 import { SMicrosoftTeams } from 'vue-socials'
+import { useRoute } from 'vue-router'
 
 const { reel } = defineProps<{
   reel: IReel
@@ -251,7 +237,6 @@ useEventListener(element, 'keypress', (e) => {
   }
 })
 
-import { useRoute, useRouter } from 'vue-router'
 const route = useRoute()
 const shareOptions = {
   url: import.meta.env.VITE_FRONTEND_URL + route.fullPath,

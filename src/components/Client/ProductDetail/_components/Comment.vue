@@ -39,7 +39,7 @@
 
 <script setup lang="ts">
 import { Image, Button, Rate } from 'ant-design-vue'
-import { StarFilled, StarOutlined, LikeFilled, RollbackOutlined } from '@ant-design/icons-vue'
+import { LikeFilled, RollbackOutlined } from '@ant-design/icons-vue'
 import type { IComment } from '@/interfaces/comment.interface'
 import { ref } from 'vue'
 import { formatDateText } from '@/utils'

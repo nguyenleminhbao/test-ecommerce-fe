@@ -1,7 +1,7 @@
 import type { ICart, ICartItem } from '@/interfaces/cart.interface'
 
 export const getCartItemByShop = (cart: ICart) => {
-  let listShopName: string[] = []
+  const listShopName: string[] = []
   cart?.cartItems?.forEach((cartItem) => {
     if (!listShopName.includes(cartItem.shopId as string)) {
       listShopName.push(cartItem.shopId as string)

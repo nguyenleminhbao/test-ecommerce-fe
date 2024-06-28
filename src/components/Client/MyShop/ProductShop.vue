@@ -18,7 +18,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import CardItem from '@/components/UI/ProdCard.vue'
-import { useRoute } from 'vue-router'
 import { Pagination } from 'ant-design-vue'
 import { useShopProduct } from '@/composables/useProduct'
 
@@ -26,7 +25,6 @@ const { shopId } = defineProps<{
   shopId: string
 }>()
 
-const route = useRoute()
 const { data: products } = useShopProduct({ shopId })
 const currentPage = ref<number>(1)
 </script>

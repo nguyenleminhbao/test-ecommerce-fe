@@ -2,8 +2,8 @@ import { STATUS_ORDER } from '@/constants/enum/status-order.enum'
 import type { IOrder } from '@/interfaces/order.interface'
 
 export const calcOrder = (orders: IOrder[]) => {
-  let success = orders.length
-  let failed = 0
+  const success = orders.length
+  const failed = 0
   let total = 0
   let pending = 0
 
