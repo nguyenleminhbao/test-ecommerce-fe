@@ -106,7 +106,8 @@ const router = useRouter()
 const { isSignedIn } = useAuth()
 const { openSignIn } = useClerk()
 const drawerCart = ref()
-const route = useRoute()
+const route = useRoute();
+
 
 const showCart = () => {
   drawerCart?.value?.showCart()

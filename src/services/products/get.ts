@@ -12,23 +12,15 @@ export const getAllProducts = async (page?: number) => {
 }
 
 export const getOneProduct = async (productId: string) => {
-  try {
-    const { data } = await axiosInstance.get<IResponse<IProduct>>(`/products/${productId}`)
+  const { data } = await axiosInstance.get<IResponse<IProduct>>(`/products/${productId}`)
 
-    return data
-  } catch (err) {
-    throw err
-  }
+  return data
 }
 
 export const getShopProducts = async (shopId: string) => {
-  try {
-    const { data } = await axiosInstance.get<IResponse<IProduct[]>>(
-      `/products/get-shop-product/${shopId}`
-    )
+  const { data } = await axiosInstance.get<IResponse<IProduct[]>>(
+    `/products/get-shop-product/${shopId}`
+  )
 
-    return data
-  } catch (err) {
-    throw err
-  }
+  return data
 }

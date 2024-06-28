@@ -8,9 +8,9 @@
     class="[&_.ant-drawer-title]:text-headline-6 [&_.ant-drawer-body]:px-0"
     :width="width > 500 ? 450 : 300"
   >
-    <ul class="flex flex-col h-full">
+    <ul class="flex flex-col h-full" v-if="cartStore.cart">
       <CartItem
-        v-if="cartStore.cart"
+        
         v-for="cartItem in cartStore.cart.cartItems"
         :key="cartItem.variantId"
         :cart-item="cartItem"

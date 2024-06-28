@@ -1,4 +1,4 @@
-import { createApp, onMounted } from 'vue'
+import { createApp } from 'vue'
 import App from './App.vue'
 import { clerkPlugin } from 'vue-clerk/plugin'
 import router from './router'
