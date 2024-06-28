@@ -64,11 +64,11 @@ import { EditOutlined, LoadingOutlined, PlayCircleOutlined } from '@ant-design/i
 import { Spin, Upload, message, Button } from 'ant-design-vue'
 import type { UploadChangeParam } from 'ant-design-vue'
 import type { FileType } from 'ant-design-vue/es/upload/interface'
-import { updateShopAvatar } from '@/services/upload/post'
 import { ZegoUIKitPrebuilt } from '@zegocloud/zego-uikit-prebuilt'
 import { useAuthSystem } from '@/stores/use-auth'
 import { getBase64, getPublicIdFromUrl, configStream, listenSocketStream } from '@/utils'
 import { uploadImageUrl } from '@/constants/upload-url'
+import { updateShopAvatar } from '@/services/shop/post'
 
 const { shopName, shopAvatar, shopId, userId } = defineProps<{
   shopName: string

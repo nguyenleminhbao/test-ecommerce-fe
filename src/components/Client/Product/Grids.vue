@@ -36,13 +36,13 @@
     <div class="flex flex-col gap-20 max-sm:gap-8">
       <Spin
         class="[&_.ant-spin-dot-item]:bg-black [&_.ant-spin-dot-item]:text-xl"
-        :spinning="!products"
+        :spinning="isLoading"
         size="large"
       />
       <div
         class="grid grid-cols-4 gap-6 max-[1120px]:grid-cols-3 max-[800px]:grid-cols-2 max-sm:grid-cols-1"
       >
-        <ProdCard v-for="product in products" :key="product.id" :product="product" />
+        <ProdCard v-if="!isLoading " v-for="product in products" :key="product.id" :product="product" />
       </div>
 
       <div class="mx-auto">
@@ -67,13 +67,14 @@ import { useRoute, useRouter } from 'vue-router'
 import { useProduct } from '@/composables/useProduct'
 import { searchProduct } from '@/services/products/post'
 import { ElasticsearchIndex } from '@/constants/enum/search.enum'
+import { getAllProducts } from '@/services/products/get'
 
 const route = useRoute()
 const router = useRouter()
 const currentPage = ref<number>(
   isNaN(parseInt(route.query.page as string)) ? 1 : parseInt(route.query.page as string)
 )
-const { data: products, mutate: runMutation } = useProduct({
+const { data: products , isLoading,  mutate: runMutation } = useProduct({
   key: `products/page=${currentPage.value}`,
   page: currentPage.value
 })
@@ -92,7 +93,7 @@ const titleSearch = ref<string>('')
 const onSearch = () => {
   if (titleSearch.value)
     runMutation(() => searchProduct(ElasticsearchIndex.PRODUCT, titleSearch.value))
-  else runMutation()
+  else runMutation(()=>getAllProducts(1))
 }
 </script>
 

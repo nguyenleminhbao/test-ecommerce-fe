@@ -1,2 +1,2 @@
-export const uploadImageUrl = `${import.meta.env.VITE_BACKEND_URL}/upload/image`
-export const uploadVideoUrl = `${import.meta.env.VITE_BACKEND_URL}/upload/video`
+export const uploadImageUrl = `${import.meta.env.VITE_HOST_SUB_UPLOAD_MODULE}/upload/image`
+export const uploadVideoUrl = `${import.meta.env.VITE_HOST_SUB_UPLOAD_MODULE}/upload/video`

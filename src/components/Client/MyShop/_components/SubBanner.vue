@@ -42,9 +42,9 @@ import { Spin, Upload, message } from 'ant-design-vue'
 import type { UploadChangeParam } from 'ant-design-vue'
 import type { FileType } from 'ant-design-vue/es/upload/interface'
 import { getBase64 } from '@/utils/get-base-64'
-import { updateBanner } from '@/services/upload/post'
 import { getPublicIdFromUrl } from '@/utils/get-publicId-from-url'
 import { uploadImageUrl } from '@/constants/upload-url'
+import { updateBanner } from '@/services/shop/post'
 
 const { bannerUrl, shopId, numOfBanner } = defineProps<{
   bannerUrl: string

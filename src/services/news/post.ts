@@ -1,12 +1,19 @@
 import type { IResponse } from '@/interfaces/response.interface'
 import axiosInstance from '../axios-instance'
 import type { ElasticsearchIndex } from '@/constants/enum/search.enum'
-import type { IFeed, IReel } from '@/interfaces/news.interface'
 
 type CreateReelType = {
   video: string
   title: string
   shopId: string
+  description: string
+}
+
+type UpdateReelType = {
+  reelId: string
+  idVideoOld: string
+  newVideoUrl: string
+  title: string
   description: string
 }
 
@@ -31,12 +38,9 @@ export const increateViewReel = async (reelId: string) => {
   }
 }
 
-export const searchReel = async (typeIndex: ElasticsearchIndex, titleSearch: string) => {
+export const updateReel = async (_data: UpdateReelType) => {
   try {
-    const { data } = await axiosInstance.post<IResponse<IReel[]>>('/search', {
-      typeIndex,
-      titleSearch
-    })
+    const { data } = await axiosInstance.post<IResponse<string>>('/news/update-reel', _data)
     return data
   } catch (err) {
     throw err
@@ -49,6 +53,14 @@ type CreateFeedType = {
   thumbnail: string
   title: string
   shopId: string
+  content: string
+}
+
+type UpdateFeedType = {
+  feedId: string
+  idImageOld: string
+  newImageUrl: string
+  title: string
   content: string
 }
 
@@ -73,12 +85,21 @@ export const increateViewFeed = async (feedId: string) => {
   }
 }
 
-export const searchFeed = async (typeIndex: ElasticsearchIndex, titleSearch: string) => {
+export const searchNews = async <T>(typeIndex: ElasticsearchIndex, titleSearch: string) => {
   try {
-    const { data } = await axiosInstance.post<IResponse<IFeed[]>>('/search', {
+    const { data } = await axiosInstance.post<IResponse<T[]>>('/search', {
       typeIndex,
       titleSearch
     })
+    return data
+  } catch (err) {
+    throw err
+  }
+}
+
+export const updateFeed = async (_data: UpdateFeedType) => {
+  try {
+    const { data } = await axiosInstance.post<IResponse<string>>('/news/update-feed', _data)
     return data
   } catch (err) {
     throw err

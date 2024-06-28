@@ -48,19 +48,18 @@
         <editor
           v-model="imageState.content"
           style="width: 100%; height: 600px"
-          api-key="qagffr3pkuv17a8on1afax661irst1hbr4e6tbv888sz91jc"
+          :api-key="import.meta.env.VITE_EDITOR_KEY"
           :init="{
             menubar: false,
             branding: false,
             plugins: [
               'advlist autolink autosave autoresize link image lists charmap hr anchor',
-              'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime nonbreaking',
               'table template colorpicker paste textcolor importcss textpattern spellchecker'
             ],
             toolbar: [
-              'undo redo | bold italic underline strikethrough | alignleft aligncenter alignright  | blockquote | formatselect | spellchecker',
-              'cut copy paste removeformat | searchreplace | bullist numlist | outdent indent | hr | link unlink anchor image code | inserttime',
-              'h1 h2 h3 | table | subscript superscript | charmap | visualchars visualblocks nonbreaking | template | helloworld'
+              'undo redo | bold italic underline strikethrough | alignleft aligncenter alignright  | blockquote',
+              'cut copy paste removeformat | outdent indent | hr',
+              'h1 h2 h3 | subscript superscript'
             ]
           }"
         ></editor>
@@ -73,7 +72,13 @@
           <Button :loading="loadingDel" type="primary" danger class="w-[70px]">Delete</Button>
         </Popconfirm>
 
-        <Button :loading="loadingEdit" type="primary" class="bg-black w-[70px]" @click="onUpdateFeed">Edit</Button>
+        <Button
+          :loading="loadingEdit"
+          type="primary"
+          class="bg-black w-[70px]"
+          @click="onUpdateFeed"
+          >Edit</Button
+        >
       </div>
     </template>
   </Drawer>
@@ -96,10 +101,10 @@ import {
 import { EditOutlined, QuestionCircleOutlined } from '@ant-design/icons-vue'
 import { uploadImageUrl } from '@/constants/upload-url'
 import { getPublicIdFromUrl } from '@/utils'
-import { updateFeed } from '@/services/upload/post'
 import type { IFeed } from '@/interfaces/news.interface'
 import type { IResponse } from '@/interfaces/response.interface'
 import type { fetcherFn } from 'swrv/dist/types'
+import { updateFeed } from '@/services/news/post'
 
 const { feedId, imageUrl, title, content, runMutation } = defineProps<{
   feedId: string

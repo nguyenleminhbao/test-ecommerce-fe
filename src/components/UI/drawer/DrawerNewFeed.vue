@@ -54,7 +54,7 @@
         <editor
           v-model="feedState.content"
           style="width: 100%; height: 600px"
-          api-key="qagffr3pkuv17a8on1afax661irst1hbr4e6tbv888sz91jc"
+          :api-key="import.meta.env.VITE_EDITOR_KEY"
           :init="{
             menubar: false,
             branding: false,
@@ -76,7 +76,9 @@
     <template #footer>
       <div class="flex items-end w-full justify-end gap-2">
         <Button class="border-black w-[70px]" @click="open = false">Cancel</Button>
-        <Button :loading="loadingAdd" type="primary" class="bg-black w-[70px]" @click="onAdd">Add</Button>
+        <Button :loading="loadingAdd" type="primary" class="bg-black w-[70px]" @click="onAdd"
+          >Add</Button
+        >
       </div>
     </template>
   </Drawer>

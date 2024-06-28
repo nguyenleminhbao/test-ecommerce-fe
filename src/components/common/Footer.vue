@@ -1,5 +1,5 @@
 <template>
-  <div class="hidden md:block bg-neutral-7 pt-[80px] pb-[32px]">
+  <div class="hidden md:block px-6 bg-neutral-7 pt-[80px] pb-[32px]">
     <div class="grid gap-[49px] max-w-[1120px] mx-auto text-white">
       <div class="flex justify-between items-center">
         <div class="flex gap-[32px]">
