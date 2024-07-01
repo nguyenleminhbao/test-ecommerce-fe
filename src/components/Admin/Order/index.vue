@@ -19,7 +19,7 @@
 import { onMounted, ref } from 'vue'
 import { Spin } from 'ant-design-vue'
 import Statistic from './TheStatistic.vue'
-import Table from './Table.vue'
+import Table from './TheTable.vue'
 import type { IOrder } from '@/interfaces/order.interface'
 import { getAllOrderSystem } from '@/services/order/get'
 import { calcOrder } from '@/utils/calc-order'
