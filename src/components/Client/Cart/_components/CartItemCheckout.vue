@@ -69,7 +69,7 @@ import type { ICartItem } from '@/interfaces/cart.interface'
 import { formatNumberWithCommas } from '@/utils'
 import { Checkbox, Image, Button } from 'ant-design-vue'
 import { MinusOutlined, PlusOutlined, CloseOutlined } from '@ant-design/icons-vue'
-import { ref, watch } from 'vue'
+import { ref } from 'vue'
 import { deleteCartItem, updateQuantity } from '@/services/cart/post'
 import { useCart } from '@/stores/use-cart'
 

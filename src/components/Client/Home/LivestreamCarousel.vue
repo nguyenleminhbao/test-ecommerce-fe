@@ -12,8 +12,6 @@
         :room-id="stream.roomId"
         logoShop="https://play-lh.googleusercontent.com/5vcrZX1-Rx6NpuOASKSUWqMpQqbFTiLOZ-IV8CehAP3XycsmaKJvp36BJOxaKhq8TWc"
       />
-
-      <!-- <RightIcon /> -->
     </div>
   </div>
 </template>
@@ -21,7 +19,6 @@
 <script setup lang="ts">
 import LivestreamItem from '@/components/UI/LivestreamItem.vue'
 import { useLivestream } from '@/stores/use-livestream'
-import { RightIcon } from '@/components/UI/elements'
 
 const streamStore = useLivestream()
 </script>

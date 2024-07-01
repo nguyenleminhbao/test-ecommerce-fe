@@ -46,7 +46,7 @@
           </ul>
         </div>
       </template>
-      <template #extra class="gap-4">
+      <template #extra>
         <div class="flex flex-col md:flex-row gap-3 items-center justify-center">
           <Button key="buy" class="w-[150px] h-10">Buy Again</Button>
           <RouterLink to="/my-account?keyPage=2">
@@ -66,7 +66,7 @@ import type { IOrder } from '@/interfaces/order.interface'
 import { useCart } from '@/stores/use-cart'
 import { formatDateText } from '@/utils'
 import { Result, Button } from 'ant-design-vue'
-import { computed, watchEffect } from 'vue'
+import { computed } from 'vue'
 
 const { order } = defineProps<{
   order: IOrder

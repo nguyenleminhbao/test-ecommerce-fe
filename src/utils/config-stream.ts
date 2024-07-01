@@ -1,7 +1,7 @@
 import { ZegoUIKitPrebuilt } from '@zegocloud/zego-uikit-prebuilt'
 
 export const configStream = (roomID: string) => {
-  let role_str = 'Host'
+  const role_str = 'Host'
   const role =
     role_str === 'Host'
       ? ZegoUIKitPrebuilt.Host
@@ -9,7 +9,7 @@ export const configStream = (roomID: string) => {
         ? ZegoUIKitPrebuilt.Cohost
         : ZegoUIKitPrebuilt.Audience
 
-  let sharedLinks = []
+  const sharedLinks = []
   if (role === ZegoUIKitPrebuilt.Host || role === ZegoUIKitPrebuilt.Cohost) {
     sharedLinks.push({
       name: 'Join as co-host',

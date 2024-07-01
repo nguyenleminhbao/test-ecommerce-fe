@@ -8,7 +8,7 @@ export const dynamicQuery = (
     }[]
   >
 ) => {
-  let queryObject: { [key: string]: string } = {}
+  const queryObject: { [key: string]: string } = {}
   const newList = list.value.map((ele) => {
     queryObject[ele.key] = ele.value
   })

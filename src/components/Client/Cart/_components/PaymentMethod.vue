@@ -63,7 +63,7 @@
 
 <script setup lang="ts">
 import { FormItem, Radio, RadioGroup, Input } from 'ant-design-vue'
-import { computed, ref, watch, watchEffect } from 'vue'
+import { ref } from 'vue'
 import { banks } from '@/constants/bank'
 import type { FormOrderType } from '../index.vue'
 import { PAYMENT_TYPE } from '@/constants/enum/payment.enum'

@@ -22,28 +22,28 @@ function getMonthText(monthNumber: number) {
 }
 
 export const formatDateText = (date: string) => {
-  let objectDate = new Date(date)
+  const objectDate = new Date(date)
 
-  let hour = objectDate.getHours()
-  let minute =
+  const hour = objectDate.getHours()
+  const minute =
     objectDate.getMinutes() < 10 ? `0${objectDate.getMinutes()}` : objectDate.getMinutes()
 
-  let day = objectDate.getDate()
+  const day = objectDate.getDate()
 
   const month = objectDate.getMonth() + 1
   const monthText = getMonthText(month)
 
-  let year = objectDate.getFullYear()
+  const year = objectDate.getFullYear()
   return `${hour}:${minute} - ${day} ${monthText} ${year}`
 }
 
 export const formatDateDelivery = (date: string) => {
-  let objectDate = new Date(date)
-  let day = objectDate.getDate()
+  const objectDate = new Date(date)
+  const day = objectDate.getDate()
 
   const month = objectDate.getMonth() + 1
   const monthText = getMonthText(month)
 
-  let year = objectDate.getFullYear()
+  const year = objectDate.getFullYear()
   return `${day} ${monthText} ${year}`
 }
