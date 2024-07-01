@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import Header from './Header.vue'
-import Toolbar from './Toolbar.vue'
-import Grids from './Grids.vue'
+import Header from './TheHeader.vue'
+import Toolbar from './TheToolbar.vue'
+import Grids from './TheGrids.vue'
 </script>

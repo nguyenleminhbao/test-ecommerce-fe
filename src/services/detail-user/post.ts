@@ -7,10 +7,6 @@ type CreateAddressType = {
 }
 
 export const createAddress = async (_data: CreateAddressType) => {
-  try {
-    const { data } = await axiosInstance.post<IResponse<string>>('/detail-user/address', _data)
-    return data
-  } catch (err) {
-    throw err
-  }
+  const { data } = await axiosInstance.post<IResponse<string>>('/detail-user/address', _data)
+  return data
 }

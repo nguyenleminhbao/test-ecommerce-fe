@@ -31,7 +31,6 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { Button, Modal } from 'ant-design-vue'
 import {
   CalendarOutlined,
   UserOutlined,
@@ -52,13 +51,4 @@ const interacts = ref([
   { icon: CommentOutlined, title: 'Comment', content: '123' },
   { icon: ShareAltOutlined, title: 'Share', content: '123' }
 ])
-
-const open = ref<boolean>(false)
-
-const showModal = () => {
-  open.value = true
-}
-
-const DesContent =
-  'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repudiandae minus totam debitis, eligendi excepturi atque repellat quis voluptate similique, aliquam molestiae veniam, explicabo dolores quia ullam. Earum, similique tenetur. Illo? Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto dolores nihil qui. Necessitatibus, illo corporis nobis neque officiis incidunt, odio ratione modi aperiam placeat expedita sint voluptatibus quod iusto facilis.'
 </script>

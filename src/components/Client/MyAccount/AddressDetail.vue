@@ -13,13 +13,14 @@
     <div class="grid grid-cols-2 max-lg:grid-cols-1 gap-[23px]">
       <AddressCard
         v-for="(address, index) in listAddress"
+        :key="index"
         :id="index"
         :street="address.streetAddress"
         :city="address.city"
       />
     </div>
   </div>
-  
+
   <Modal
     v-model:open="open"
     title="New address shipping"
@@ -65,9 +66,9 @@
 
 <script setup lang="ts">
 import AddressCard from './_components/AddressCard.vue'
-import { Form, FormItem, Input, Button, Select, SelectOption, Modal, message } from 'ant-design-vue'
+import { Form, FormItem, Input, Button, Modal, message } from 'ant-design-vue'
 import { PlusCircleOutlined } from '@ant-design/icons-vue'
-import { onMounted, ref, watchEffect, h } from 'vue'
+import { onMounted, ref, h } from 'vue'
 import type { IAddress } from '@/interfaces/user.interface'
 import { getAllAddress } from '@/services/detail-user/get'
 import { createAddress } from '@/services/detail-user/post'

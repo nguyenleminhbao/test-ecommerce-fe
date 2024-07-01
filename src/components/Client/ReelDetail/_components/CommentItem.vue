@@ -20,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-const { avatarUrl, userName, desc, createAt } = defineProps<{
+const { avatarUrl, userName, desc } = defineProps<{
   avatarUrl: string
   userName: string
   desc: string

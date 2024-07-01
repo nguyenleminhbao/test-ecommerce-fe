@@ -9,8 +9,9 @@
     <div class="flex overflow-x-auto items-center gap-[24px] scrollbar-hide relative">
       <LivestreamItem
         v-for="(stream, index) in streamStore.listLivestream"
+        :key="index"
         :room-id="stream.roomId"
-        logoShop="https://play-lh.googleusercontent.com/5vcrZX1-Rx6NpuOASKSUWqMpQqbFTiLOZ-IV8CehAP3XycsmaKJvp36BJOxaKhq8TWc"
+        :logoShop="stream.shopAvatar"
       />
     </div>
   </div>

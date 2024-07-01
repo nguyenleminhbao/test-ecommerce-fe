@@ -24,10 +24,6 @@
     </div>
     <div class="flex justify-between items-center my-10">
       <span class="text-headline-6">{{ `${resultReviewState.review_len} Reviews` }}</span>
-      <!-- <Select v-model:value="value" style="width: 25%">
-        <SelectOption value="New">Newest</SelectOption>
-        <SelectOption value="Old">Older</SelectOption>
-      </Select> -->
     </div>
     <ul class="">
       <Comment v-for="(comment, index) in comments" :key="index" :comment="comment" />
@@ -71,19 +67,9 @@
   </Modal>
 </template>
 <script setup lang="ts">
-import {
-  Select,
-  SelectOption,
-  Button,
-  Modal,
-  Rate,
-  Input,
-  Upload,
-  type UploadChangeParam,
-  message
-} from 'ant-design-vue'
+import { Button, Modal, Rate, Input, Upload, type UploadChangeParam, message } from 'ant-design-vue'
 import { PlusOutlined } from '@ant-design/icons-vue'
-import Comment from './Comment.vue'
+import Comment from './TheComment.vue'
 import { onMounted, ref } from 'vue'
 import { uploadImageUrl } from '@/constants/upload-url'
 import { TYPE_COMMENT } from '@/constants/enum/comment.enum'
@@ -105,9 +91,6 @@ const authStore = useAuthSystem()
 // Rate
 const star = ref<number>(3)
 const desc = ref<string[]>(['terrible', 'bad', 'normal', 'good', 'wonderful'])
-
-// Newest
-const value = ref<string>('New')
 
 //Modal comment
 const content = ref<string>('')

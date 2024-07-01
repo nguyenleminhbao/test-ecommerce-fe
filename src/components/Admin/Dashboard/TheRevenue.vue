@@ -10,6 +10,6 @@
 </template>
 
 <script setup lang="ts">
-import Select from './_components/Select.vue'
+import Select from './_components/TheSelect.vue'
 import Line from './_components/LineChart.vue'
 </script>

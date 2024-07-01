@@ -13,7 +13,7 @@ import { useAuthSystem } from '@/stores/use-auth'
 import { useLivestream } from '@/stores/use-livestream'
 import { configStream } from '@/utils'
 import { ZegoUIKitPrebuilt } from '@zegocloud/zego-uikit-prebuilt'
-import { onMounted, ref, watch, watchEffect } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 const route = useRoute()
@@ -22,7 +22,7 @@ const roomID = route.query.roomID as string
 const existRoom = ref<ILivestream>()
 const authStore = useAuthSystem()
 const streamStore = useLivestream()
-const { role, sharedLinks } = configStream(roomID)
+const { role } = configStream(roomID)
 
 onMounted(() => {
   existRoom.value = streamStore.listLivestream?.find((stream) => stream.roomId == roomID)
@@ -59,8 +59,7 @@ onMounted(() => {
         parentNode?.remove()
         router.replace('/product')
         zp.destroy()
-        
-     },
+      },
       turnOnCameraWhenJoining: false,
       showMyCameraToggleButton: true,
       showAudioVideoSettingsButton: true,

@@ -1,7 +1,7 @@
 import type { IOption, IVariant } from '@/interfaces/product.interface'
 
 export const findVariant = (options: IOption[], variants: IVariant[], optionFind: number[]) => {
-  const arr_options = options?.map((ele, idx) => {
+  const arr_options = options?.map((ele) => {
     return ele?.values?.length
   })
 

@@ -18,33 +18,21 @@ type UpdateReelType = {
 }
 
 export const createReel = async (_data: CreateReelType) => {
-  try {
-    const { data } = await axiosInstance.post<IResponse<string>>('/news/reel', _data)
-    return data
-  } catch (err) {
-    throw err
-  }
+  const { data } = await axiosInstance.post<IResponse<string>>('/news/reel', _data)
+  return data
 }
 
 export const increateViewReel = async (reelId: string) => {
-  try {
-    const { data } = await axiosInstance.post<IResponse<string>>('/news/reel/increase-view', {
-      reelId
-    })
+  const { data } = await axiosInstance.post<IResponse<string>>('/news/reel/increase-view', {
+    reelId
+  })
 
-    return data
-  } catch (err) {
-    throw err
-  }
+  return data
 }
 
 export const updateReel = async (_data: UpdateReelType) => {
-  try {
-    const { data } = await axiosInstance.post<IResponse<string>>('/news/update-reel', _data)
-    return data
-  } catch (err) {
-    throw err
-  }
+  const { data } = await axiosInstance.post<IResponse<string>>('/news/update-reel', _data)
+  return data
 }
 
 // --Feed-----------------------------------------------------------
@@ -65,43 +53,27 @@ type UpdateFeedType = {
 }
 
 export const createFeed = async (_data: CreateFeedType) => {
-  try {
-    const { data } = await axiosInstance.post<IResponse<string>>('/news/feed', _data)
-    return data
-  } catch (err) {
-    throw err
-  }
+  const { data } = await axiosInstance.post<IResponse<string>>('/news/feed', _data)
+  return data
 }
 
 export const increateViewFeed = async (feedId: string) => {
-  try {
-    const { data } = await axiosInstance.post<IResponse<string>>('/news/feed/increase-view', {
-      feedId
-    })
+  const { data } = await axiosInstance.post<IResponse<string>>('/news/feed/increase-view', {
+    feedId
+  })
 
-    return data
-  } catch (err) {
-    throw err
-  }
+  return data
 }
 
 export const searchNews = async <T>(typeIndex: ElasticsearchIndex, titleSearch: string) => {
-  try {
-    const { data } = await axiosInstance.post<IResponse<T[]>>('/search', {
-      typeIndex,
-      titleSearch
-    })
-    return data
-  } catch (err) {
-    throw err
-  }
+  const { data } = await axiosInstance.post<IResponse<T[]>>('/search', {
+    typeIndex,
+    titleSearch
+  })
+  return data
 }
 
 export const updateFeed = async (_data: UpdateFeedType) => {
-  try {
-    const { data } = await axiosInstance.post<IResponse<string>>('/news/update-feed', _data)
-    return data
-  } catch (err) {
-    throw err
-  }
+  const { data } = await axiosInstance.post<IResponse<string>>('/news/update-feed', _data)
+  return data
 }

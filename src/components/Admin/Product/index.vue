@@ -19,25 +19,27 @@
         "
         class="[&_.ant-table-body]:!scrollbar-hide [&_.ant-table-row]:cursor-pointer"
       >
-        <template #bodyCell="{ index, column, record }" class="cursor-pointer">
-          <template v-if="column.dataIndex == 'id'">
-            <span>{{ products.findIndex((ele: any) => ele == record) + 1 }}</span></template
-          >
-          <template v-if="column.dataIndex == 'product'">
-            <div class="flex gap-3 items-center">
-              <Image
-                :src="record.variants[0].variant_image"
-                class="object-cover !w-16 !h-16 aspect-square rounded-lg"
-              />
-              <span class="text-body-2-semibold two-lines-truncate">{{ record.title }}</span>
-            </div>
-          </template>
-          <template v-if="column.dataIndex == 'shopName'">
-            <span>{{ record.shopName }}</span>
-          </template>
-          <template v-if="column.dataIndex == 'price'">
-            <span>{{ `${formatNumberWithCommas(record.variants[0].price)} đ` }}</span>
-          </template>
+        <template #bodyCell="{ column, record }">
+          <div class="cursor-pointer">
+            <template v-if="column.dataIndex == 'id'">
+              <span>{{ products.findIndex((ele: any) => ele == record) + 1 }}</span></template
+            >
+            <template v-if="column.dataIndex == 'product'">
+              <div class="flex gap-3 items-center">
+                <Image
+                  :src="record.variants[0].variant_image"
+                  class="object-cover !w-16 !h-16 aspect-square rounded-lg"
+                />
+                <span class="text-body-2-semibold two-lines-truncate">{{ record.title }}</span>
+              </div>
+            </template>
+            <template v-if="column.dataIndex == 'shopName'">
+              <span>{{ record.shopName }}</span>
+            </template>
+            <template v-if="column.dataIndex == 'price'">
+              <span>{{ `${formatNumberWithCommas(record.variants[0].price)} đ` }}</span>
+            </template>
+          </div>
         </template>
       </Table>
     </div>

@@ -3,57 +3,32 @@ import axiosInstance from '../axios-instance'
 import type { IReel, IFeed } from '@/interfaces/news.interface'
 
 export const getAllReel = async () => {
-  try {
-    console.log('fetching reel')
-    const { data } = await axiosInstance.get<IResponse<IReel[]>>('/news/reel')
-    return data
-  } catch (err) {
-    throw err
-  }
+  const { data } = await axiosInstance.get<IResponse<IReel[]>>('/news/reel')
+  return data
 }
 
 export const getReelByShop = async (shopId: string) => {
-  try {
-    const { data } = await axiosInstance.get<IResponse<IReel[]>>(`/news/reel/shop/${shopId}`)
-    return data
-  } catch (err) {
-    throw err
-  }
+  const { data } = await axiosInstance.get<IResponse<IReel[]>>(`/news/reel/shop/${shopId}`)
+  return data
 }
 
 export const getReelById = async (reelId: string) => {
-  try {
-    const { data } = await axiosInstance.get<IResponse<IReel>>(`/news/reel/${reelId}`)
-    return data
-  } catch (err) {
-    throw err
-  }
+  const { data } = await axiosInstance.get<IResponse<IReel>>(`/news/reel/${reelId}`)
+  return data
 }
 
 // ---Feed------------------------------------------------------------------------
 export const getAllFeed = async () => {
-  try {
-    const { data } = await axiosInstance.get<IResponse<IFeed[]>>('/news/feed')
-    return data
-  } catch (err) {
-    throw err
-  }
+  const { data } = await axiosInstance.get<IResponse<IFeed[]>>('/news/feed')
+  return data
 }
 
 export const getFeedByShop = async (shopId: string) => {
-  try {
-    const { data } = await axiosInstance.get<IResponse<IFeed[]>>(`/news/feed/shop/${shopId}`)
-    return data
-  } catch (err) {
-    throw err
-  }
+  const { data } = await axiosInstance.get<IResponse<IFeed[]>>(`/news/feed/shop/${shopId}`)
+  return data
 }
 
 export const getFeedById = async (feedId: string) => {
-  try {
-    const { data } = await axiosInstance.get<IResponse<IFeed>>(`/news/feed/${feedId}`)
-    return data
-  } catch (err) {
-    throw err
-  }
+  const { data } = await axiosInstance.get<IResponse<IFeed>>(`/news/feed/${feedId}`)
+  return data
 }

@@ -22,7 +22,6 @@
         :content="feed.content"
         :is-edit="true"
         :runMutation="runMutation"
-        @delete-blog="onDelete"
       />
     </div>
     <div class="flex justify-center my-20">
@@ -40,8 +39,7 @@
 <script setup lang="ts">
 import { ref, h } from 'vue'
 import { PlusCircleOutlined } from '@ant-design/icons-vue'
-import { Button, Pagination, message } from 'ant-design-vue'
-import { deleteFeed } from '@/services/news/delete'
+import { Button, Pagination } from 'ant-design-vue'
 import { useShopFeed } from '@/composables/useFeed'
 import { DrawerNewFeed } from '@/components/UI/drawer'
 import BlogItem from '@/components/UI/BlogItem.vue'
@@ -53,10 +51,4 @@ const { shopId } = defineProps<{
 const drawerNewFeed = ref()
 const { data: feeds, mutate: runMutation } = useShopFeed({ shopId })
 const currentPage = ref<number>(1)
-
-const onDelete = async (feedId: string) => {
-  await deleteFeed(feedId)
-  if (runMutation) await runMutation()
-  message.success('Delete feed successfully')
-}
 </script>

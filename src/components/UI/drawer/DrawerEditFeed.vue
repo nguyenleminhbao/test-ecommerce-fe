@@ -102,6 +102,7 @@ import type { IFeed } from '@/interfaces/news.interface'
 import type { IResponse } from '@/interfaces/response.interface'
 import type { fetcherFn } from 'swrv/dist/types'
 import { updateFeed } from '@/services/news/post'
+import { deleteFeed } from '@/services/news/delete'
 
 const { feedId, imageUrl, title, content, runMutation } = defineProps<{
   feedId: string
@@ -175,9 +176,11 @@ const onUpdateFeed = async () => {
   open.value = false
 }
 
-const onDelete = () => {
+const onDelete = async () => {
   loadingDel.value = true
-  emit('deleteBlog', feedId)
+  await deleteFeed(feedId)
+  if (runMutation) await runMutation()
+  message.success('Delete feed successfully')
   open.value = false
   loadingDel.value = false
 }

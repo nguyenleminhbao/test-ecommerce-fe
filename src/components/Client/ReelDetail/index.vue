@@ -6,8 +6,8 @@
 </template>
 
 <script setup lang="ts">
-import Video from './Video.vue'
-import Content from './Content.vue'
+import Video from './TheVideo.vue'
+import Content from './TheContent.vue'
 import { useRoute } from 'vue-router'
 import type { IReel } from '@/interfaces/news.interface'
 import { onMounted, ref } from 'vue'

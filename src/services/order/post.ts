@@ -14,10 +14,6 @@ type CreateOrder = {
 }
 
 export const createOrder = async (_data: CreateOrder) => {
-  try {
-    const { data } = await axiosInstance.post<IResponse<IOrder>>('/order', _data)
-    return data
-  } catch (err) {
-    throw err
-  }
+  const { data } = await axiosInstance.post<IResponse<IOrder>>('/order', _data)
+  return data
 }

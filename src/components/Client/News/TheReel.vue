@@ -9,16 +9,18 @@
     @change="onSearch"
   />
   <div class="w-full">
-    <div v-if="isLoading"  class="w-full min-h-[500px] object-center">
+    <div v-if="isLoading" class="w-full min-h-[500px] object-center">
       <Spin
         class="[&_.ant-spin-dot-item]:bg-black [&_.ant-spin-dot-item]:text-xl"
         :spinning="isLoading"
         size="large"
       />
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-[25px] gap-y-10 mt-5">
+    <div
+      v-if="!isLoading"
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-[25px] gap-y-10 mt-5"
+    >
       <ReelItem
-        v-if="!isLoading"
         v-for="(reel, index) in reels.slice((currentPage - 1) * 12, currentPage * 12)"
         :key="index"
         :reelId="reel.id"
@@ -28,7 +30,7 @@
         :view="reel.view"
         class="!max-w-full"
       />
-      </div>
+    </div>
   </div>
 
   <div class="flex justify-center my-20">
@@ -46,7 +48,7 @@ import { ElasticsearchIndex } from '@/constants/enum/search.enum'
 import type { IReel } from '@/interfaces/news.interface'
 import { getAllReel } from '@/services/news/get'
 
-const { data: reels, isLoading,mutate: runMutation } = useReel()
+const { data: reels, isLoading, mutate: runMutation } = useReel()
 const currentPage = ref<number>(1)
 
 const loading = ref<boolean>(false)
@@ -54,6 +56,6 @@ const titleSearch = ref<string>('')
 const onSearch = () => {
   if (titleSearch.value)
     runMutation(() => searchNews<IReel>(ElasticsearchIndex.REEL, titleSearch.value))
-  else runMutation(()=>getAllReel())
+  else runMutation(() => getAllReel())
 }
 </script>

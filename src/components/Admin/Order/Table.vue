@@ -17,7 +17,7 @@
     "
     class="[&_.ant-table-body]:!scrollbar-hide [&_.ant-table-row]:cursor-pointer"
   >
-    <template #bodyCell="{ index, record, column, text }">
+    <template #bodyCell="{ record, column }">
       <template v-if="column.dataIndex == 'id'">
         <span>{{ orders.findIndex((ele: any) => ele == record) + 1 }}</span>
       </template>
@@ -34,6 +34,7 @@
           <img
             :src="image"
             v-for="(image, index) in groupImageOrder(record.cartItems)"
+            :key="index"
             class="!w-12 aspect-square rounded-lg"
             alt="prod"
           />

@@ -26,12 +26,12 @@
 </template>
 
 <script setup lang="ts">
-import Header from './Header.vue'
-import Blog from './Blog.vue'
-import Reel from './Reel.vue'
+import Header from './TheHeader.vue'
+import Blog from './TheBlog.vue'
+import Reel from './TheReel.vue'
 import { FileOutlined, MobileOutlined } from '@ant-design/icons-vue'
 import { Tabs, TabPane } from 'ant-design-vue'
-import { ref, watchEffect } from 'vue'
+import { ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 const route = useRoute()

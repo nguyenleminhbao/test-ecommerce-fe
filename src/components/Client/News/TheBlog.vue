@@ -9,7 +9,7 @@
     @change="onSearch"
   />
   <div class="w-full">
-    <div v-if="isLoading"  class="w-full min-h-[500px] object-center">
+    <div v-if="isLoading" class="w-full min-h-[500px] object-center">
       <Spin
         class="[&_.ant-spin-dot-item]:bg-black [&_.ant-spin-dot-item]:text-xl"
         :spinning="isLoading"
@@ -17,9 +17,11 @@
       />
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-[25px] gap-y-10 mt-5">
-    <BlogItem
+    <div
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-[25px] gap-y-10 mt-5"
       v-if="!isLoading"
+    >
+      <BlogItem
         v-for="(feed, index) in feeds.slice((currentPage - 1) * 12, currentPage * 12)"
         :key="index"
         :feedId="feed.id"
@@ -28,10 +30,10 @@
         :date="feed.createdAt"
         :content="feed.content"
         class="!max-w-full"
-    />
+      />
+    </div>
   </div>
-  </div>
- 
+
   <div class="flex justify-center my-20">
     <Pagination v-model:current="currentPage" :total="feeds.length" show-less-items />
   </div>
@@ -50,11 +52,11 @@ import { getAllFeed } from '@/services/news/get'
 const currentPage = ref<number>(1)
 const loading = ref<boolean>(false)
 const titleSearch = ref<string>('')
-const { data: feeds,isLoading, mutate: runMutation } = useFeed()
+const { data: feeds, isLoading, mutate: runMutation } = useFeed()
 
 const onSearch = () => {
   if (titleSearch.value)
     runMutation(() => searchNews<IFeed>(ElasticsearchIndex.FEED, titleSearch.value))
-  else runMutation(()=>getAllFeed())
+  else runMutation(() => getAllFeed())
 }
 </script>

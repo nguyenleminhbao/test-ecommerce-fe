@@ -20,9 +20,9 @@
           >Edit</Button
         >
       </div>
-      <div class="flex flex-col gap-2 p-4 bg-gray-200 rounded-b-md">
+      <div class="flex flex-col gap-2 p-4 bg-neutral-200 bg-opacity-15 rounded-b-md">
         <h3 class="text-headline-7 text-neutral-7 h-[42px] two-lines-truncate">{{ title }}</h3>
-        <p class="text-neutral-4 text-[14px] leading-[24px]">{{ formatDateText(date) }}</p>
+        <p class="text-neutral-4 text-[14px] leading-6">{{ formatDateText(date) }}</p>
       </div>
     </div>
     <DrawerEditFeed

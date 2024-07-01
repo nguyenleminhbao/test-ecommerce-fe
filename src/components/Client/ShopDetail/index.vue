@@ -42,7 +42,7 @@
 <script setup lang="ts">
 import ShopInfo from './ShopInfo.vue'
 import HeroBanner from './HeroBanner.vue'
-import Newest from './Newest.vue'
+import Newest from './TheNewest.vue'
 import ShopProduct from './ShopProduct.vue'
 import ShopBlog from './ShopBlog.vue'
 import ShopReel from './ShopReel.vue'

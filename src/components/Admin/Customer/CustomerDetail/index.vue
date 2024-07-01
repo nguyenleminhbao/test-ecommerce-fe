@@ -23,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-import Table from './Table.vue'
+import Table from './TheTable.vue'
 import InfoList from './InfoList.vue'
 import RateList from './RateList.vue'
 import AddressList from './AddressList.vue'

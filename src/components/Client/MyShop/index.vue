@@ -52,7 +52,7 @@
 
 <script setup lang="ts">
 import ShopAvatar from './ShopAvatar.vue'
-import Banner from './Banner.vue'
+import Banner from './TheBanner.vue'
 import FormShop from './FormShop.vue'
 import { onMounted, ref } from 'vue'
 import { getShopAdmin } from '@/services/shop/get'

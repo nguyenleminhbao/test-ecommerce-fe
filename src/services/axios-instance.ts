@@ -22,7 +22,6 @@ instance.interceptors.response.use(
   async (error) => {
     if (error?.response?.status == 401) {
       const token = localStorage && localStorage?.getItem('refreshToken')
-      const config = error?.response?.config
       if (token == undefined) {
         window.location.href = '/unauthorized'
       } else if (token != 'undefined') {

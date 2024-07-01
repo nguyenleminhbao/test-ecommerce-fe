@@ -20,8 +20,8 @@
 import { ref } from 'vue'
 import { Tabs, TabPane, Button } from 'ant-design-vue'
 import Profile from './Profile.vue'
-import Notifications from './Notifications.vue'
-import Security from './Security.vue'
+import Notifications from './TheNotifications.vue'
+import Security from './TheSecurity.vue'
 
 const activeKey = ref('1')
 </script>

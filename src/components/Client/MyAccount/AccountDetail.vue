@@ -63,7 +63,7 @@
 
 <script setup lang="ts">
 import { Form, FormItem, Input, InputPassword, Button } from 'ant-design-vue'
-import { reactive, ref } from 'vue'
+import { ref } from 'vue'
 import type { Rule } from 'ant-design-vue/es/form'
 import type { FormInstance } from 'ant-design-vue'
 import { useAuthSystem } from '@/stores/use-auth'

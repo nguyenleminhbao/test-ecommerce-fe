@@ -85,7 +85,6 @@
 <script setup lang="ts">
 import { formatDateText } from '@/utils'
 import { HeartFilled } from '@ant-design/icons-vue'
-import { ref } from 'vue'
 import { isClient } from '@vueuse/shared'
 import { useShare } from '@vueuse/core'
 

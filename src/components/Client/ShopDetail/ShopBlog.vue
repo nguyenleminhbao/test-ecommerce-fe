@@ -28,7 +28,7 @@ import { useShopFeed } from '@/composables/useFeed'
 const route = useRoute()
 const currentPage = ref<number>(1)
 
-const { data: feeds, mutate: runMutation } = useShopFeed({
+const { data: feeds } = useShopFeed({
   shopId: route.params['shopId'] as string
 })
 </script>

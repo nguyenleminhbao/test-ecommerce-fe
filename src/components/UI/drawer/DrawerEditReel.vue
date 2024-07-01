@@ -87,6 +87,7 @@ import type { IReel } from '@/interfaces/news.interface'
 import type { IResponse } from '@/interfaces/response.interface'
 import type { fetcherFn } from 'swrv/dist/types'
 import { updateReel } from '@/services/news/post'
+import { deleteReel } from '@/services/news/delete'
 
 const { reelId, videoUrl, title, description, runMutation } = defineProps<{
   reelId: string
@@ -166,9 +167,11 @@ const onUpdateReel = async () => {
   open.value = false
 }
 
-const onDelete = () => {
+const onDelete = async () => {
   loadingDel.value = true
-  emit('deleteReel', reelId)
+  await deleteReel(reelId)
+  if (runMutation) await runMutation()
+  message.success('Delete reel successfully')
   open.value = false
   loadingDel.value = false
 }

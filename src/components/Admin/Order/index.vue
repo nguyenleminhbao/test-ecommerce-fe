@@ -18,7 +18,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import { Spin } from 'ant-design-vue'
-import Statistic from './Statistic.vue'
+import Statistic from './TheStatistic.vue'
 import Table from './Table.vue'
 import type { IOrder } from '@/interfaces/order.interface'
 import { getAllOrderSystem } from '@/services/order/get'

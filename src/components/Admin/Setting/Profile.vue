@@ -35,7 +35,7 @@
 
 <script lang="ts" setup>
 import { reactive } from 'vue'
-import { Avatar, Form, FormItem, Input, InputNumber, Textarea, Button } from 'ant-design-vue'
+import { Avatar, Form, FormItem, Input } from 'ant-design-vue'
 import { UserOutlined } from '@ant-design/icons-vue'
 
 const layout = {
