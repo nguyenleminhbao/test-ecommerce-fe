@@ -6,7 +6,11 @@
 
     <div class="p-[24px] bg-white rounded-lg flex flex-col gap-[24px] w-full">
       <h1 class="text-headline-6">Content</h1>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam consectetur cum maiores, eum error voluptates corporis ea similique consequuntur, amet nesciunt illum? Quam odio nam nesciunt rerum, ipsum mollitia soluta.</p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam consectetur cum maiores,
+        eum error voluptates corporis ea similique consequuntur, amet nesciunt illum? Quam odio nam
+        nesciunt rerum, ipsum mollitia soluta.
+      </p>
     </div>
   </div>
 </template>

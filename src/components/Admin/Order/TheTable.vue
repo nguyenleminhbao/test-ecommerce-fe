@@ -115,18 +115,7 @@ const columns: TableColumnsType = [
   }
 ]
 
-const groupImageOrder = (
-  listProduct: {
-    shopId: string
-    cartItems: ICartItem[]
-  }[]
-) => {
-  return (
-    listProduct
-      .map((ele) => {
-        return ele?.cartItems?.map((cartItem) => cartItem.image)
-      })
-      .flat() ?? []
-  )
+const groupImageOrder = (cartItems: ICartItem[]) => {
+  return cartItems.flatMap((ele) => ele.image) ?? []
 }
 </script>

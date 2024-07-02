@@ -1,6 +1,5 @@
 <template>
   <div class="flex flex-col gap-[24px]" v-if="order">
-    
     <div class="ml-[24px] flex flex-col gap-[8px]">
       <h1 class="text-headline-5">Order Detail</h1>
       <div class="flex flex-col text-body-2">
@@ -82,16 +81,17 @@ import Table from './TheTable.vue'
 import { formatDateText, formatDateDelivery, formatNumberWithCommas } from '@/utils'
 import { getOneOrderSystem } from '@/services/order/get'
 import type { IOrder } from '@/interfaces/order.interface'
+import type { ICartItem } from '@/interfaces/cart.interface'
 
 const order = ref<IOrder>()
 const route = useRoute()
 
 onMounted(async () => {
   const data = await getOneOrderSystem(route.params['orderId'] as string)
-  const cartItems = JSON.parse(data.message.cartItems)
+  // const cartItems = JSON.parse(data.message.cartItems) as ICartItem[]
   order.value = {
     ...data.message,
-    orderItems: cartItems.map((cartItem: any) => cartItem.cartItems).flat() ?? []
+    orderItems: JSON.parse(data.message.cartItems) as ICartItem[]
   }
 })
 </script>

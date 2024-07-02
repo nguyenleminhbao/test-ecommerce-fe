@@ -7,8 +7,8 @@
   >
     <div
       class="w-full h-[420px] aspect-[9/16] bg-gray-800 rounded-2xl relative group cursor-pointer"
-      @mouseover="playing = true; muted = true"
-      @mouseleave="playing = false; currentTime = 0"
+      @mouseover="(playing = true), (muted = true)"
+      @mouseleave="(playing = false), (currentTime = 0)"
     >
       <video
         ref="video"

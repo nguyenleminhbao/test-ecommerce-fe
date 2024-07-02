@@ -80,6 +80,7 @@ watch(userId, async () => {
     }
 
     if (sessionStorage.getItem('isAdmin') == '1') {
+      setAdmin(true)
       router.push('/admin')
     } else if (sessionStorage.getItem('isAdmin') == '0') {
       console.log('isAdmin')

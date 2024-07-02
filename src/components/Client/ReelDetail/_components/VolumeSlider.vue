@@ -7,7 +7,7 @@
     <div class="relative overflow-hidden w-full h-full rounded">
       <div
         class="relative w-full h-full bg-white rounded"
-        :style="{ transform: `translateY(${(1 - (value / max)) * 100}%)` }"
+        :style="{ transform: `translateY(${(1 - value / max) * 100}%)` }"
       />
     </div>
   </div>
@@ -36,7 +36,7 @@ const value = useVModel(props, 'modelValue', emit)
 const { elementY, elementHeight } = useMouseInElement(scrubber)
 
 watch([scrubbing, elementY], () => {
-  const progress = Math.max(0, Math.min(1, 1 - (elementY.value / elementHeight.value)))
+  const progress = Math.max(0, Math.min(1, 1 - elementY.value / elementHeight.value))
   pendingValue.value = progress * props.max
   if (scrubbing.value) value.value = pendingValue.value
 })

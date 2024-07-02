@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="flex flex-col gap-6">
     <div class="m-[8px] h-11 flex px-6 items-center">
       <RouterLink to="/admin" class="text-headline-5">Admin</RouterLink>
     </div>
@@ -9,7 +9,7 @@
       mode="inline"
       :inline-collapsed="state.collapsed"
       :items="items"
-      class="[&_.ant-menu-title-content]:font-semibold [&_.ant-menu-item-selected]:bg-neutral-7 [&_.ant-menu-item-selected]:text-white"
+      class="[&_.ant-menu-title-content]:font-semibold [&_.ant-menu-item-selected]:bg-neutral-7 [&_.ant-menu-item-selected]:text-white [&_.ant-menu]:!pt-3"
       @click="handleMenuItemClick"
     ></Menu>
   </div>

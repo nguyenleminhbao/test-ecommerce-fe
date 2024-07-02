@@ -1,7 +1,6 @@
 <template>
   <div class="w-full flex flex-col gap-10 max-sm:gap-8 h-fit">
     <div class="flex flex-wrap justify-between items-center gap-6">
-      
       <InputSearch
         v-model:value="titleSearch"
         class="border-neutral-4 border-2 rounded-lg sm:w-80 [&_.ant-btn-default]:border-0 [&_.ant-btn-default]:flex [&_.ant-btn-default]:justify-center [&_.ant-btn-default]:items-center"
@@ -90,7 +89,7 @@ const onChange = () => {
     path: route.path,
     query: { page: currentPage.value }
   })
-  runMutation()
+  runMutation(() => getAllProducts(currentPage.value))
 }
 
 const loading = ref<boolean>(false)
