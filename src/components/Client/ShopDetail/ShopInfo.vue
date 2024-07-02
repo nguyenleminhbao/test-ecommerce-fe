@@ -12,8 +12,9 @@
 
           <Button class="h-7 bg-primary text-white object-center" @click="followFunc">
             <template #icon>
-              <PlusCircleOutlined v-if="!follow" /> <CheckCircleOutlined v-else
-            /></template>
+              <PlusCircleOutlined v-if="!follow" />
+              <CheckCircleOutlined v-else />
+            </template>
             <span v-if="!follow">Follow</span>
             <span v-else>Following</span>
           </Button>
