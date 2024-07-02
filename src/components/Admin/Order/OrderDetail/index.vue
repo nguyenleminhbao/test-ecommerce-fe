@@ -1,5 +1,6 @@
 <template>
   <div class="flex flex-col gap-[24px]" v-if="order">
+    
     <div class="ml-[24px] flex flex-col gap-[8px]">
       <h1 class="text-headline-5">Order Detail</h1>
       <div class="flex flex-col text-body-2">

@@ -12,7 +12,7 @@
         </ClerkLoading>
         <ClerkLoaded>
           <Image :src="user?.imageUrl" class="!w-[80px] !h-[80px] rounded-full" />
-          <span class="text-body-2-semibold"> {{ user?.fullName }}</span>
+          <span class="text-body-2-semibold">{{ user?.fullName }}</span>
         </ClerkLoaded>
       </div>
     </div>
@@ -27,7 +27,7 @@
           </ClerkLoading>
           <ClerkLoaded>
             <Image :src="user?.imageUrl" class="!w-[50px] !h-[50px] rounded-full" />
-            <span class="text-body-2-semibold"> {{ user?.fullName }}</span>
+            <span class="text-body-2-semibold">{{ user?.fullName }}</span>
           </ClerkLoaded>
         </div>
 

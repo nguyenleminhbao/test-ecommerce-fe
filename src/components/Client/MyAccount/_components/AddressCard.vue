@@ -93,7 +93,7 @@ const formAddress = ref<{
   city: ''
 })
 
-const handleEdit = async (e: MouseEvent) => {
+const handleEdit = () => {
   if (!formAddress.value.streetAddress || !formAddress.value.city) {
     message.error('Please fill in all information')
   } else {
@@ -108,7 +108,7 @@ const handleEdit = async (e: MouseEvent) => {
   }
 }
 
-const handleDel = async (e: MouseEvent) => {
+const handleDel = () => {
   loadingDel.value = true
 
   // Delete

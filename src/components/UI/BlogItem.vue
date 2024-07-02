@@ -17,8 +17,8 @@
           class="absolute bg-black bottom-2 right-2 hidden shadow-lg z-30 group-hover:block"
           type="primary"
           @click="drawerEditFeed?.showDrawer"
-          >Edit</Button
-        >
+          >Edit
+        </Button>
       </div>
       <div class="flex flex-col gap-2 p-4 bg-neutral-200 bg-opacity-15 rounded-b-md">
         <h3 class="text-headline-7 text-neutral-7 h-[42px] two-lines-truncate">{{ title }}</h3>
