@@ -3,5 +3,5 @@
 </template>
 
 <script setup lang="ts">
-import ReelDetail from '@/components/Admin/Reel/ReelDetail/index.vue'
+import ReelDetail from '@/components/Admin/Reel/ReelDetail/AdminReelDetail.vue'
 </script>

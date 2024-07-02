@@ -66,7 +66,7 @@
 import { FormItem, Radio, RadioGroup, Input } from 'ant-design-vue'
 import { ref, reactive } from 'vue'
 import { banks } from '@/constants/bank'
-import type { FormOrderType } from '../index.vue'
+import type { FormOrderType } from '../ClientCart.vue'
 import { PAYMENT_TYPE } from '@/constants/enum/payment.enum'
 import { useWindowSize } from '@vueuse/core'
 

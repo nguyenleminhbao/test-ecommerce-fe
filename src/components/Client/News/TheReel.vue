@@ -28,7 +28,7 @@
         :title="reel.title"
         :description="reel.description"
         :view="reel.view"
-        class="!max-w-full"
+        otherStyle="!max-w-full"
       />
     </div>
   </div>

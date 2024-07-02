@@ -17,7 +17,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import Header from '@/components/common/Header.vue'
+import Header from '@/components/common/HeaderWeb.vue'
 import HeaderMobile from '@/components/common/HeaderMobile.vue'
 import Footer from '@/components/common/TheFooter.vue'
 

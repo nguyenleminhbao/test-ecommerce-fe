@@ -100,26 +100,16 @@ import {
 } from 'vue-clerk'
 import DrawerCart from '@/components/UI/drawer/DrawerCart.vue'
 import { ref } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { useRouter } from 'vue-router'
 
 const router = useRouter()
 const { isSignedIn } = useAuth()
 const { openSignIn } = useClerk()
 const drawerCart = ref()
-const route = useRoute();
-
 
 const showCart = () => {
   drawerCart?.value?.showCart()
 }
-
-const checkNavNum = (path: string) => {
-  if (path.includes('product')) return 1
-  else if (path.includes('news')) return 2
-  else if (path.includes('my-account')) return 3
-  else return 0
-}
-const navNum = ref<number>(checkNavNum(route.path))
 
 const onCheckLogin = (e: Event) => {
   e.stopPropagation()

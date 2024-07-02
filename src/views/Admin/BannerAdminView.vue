@@ -3,5 +3,5 @@
 </template>
 
 <script setup lang="ts">
-import Banner from '@/components/Admin/Banner/index.vue'
+import Banner from '@/components/Admin/Banner/AdminBanner.vue'
 </script>

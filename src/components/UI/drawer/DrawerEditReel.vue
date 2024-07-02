@@ -116,7 +116,6 @@ const fileList = ref([])
 const loadingVid = ref<boolean>(false)
 const loadingEdit = ref<boolean>(false)
 const loadingDel = ref<boolean>(false)
-const emit = defineEmits(['deleteReel'])
 
 const { volume, muted } = useMediaControls(video, {
   src: videoState.value.video

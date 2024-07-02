@@ -2,7 +2,7 @@
   <RouterLink
     :to="`/blog/${feedId}`"
     class="group relative shadow-md min-w-[262px] max-w-[262px] rounded-md bg-neutral-3"
-    :class="class"
+    :class="otherStyle"
     @click="reloadPage"
   >
     <div class="flex flex-col w-full rounded-md">
@@ -61,7 +61,7 @@ const {
   date: string
   content: string
   isEdit?: boolean
-  class?: string
+  otherStyle?: string
   runMutation?: (data?: fetcherFn<IResponse<IFeed[]>>) => Promise<void>
 }>()
 

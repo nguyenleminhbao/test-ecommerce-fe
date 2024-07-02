@@ -117,7 +117,7 @@
 import { Form, FormItem, Input, Select, SelectOption, Modal, message } from 'ant-design-vue'
 import { PlusCircleOutlined } from '@ant-design/icons-vue'
 import { onMounted, ref } from 'vue'
-import type { FormOrderType } from '../index.vue'
+import type { FormOrderType } from '../ClientCart.vue'
 import type { IAddress } from '@/interfaces/user.interface'
 import { getAllAddress } from '@/services/detail-user/get'
 import { createAddress } from '@/services/detail-user/post'
@@ -126,7 +126,7 @@ const props = defineProps<{
   form: FormOrderType
 }>()
 
-const localForm = ref<FormOrderType>({...props.form })
+const localForm = ref<FormOrderType>({ ...props.form })
 
 const listAddress = ref<IAddress[]>([])
 

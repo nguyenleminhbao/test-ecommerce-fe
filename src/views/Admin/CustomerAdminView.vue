@@ -3,5 +3,5 @@
 </template>
 
 <script setup lang="ts">
-import Customer from '@/components/Admin/Customer/index.vue'
+import Customer from '@/components/Admin/Customer/AdminCustomer.vue'
 </script>

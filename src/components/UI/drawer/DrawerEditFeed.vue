@@ -117,7 +117,6 @@ const fileList = ref([])
 const loadingImg = ref<boolean>(false)
 const loadingEdit = ref<boolean>(false)
 const loadingDel = ref<boolean>(false)
-const emit = defineEmits(['deleteBlog'])
 const editorApiKey = import.meta.env.VITE_EDITOR_KEY
 
 const imageState = ref<{

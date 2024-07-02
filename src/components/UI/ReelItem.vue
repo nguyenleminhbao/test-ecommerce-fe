@@ -1,7 +1,7 @@
 <template>
   <RouterLink
     class="relative group max-w-[262px]"
-    :class="class"
+    :class="otherStyle"
     :to="`/reel/${reelId}`"
     @click="onClick"
   >
@@ -63,7 +63,7 @@ const {
   description: string
   view: number
   isEdit?: boolean
-  class?: string
+  otherStyle?: string
   runMutation?: (data?: fetcherFn<IResponse<IReel[]>>) => Promise<void>
 }>()
 

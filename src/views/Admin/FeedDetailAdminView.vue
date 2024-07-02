@@ -3,5 +3,5 @@
 </template>
 
 <script setup lang="ts">
-import FeedDetail from '@/components/Admin/Feed/FeedDetail/index.vue'
+import FeedDetail from '@/components/Admin/Feed/FeedDetail/AdminFeedDetail.vue'
 </script>

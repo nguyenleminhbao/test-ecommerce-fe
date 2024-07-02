@@ -29,7 +29,7 @@
         :title="feed.title"
         :date="feed.createdAt"
         :content="feed.content"
-        class="!max-w-full"
+        otherStyle="!max-w-full"
       />
     </div>
   </div>
