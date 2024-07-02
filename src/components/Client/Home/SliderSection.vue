@@ -2,6 +2,7 @@
   <div
     class="max-w-[1120px] mx-auto grid gap-[32px] pb-[40px] overflow-x-hidden"
     style="display: inherit"
+    v-if="banners"
   >
     <Carousel arrows autoplay>
       <template #prevArrow>
@@ -14,10 +15,8 @@
           <right-circle-outlined />
         </div>
       </template>
-      <div v-if="banners">
-        <div v-for="(banner, index) in banners.message" :key="index">
-          <img class="w-full aspect-[1120/536] object-cover" :src="banner" alt="temp" />
-        </div>
+      <div v-for="(banner, index) in banners.message" :key="index">
+        <img class="w-full aspect-[1120/536] object-cover" :src="banner" alt="temp" />
       </div>
     </Carousel>
   </div>
