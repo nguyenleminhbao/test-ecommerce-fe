@@ -1,5 +1,5 @@
 <template>
-  <div v-if="authStore.isAdmin">
+  <div>
     <div class="flex">
       <SlidebarAdmin class="fixed top-0 w-[200px]" />
       <div class="flex-1 overflow-auto ml-[200px] bg-neutral-2 min-h-screen">

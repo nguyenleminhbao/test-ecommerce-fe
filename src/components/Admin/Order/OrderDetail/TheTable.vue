@@ -22,8 +22,16 @@
               <span class="text-body-2-semibold two-lines-truncate">{{ record.title }}</span>
             </div>
           </template>
+          <template v-if="column.dataIndex == 'shopName'">
+            <span class="text-body-2-semibold two-lines-truncate">{{ record.shopName }}</span>
+          </template>
+          <template v-if="column.dataIndex == 'quantity'"
+            ><span class="text-lg font-semibold">{{ record.quantity }}</span></template
+          >
           <template v-if="column.dataIndex == 'price'">
-            <span>{{ `${formatNumberWithCommas(record.price * record.quantity)} đ` }}</span>
+            <span class="text-lg font-semibold">{{
+              `${formatNumberWithCommas(record.price * record.quantity)} đ`
+            }}</span>
           </template>
         </div>
       </template>

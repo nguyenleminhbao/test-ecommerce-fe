@@ -10,7 +10,6 @@
   >
     <ul class="flex flex-col h-full" v-if="cartStore.cart">
       <CartItem
-        
         v-for="cartItem in cartStore.cart.cartItems"
         :key="cartItem.variantId"
         :cart-item="cartItem"

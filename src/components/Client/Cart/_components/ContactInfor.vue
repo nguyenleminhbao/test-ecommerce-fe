@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-mutating-props -->
 <template>
   <div
     class="p-6 pt-3 border-[1px] rounded-md border-neutral-600 shadow-lg [&_.ant-form-item]:!mb-0"
@@ -12,7 +13,7 @@
         <span class="text-body-2-semibold text-neutral-4"
           >First Name <span class="text-red-600 text-lg">*</span></span
         >
-        <Input v-model:value="localForm.firstName" class="mt-2" placeholder="Nguyen Van" />
+        <Input v-model:value="form.firstName" class="mt-2" placeholder="Nguyen Van" />
       </FormItem>
       <FormItem
         name="lastName"
@@ -22,7 +23,7 @@
         <span class="text-body-2-semibold text-neutral-4"
           >Last Name <span class="text-red-600 text-lg">*</span></span
         >
-        <Input v-model:value="localForm.lastName" class="mt-2" placeholder="A" />
+        <Input v-model:value="form.lastName" class="mt-2" placeholder="A" />
       </FormItem>
       <FormItem
         class="col-span-2"
@@ -38,7 +39,7 @@
         <span class="text-body-2-semibold text-neutral-4"
           >Phone number <span class="text-red-600 text-lg">*</span></span
         >
-        <Input v-model:value="localForm.phoneNumber" class="mt-2" placeholder="0398841271" />
+        <Input v-model:value="form.phoneNumber" class="mt-2" placeholder="0398841271" />
       </FormItem>
 
       <FormItem
@@ -56,7 +57,7 @@
         </div>
 
         <Select
-          v-model:value="localForm.shippingAddress"
+          v-model:value="form.shippingAddress"
           placeholder="please select your zone"
           class="mt-2"
         >
@@ -122,11 +123,9 @@ import type { IAddress } from '@/interfaces/user.interface'
 import { getAllAddress } from '@/services/detail-user/get'
 import { createAddress } from '@/services/detail-user/post'
 
-const props = defineProps<{
+const { form } = defineProps<{
   form: FormOrderType
 }>()
-
-const localForm = ref<FormOrderType>({ ...props.form })
 
 const listAddress = ref<IAddress[]>([])
 

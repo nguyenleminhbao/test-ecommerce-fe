@@ -2,7 +2,9 @@
   <div
     class="max-w-[1120px] mx-auto content-center bg-[url('https://img.freepik.com/free-photo/arrangement-black-friday-shopping-carts-with-copy-space_23-2148667047.jpg?size=626&ext=jpg&ga=GA1.1.2116175301.1718668800&semt=ais_user')] bg-no-repeat bg-local aspect-[1120/392] max-sm:aspect-[311/308] bg-cover bg-center"
   >
-    <div class="backdrop-blur h-full grid gap-6 max-sm:gap-4 place-content-center text-center text-white">
+    <div
+      class="backdrop-blur h-full grid gap-6 max-sm:gap-4 place-content-center text-center text-white"
+    >
       <Breadcrumb
         separator=">"
         class="flex gap-4 text-button-xs justify-self-center [&_.ant-breadcrumb-link]:text-white [&_.ant-breadcrumb-separator]:text-white"

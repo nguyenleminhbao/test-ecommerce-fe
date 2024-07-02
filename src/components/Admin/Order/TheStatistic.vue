@@ -23,7 +23,7 @@
       </Col>
       <Col :span="6">
         <Card>
-          <Statistic title="Pending" :value="pending" />
+          <Statistic title="Pending" :value="`${formatNumberWithCommas(pending)} đ`" />
         </Card>
       </Col>
     </Row>
@@ -31,6 +31,7 @@
 </template>
 
 <script lang="ts" setup>
+import { formatNumberWithCommas } from '@/utils'
 import { Row, Col, Card, Statistic } from 'ant-design-vue'
 
 const { success, failed, pending, total } = defineProps<{

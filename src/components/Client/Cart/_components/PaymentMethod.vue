@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-mutating-props -->
 <template>
   <div
     class="p-6 pt-3 border-[1px] rounded-md border-neutral-600 shadow-lg [&_.ant-form-item]:!mb-0"
@@ -8,7 +9,7 @@
         name="payMethod"
         :rules="[{ required: true, message: 'Please select payment method' }]"
       >
-        <RadioGroup class="flex flex-col gap-3" v-model:value="localForm.payMethod">
+        <RadioGroup class="flex flex-col gap-3" v-model:value="form.payMethod">
           <li
             class="shippingItem p-2 rounded-md border-[1px] border-neutral-600 flex justify-between items-center w-full"
           >
@@ -33,7 +34,7 @@
         </RadioGroup>
       </FormItem>
       <FormItem name="bank" class="hidden">
-        <Input v-model:value="localForm.bankCode" />
+        <Input v-model:value="form.bankCode" />
       </FormItem>
       <div
         v-if="form.payMethod == PAYMENT_TYPE.CREDIT"
@@ -64,24 +65,24 @@
 
 <script setup lang="ts">
 import { FormItem, Radio, RadioGroup, Input } from 'ant-design-vue'
-import { ref, reactive } from 'vue'
+import { ref } from 'vue'
 import { banks } from '@/constants/bank'
 import type { FormOrderType } from '../ClientCart.vue'
 import { PAYMENT_TYPE } from '@/constants/enum/payment.enum'
 import { useWindowSize } from '@vueuse/core'
 
-const props = defineProps<{
+const { form } = defineProps<{
   form: FormOrderType
 }>()
 
-const localForm = reactive({ ...props.form })
 const { width } = useWindowSize()
 const bankNum = ref<number>(-1)
 
 const selectBank = (index: number) => {
   bankNum.value = index
   const bank = banks.find((bank, id) => id == index)
-  localForm.bankCode = bank?.bankCode
+  // eslint-disable-next-line vue/no-mutating-props
+  form.bankCode = bank?.bankCode
 }
 </script>
 
