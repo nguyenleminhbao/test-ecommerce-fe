@@ -47,6 +47,7 @@
           class="rounded-md flex flex-col items-center shadow-lg cursor-pointer py-2 max-h-[88px]"
           :class="bankNum == index ? 'border-neutral-500 border-[2px]' : ''"
           v-for="(bank, index) in banks"
+          :key="index"
           @click="selectBank(index)"
         >
           <img
@@ -63,7 +64,7 @@
 
 <script setup lang="ts">
 import { FormItem, Radio, RadioGroup, Input } from 'ant-design-vue'
-import { computed, ref, watch, watchEffect } from 'vue'
+import { ref } from 'vue'
 import { banks } from '@/constants/bank'
 import type { FormOrderType } from '../index.vue'
 import { PAYMENT_TYPE } from '@/constants/enum/payment.enum'

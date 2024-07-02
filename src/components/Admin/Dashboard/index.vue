@@ -16,8 +16,8 @@
 </template>
 
 <script setup lang="ts">
-import Revenue from './Revenue.vue'
-import Sales from './Sales.vue'
-import Comments from './Customers.vue'
-import Statistic from './Statistic.vue'
+import Revenue from './TheRevenue.vue'
+import Sales from './TheSales.vue'
+import Comments from './TheCustomers.vue'
+import Statistic from './TheStatistic.vue'
 </script>

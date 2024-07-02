@@ -9,17 +9,17 @@
   <ReelCarousel />
   <Banner />
   <BlogSection />
-  <Newsletter />
+  <TheNewsletter />
 </template>
 
 <script setup lang="ts">
 import SliderSection from './SliderSection.vue'
 import BannerGrid from './BannerGrid.vue'
 import ProductCarousel from './ProductCarousel.vue'
-import Values from './Values.vue'
-import Banner from './Banner.vue'
+import Values from './TheValues.vue'
+import Banner from './TheBanner.vue'
 import BlogSection from './BlogSection.vue'
-import Newsletter from './Newsletter.vue'
+import TheNewsletter from './TheNewsletter.vue'
 import ReelCarousel from './ReelCarousel.vue'
 import LivestreanCarousel from './LivestreamCarousel.vue'
 import { useLivestream } from '@/stores/use-livestream'

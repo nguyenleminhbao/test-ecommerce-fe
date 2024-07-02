@@ -35,7 +35,7 @@
 </template>
 
 <script setup lang="ts">
-import Profie from './_components/Profie.vue'
+import Profie from './_components/TheProfie.vue'
 import CommentItem from './_components/CommentItem.vue'
 import type { IReel } from '@/interfaces/news.interface'
 import { ref } from 'vue'

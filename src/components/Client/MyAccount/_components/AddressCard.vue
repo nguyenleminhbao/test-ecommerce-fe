@@ -69,9 +69,8 @@
 
 <script setup lang="ts">
 import { Modal, Form, FormItem, Input, Button, message } from 'ant-design-vue'
-import { ConsoleSqlOutlined, EditOutlined } from '@ant-design/icons-vue'
-import { onMounted, ref, watchEffect, h } from 'vue'
-import type { IAddress } from '@/interfaces/user.interface'
+import { EditOutlined } from '@ant-design/icons-vue'
+import { ref, h } from 'vue'
 
 const { id, street, city } = defineProps<{
   id: number
@@ -114,7 +113,7 @@ const handleDel = async (e: MouseEvent) => {
 
   // Delete
   console.log('del')
-  
+
   loadingDel.value = false
   message.success('Delete address successfully')
 }

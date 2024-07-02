@@ -4,9 +4,9 @@
     <RadioGroup
       v-model:value="value"
       button-style="solid"
-      class="flex flex-wrap gap-2 mt-3 [&_.ant-radio-button-wrapper-checked]:!bg-neutral-7 "
+      class="flex flex-wrap gap-2 mt-3 [&_.ant-radio-button-wrapper-checked]:!bg-neutral-7"
     >
-      <OptionItem v-for="title in option.values" :title="title" />
+      <OptionItem v-for="(title, index) in option.values" :key="index" :title="title" />
     </RadioGroup>
   </div>
 </template>

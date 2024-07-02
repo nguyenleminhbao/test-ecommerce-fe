@@ -116,7 +116,7 @@
 <script setup lang="ts">
 import { Form, FormItem, Input, Select, SelectOption, Modal, message } from 'ant-design-vue'
 import { PlusCircleOutlined } from '@ant-design/icons-vue'
-import { onMounted, ref, watchEffect } from 'vue'
+import { onMounted, ref } from 'vue'
 import type { FormOrderType } from '../index.vue'
 import type { IAddress } from '@/interfaces/user.interface'
 import { getAllAddress } from '@/services/detail-user/get'

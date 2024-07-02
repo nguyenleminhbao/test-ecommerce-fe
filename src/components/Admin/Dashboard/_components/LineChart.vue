@@ -1,5 +1,5 @@
 <template>
-  <Line :data="data" :options="options" />
+  <ChartLine :data="data" :options="options" />
 </template>
 
 <script lang="ts">
@@ -13,14 +13,14 @@ import {
   Tooltip,
   Legend
 } from 'chart.js'
-import { Line } from 'vue-chartjs'
+import { Line as ChartLine } from 'vue-chartjs'
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend)
 
 export default {
   name: 'App',
   components: {
-    Line
+    ChartLine
   },
   data() {
     return {

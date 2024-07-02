@@ -38,6 +38,6 @@
 </template>
 
 <script setup lang="ts">
-import Card from './_components/Card.vue'
+import Card from './_components/TheCard.vue'
 import { CarOutlined, WalletOutlined, LockOutlined, PhoneOutlined } from '@ant-design/icons-vue'
 </script>

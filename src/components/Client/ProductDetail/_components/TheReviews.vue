@@ -69,7 +69,7 @@
 <script setup lang="ts">
 import { Button, Modal, Rate, Input, Upload, type UploadChangeParam, message } from 'ant-design-vue'
 import { PlusOutlined } from '@ant-design/icons-vue'
-import Comment from './Comment.vue'
+import Comment from './TheComment.vue'
 import { onMounted, ref } from 'vue'
 import { uploadImageUrl } from '@/constants/upload-url'
 import { TYPE_COMMENT } from '@/constants/enum/comment.enum'

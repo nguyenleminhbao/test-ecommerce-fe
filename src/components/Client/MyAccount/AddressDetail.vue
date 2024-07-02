@@ -13,6 +13,7 @@
     <div class="grid grid-cols-2 max-lg:grid-cols-1 gap-[23px]">
       <AddressCard
         v-for="(address, index) in listAddress"
+        :key="index"
         :id="index"
         :street="address.streetAddress"
         :city="address.city"

@@ -12,8 +12,8 @@
 </template>
 
 <script setup lang="ts">
-import Header from './Header.vue'
-import Content from './Content.vue'
+import Header from './TheHeader.vue'
+import Content from './TheContent.vue'
 import RelatedPosts from './RelatedPosts.vue'
 import type { IFeed } from '@/interfaces/news.interface'
 import { onMounted, ref } from 'vue'

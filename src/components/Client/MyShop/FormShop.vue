@@ -130,7 +130,6 @@ import {
   FormItem,
   Upload,
   Input,
-  Checkbox,
   Textarea,
   Select,
   SelectOption,
@@ -138,7 +137,7 @@ import {
   message
 } from 'ant-design-vue'
 import { PlusOutlined, LoadingOutlined } from '@ant-design/icons-vue'
-import type { UploadChangeParam, UploadProps } from 'ant-design-vue'
+import type { UploadChangeParam } from 'ant-design-vue'
 import type { Rule } from 'ant-design-vue/es/form'
 
 interface FormState {

@@ -1,7 +1,7 @@
 <template>
   <div class="w-full flex flex-col gap-10 max-sm:gap-8 h-fit">
     <div class="flex flex-wrap justify-between items-center gap-6">
-      <!-- <h1 class="text-body-1-semibold">All Products</h1> -->
+      
       <InputSearch
         v-model:value="titleSearch"
         class="border-neutral-4 border-2 rounded-lg sm:w-80 [&_.ant-btn-default]:border-0 [&_.ant-btn-default]:flex [&_.ant-btn-default]:justify-center [&_.ant-btn-default]:items-center"
@@ -41,13 +41,9 @@
       />
       <div
         class="grid grid-cols-4 gap-6 max-[1120px]:grid-cols-3 max-[800px]:grid-cols-2 max-sm:grid-cols-1"
+        v-if="!isLoading"
       >
-        <ProdCard
-          v-if="!isLoading"
-          v-for="product in products"
-          :key="product.id"
-          :product="product"
-        />
+        <ProdCard v-for="product in products" :key="product.id" :product="product" />
       </div>
 
       <div class="mx-auto">

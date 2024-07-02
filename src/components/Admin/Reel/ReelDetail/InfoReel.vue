@@ -12,7 +12,7 @@
       <h1 class="text-headline-6">Preview bánh tráng trộn</h1>
 
       <ul class="text-body-2">
-        <li v-for="item in items" class="flex justify-between gap-2">
+        <li v-for="item in items" :key="item.id" class="flex justify-between gap-2">
           <span class="text-body-2-semibold flex items-center gap-2"
             ><component :is="item.icon" />{{ item.title }}:</span
           >
@@ -20,7 +20,7 @@
         </li>
       </ul>
       <ul class="text-body-2">
-        <li v-for="interact in interacts" class="flex justify-between gap-2">
+        <li v-for="interact in interacts" :key="interact.id" class="flex justify-between gap-2">
           <span class="text-body-2-semibold flex items-center gap-2"
             ><component :is="interact.icon" />{{ interact.title }}:</span
           >
@@ -55,15 +55,15 @@ import {
 } from '@ant-design/icons-vue'
 
 const items = ref([
-  { icon: CalendarOutlined, title: 'Create', content: '14/02/2019' },
-  { icon: UserOutlined, title: 'Owner', content: 'Name' },
-  { icon: EyeOutlined, title: 'View', content: '123' }
+  { id: 1, icon: CalendarOutlined, title: 'Create', content: '14/02/2019' },
+  { id: 2, icon: UserOutlined, title: 'Owner', content: 'Name' },
+  { id: 3, icon: EyeOutlined, title: 'View', content: '123' }
 ])
 
 const interacts = ref([
-  { icon: LikeOutlined, title: 'Like', content: '123' },
-  { icon: CommentOutlined, title: 'Comment', content: '123' },
-  { icon: ShareAltOutlined, title: 'Share', content: '123' }
+  { id: 1, icon: LikeOutlined, title: 'Like', content: '123' },
+  { id: 2, icon: CommentOutlined, title: 'Comment', content: '123' },
+  { id: 3, icon: ShareAltOutlined, title: 'Share', content: '123' }
 ])
 
 const open = ref<boolean>(false)

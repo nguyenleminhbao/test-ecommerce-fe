@@ -142,7 +142,7 @@
 </template>
 
 <script setup lang="ts">
-import { Button, Drawer, Tooltip, message } from 'ant-design-vue'
+import { Button, Drawer, message } from 'ant-design-vue'
 import {
   ShoppingOutlined,
   BellOutlined,

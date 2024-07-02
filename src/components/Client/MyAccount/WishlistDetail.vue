@@ -9,7 +9,7 @@
       :scroll="{ x: 500, y: 500 }"
       class="w-full border-[1px] border-black rounded-lg [&_.ant-table-body]:!scrollbar-hide [&_.ant-table-row]:cursor-pointer"
     >
-      <template #bodyCell="{ column, text, record }">
+      <template #bodyCell="{ column, text }">
         <template v-if="column.dataIndex === 'product'">
           <div class="flex gap-4 items-center">
             <img

@@ -9,11 +9,10 @@
     <div class="flex overflow-x-auto items-center gap-[24px] scrollbar-hide relative">
       <LivestreamItem
         v-for="(stream, index) in streamStore.listLivestream"
+        :key="index"
         :room-id="stream.roomId"
         :logoShop="stream.shopAvatar"
       />
-
-      <!-- <RightIcon /> -->
     </div>
   </div>
 </template>

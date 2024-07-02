@@ -19,7 +19,7 @@
 <script setup lang="ts">
 import Header from '@/components/common/Header.vue'
 import HeaderMobile from '@/components/common/HeaderMobile.vue'
-import Footer from '@/components/common/Footer.vue'
+import Footer from '@/components/common/TheFooter.vue'
 
 import { login } from '@/services/auth/post'
 import { onMounted, ref, watch } from 'vue'

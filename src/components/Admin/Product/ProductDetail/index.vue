@@ -57,11 +57,11 @@
 
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
-import Table from './Table.vue'
+import Table from './TheTable.vue'
 import InfoProd from './InfoProd.vue'
 import CheckList from './CheckList.vue'
 import BarChart from './BarChart.vue'
-import Pagination from './Pagination.vue'
+import Pagination from './ThePagination.vue'
 import CardProduct from './CardProduct.vue'
 import { useProductDetail } from '@/composables/useProduct'
 
