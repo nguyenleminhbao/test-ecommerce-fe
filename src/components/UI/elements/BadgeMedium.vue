@@ -18,9 +18,9 @@
 import { TYPE_BADGE } from '@/constants/enum/badge.enum'
 
 const { title, textColor, bgColor, type } = defineProps<{
-  title: String
-  textColor: String
-  bgColor: String
+  title: string
+  textColor: string
+  bgColor: string
   type: TYPE_BADGE
 }>()
 </script>

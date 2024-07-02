@@ -52,7 +52,7 @@
 import { Button, Spin } from 'ant-design-vue'
 import { useCart } from '@/stores/use-cart'
 import { formatNumberWithCommas } from '@/utils'
-import type { FormOrderType } from './index.vue'
+import type { FormOrderType } from './TheCart.vue'
 
 const { form, isLoading } = defineProps<{
   form: FormOrderType

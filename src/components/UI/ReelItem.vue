@@ -1,14 +1,20 @@
 <template>
   <RouterLink
     class="relative group max-w-[262px]"
-    :class="class"
+    :class="otherStyle"
     :to="`/reel/${reelId}`"
     @click="onClick"
   >
     <div
       class="w-full h-[420px] aspect-[9/16] bg-gray-800 rounded-2xl relative group cursor-pointer"
-      @mouseover="playing = true; muted = true"
-      @mouseleave="playing = false; currentTime = 0"
+      @mouseover="
+        playing = true
+        muted = true
+      "
+      @mouseleave="
+        playing = false
+        currentTime = 0
+      "
     >
       <video
         ref="video"
@@ -63,7 +69,7 @@ const {
   description: string
   view: number
   isEdit?: boolean
-  class?: string
+  otherStyle?: string
   runMutation?: (data?: fetcherFn<IResponse<IReel[]>>) => Promise<void>
 }>()
 

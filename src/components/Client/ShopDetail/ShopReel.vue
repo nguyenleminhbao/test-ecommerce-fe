@@ -9,7 +9,7 @@
         :title="reel.title"
         :description="reel.description"
         :view="reel.view"
-        class="!max-w-full"
+        other-style="!max-w-full"
       />
     </div>
     <div class="flex justify-center my-20">

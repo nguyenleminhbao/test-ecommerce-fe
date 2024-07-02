@@ -3,5 +3,5 @@
 </template>
 
 <script setup lang="ts">
-import Livestream from '@/components/Client/Livestream/index.vue'
+import Livestream from '@/components/Client/Livestream/TheLivestream.vue'
 </script>

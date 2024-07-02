@@ -138,7 +138,7 @@ const routes = [
       {
         path: '/admin/customer',
         name: 'customer admin',
-        component: () => import('@/views/Admin/CustomerAdminView.vue')
+        component: () => import('@/views/Admin/CustomerDetailAdminView.vue')
       },
       {
         path: '/admin/customer/:customerId',

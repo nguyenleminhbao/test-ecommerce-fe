@@ -7,7 +7,7 @@
 
 <script setup lang="ts">
 import { ContactInfor, PaymentMethod } from './_components'
-import type { FormOrderType } from './index.vue'
+import type { FormOrderType } from './TheCart.vue'
 
 const { form } = defineProps<{
   form: FormOrderType
