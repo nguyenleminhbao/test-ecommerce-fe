@@ -77,8 +77,4 @@ for (let i = 0; i < 100; i++) {
     price: `${i} đ`
   })
 }
-
-const onDelete = (key: number) => {
-  products.value = products.value.filter((item) => item.key !== key)
-}
 </script>

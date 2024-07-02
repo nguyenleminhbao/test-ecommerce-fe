@@ -19,7 +19,7 @@
       />
     </div>
   </div>
-  
+
   <Modal
     v-model:open="open"
     title="New address shipping"
@@ -65,9 +65,9 @@
 
 <script setup lang="ts">
 import AddressCard from './_components/AddressCard.vue'
-import { Form, FormItem, Input, Button, Select, SelectOption, Modal, message } from 'ant-design-vue'
+import { Form, FormItem, Input, Button, Modal, message } from 'ant-design-vue'
 import { PlusCircleOutlined } from '@ant-design/icons-vue'
-import { onMounted, ref, watchEffect, h } from 'vue'
+import { onMounted, ref, h } from 'vue'
 import type { IAddress } from '@/interfaces/user.interface'
 import { getAllAddress } from '@/services/detail-user/get'
 import { createAddress } from '@/services/detail-user/post'
@@ -79,7 +79,7 @@ const showModal = () => {
   open.value = true
 }
 
-const handleOk = async (e: MouseEvent) => {
+const handleOk = async () => {
   if (!formAddress.value.streetAddress || !formAddress.value.city) {
     message.error('Please fill in all information')
   } else {
