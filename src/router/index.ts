@@ -113,67 +113,67 @@ const routes = [
       {
         path: '',
         name: 'dashboard admin',
-        component: () => import('@/views/Admin/DashboardAdmin.vue')
+        component: () => import('@/views/Admin/DashboardAdminView.vue')
       },
       {
         path: '/admin/product',
         name: 'product admin',
-        component: () => import('@/views/Admin/ProductAdmin.vue')
+        component: () => import('@/views/Admin/ProductAdminView.vue')
       },
       {
         path: '/admin/product/:productId',
         name: 'product detail admin',
-        component: () => import('@/views/Admin/ProductDetailAdmin.vue')
+        component: () => import('@/views/Admin/ProductDetailAdminView.vue')
       },
       {
         path: '/admin/order',
         name: 'order admin',
-        component: () => import('@/views/Admin/OrderAdmin.vue')
+        component: () => import('@/views/Admin/OrderAdminView.vue')
       },
       {
         path: '/admin/order/:orderId',
         name: 'order detail admin',
-        component: () => import('@/views/Admin/OrderDetailAdmin.vue')
+        component: () => import('@/views/Admin/OrderDetailAdminView.vue')
       },
       {
         path: '/admin/customer',
         name: 'customer admin',
-        component: () => import('@/views/Admin/CustomerAdmin.vue')
+        component: () => import('@/views/Admin/CustomerAdminView.vue')
       },
       {
         path: '/admin/customer/:customerId',
         name: 'customer detail admin',
-        component: () => import('@/views/Admin/CustomerDetailAdmin.vue')
+        component: () => import('@/views/Admin/CustomerDetailAdminView.vue')
       },
       {
         path: '/admin/shop',
         name: 'shop admin',
-        component: () => import('@/views/Admin/ShopAdmin.vue')
+        component: () => import('@/views/Admin/ShopAdminView.vue')
       },
       {
         path: '/admin/shop/:shopId',
         name: 'shop detail admin',
-        component: () => import('@/views/Admin/ShopDetailAdmin.vue')
+        component: () => import('@/views/Admin/ShopDetailAdminView.vue')
       },
       {
         path: '/admin/reel',
         name: 'reel admin',
-        component: () => import('@/views/Admin/ReelAdmin.vue')
+        component: () => import('@/views/Admin/ReelAdminView.vue')
       },
       {
         path: '/admin/reel/:reelId',
         name: 'reel detail admin',
-        component: () => import('@/views/Admin/ReelDetailAdmin.vue')
+        component: () => import('@/views/Admin/ReelDetailAdminView.vue')
       },
       {
         path: '/admin/feed',
         name: 'feed admin',
-        component: () => import('@/views/Admin/FeedAdmin.vue')
+        component: () => import('@/views/Admin/FeedAdminView.vue')
       },
       {
         path: '/admin/feed/:feedId',
         name: 'feed detail admin',
-        component: () => import('@/views/Admin/FeedDetailAdmin.vue')
+        component: () => import('@/views/Admin/FeedDetailAdminView.vue')
       },
       {
         path: '/admin/banner',
@@ -183,7 +183,7 @@ const routes = [
       {
         path: '/admin/setting',
         name: 'setting admin',
-        component: () => import('@/views/Admin/SettingAdmin.vue')
+        component: () => import('@/views/Admin/SettingAdminView.vue')
       }
     ]
   },
