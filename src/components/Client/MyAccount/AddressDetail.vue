@@ -10,6 +10,11 @@
       >
     </h1>
 
+    <Spin
+      class="[&_.ant-spin-dot-item]:bg-black [&_.ant-spin-dot-item]:text-xl"
+      :spinning="!listAddress"
+      size="large"
+    />
     <div class="grid grid-cols-2 max-lg:grid-cols-1 gap-[23px]">
       <AddressCard
         v-for="(address, index) in listAddress"
@@ -66,7 +71,7 @@
 
 <script setup lang="ts">
 import AddressCard from './_components/AddressCard.vue'
-import { Form, FormItem, Input, Button, Modal, message } from 'ant-design-vue'
+import { Form, FormItem, Input, Button, Modal, Spin, message } from 'ant-design-vue'
 import { PlusCircleOutlined } from '@ant-design/icons-vue'
 import { onMounted, ref, h } from 'vue'
 import type { IAddress } from '@/interfaces/user.interface'
@@ -80,7 +85,7 @@ const showModal = () => {
   open.value = true
 }
 
-const handleOk = async (e: MouseEvent) => {
+const handleOk = async () => {
   if (!formAddress.value.streetAddress || !formAddress.value.city) {
     message.error('Please fill in all information')
   } else {

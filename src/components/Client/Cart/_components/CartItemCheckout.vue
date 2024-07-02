@@ -86,7 +86,7 @@ const {
 const qty = ref<number>(cartItem.quantity)
 const isChecked = ref<boolean>(false)
 
-const selectCartItem = (e: any) => {
+const selectCartItem = () => {
   pushOrPopSelectedVariant(cartItem.variantId)
 }
 
