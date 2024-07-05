@@ -5,26 +5,25 @@
     :class="otherStyle"
     @click="reloadPage"
   >
-    <div class="flex flex-col w-full rounded-md">
-      <div class="w-full rounded">
-        <img
-          class="w-full aspect-[357/325] object-cover rounded-t"
-          :src="imageUrl"
-          alt="theme blog"
-        />
-        <Button
-          v-if="isEdit"
-          class="absolute bg-black bottom-2 right-2 hidden shadow-lg z-30 group-hover:block"
-          type="primary"
-          @click="drawerEditFeed?.showDrawer"
-          >Edit
-        </Button>
-      </div>
-      <div class="flex flex-col gap-2 p-4 bg-neutral-200 bg-opacity-15 rounded-b-md">
-        <h3 class="text-headline-7 text-neutral-7 h-[42px] two-lines-truncate">{{ title }}</h3>
-        <p class="text-neutral-4 text-[14px] leading-6">{{ formatDateText(date) }}</p>
-      </div>
-    </div>
+    <Card hoverable class="w-full bg-neutral-2">
+      <template #cover>
+        <img class="w-full aspect-[357/325] object-cover" :src="imageUrl" alt="theme blog" />
+      </template>
+      <CardMeta :title="title">
+        <template #description>
+          {{ formatDateText(date) }}
+          
+          <Button
+            v-if="isEdit"
+            class="absolute bg-black bottom-2 right-2 hidden shadow-lg z-30 group-hover:block"
+            type="primary"
+            @click="drawerEditFeed?.showDrawer"
+            >Edit
+          </Button>
+        </template>
+      </CardMeta>
+    </Card>
+
     <DrawerEditFeed
       ref="drawerEditFeed"
       :feed-id="feedId"
@@ -38,7 +37,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { Button } from 'ant-design-vue'
+import { Button, Card, CardMeta } from 'ant-design-vue'
 import { formatDateText } from '@/utils'
 import { DrawerEditFeed } from './drawer'
 import type { IFeed } from '@/interfaces/news.interface'
